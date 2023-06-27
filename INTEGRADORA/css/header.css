@@ -9,6 +9,9 @@
     list-style: none;
     text-decoration: none;
 }
+a{
+    text-decoration: none;
+}
 :root
 {
 --main-color:#FECB00;
@@ -38,7 +41,7 @@ header{
     display:flex;
     align-items: center;
     justify-content: space-between;
-    padding: 30px 100px;
+    /*padding: 30px 100px;*/
     background-color: var(--bg-color);
 }
 .logo{
@@ -46,16 +49,17 @@ header{
     font-weight: 600;
     font-size: 2.4rem;
 }
-.navbar{
+.navbarri{
     display:flex;
+    margin-top: 2%;
 }
-.navbar a{
+.navbarri a{
     color: var(--text-color);
     font-size: 1.1rem;
     padding: 10px 20px;
     font-weight: 500;
 }
-.navbar a:hover{
+.navbarri a:hover{
     color:var(--main-color);
     transition: .4s;
 }
@@ -89,14 +93,14 @@ padding: 70px 17%;
     font-size: var(--h2-font);
     margin: 1rem 0 2rem;
 }
-.btn{
+.butn{
     display: inline-block;
     padding: 10px 20px;
     background:var(--main-color);
     color: #F2F2F2;
     border-radius: 0.5rem;
 }
-.btn:hover{
+.butn:hover{
     transform: scale(1.2) translateY(10px);
     transition: .4s;
 }
@@ -149,20 +153,20 @@ padding: 70px 17%;
 display: flex;
 flex-wrap: wrap;
 }
-/*Footer*/
+/*Base*/
 .footer{
 padding: 10px 0;
 }
-.col{
+.colu{
 width: 25%; 
 }
-.col h4{
+.colu h4{
     font-size: 1.2rem;
     color:var(--text-color);
     margin-bottom: 25px;
     position: relative;
 }
-.col h4::before{
+.colu h4::before{
     content:"";
     position: absolute;
     height: 2px;
@@ -171,27 +175,27 @@ width: 25%;
     bottom: -8px;
     background-color: var(--main-color);
 }
-.col ul li::not(:last-child){
+.colu ul li::not(:last-child){
     margin-bottom: 15px;
 }
-.col ul li a{
+.colu ul li a{
     color: #9897a9;
     font-size: 1.1rem;
     display: block;
     text-transform: capitalize;
     transition: .4s;
 }
-.col ul li a:hover{
+.colu ul li a:hover{
     color:var(--text-color);
     transform: translateX(-12px);
 }
-.col .social{
+.colu .social{
     width: 220px;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
-.col .social a{
+.colu .social a{
     height: 40px;
     width: 40px;
     background: var(--main-color);
@@ -203,7 +207,7 @@ width: 25%;
     border-radius: 50%;
     transition: .4s;
 }
-.col .social a:hover{
+.colu .social a:hover{
     transform: scale(1.5,1.5);
     color: var(--bg-color);
     background: var(--main-color);
