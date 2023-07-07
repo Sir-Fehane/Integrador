@@ -1,0 +1,243 @@
+/*Base*/
+*
+{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Ysabeau Office;
+    scroll-behavior: smooth;
+    list-style: none;
+    text-decoration: none;
+}
+a{
+    text-decoration: none;
+}
+:root
+{
+--main-color:#FECB00;
+--text-color:#2A52D5;
+--bg-color:#BB0E10;
+--big-font:4rem;
+--h2-font:2.25rem;
+--p-font:0.9rem;
+}
+*::selection
+{
+    background: var(--main-color);
+    color:#f2f2f2;
+}
+body{
+    color:var(--text-color);
+    background-color:#F2F2F2 ;
+    padding: 0;
+    
+}
+/*Header*/
+.logo{
+    color: var(--main-color) !important;;
+    font-weight: 600 !important;
+    font-size: 2.4rem !important;
+}
+.he{
+    top: 0;
+    right: 0;
+    /*padding: 30px 100px;*/
+    background-color: var(--bg-color) !important;
+    
+}
+
+.he a{
+    
+    font-size: 1.1rem;
+    padding: 10px 20px !important;
+    font-weight: 500;
+}
+.he a:hover{
+    color: var(--main-color) !important;;
+    transition: .4s;
+}
+section{
+padding: 40px 17%;
+}
+/*Cuerpo*/
+.h{
+    width: 100%;
+    min-height: 90vh;
+    align-items: center;
+}
+.h-img img{
+    max-width: 100%;
+    width: 50rem;
+    margin-right: 5%;
+    margin-top: 5rem;
+}
+.h-t h1{
+    font-size: var(--big-font);
+    color: var(--main-color);
+}
+.h-t h2{
+    font-size: var(--h2-font);
+    margin: 1rem 0 2rem;
+}
+.butn{
+    display: inline-block;
+    padding: 10px 20px;
+    background:var(--main-color);
+    color: #F2F2F2;
+    border-radius: 0.5rem;
+}
+.butn:hover{
+    transform: scale(1.2) translateY(10px);
+    transition: .4s;
+}
+/*Acerca*/
+.abt{
+    display: grid;
+    grid-template-columns: repeat(2,2fr);
+    grid-gap: 1.5rem;
+    align-items: center;
+}
+.abt-img img{
+    max-width: 100%;
+    width: 400px;
+    height: auto;
+}
+.abt-t span{
+    color:var(--main-color);
+    font-weight: 600;
+}
+.abt-t h2{
+    font-size: var(--h2-font);
+}
+.abt-t p{
+    margin: 0.8rem 0 1.8rem;
+    line-height: 1.7;
+}
+/*Pizzas*/
+.heading span{
+    color:var(--main-color);
+    font-weight: 600;
+}
+.heading h2{
+    font-size: var(--h2-font);
+}
+.heading p{
+    margin: 0.8rem 0 1.8rem;
+    line-height: 1.7;
+}
+/*Servicio*/
+.service-container{
+    grid-gap: 1.5rem;
+    margin-top: 4rem;
+}
+.s-box{
+    text-align: center;
+    padding: 20px 30px;
+}
+.s-box img{
+    width: 90px;
+}
+.s-box h3{
+    margin: 4px 0 10px;
+    color: var(--main-color);
+    font-size: 1.2rem;
+}
+.s-box p{
+    line-height: 1.7;
+    
+}
+.main{
+display: flex;
+flex-wrap: wrap;
+}
+/*Base*/
+.footer{
+padding: 10px 0;
+}
+
+.colu h4{
+    font-size: 1.2rem;
+    color:var(--text-color);
+    margin-bottom: 25px;
+    position: relative;
+}
+.colu h4::before{
+    content:"";
+    position: absolute;
+    height: 2px;
+    width: 50px;
+    left: 0;
+    bottom: -8px;
+    background-color: var(--main-color);
+}
+.colu ul li::not(:last-child){
+    margin-bottom: 15px;
+}
+.colu ul li a{
+    color: #9897a9;
+    font-size: 1.1rem;
+    display: block;
+    text-transform: capitalize;
+    transition: .4s;
+}
+.colu ul li a:hover{
+    color:var(--text-color);
+    transform: translateX(-12px);
+}
+.colu .social{
+    width: 220px;
+    display: flex;
+    align-items: center;
+    
+}
+.colu .social a{
+    height: 40px;
+    width: 40px;
+    background: var(--main-color);
+    color:var(--text-color);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    border-radius: 50%;
+    transition: .4s;
+}
+.colu .social a:hover{
+    transform: scale(1.5,1.5);
+    color: var(--bg-color);
+    background: var(--main-color);
+}
+/*Cartas*/
+.estcart{
+    background-color: var(--bg-color);
+}
+.estcart p{
+    color: #F2F2F2;
+}
+.estcart h2{
+    color: var(--main-color);
+}
+.card{
+    margin-top: 5%;
+}
+.card img{
+    width: 17rem;
+    height: 10rem;
+}
+/* Menu css */
+.nav-tabs
+{
+    background-color:var(--bg-color);
+    color: var(--text-color);
+    border-color: var(--bg-color);
+}
+.nav-tabs :hover
+{
+    color: var(--main-color);
+    border: var(--main-color);
+}
+.nav-tabs .nav-link.active
+{
+    background-color: var(--main-color);
+    border-color: var(--main-color);
+}
