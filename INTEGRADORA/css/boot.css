@@ -224,3 +224,20 @@ padding: 10px 0;
     width: 17rem;
     height: 10rem;
 }
+/* Menu css */
+.nav-tabs
+{
+    background-color:var(--bg-color);
+    color: var(--text-color);
+    border-color: var(--bg-color);
+}
+.nav-tabs :hover
+{
+    color: var(--main-color);
+    border: var(--main-color);
+}
+.nav-tabs .nav-link.active
+{
+    background-color: var(--main-color);
+    border-color: var(--main-color);
+}
