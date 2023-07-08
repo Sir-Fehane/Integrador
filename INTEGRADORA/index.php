@@ -40,7 +40,7 @@
                   Sobre nosotros
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="views/verEmpleados.php">Contacto</a></li>
+                  <li><a class="dropdown-item" href="#">Contacto</a></li>
                   <li><a class="dropdown-item" href="#">Servicio</a></li>
                   <li><hr class="dropdown-divider"></li>
                   <li><a class="dropdown-item" href="#">Informacion</a></li>
@@ -284,8 +284,8 @@
         </div>
         <div class="modal-body">
             <form action="views/registrarse.php" method="POST">
-                <label for="Nombre" class="form-label">nombre</label>
-                <input type="text" class="form-control" name="Nombre" required>
+                <label for="Nombre" class="form-label">Nombre</label>
+                <input type="text" class="form-control" name="nombre" required>
                 <label for="password" class="form-label">Contraseña</label>
                 <input type="password" name="password" class="form-control" required>
                 <label for="confpass" class="form-label">Confirmar contraseña</label>

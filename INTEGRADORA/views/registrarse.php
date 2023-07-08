@@ -20,7 +20,7 @@
 
         $db->registrarUsuario($cadena);
 
-        echo "<div class='alert alert-success'> Cliente Registrado</div>";
+        echo "<div class='alert alert-success'> Te has registrado correctamente</div>";
         header("refresh:3 ../index.php");
 
         $db->desconectarDB();
