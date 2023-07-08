@@ -40,7 +40,7 @@
                   Sobre nosotros
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Contacto</a></li>
+                  <li><a class="dropdown-item" href="views/verEmpleados.php">Contacto</a></li>
                   <li><a class="dropdown-item" href="#">Servicio</a></li>
                   <li><hr class="dropdown-divider"></li>
                   <li><a class="dropdown-item" href="#">Informacion</a></li>
@@ -283,23 +283,23 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <form>
-                <label for="Nombre" class="form-label">Nombre</label>
+            <form action="views/registrarse.php" method="POST">
+                <label for="Nombre" class="form-label">nombre</label>
                 <input type="text" class="form-control" name="Nombre" required>
                 <label for="password" class="form-label">Contraseña</label>
                 <input type="password" name="password" class="form-control" required>
                 <label for="confpass" class="form-label">Confirmar contraseña</label>
                 <input type="confpass" name="password" class="form-control" required>
                 <label for="direccion" class="form-label">Direccion</label>
-                <input type="text" class="form-control" required>
-                <label for="celular" class="form-label">Celular</label>
-                <input type="tel" name="celular" class="form-control" required>
+                <input type="text" class="form-control" required name="direccion">
+                <label for="celular" class="form-label">Telefono</label>
+                <input type="tel" name="telefono" class="form-control" required>
                 <label for="email" class="form-label">Correo</label>
-                <input type="email" name="email" placeholder="Opcional" class="form-control">
+                <input type="email" name="correo" placeholder="Opcional" class="form-control">
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-warning">Registrar</button>
+                </div>
               </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-warning">Registrar</button>
         </div>
       </div>
     </div>
