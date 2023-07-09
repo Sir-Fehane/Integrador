@@ -21,7 +21,7 @@
         $inicioUsuarios = false;
         $inicioEmpleados = false;
 
-        $resultadoUsuarios = $db->loginUsuario($cadenaUsuarios)
+        $resultadoUsuarios = $db->loginUsuario($cadenaUsuarios);
         if ($resultadoUsuarios) 
         {
         $inicioUsuarios = true;
