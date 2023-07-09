@@ -52,6 +52,23 @@ class Database{
             echo $e->getMessage();
         }
     }
+    function loginUsuario($consulta)
+    {
+        try
+        {
+            $stmt = $this->PDOAws->prepare($consulta);
+            $stmt->execute();
+
+            $rowCount = $stmt->rowCount();
+
+            return ($rowCount > 0);
+        }
+        catch(PDOException $e)
+        {
+            echo $e->getMessage();
+            return false;
+        }
+    }
 }
 
 ?>

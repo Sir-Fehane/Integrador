@@ -258,18 +258,18 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <form>
+            <form action="views/login.php" method="post">
                 <label for="Nombre" class="form-label">Nombre</label>
-                <input type="text" class="form-control" required>
+                <input type="text" class="form-control" name="usuario" required>
                 <label for="password" class="form-label">Contraseña</label>
-                <input type="password" class="form-control" required>
+                <input type="password" class="form-control" name="password" required>
                 <div>
                   <a href="">Olvide mi contraseña</a>
                 </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-danger">Iniciar sesion</button>
+                </div>
               </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger">Iniciar sesion</button>
         </div>
       </div>
     </div>
