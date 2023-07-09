@@ -1,0 +1,79 @@
+body{
+    margin: 0;
+    padding: 0;
+    background-color: #f2f2f2;
+}
+#barra{
+    background-color: #BB0E10;
+    position:sticky;
+}
+#cuerpo1{
+    margin-left: 2%;
+}
+#cuerpo1 #renglon{
+    width: 85%;
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    padding-left: 1%;
+}
+#item{
+    margin-top: 2%;
+    border: 1px solid #666;
+    border-radius: 10px;
+    padding: 20px;
+    transition: .3s;
+    margin-right: 5%;
+}
+#cuerpo1 #item .img-item{
+    width: 100%;
+}
+#cuerpo1 #item:hover{
+    box-shadow: 0 0 10px #666;
+    scale: 1.05;
+}
+#cuerpo1 #item .titulo-item{
+    display: block;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+}
+#cuerpo1 #item .precio-item{
+    display: block;
+    text-align: center;
+    font-weight: bold;
+    font-size: 22px;
+}
+
+#cuerpo1 #item .boton-item{
+    display: block;
+    margin: 10px auto;
+    border: none;
+    background-color: black;
+    color: #fff;
+    padding: 5px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+#logo{
+    color: #FECB00;
+    text-shadow: -0.5px -0.5px 0 #000, 0.5px -0.5px 0 #000, -0.5px 0.5px 0 #000, 0.5px 0.5px 0 #000;
+}
+#btn-carrito
+{
+    background-color: #FECB00;
+}
+@media (max-width: 767px) 
+{
+    #cuerpo1 #renglon{
+        padding-right: 5%;
+    }
+
+}
+@media (max-width: 575px) 
+{
+    #cuerpo1 #renglon{
+        padding-left: 10%;
+    }
+
+}
