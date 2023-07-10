@@ -241,3 +241,148 @@ padding: 10px 0;
     background-color: var(--main-color);
     border-color: var(--main-color);
 }
+#promopizza
+{
+    max-width: 100%;
+    width: 25rem;
+    height: 25rem;
+}
+.rectangulos
+{
+    border-radius: 50px;
+    color: var(--bg-color);
+    width: 12rem;
+    height:5rem;
+}
+.carousel-item img
+{
+
+    width: 100%;
+    height: 30rem;
+    object-fit: cover;
+}
+/*Launchers menu*/
+.comida
+{
+    width: 80%;
+    height: 8rem;
+    background-color: var(--bg-color);
+    border-color:var(--main-color);
+    color: var(--text-color);
+    border-width: 5px;
+    border-style: solid;
+}
+.comida :hover
+{
+    background-color: var(--main-color);
+    border-color:var(--text-color);
+    border-width: 4px;
+    border-style: solid;
+    color: black;
+}
+.comida img
+{
+pointer-events: none;
+}
+.disp
+{
+    display: inline-block;
+    max-width:100%;
+    margin-top: .8rem;
+
+}
+#ero
+{
+    margin-top:12rem;
+}
+#do
+{
+    margin-top: 6rem;
+}
+/*Menu cards*/
+.carta
+{
+    position: relative;
+    width: 15rem;
+    height: 20rem;
+    margin-top: 20px;
+    margin-left: 30px;
+
+}
+.carta .face
+{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: .5s;
+}
+.carta .front
+{
+    transform: perspective(600px) rotateY(0deg); 
+    box-shadow: 0 5px 10px #000;
+}
+.carta .front img
+{
+    position:absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.carta .front h3
+{
+    position:absolute;
+    bottom: 0;
+    width: 100%;
+    height: 45px;
+    object-fit: cover;
+    line-height: 45px;
+    color:var(--main-color);
+    background:rgba(187, 14, 16, .8);
+    text-align: center;
+}
+.carta .back
+{
+    transform: perspective(600px) rotateY(180deg);
+    background: var(--bg-color);
+    padding: 15px;
+    color: var(--main-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+}
+.carta .back .linka
+{
+border-top:solid 1px var(--main-color);
+height: 80px;
+line-height: 80px;
+}
+.carta:hover .front
+{
+transform: perspective(600px) rotateY(180deg);
+}
+.carta:hover .back
+{
+transform: perspective(600px) rotateY(360deg);
+}
+.linka
+{
+display: inline-block;
+justify-content: left;
+}
+.butn-menu
+{
+    display: inline-flex;
+    background: var(--main-color)!important;
+    border-radius: 0.5rem;
+    text-align: center;
+    height: 30px !important;
+    width: 70px;
+}
+.butn-menu i
+{
+    color: var(--text-color) !important;
+}
