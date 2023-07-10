@@ -8,9 +8,9 @@
     <link rel="stylesheet" href="./estilos/style.css"/>
     <link
       rel="stylesheet"
-      href="./css/bootstrap.min.css"
+      href="../css/bootstrap.min.css"
     />
-    <script src="./src/app.js"></script>
+    <script src="../src/app.js"></script>
   </head>
   <body>
     <!--Header/navbar-->
@@ -357,6 +357,6 @@
         <button class="btn btn-primary" type="button">Proceder al pago</button>
       </div>
     </div>
-    <script src="./js/bootstrap.bundle.js"></script>
+    <script src="../js/bootstrap.bundle.js"></script>
   </body>
 </html>
