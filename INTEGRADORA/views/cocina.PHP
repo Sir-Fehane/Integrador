@@ -41,33 +41,37 @@
       </nav>
       <!--cuerpo-->
       <?php      
+      $sexo = 0;
         include '../class/database.php';
         $conexion = new Database();
         $conexion->conectarDB();
-        $consulta = "SELECT DE.NO_ORDEN , P.NOMBRE ,P.TAMAÑO, COUNT(P.NOMBRE) AS CANTIDAD_PIZZAS, DE.NOTAS   from DETALLE_ORDEN DE INNER JOIN PRODUCTOS P ON DE.ID_DETALLE = P.CODIGO group by DE.NO_ORDEN, P.TAMAÑO;";
-        $tabla = $conexion->seleccionar($consulta);
+        $ordenesact = "SELECT DE.NO_ORDEN from DETALLE_ORDEN DE  group by DE.NO_ORDEN;";
+        $tabla = $conexion->seleccionar($ordenesact);
+        foreach ($tabla as $registro)
+        {
         echo "<div class='container'>";
-        echo "<h1 align='Center'>Orden</h1>";
+        echo "<h1 align='Center'>ORDEN $registro->NO_ORDEN</h1>";
         echo "<table class = 'table table-hover'>
         <thead class = 'table-dark'>
         <tr>
-        <th>NUM_ORDEN</th><th>PRODUCTO</th><th>TAMAÑO</th><th>CATIDAD</th><th>NOTAS</th><th>Acciones</th>
+        <th>PRODUCTO</th><th>TAMAÑO</th><th>CATIDAD</th><th>NOTAS</th>
         </tr>
-        </thead>
-        <tbody>";
-        foreach ($tabla as $registro)
-        {
-            echo "<tr>";
-            echo "<td> $registro->NO_ORDEN </td>";
-            echo "<td> $registro->NOMBRE </td>";
-            echo "<td> $registro->TAMAÑO </td>";
-            echo "<td> $registro->CANTIDAD_PIZZAS </td>";
-            echo "<td> $registro->NOTAS </td>";
-            echo "</tr>";
+        </thead>";
+        $pizzas = " SELECT DE.NO_ORDEN , P.NOMBRE ,P.TAMAÑO, DE.CANTIDAD AS CANTIDAD_PIZZAS, DE.NOTAS   from DETALLE_ORDEN DE INNER JOIN PRODUCTOS P ON DE.ID_DETALLE = P.CODIGO WHERE DE.NO_ORDEN=$registro->NO_ORDEN group by DE.NO_ORDEN, P.TAMAÑO;";
+        $tabla2 = $conexion->seleccionar($pizzas);
+        foreach($tabla2 as $registro2){ 
+       echo "<tbody>";
+          echo "<tr>";
+          echo "<td> $registro2->NOMBRE </td>";
+          echo "<td> $registro2->TAMAÑO </td>";
+          echo "<td> $registro2->CANTIDAD_PIZZAS </td>";
+          echo "<td> $registro2->NOTAS </td>";
+          echo "</tr>";
         }
         echo "</tbody>";
         echo "</table>";
         echo "</div>";
+        }
         ?>
 </body>
 </html>
