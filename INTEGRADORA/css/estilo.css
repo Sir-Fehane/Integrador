@@ -1,0 +1,37 @@
+body{
+    margin: 0;
+    padding: 0;
+    background-color: #f2f2f2;
+}
+#barra{
+    background-color: #BB0E10;
+    position:sticky;
+}
+#logo{
+    color: #FECB00;
+    text-shadow: -0.5px -0.5px 0 #000, 0.5px -0.5px 0 #000, -0.5px 0.5px 0 #000, 0.5px 0.5px 0 #000;
+}
+#cuerpo{
+    justify-items: center;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+#contenedor{
+    margin-top: 5%;
+    width: 70%;
+    margin-left: 15%;
+}
+@media (max-width: 767px) {
+    #cuerpo1 #renglon{
+        padding-right: 5%;
+    }
+
+}
+@media (max-width: 575px) {
+    #cuerpo1 #renglon{
+        padding-left: 10%;
+    }
+
+}
