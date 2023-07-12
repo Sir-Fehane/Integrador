@@ -378,7 +378,8 @@ transform: perspective(600px) rotateY(360deg);
 .linka
 {
 display: inline-block;
-justify-content: left;
+justify-content: center;
+align-items: center;
 }
 .butn-menu
 {
@@ -386,10 +387,18 @@ justify-content: left;
     background: var(--main-color)!important;
     border-radius: 0.5rem;
     text-align: center;
-    height: 30px !important;
-    width: 70px;
+    height: 40px !important;
+    width: 100px !important;
+    font-size: 5px;
+}
+.butn-menu:hover
+{
+    transform: scale(1.1) translateY(5px);
+    transition: .4s;
 }
 .butn-menu i
 {
     color: var(--text-color) !important;
+    font-size: var(--p-font);
 }
+
