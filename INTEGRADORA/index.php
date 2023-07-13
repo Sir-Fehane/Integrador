@@ -18,10 +18,10 @@
 </head>
 <body> 
 
-    <nav class="navbar navbar-expand-lg he">
+<nav class="navbar navbar-expand-lg he">
         <div class="container-fluid">
             <a class="navbar-brand logo" href="#">
-                <img src="img/pizza.png" alt="Logo" width="60" height="48" class="d-inline-block align-text-top">
+                <img src="../img/pizza.png" alt="Logo" width="60" height="48" class="d-inline-block align-text-top">
                 Toy's Pizza
               </a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,24 +30,24 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+                <a class="nav-link active navtext" aria-current="page" href="#">Inicio</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Menu</a>
+                <a class="nav-link navtext" href="#">Menu</a>
               </li>
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <a class="nav-link dropdown-toggle navtext" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Sobre nosotros
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Contacto</a></li>
-                  <li><a class="dropdown-item" href="#">Servicio</a></li>
+                  <li><a class="dropdown-item drup" href="#">Contacto</a></li>
+                  <li><a class="dropdown-item drup" href="#">Servicio</a></li>
                   <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="#">Informacion</a></li>
+                  <li><a class="dropdown-item drup" href="#">Informacion</a></li>
                 </ul>
               </li>
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <a class="nav-link dropdown-toggle navtext" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Selecciona tu sucursal
                 </a>
                 <ul class="dropdown-menu">
@@ -72,7 +72,7 @@
                 </li>
                 </ul>
             </ul>
-              <li class="nav-item">
+              <li class="nav-item navtext">
                 <div class="container">
                   <div class="d-flex justify-content">
                   <button type="button" class="btn btn-danger jus" data-bs-toggle="modal" data-bs-target="#login">Iniciar Sesion</button>

@@ -20,7 +20,7 @@
     <!--Navbar-->
     <nav class="navbar navbar-expand-lg he">
         <div class="container-fluid">
-            <a class="navbar-brand logo" href="#">
+            <a class="navbar-brand logo" href="../index.php">
                 <img src="../img/pizza.png" alt="Logo" width="60" height="48" class="d-inline-block align-text-top">
                 Toy's Pizza
               </a>
@@ -30,24 +30,24 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+                <a class="nav-link active navtext" aria-current="page" href="#">Inicio</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Menu</a>
+                <a class="nav-link navtext" href="menu.php">Menu</a>
               </li>
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <a class="nav-link dropdown-toggle navtext" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Sobre nosotros
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Contacto</a></li>
-                  <li><a class="dropdown-item" href="#">Servicio</a></li>
+                  <li><a class="dropdown-item drup" href="#">Contacto</a></li>
+                  <li><a class="dropdown-item drup" href="#">Servicio</a></li>
                   <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="#">Informacion</a></li>
+                  <li><a class="dropdown-item drup" href="#">Informacion</a></li>
                 </ul>
               </li>
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <a class="nav-link dropdown-toggle navtext" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Selecciona tu sucursal
                 </a>
                 <ul class="dropdown-menu">
@@ -72,7 +72,7 @@
                 </li>
                 </ul>
             </ul>
-              <li class="nav-item">
+              <li class="nav-item navtext">
                 <div class="container">
                   <div class="d-flex justify-content">
                   <button type="button" class="btn btn-danger jus" data-bs-toggle="modal" data-bs-target="#login">Iniciar Sesion</button>
@@ -86,74 +86,133 @@
       <!--SUB Barra navegacion-->
       <ul class="nav nav-tabs justify-content-center nav-fill">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="menu.html">Menu</a>
+          <a class="nav-link" aria-current="page" href="menu.php">Menu</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="menu-pizzas.html">Pizza</a>
+          <a class="nav-link active" href="#">Pizza</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Bongles</a>
-        </li>
+
       </ul>
-      <!--Menu-->
-      <div class="container mt-5">
-        <div class="row">
-          <div class="col-12 col-lg-4">
-            <div class="container ">
-              <img src="../img/promo.jpg" id="promopizza">
+      <!--Cards reversibles-->
+      <section>
+        <div class="container d-inline-flex">
+          <div class="row">
+
+      <div class="carta col-12 col-lg-4">
+          <div class="face front">
+            <img src="../img/pepe.jpg">
+            <h3>Peperoni</h3>
+          </div>
+          <div class="face back">
+            <h3>Peperoni</h3>
+            <p>Pizza tradicional de peperoni</p>
+            <div class="linka d-flex mb-lg-3">
+              <div class="btn butn-menu">
+                <i class='bx bxs-cart'>Agregar al carrito</i>
+              </div>
             </div>
           </div>
-          <div class="col-12 col-lg-3 offset-0 offset-lg-1">
-              <div class="container mt-5">
-                <img src="../img/recrefre.jpg" class="rectangulos">
-              </div>
-              <div class="container mt-5">
-                <img src="../img/recrefre.jpg" class="rectangulos">
-              </div>
-          </div>
-          <div class="col-12 col-lg-4 mt-5 mt-lg-0">
-            <div id="carouselExample" class="carousel slide">
-              <div class="carousel-inner">
-                <div class="carousel-item active">
-                  <img src="../img/migueljpg.jpg" class="d-block w-100" alt="...">
-                </div>
-                <div class="carousel-item">
-                  <img src="../img/yona.jpg" class="d-block w-100" alt="...">
-                </div>
-                <div class="carousel-item">
-                  <img src="../img/mexi.jpg" class="d-block w-100" alt="...">
-                </div>
-              </div>
-              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Anterior</span>
-              </button>
-              <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Siguiente</span>
-              </button>
+      </div>
+      
+      <div class="carta col-12 col-lg-4">
+        <div class="face front">
+          <img src="../img/hawa.jpg">
+          <h3>Hawaiina</h3>
+        </div>
+        <div class="face back">
+          <h3>Hawaiina</h3>
+          <p>Pizza con jamón y piña</p>
+          <div class="linka d-flex mb-lg-3">
+            <div class="btn butn-menu">
+              <i class='bx bxs-cart'>Agregar al carrito</i>
             </div>
+          </div>
+        </div>
+    </div>
+
+    <div class="carta col-12 col-lg-4">
+      <div class="face front">
+        <img src="../img/mollete.jpg">
+        <h3>Mollete</h3>
+      </div>
+      <div class="face back">
+        <h3>Mollete</h3>
+        <p>Quien pida esta pizza lo mato</p>
+        <div class="linka d-flex mb-lg-3">
+          <div class="btn butn-menu">
+            <i class='bx bxs-cart'>Agregar al carrito</i>
           </div>
         </div>
       </div>
-      <div class="container">
-        
-            <div class="container col-12 col-lg-8 comida" id="ero">
-            <a href="menu-pizzas.html" class="disp"> 
-                <img src="../img/cajap.png" width="10%">
-                Pizza
-              </a>
-              </div>
-            
-            
-          <div class="container col-12 col-lg-8 comida"id="do" >
-            <a href="" class="disp"> 
-              <img src="../img/cajap.png" width="10%">
-              Pizza
-            </a>
-          </div>
+  </div>
+
+  <div class="carta col-12 col-lg-4">
+    <div class="face front">
+      <img src="../img/cfrias.jpg">
+      <h3>Carnes frías</h3>
+    </div>
+    <div class="face back">
+      <h3>Carnes frías</h3>
+      <p>Pizza de carnes frías</p>
+      <div class="linka d-flex mb-lg-3">
+        <div class="btn butn-menu">
+          <i class='bx bxs-cart'>Agregar al carrito</i>
         </div>
+      </div>
+    </div>
+</div>
+
+<div class="carta col-12 col-lg-4">
+  <div class="face front">
+    <img src="../img/espe.jpg">
+    <h3>Especial</h3>
+  </div>
+  <div class="face back">
+    <h3>Especial</h3>
+    <p>Pizza de jamon, Chorizo, peperoni, champiñones</p>
+    <div class="linka d-flex mb-lg-3">
+      <div class="btn butn-menu">
+        <i class='bx bxs-cart'>Agregar al carrito</i>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="carta col-12 col-lg-4">
+  <div class="face front">
+    <img src="../img/mexi.jpg">
+    <h3>Mexicana</h3>
+  </div>
+  <div class="face back">
+    <h3>Mexicana</h3>
+    <p>Pizza de carne molida, chile, tomate, cebolla, tocino</p>
+    <div class="linka d-flex mb-lg-3">
+      <div class="btn butn-menu">
+        <i class='bx bxs-cart'>Agregar al carrito</i>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="carta col-lg-4 offset-lg-4 col-12">
+  <div class="face front">
+    <img src="../img/toys.jpg">
+    <h3>Chikita</h3>
+  </div>
+  <div class="face back">
+    <h3>Chikita</h3>
+    <p>Toda chikita, todo bonita</p>
+    <div class="linka d-flex mb-lg-3">
+      <div class="btn butn-menu">
+        <i class='bx bxs-cart'>Agregar al carrito</i>
+      </div>
+    </div>
+  </div>
+</div>
       
+</div>
+</div>
+</section>     
       <!--Footer-->
       <section >
         <div class="footer">
