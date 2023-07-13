@@ -258,7 +258,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <form action="views/login.php" method="post">
+            <form action="scripts/login.php" method="post">
                 <label for="Nombre" class="form-label">Nombre</label>
                 <input type="text" class="form-control" name="usuario" required>
                 <label for="password" class="form-label">Contraseña</label>
@@ -283,7 +283,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <form action="views/registrarse.php" method="POST">
+            <form action="scripts/registrarse.php" method="POST">
                 <label for="Nombre" class="form-label">Nombre</label>
                 <input type="text" class="form-control" name="nombre" required>
                 <label for="password" class="form-label">Contraseña</label>

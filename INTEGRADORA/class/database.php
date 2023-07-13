@@ -41,7 +41,7 @@ class Database{
         }
     }
 
-    function registrarUsuario($consulta)
+    function ejecutarSQL($consulta)
     {
         try
         {
@@ -52,22 +52,48 @@ class Database{
             echo $e->getMessage();
         }
     }
-    function loginUsuario($consulta)
+    function verifica($usuario, $contra)
     {
         try
         {
-            $stmt = $this->PDOAws->prepare($consulta);
-            $stmt->execute();
-
-            $rowCount = $stmt->rowCount();
-
-            return ($rowCount > 0);
+            $pase = false;
+            $query = "SELECT * FROM USUARIOS WHERE NOMBRE = '$usuario'";
+            $consulta = $this->PDOAws->query($query);
+            
+            while($renglon = $consulta->fetch(PDO::FETCH_ASSOC))
+            {
+                if (password_verify($contra, $renglon['CONTRASEÑA'])) 
+                {
+                    $pase = true;
+                }
+            }
+            if($pase)
+            {
+                session_start();
+                $_SESSION["usuario"] = $usuario;
+                echo "<div class = 'alert altert-success'>";
+                echo "<h2 align = 'center'>Bienvenido ".$_SESSION["usuario"]."</h2> </div>";
+                echo "</div>";
+                header("refresh:2 ../index.php");
+            }
+            else
+            {
+                echo "<div class = 'alert altert-danger'>";
+                echo "<h2 align = 'center'>Usuario o password incorrecto</h2>";
+                echo "</div>";
+                header("refresh:2 ../index.php");
+            }
         }
         catch(PDOException $e)
         {
             echo $e->getMessage();
-            return false;
         }
+    }
+    function cerrarSesion()
+    {
+        session_start();
+        session_destroy();
+        header("Location:../index.php");
     }
 }
 
