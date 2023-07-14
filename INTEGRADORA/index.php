@@ -17,11 +17,20 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body> 
-
-    <nav class="navbar navbar-expand-lg he">
+  <?php 
+  session_start();
+  if(isset($_SESSION["usuario"]))
+  {
+    echo "<h4 align= 'right'> Usuario: ".$_SESSION["usuario"]."</h4>";
+    echo "<h5 align= 'right'>
+    <a href='scripts/cerrarSesion.php'>Cerrar sesión </a>";
+    echo "</h5>";
+  }
+  ?>
+<nav class="navbar navbar-expand-lg he">
         <div class="container-fluid">
             <a class="navbar-brand logo" href="#">
-                <img src="img/pizza.png" alt="Logo" width="60" height="48" class="d-inline-block align-text-top">
+                <img src="../img/pizza.png" alt="Logo" width="60" height="48" class="d-inline-block align-text-top">
                 Toy's Pizza
               </a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,24 +39,24 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+                <a class="nav-link active navtext" aria-current="page" href="#">Inicio</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Menu</a>
+                <a class="nav-link navtext" href="#">Menu</a>
               </li>
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <a class="nav-link dropdown-toggle navtext" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Sobre nosotros
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Contacto</a></li>
-                  <li><a class="dropdown-item" href="#">Servicio</a></li>
+                  <li><a class="dropdown-item drup" href="#">Contacto</a></li>
+                  <li><a class="dropdown-item drup" href="#">Servicio</a></li>
                   <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="#">Informacion</a></li>
+                  <li><a class="dropdown-item drup" href="#">Informacion</a></li>
                 </ul>
               </li>
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <a class="nav-link dropdown-toggle navtext" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Selecciona tu sucursal
                 </a>
                 <ul class="dropdown-menu">
@@ -72,7 +81,7 @@
                 </li>
                 </ul>
             </ul>
-              <li class="nav-item">
+              <li class="nav-item navtext">
                 <div class="container">
                   <div class="d-flex justify-content">
                   <button type="button" class="btn btn-danger jus" data-bs-toggle="modal" data-bs-target="#login">Iniciar Sesion</button>
@@ -258,7 +267,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <form action="views/login.php" method="post">
+            <form action="scripts/login.php" method="post">
                 <label for="Nombre" class="form-label">Nombre</label>
                 <input type="text" class="form-control" name="usuario" required>
                 <label for="password" class="form-label">Contraseña</label>
@@ -283,7 +292,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <form action="views/registrarse.php" method="POST">
+            <form action="scripts/registrarse.php" method="POST">
                 <label for="Nombre" class="form-label">Nombre</label>
                 <input type="text" class="form-control" name="nombre" required>
                 <label for="password" class="form-label">Contraseña</label>
