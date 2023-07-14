@@ -5,12 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Toy's Pízza</title>
-    <link rel="stylesheet" href="./estilos/style.css"/>
+    <link rel="stylesheet" href="estilos/style.css"/>
     <link
       rel="stylesheet"
-      href="../css/bootstrap.min.css"
+      href="./css/bootstrap.min.css"
     />
-    <script src="../src/app.js"></script>
+    <script src="./src/app.js"></script>
   </head>
   <body>
     <!--Header/navbar-->
@@ -23,13 +23,13 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="./punto-de-venta.php">Inicio</a>
+              <a class="nav-link active" aria-current="page" href="#">Inicio</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="./cocina.php">Cocina</a>
+              <a class="nav-link" href="#">Cocina</a>
             </li>
             <li>
-              <a class="nav-link" href="./cierre.php">Cierre</a>
+              <a class="nav-link" href="#">Cierre</a>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -53,284 +53,26 @@
     <div class="container" id="cuerpo">
       <div class="container" id="cuerpo1">
         <!--Tarjetas-->
-        <div class="row" id="renglon">
-          <div class="col-12 col-md-5 col-lg-3 card" id="item">
-            <span class="titulo-item">Pizza Peperoni</span>
-            <img src="./src/img/pepe.jpg" alt="" class="img-item" />
-            <span class="precio-item">Tamaño</span>
-            <input
-              type="radio"
-              class="btn-check"
-              name="tamaño"
-              id="mediana"
-              autocomplete="off"
-              checked
-            />
-            <label class="btn btn-outline-success" for="mediana">mediana</label>
-            <input
-              type="radio"
-              class="btn-check"
-              name="tamaño"
-              id="grande"
-              autocomplete="off"
-              checked
-            />
-            <label class="btn btn-outline-success" for="grande">Grande</label>
-            <input
-              type="radio"
-              class="btn-check"
-              name="tamaño"
-              id="extra"
-              autocomplete="off"
-              checked
-            />
-            <label class="btn btn-outline-success" for="extra">Extra</label>
-            <span class="precio-item">$</span>
-            <button class="boton-item">Agregar al Carrito</button>
-          </div>
-          <div class="col-12 col-md-5 col-lg-3 card" id="item">
-            <span class="titulo-item">Pizza Peperoni</span>
-            <img src="./src/img/pepe.jpg" alt="" class="img-item" />
-            <span class="precio-item">Tamaño</span>
-            <input
-              type="radio"
-              class="btn-check"
-              name="tamaño"
-              id="mediana"
-              autocomplete="off"
-              checked
-            />
-            <label class="btn btn-outline-success" for="mediana">mediana</label>
-            <input
-              type="radio"
-              class="btn-check"
-              name="tamaño"
-              id="grande"
-              autocomplete="off"
-              checked
-            />
-            <label class="btn btn-outline-success" for="grande">Grande</label>
-            <input
-              type="radio"
-              class="btn-check"
-              name="tamaño"
-              id="extra"
-              autocomplete="off"
-              checked
-            />
-            <label class="btn btn-outline-success" for="extra">Extra</label>
-            <span class="precio-item">$</span>
-            <button class="boton-item">Agregar al Carrito</button>
-          </div>
-          <div class="col-12 col-md-5 col-lg-3 card" id="item">
-            <span class="titulo-item">Pizza Peperoni</span>
-            <img src="./src/img/pepe.jpg" alt="" class="img-item" />
-            <span class="precio-item">Tamaño</span>
-            <input
-              type="radio"
-              class="btn-check"
-              name="tamaño"
-              id="mediana"
-              autocomplete="off"
-              checked
-            />
-            <label class="btn btn-outline-success" for="mediana">mediana</label>
-            <input
-              type="radio"
-              class="btn-check"
-              name="tamaño"
-              id="grande"
-              autocomplete="off"
-              checked
-            />
-            <label class="btn btn-outline-success" for="grande">Grande</label>
-            <input
-              type="radio"
-              class="btn-check"
-              name="tamaño"
-              id="extra"
-              autocomplete="off"
-              checked
-            />
-            <label class="btn btn-outline-success" for="extra">Extra</label>
-            <span class="precio-item">$</span>
-            <button class="boton-item">Agregar al Carrito</button>
-          </div> 
-          <div class="col-12 col-md-5 col-lg-3 card" id="item">
-            <span class="titulo-item">Pizza Peperoni</span>
-            <img src="./src/img/pepe.jpg" alt="" class="img-item" />
-            <span class="precio-item">Tamaño</span>
-            <input
-              type="radio"
-              class="btn-check"
-              name="tamaño"
-              id="mediana"
-              autocomplete="off"
-              checked
-            />
-            <label class="btn btn-outline-success" for="mediana">mediana</label>
-            <input
-              type="radio"
-              class="btn-check"
-              name="tamaño"
-              id="grande"
-              autocomplete="off"
-              checked
-            />
-            <label class="btn btn-outline-success" for="grande">Grande</label>
-            <input
-              type="radio"
-              class="btn-check"
-              name="tamaño"
-              id="extra"
-              autocomplete="off"
-              checked
-            />
-            <label class="btn btn-outline-success" for="extra">Extra</label>
-            <span class="precio-item">$</span>
-            <button class="boton-item">Agregar al Carrito</button>
-          </div>
-          <div class="col-12 col-md-5 col-lg-3 card" id="item">
-            <span class="titulo-item">Pizza Peperoni</span>
-            <img src="./src/img/pepe.jpg" alt="" class="img-item" />
-            <span class="precio-item">Tamaño</span>
-            <input
-              type="radio"
-              class="btn-check"
-              name="tamaño"
-              id="mediana"
-              autocomplete="off"
-              checked
-            />
-            <label class="btn btn-outline-success" for="mediana">mediana</label>
-            <input
-              type="radio"
-              class="btn-check"
-              name="tamaño"
-              id="grande"
-              autocomplete="off"
-              checked
-            />
-            <label class="btn btn-outline-success" for="grande">Grande</label>
-            <input
-              type="radio"
-              class="btn-check"
-              name="tamaño"
-              id="extra"
-              autocomplete="off"
-              checked
-            />
-            <label class="btn btn-outline-success" for="extra">Extra</label>
-            <span class="precio-item">$</span>
-            <button class="boton-item">Agregar al Carrito</button>
-          </div>
-          <div class="col-12 col-md-5 col-lg-3 card" id="item">
-            <span class="titulo-item">Pizza Peperoni</span>
-            <img src="./src/img/pepe.jpg" alt="" class="img-item" />
-            <span class="precio-item">Tamaño</span>
-            <input
-              type="radio"
-              class="btn-check"
-              name="tamaño"
-              id="mediana"
-              autocomplete="off"
-              checked
-            />
-            <label class="btn btn-outline-success" for="mediana">mediana</label>
-            <input
-              type="radio"
-              class="btn-check"
-              name="tamaño"
-              id="grande"
-              autocomplete="off"
-              checked
-            />
-            <label class="btn btn-outline-success" for="grande">Grande</label>
-            <input
-              type="radio"
-              class="btn-check"
-              name="tamaño"
-              id="extra"
-              autocomplete="off"
-              checked
-            />
-            <label class="btn btn-outline-success" for="extra">Extra</label>
-            <span class="precio-item">$</span>
-            <button class="boton-item">Agregar al Carrito</button>
-          </div>
-          <div class="col-12 col-md-5 col-lg-3 card" id="item">
-            <span class="titulo-item">Pizza Peperoni</span>
-            <img src="./src/img/pepe.jpg" alt="" class="img-item" />
-            <span class="precio-item">Tamaño</span>
-            <input
-              type="radio"
-              class="btn-check"
-              name="tamaño"
-              id="mediana"
-              autocomplete="off"
-              checked
-            />
-            <label class="btn btn-outline-success" for="mediana">mediana</label>
-            <input
-              type="radio"
-              class="btn-check"
-              name="tamaño"
-              id="grande"
-              autocomplete="off"
-              checked
-            />
-            <label class="btn btn-outline-success" for="grande">Grande</label>
-            <input
-              type="radio"
-              class="btn-check"
-              name="tamaño"
-              id="extra"
-              autocomplete="off"
-              checked
-            />
-            <label class="btn btn-outline-success" for="extra">Extra</label>
-            <span class="precio-item">$</span>
-            <button class="boton-item">Agregar al Carrito</button>
-          </div>
-          <div class="col-12 col-md-5 col-lg-3 card" id="item">
-            <span class="titulo-item">Pizza Peperoni</span>
-            <img src="./src/img/pepe.jpg" alt="" class="img-item" />
-            <span class="precio-item">Tamaño</span>
-            <input
-              type="radio"
-              class="btn-check"
-              name="tamaño"
-              id="mediana"
-              autocomplete="off"
-              checked
-            />
-            <label class="btn btn-outline-success" for="mediana">mediana</label>
-            <input
-              type="radio"
-              class="btn-check"
-              name="tamaño"
-              id="grande"
-              autocomplete="off"
-              checked
-            />
-            <label class="btn btn-outline-success" for="grande">Grande</label>
-            <input
-              type="radio"
-              class="btn-check"
-              name="tamaño"
-              id="extra"
-              autocomplete="off"
-              checked
-            />
-            <label class="btn btn-outline-success" for="extra">Extra</label>
-            <span class="precio-item">$</span>
-            <button class="boton-item">Agregar al Carrito</button>
-          </div>
-          <div class="col-12 col-md-5 col-lg-3 card" id="item" style="opacity: 0;">
-          </div>
-
+        <div class="row align-left" id="renglon">
+          <?php
+          include './class/database.php';
+          $conexion = new database();
+          $conexion->conectarDB();
+          $consulta ="SELECT PRODUCTOS.NOMBRE as N FROM PRODUCTOS GROUP BY PRODUCTOS.NOMBRE";
+          $reg = $conexion->seleccionar($consulta);
+          foreach($reg as $value){
+            echo "
+          <div class='col-12 col-md-5 col-lg-4'>
+            <button class='btn card' data-bs-toggle='modal' data-bs-target='#configuracion' id='item' id='$value->N'>
+              <span class='titulo-item'>$value->N</span>
+              <img src='./src/img/pepe.jpg' alt='' class='img-item' />
+            </button>
+          </div>";
+          }              
+          ?>
         </div>
-    </div>
+      </div>
+     </div>
     <!--CARRITOOOO-->
     <div
       class="offcanvas offcanvas-end"
@@ -357,6 +99,25 @@
         <button class="btn btn-primary" type="button">Proceder al pago</button>
       </div>
     </div>
-    <script src="../js/bootstrap.bundle.js"></script>
+
+    <!-- Modal -->
+<div class="modal fade" id="configuracion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary">Guardar cambios</button>
+      </div>
+    </div>
+  </div>
+</div>
+    <script src="./js/bootstrap.bundle.js"></script>
   </body>
 </html>
