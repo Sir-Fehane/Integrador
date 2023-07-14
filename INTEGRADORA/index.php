@@ -17,7 +17,16 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body> 
-
+  <?php 
+  session_start();
+  if(isset($_SESSION["usuario"]))
+  {
+    echo "<h4 align= 'right'> Usuario: ".$_SESSION["usuario"]."</h4>";
+    echo "<h5 align= 'right'>
+    <a href='scripts/cerrarSesion.php'>Cerrar sesión </a>";
+    echo "</h5>";
+  }
+  ?>
 <nav class="navbar navbar-expand-lg he">
         <div class="container-fluid">
             <a class="navbar-brand logo" href="#">
