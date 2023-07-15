@@ -7,15 +7,17 @@ body{
     background-color: #BB0E10;
     position:sticky;
 }
-#cuerpo1{
-    margin-left: 2%;
+#cuerpo{
+    background-color: #000;
+    display: flex;
 }
 #cuerpo1 #renglon{
-    width: 85%;
+    width: 80%;
     display: flex;
     justify-content: space-between;
     position: absolute;
     padding-left: 1%;
+    margin-left: 1%;
 }
 #item{
     margin-top: 2%;
@@ -35,6 +37,7 @@ body{
 #cuerpo1 #item .titulo-item{
     display: block;
     font-weight: bold;
+    align-items: center;
     text-align: center;
     text-transform: uppercase;
 }

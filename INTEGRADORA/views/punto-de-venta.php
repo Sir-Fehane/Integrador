@@ -5,12 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Toy's Pízza</title>
-    <link rel="stylesheet" href="estilos/style.css"/>
+    <link rel="stylesheet" href="../css/style.css"/>
     <link
       rel="stylesheet"
-      href="./css/bootstrap.min.css"
+      href="../css/bootstrap.min.css"
     />
-    <script src="./src/app.js"></script>
   </head>
   <body>
     <!--Header/navbar-->
@@ -51,28 +50,27 @@
     </nav>
     <!--Cuerpo de la pagina-->
     <div class="container" id="cuerpo">
-      <div class="container" id="cuerpo1">
-        <!--Tarjetas-->
-        <div class="row align-left" id="renglon">
-          <?php
-          include './class/database.php';
-          $conexion = new database();
-          $conexion->conectarDB();
-          $consulta ="SELECT PRODUCTOS.NOMBRE as N FROM PRODUCTOS GROUP BY PRODUCTOS.NOMBRE";
-          $reg = $conexion->seleccionar($consulta);
-          foreach($reg as $value){
-            echo "
-          <div class='col-12 col-md-5 col-lg-4'>
-            <button class='btn card' data-bs-toggle='modal' data-bs-target='#configuracion' id='item' id='$value->N'>
-              <span class='titulo-item'>$value->N</span>
-              <img src='./src/img/pepe.jpg' alt='' class='img-item' />
+      <div class="div" id="cuerpo1">
+        <div class="row" id="renglon">
+        <?php
+        include './class/database.php';
+        $conexion = new database();
+        $conexion->conectarDB();
+        $consulta ="SELECT PRODUCTOS.NOMBRE as N FROM PRODUCTOS GROUP BY PRODUCTOS.NOMBRE";
+        $reg = $conexion->seleccionar($consulta);
+        foreach($reg as $value){
+        echo "
+        <div class='col-12 col-md-5 col-lg-4'>
+            <button class='btn card' data-bs-toggle='modal' data-bs-target='#modal ' id='item' id='$value->N'>
+                <span class='titulo-item'>$value->N</span>
+                <img src='./src/img/pepe.jpg' class='img-item'/>
             </button>
-          </div>";
-          }              
-          ?>
+        </div>";
+        }              
+        ?>   
         </div>
       </div>
-     </div>
+    </div>
     <!--CARRITOOOO-->
     <div
       class="offcanvas offcanvas-end"
@@ -99,13 +97,12 @@
         <button class="btn btn-primary" type="button">Proceder al pago</button>
       </div>
     </div>
-
-    <!-- Modal -->
-<div class="modal fade" id="configuracion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- Pizza Builder -->
+<div class="modal fade" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"></h5>
+        <h5 class="modal-title" id="titulo-modal">Título del modal</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -118,6 +115,8 @@
     </div>
   </div>
 </div>
-    <script src="./js/bootstrap.bundle.js"></script>
+
+<script src="../js/bootstrap.bundle.js"></script>
+    <script src="../src/app.js"></script>
   </body>
 </html>
