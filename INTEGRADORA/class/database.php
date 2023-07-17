@@ -84,7 +84,7 @@ class Database{
                         break;
                     case 2: header("refresh:2 ../index.php");
                         break;
-                    case 3: header("location: ../views/puntoventa.php");
+                    case 3: header("location: ../views/punto-de-venta.php");
                         break;
                     default:
                         break;
