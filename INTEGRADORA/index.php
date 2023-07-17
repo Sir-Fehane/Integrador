@@ -95,8 +95,6 @@
                   <?php
                     }
                   ?>
-                  <button type="button" class="btn btn-danger jus" data-bs-toggle="modal" data-bs-target="#login">Iniciar Sesion</button>
-                  <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#register">Registrate</button>
                   </div>
               </div>
               </li>
