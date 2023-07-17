@@ -17,16 +17,6 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body> 
-  <?php 
-  session_start();
-  if(isset($_SESSION["usuario"]))
-  {
-    echo "<h4 align= 'right'> Usuario: ".$_SESSION["usuario"]."</h4>";
-    echo "<h5 align= 'right'>
-    <a href='scripts/cerrarSesion.php'>Cerrar sesión </a>";
-    echo "</h5>";
-  }
-  ?>
 <nav class="navbar navbar-expand-lg he">
         <div class="container-fluid">
             <a class="navbar-brand logo" href="#">
@@ -84,6 +74,27 @@
               <li class="nav-item navtext">
                 <div class="container">
                   <div class="d-flex justify-content">
+                  <?php 
+                    session_start();
+                    if(isset($_SESSION["usuario"]))
+                    {
+                      echo "<li class='nav-item dropdown'>
+                      <a class='nav-link dropdown-toggle text-white' href='#' role='button' data-bs-toggle='dropdown' aria-expanded='false'>
+                      " . $_SESSION["usuario"] . "</a>
+                      <ul class='dropdown-menu'>
+                      <li><a class='dropdown-item text-black' href='#'>Ver perfil</a></li>
+                      <li><a class='dropdown-item text-black' href='scripts/cerrarSesion.php'>Cerrar sesión</a></li>
+                      </ul>
+                      </li>";
+                    }
+                    else
+                    {
+                    ?>
+                  <button type="button" class="btn btn-danger jus" data-bs-toggle="modal" data-bs-target="#login">Iniciar Sesion</button>
+                  <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#register">Registrate</button>
+                  <?php
+                    }
+                  ?>
                   <button type="button" class="btn btn-danger jus" data-bs-toggle="modal" data-bs-target="#login">Iniciar Sesion</button>
                   <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#register">Registrate</button>
                   </div>
@@ -297,8 +308,6 @@
                 <input type="text" class="form-control" name="nombre" required>
                 <label for="password" class="form-label">Contraseña</label>
                 <input type="password" name="password" class="form-control" required>
-                <label for="confpass" class="form-label">Confirmar contraseña</label>
-                <input type="confpass" name="password" class="form-control" required>
                 <label for="direccion" class="form-label">Direccion</label>
                 <input type="text" class="form-control" required name="direccion">
                 <label for="celular" class="form-label">Telefono</label>
