@@ -65,16 +65,30 @@ class Database{
                 if (password_verify($contra, $renglon['CONTRASEÑA'])) 
                 {
                     $pase = true;
+                    $rol = $renglon['ROL'];
                 }
             }
             if($pase)
             {
                 session_start();
                 $_SESSION["usuario"] = $usuario;
+                $_SESSION["rol"] = $rol;
+
                 echo "<div class = 'alert altert-success'>";
                 echo "<h2 align = 'center'>Bienvenido ".$_SESSION["usuario"]."</h2> </div>";
                 echo "</div>";
-                header("refresh:2 ../index.php");
+
+                switch ($_SESSION["rol"])
+                {
+                    case 1: header("location: ../views/admin.php");
+                        break;
+                    case 2: header("refresh:2 ../index.php");
+                        break;
+                    case 3: header("location: ../views/punto-de-venta.php");
+                        break;
+                    default:
+                        break;
+                }
             }
             else
             {
@@ -93,7 +107,7 @@ class Database{
     {
         session_start();
         session_destroy();
-        header("Location:../index.php");
+        header("Location: ../index.php");
     }
 }
 

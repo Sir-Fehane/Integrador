@@ -20,7 +20,7 @@
     <!--Navbar-->
     <nav class="navbar navbar-expand-lg he">
         <div class="container-fluid">
-            <a class="navbar-brand logo" href="#">
+            <a class="navbar-brand logo" href="../index.php">
                 <img src="../img/pizza.png" alt="Logo" width="60" height="48" class="d-inline-block align-text-top">
                 Toy's Pizza
               </a>
@@ -30,49 +30,24 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+                <a class="nav-link active navtext" aria-current="page" href="#">Inicio</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Menu</a>
+                <a class="nav-link navtext" href="menu.php">Menu</a>
               </li>
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <a class="nav-link dropdown-toggle navtext" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Sobre nosotros
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Contacto</a></li>
-                  <li><a class="dropdown-item" href="#">Servicio</a></li>
+                  <li><a class="dropdown-item drup" href="#">Contacto</a></li>
+                  <li><a class="dropdown-item drup" href="#">Servicio</a></li>
                   <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="#">Informacion</a></li>
+                  <li><a class="dropdown-item drup" href="#">Informacion</a></li>
                 </ul>
               </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Selecciona tu sucursal
-                </a>
-                <ul class="dropdown-menu">
-                  <li>
-                    <div>
-                    <input type="radio" id="huey" name="drone" value="huey"
-                           checked>
-                    <label for="huey">Sol de Ote</label>
-                  </div>
-                </li>
-                  <li>
-                  <div>
-                    <input type="radio" id="dewey" name="drone" value="dewey">
-                    <label for="dewey">Triana</label>
-                  </div>
-                 </li>
-                <li>
-                  <div>
-                    <input type="radio" id="louie" name="drone" value="louie">
-                    <label for="louie">Pedregal</label>
-                  </div>
-                </li>
-                </ul>
             </ul>
-              <li class="nav-item">
+              <li class="nav-item navtext">
                 <div class="container">
                   <div class="d-flex justify-content">
                   <button type="button" class="btn btn-danger jus" data-bs-toggle="modal" data-bs-target="#login">Iniciar Sesion</button>
@@ -86,13 +61,10 @@
       <!--SUB Barra navegacion-->
       <ul class="nav nav-tabs justify-content-center nav-fill">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="menu.html">Menu</a>
+          <a class="nav-link active" aria-current="page" href="menu.php">Promociones</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="menu-pizzas.html">Pizza</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Bongles</a>
+          <a class="nav-link" href="menu-pizza.php">Menu</a>
         </li>
       </ul>
       <!--Menu-->
@@ -141,17 +113,9 @@
             <div class="container col-12 col-lg-8 comida" id="ero">
             <a href="menu-pizzas.html" class="disp"> 
                 <img src="../img/cajap.png" width="10%">
-                Pizza
+                ¿Listo para ordenar?
               </a>
               </div>
-            
-            
-          <div class="container col-12 col-lg-8 comida"id="do" >
-            <a href="" class="disp"> 
-              <img src="../img/cajap.png" width="10%">
-              Pizza
-            </a>
-          </div>
         </div>
       
       <!--Footer-->

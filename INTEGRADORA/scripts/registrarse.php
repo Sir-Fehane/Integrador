@@ -16,7 +16,7 @@
         extract($_POST);
 
         $hash = password_hash($password, PASSWORD_DEFAULT);
-        $cadena = "INSERT INTO USUARIO(NOMBRE, DIRECCION, TELEFONO, CORREO, CONTRASEÑA, ROL)
+        $cadena = "INSERT INTO USUARIOS(NOMBRE, DIRECCION, TELEFONO, CORREO, CONTRASEÑA, ROL)
         VALUES ('$nombre','$direccion','$celular','$correo','$hash', 2)";
 
         $db->ejecutarSQL($cadena);
