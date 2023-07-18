@@ -7,16 +7,19 @@
     <title>Nuevo</title>
 </head>
 <body>
+    <?php
+    $error = false;
+    ?>
 <div class="container w-75 p-5">
     <div class="d-flex">
-        <a class="btn btn-danger" href="../views/admin.php">Regresar</a>
+        <a class="btn btn-primary" href="../views/admin.php">Regresar</a>
         <h3 align="center" style="margin-left: 30%;">Añadir Insumo</h3>
     </div>
     <form action="" method="post">
         <input type="hidden" value="ACTIVO" name="estado">
         <div class="mb-3">
             <label for="nombre" class="form-label">Nombre del insumo:</label>
-            <input type="text" name="nombre" class="form-control">
+            <input type="text" name="nombre" class="form-control" required>
         </div>
         <div class="mb-3">
         <label for="categoria" class="form-label">Categoria:</label>
@@ -37,7 +40,7 @@
         </div>
         <div class="mb-3">
         <label for="cant" class="form-label">Cantidad:</label>
-        <input type="number" name="cant" class="form-control">
+        <input type="number" name="cant" class="form-control" required>
         </div>
         <div class="mb-3">
         <label for="pres" class="form-label">Presentacion:</label>
@@ -81,6 +84,8 @@ if(isset($_POST['submit']))
     $cadena = "INSERT INTO INV_SUC (SUCURSAL, INVENTARIO, CANTIDAD, FECHA) VALUES ('$sucur', (SELECT ID_INS FROM INVENTARIO WHERE NOMBRE = '$nombre' ORDER BY ID_INS DESC LIMIT 1), '$cant', CURDATE())";
     $db->ejecutarsql($cadena);
     $db->desconectarDB();
+    header("Location: Exito.php");
+    exit;
 }
 ?>
 </body>
