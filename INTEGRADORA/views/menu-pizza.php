@@ -46,31 +46,6 @@
                   <li><a class="dropdown-item drup" href="#">Informacion</a></li>
                 </ul>
               </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle navtext" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Selecciona tu sucursal
-                </a>
-                <ul class="dropdown-menu">
-                  <li>
-                    <div>
-                    <input type="radio" id="huey" name="drone" value="huey"
-                           checked>
-                    <label for="huey">Sol de Ote</label>
-                  </div>
-                </li>
-                  <li>
-                  <div>
-                    <input type="radio" id="dewey" name="drone" value="dewey">
-                    <label for="dewey">Triana</label>
-                  </div>
-                 </li>
-                <li>
-                  <div>
-                    <input type="radio" id="louie" name="drone" value="louie">
-                    <label for="louie">Pedregal</label>
-                  </div>
-                </li>
-                </ul>
             </ul>
               <li class="nav-item navtext">
                 <div class="container">
@@ -86,132 +61,59 @@
       <!--SUB Barra navegacion-->
       <ul class="nav nav-tabs justify-content-center nav-fill">
         <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="menu.php">Menu</a>
+          <a class="nav-link" aria-current="page" href="menu.php">Promociones</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="#">Pizza</a>
+          <a class="nav-link active" href="#">Menu</a>
         </li>
-
       </ul>
       <!--Cards reversibles-->
       <section>
-        <div class="container d-inline-flex">
-          <div class="row">
-
-      <div class="carta col-12 col-lg-4">
-          <div class="face front">
-            <img src="../img/pepe.jpg">
-            <h3>Peperoni</h3>
-          </div>
-          <div class="face back">
-            <h3>Peperoni</h3>
-            <p>Pizza tradicional de peperoni</p>
-            <div class="linka d-flex mb-lg-3">
-              <div class="btn butn-menu">
-                <i class='bx bxs-cart'>Agregar al carrito</i>
-              </div>
+        <div class="container">
+          <form action="" method="post">
+            <div class="row">
+            <?php 
+            include '../class/database.php';
+            $db = new Database();
+            $db->conectarDB();
+            $cons="SELECT * FROM PRODUCTOS GROUP BY NOMBRE";
+            $res=$db->seleccionar($cons);
+            $contador=0;
+            foreach($res as $registro)
+            {
+              if ($contador / 3 == 0) {
+                echo '</div><div class="row">';
+              }
+            echo"<div class='carta col-12 col-lg-4'>
+            <div class='face front'>
+            <img src=''>
+            <h3>$registro->NOMBRE</h3>
             </div>
-          </div>
-      </div>
-      
-      <div class="carta col-12 col-lg-4">
-        <div class="face front">
-          <img src="../img/hawa.jpg">
-          <h3>Hawaiina</h3>
-        </div>
-        <div class="face back">
-          <h3>Hawaiina</h3>
-          <p>Pizza con jamón y piña</p>
-          <div class="linka d-flex mb-lg-3">
-            <div class="btn butn-menu">
-              <i class='bx bxs-cart'>Agregar al carrito</i>
+            <div class='face back'>
+            <h3>$registro->NOMBRE</h3>
+            <p>$registro->DESCRIPCION</p>
+            <div class='linka d-flex mb-lg-3'>
+            <button type='submit' class='btn butn-menu'><i class='bx bxs-cart'>Agregar al carrito</i>
+            </button>
+            </div>";
+            $tama="SELECT TAMAÑO FROM PRODUCTOS WHERE NOMBRE ='$registro->NOMBRE'";
+            $tamalos=$db->seleccionar($tama);
+            echo"<select name='tamaño' class='form-select'>";
+            foreach($tamalos as $regi2)
+            {
+              echo"<option value='".$regi2->TAMAÑO."'>".$regi2->TAMAÑO."</option>";
+            }
+            echo"</select>
             </div>
-          </div>
-        </div>
-    </div>
-
-    <div class="carta col-12 col-lg-4">
-      <div class="face front">
-        <img src="../img/mollete.jpg">
-        <h3>Mollete</h3>
-      </div>
-      <div class="face back">
-        <h3>Mollete</h3>
-        <p>Quien pida esta pizza lo mato</p>
-        <div class="linka d-flex mb-lg-3">
-          <div class="btn butn-menu">
-            <i class='bx bxs-cart'>Agregar al carrito</i>
-          </div>
-        </div>
-      </div>
+            </div>";
+            $contador++;
+            }
+            $db->desconectarDB();
+            
+            ?>
+           </div> 
+      </form>
   </div>
-
-  <div class="carta col-12 col-lg-4">
-    <div class="face front">
-      <img src="../img/cfrias.jpg">
-      <h3>Carnes frías</h3>
-    </div>
-    <div class="face back">
-      <h3>Carnes frías</h3>
-      <p>Pizza de carnes frías</p>
-      <div class="linka d-flex mb-lg-3">
-        <div class="btn butn-menu">
-          <i class='bx bxs-cart'>Agregar al carrito</i>
-        </div>
-      </div>
-    </div>
-</div>
-
-<div class="carta col-12 col-lg-4">
-  <div class="face front">
-    <img src="../img/espe.jpg">
-    <h3>Especial</h3>
-  </div>
-  <div class="face back">
-    <h3>Especial</h3>
-    <p>Pizza de jamon, Chorizo, peperoni, champiñones</p>
-    <div class="linka d-flex mb-lg-3">
-      <div class="btn butn-menu">
-        <i class='bx bxs-cart'>Agregar al carrito</i>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="carta col-12 col-lg-4">
-  <div class="face front">
-    <img src="../img/mexi.jpg">
-    <h3>Mexicana</h3>
-  </div>
-  <div class="face back">
-    <h3>Mexicana</h3>
-    <p>Pizza de carne molida, chile, tomate, cebolla, tocino</p>
-    <div class="linka d-flex mb-lg-3">
-      <div class="btn butn-menu">
-        <i class='bx bxs-cart'>Agregar al carrito</i>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="carta col-lg-4 offset-lg-4 col-12">
-  <div class="face front">
-    <img src="../img/toys.jpg">
-    <h3>Chikita</h3>
-  </div>
-  <div class="face back">
-    <h3>Chikita</h3>
-    <p>Toda chikita, todo bonita</p>
-    <div class="linka d-flex mb-lg-3">
-      <div class="btn butn-menu">
-        <i class='bx bxs-cart'>Agregar al carrito</i>
-      </div>
-    </div>
-  </div>
-</div>
-      
-</div>
-</div>
 </section>     
       <!--Footer-->
       <section >

@@ -300,11 +300,7 @@ pointer-events: none;
 }
 #ero
 {
-    margin-top:12rem;
-}
-#do
-{
-    margin-top: 6rem;
+    margin-top:3rem;
 }
 /*Menu cards*/
 .carta
@@ -401,4 +397,3 @@ align-items: center;
     color: var(--text-color) !important;
     font-size: var(--p-font);
 }
-
