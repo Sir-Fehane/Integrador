@@ -1,0 +1,17 @@
+{
+    "name": "papit/integrador",
+    "autoload": {
+        "psr-4": {
+            "Papit\\Integrador\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "papitamcfly",
+            "email": "papitamcfly1234@gmail.com"
+        }
+    ],
+    "require": {},
+    "require": {"aws/aws-sdk-php": "^3.0"}
+    
+}
