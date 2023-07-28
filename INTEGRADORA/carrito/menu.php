@@ -46,6 +46,31 @@
                   <li><a class="dropdown-item drup" href="#">Informacion</a></li>
                 </ul>
               </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle navtext" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Selecciona tu sucursal
+                </a>
+                <ul class="dropdown-menu">
+                  <li>
+                    <div>
+                    <input type="radio" id="huey" name="drone" value="huey"
+                           checked>
+                    <label for="huey">Sol de Ote</label>
+                  </div>
+                </li>
+                  <li>
+                  <div>
+                    <input type="radio" id="dewey" name="drone" value="dewey">
+                    <label for="dewey">Triana</label>
+                  </div>
+                 </li>
+                <li>
+                  <div>
+                    <input type="radio" id="louie" name="drone" value="louie">
+                    <label for="louie">Pedregal</label>
+                  </div>
+                </li>
+                </ul>
             </ul>
               <li class="nav-item navtext">
                 <div class="container">
@@ -61,59 +86,58 @@
       <!--SUB Barra navegacion-->
       <ul class="nav nav-tabs justify-content-center nav-fill">
         <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="menu.php">Promociones</a>
+          <a class="nav-link" aria-current="page" href="menu.php">Menu</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="#">Menu</a>
+          <a class="nav-link active" href="#">Productos</a>
         </li>
+
       </ul>
       <!--Cards reversibles-->
       <section>
-        <div class="container">
-            <div class="row">
+        <div class="container d-inline-flex">
+          <div class="row">
+            <form method="post" id="form" name="form" action="../scripts/carrito.php">
             <?php 
             include '../class/database.php';
             $db = new Database();
             $db->conectarDB();
             $cons="SELECT * FROM PRODUCTOS GROUP BY NOMBRE";
             $res=$db->seleccionar($cons);
-            $contador=0;
             foreach($res as $registro)
             {
-              if ($contador / 3 == 0) {
-                echo '</div><div class="row">';
-              }
-            echo"<form method='post' action='cart.php' class='col-12 col-lg-4'>
-            <div class='carta'>
+            echo" <div class='carta col-12 col-lg-4'>
             <div class='face front'>
             <img src=''>
             <h3>$registro->NOMBRE</h3>
-            <input name='titulo' type='hidden' id='titulo' value'".$registro->NOMBRE."'>
             </div>
             <div class='face back'>
             <h3>$registro->NOMBRE</h3>
+            <input id='nombre' type='hidden' value='$registro->NOMBRE'/>
             <p>$registro->DESCRIPCION</p>
+            
             <div class='linka d-flex mb-lg-3'>
-            <button type='submit' class='btn butn-menu'><i class='bx bxs-cart'>Agregar al carrito</i>
+            <button type='submit' class='btn butn-menu'>";
+            echo"<i class='bx bxs-cart'>Agregar al carrito</i>
             </button>
             </div>";
-            $tama="SELECT TAMAÑO FROM PRODUCTOS WHERE NOMBRE ='$registro->NOMBRE'";
-            $tamalos=$db->seleccionar($tama);
-            echo"<select name='tamaño' class='form-select'>";
-            foreach($tamalos as $regi2)
+            $tamaño="SELECT TAMAÑO FROM PRODUCTOS WHERE NOMBRE='$registro->NOMBRE' GROUP BY TAMAÑO";
+            $TamañoCons=$db->seleccionar($tamaño);
+            echo"<select name='Tamaño' class='Tama'>";
+            foreach($TamañoCons as $Tam)
             {
-              echo"<option value='".$regi2->TAMAÑO."'>".$regi2->TAMAÑO."</option>";
+            echo"<option value='".$Tam->TAMAÑO."'>".$Tam->TAMAÑO."</option>";
             }
+           
             echo"</select>
             </div>
-            </div>
-            </form>";
-            $contador++;
-            }
+            </div>";
+          }
             $db->desconectarDB();
-            
             ?>
-           </div> 
+            </form>
+            
+      </div>
   </div>
 </section>     
       <!--Footer-->
