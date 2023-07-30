@@ -1,3 +1,26 @@
+<?php 
+session_start();
+if(!isset($_SESSION['rol']))
+{
+
+}
+ else
+ {
+  if ($_SESSION["rol"] == 1) {
+    header("Location: views/admin.php");
+    exit;
+  } elseif ($_SESSION["rol"] == 2) { 
+    if (basename($_SERVER['PHP_SELF']) === 'index.php') {
+    } else {
+        header("Location: index.php");
+        exit;
+    }
+  } elseif ($_SESSION["rol"] == 3) { 
+    header("Location: views/admin.php");
+    exit;
+  }
+ }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -75,7 +98,6 @@
                 <div class="container">
                   <div class="d-flex justify-content">
                   <?php 
-                    session_start();
                     if(isset($_SESSION["usuario"]))
                     {
                       echo "<li class='nav-item dropdown'>

@@ -110,6 +110,10 @@ class Database{
         setcookie(session_name(), '', time() - 3600, '/');
         header("Location: ../index.php");
     }
+    function escapar($valor) 
+    {
+        return htmlspecialchars($valor, ENT_QUOTES, 'UTF-8');
+    }
 }
 
 ?>

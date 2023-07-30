@@ -4,9 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="./css/estilo.css" />
-    <link rel="stylesheet" href="./css/bootstrap.min.css" />
-    <script src="./src/app.js"></script>
+    <link rel="stylesheet" href="../css/estilo.css" />
+    <link rel="stylesheet" href="../css/bootstrap.min.css" />
+    <script src="../src/app.js"></script>
   </head>
   <body>
     <!--Header/navbar-->
@@ -27,13 +27,10 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="./punto-de-venta.php">Inicio</a>
+              <a class="nav-link active" aria-current="page" href="puntoventa.php">Inicio</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="./cocina.php">Cocina</a>
-            </li>
-            <li>
-              <a class="nav-link" href="./cierre.php">Cierre</a>
+              <a class="nav-link" href="cocina.php">Cocina</a>
             </li>
             <li class="nav-item dropdown">
               <a
@@ -46,12 +43,7 @@
                 Perfil
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li><hr class="dropdown-divider" /></li>
-                <li>
-                  <a class="dropdown-item" href="#">Something else here</a>
-                </li>
+                <li><a class="dropdown-item" href="../scripts/cerrarSesion.php">Cerrar Sesión</a></li>
               </ul>
             </li>
           </ul>
@@ -64,37 +56,45 @@
       <hr>
       <div class="justify-content-center" id="contenedor">
         <div class="table-responsive">
+        <form action="../scripts/guardarcierre.php" method="post">
           <table class="table align-middle table-sm">
-            <form action="" method="post">
-            <thead>
-            </thead>
             <tbody>
               <?php
                 include '../class/database.php';
                 $conexion = new database();
                 $conexion->conectarDB();
-                $consulta ="SELECT INVENTARIO.NOMBRE as N FROM INVENTARIO";
+                $consulta ="SELECT INVENTARIO.NOMBRE as N FROM INVENTARIO WHERE INVENTARIO.ESTADO = 'ACTIVO'";
                 $reg = $conexion->seleccionar($consulta);
               foreach($reg as $value){
                 echo"
                 <tr>
                   <th scope='row'><label class='control-label' for='$value->N'>$value->N</label></th>
-                  <td colspan='2' class='table-active'><input type='text' name='$value->N' class='form-control' required></td>
+                  <td colspan='2' class='table-active'>
+                  <input type='number' name='cantidades[$value->N]' class='form-control' onkeypress='return validarNumero(event)' required> </td>
                 </tr>                
                 ";
-              }              
+              }             
               ?>             
             </tbody>
-          </form>
-          </table>
-        </div>
-        <br>
+            </table>
+            <br>
             <div class="d-grid gap-2">
                 <button class="btn btn-primary" type="submit">Guardar</button>
             </div>
-          </div>  
-        </form>
+          </form>
+          </div>
+        </div> 
       </div>    
     <script src="./js/bootstrap.bundle.js"></script>
+    <script>
+      function validarNumero(event) {
+    const charCode = (event.which) ? event.which : event.keyCode;
+    if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57)) {
+        return false;
+    }
+    return true;
+}
+    </script>
   </body>
 </html>
+
