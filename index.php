@@ -6,7 +6,7 @@ if(!isset($_SESSION['rol']))
 }
  else
  {
-  if ($_SESSION["rol"] == 1) {
+  if ($_SESSION["rol"] == 1) { 
     header("Location: views/admin.php");
     exit;
   } elseif ($_SESSION["rol"] == 2) { 
@@ -24,26 +24,21 @@ if(!isset($_SESSION['rol']))
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Toys Pizza</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <link rel="stylesheet" href="css/boot.css">
-    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="shortcut icon" href="img/pizza.png">
+    <title>Toys Pizza</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Ysabeau+Office:wght@600&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Lato:ital@1&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </head>
-<body> 
+<body>
 <nav class="navbar navbar-expand-lg he">
         <div class="container-fluid">
             <a class="navbar-brand logo" href="#">
-                <img src="../img/pizza.png" alt="Logo" width="60" height="48" class="d-inline-block align-text-top">
+                <img src="img/pizza.png" alt="Logo" width="60" height="48" class="d-inline-block align-text-top">
                 Toy's Pizza
               </a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -55,7 +50,7 @@ if(!isset($_SESSION['rol']))
                 <a class="nav-link active navtext" aria-current="page" href="#">Inicio</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link navtext" href="#">Menu</a>
+                <a class="nav-link navtext" href="views/menu-pizza.php">Menu</a>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle navtext" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -68,43 +63,33 @@ if(!isset($_SESSION['rol']))
                   <li><a class="dropdown-item drup" href="#">Informacion</a></li>
                 </ul>
               </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle navtext" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Selecciona tu sucursal
-                </a>
-                <ul class="dropdown-menu">
-                  <li>
-                    <div>
-                    <input type="radio" id="huey" name="drone" value="huey"
-                           checked>
-                    <label for="huey">Sol de Ote</label>
-                  </div>
-                </li>
-                  <li>
-                  <div>
-                    <input type="radio" id="dewey" name="drone" value="dewey">
-                    <label for="dewey">Triana</label>
-                  </div>
-                 </li>
-                <li>
-                  <div>
-                    <input type="radio" id="louie" name="drone" value="louie">
-                    <label for="louie">Pedregal</label>
-                  </div>
-                </li>
                 </ul>
             </ul>
               <li class="nav-item navtext">
                 <div class="container">
                   <div class="d-flex justify-content">
-                  <?php 
+                  <?php
+                  include 'class/database.php';
+                  $db = new Database();
+                  $db->conectarDB();
                     if(isset($_SESSION["usuario"]))
                     {
+                      $usuario1 = $_SESSION['usuario'];
+                      $consulta1 = "SELECT U.ID_USUARIO AS ID, U.NOMBRE AS 'NOMBRE', U.DIRECCION AS 'DIRECCION', U.TELEFONO AS 'TELEFONO', U.CORREO AS 'CORREO',
+                      U.img_chidas FROM USUARIOS U
+                      WHERE NOMBRE = '$usuario1'";
+                      $tabla = $db->seleccionar($consulta1);
+                      foreach ($tabla as $registro)
+                      {
+                        $imgchida = $registro->img_chidas;
+                     echo "<img src='$imgchida' style='border-radius: 10px;' alt='sexogratis'width= '50px'
+                     height=' 50px'>";
+                      }
                       echo "<li class='nav-item dropdown'>
                       <a class='nav-link dropdown-toggle text-white' href='#' role='button' data-bs-toggle='dropdown' aria-expanded='false'>
                       " . $_SESSION["usuario"] . "</a>
                       <ul class='dropdown-menu'>
-                      <li><a class='dropdown-item text-black' href='#'>Ver perfil</a></li>
+                      <li><a class='dropdown-item text-black' href='views/verperfilv.php'>Ver perfil</a></li>
                       <li><a class='dropdown-item text-black' href='scripts/cerrarSesion.php'>Cerrar sesión</a></li>
                       </ul>
                       </li>";
@@ -128,12 +113,9 @@ if(!isset($_SESSION['rol']))
       <div class="container d-inline">
         <div class="row">
         <div class="h-t col-lg-6">
-          
-            <h1>Bienvenido a Toy's Pizza</h1>
-            <h2>La primera y original pizzeria de <br> La Laguna <3 </h2>
+            <h1>BIENVENIDO A TOY'S PIZZA</h1>
             <a href="#" class="butn">Checa nuestro menú</a>
         </div>
-        
         <div class="h-img col-lg-5 containe">
             <img src="img/piejm.png">
         </div>
