@@ -67,7 +67,7 @@ $db->conectarDB();
 </form>
 
    <?php
-require '../vendor1/autoload.php'; // Carga el autoload del AWS SDK para PHP
+require '../vendor/autoload.php'; // Carga el autoload del AWS SDK para PHP
 
 use Aws\S3\S3Client;
 use Aws\S3\Exception\S3Exception;
