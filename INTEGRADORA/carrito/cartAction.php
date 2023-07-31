@@ -56,8 +56,8 @@ if(isset($_REQUEST['action']) && !empty($_REQUEST['action'])){
             header("Location: checkout.php");
         }
     }else{
-        header("Location: index.php");
+        header("Location: ../views/menu-pizza.php");
     }
 }else{
-    header("Location: index.php");
+    header("Location: ../views/menu-pizza.php");
 }

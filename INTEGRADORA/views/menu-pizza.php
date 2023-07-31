@@ -1,7 +1,11 @@
+<?php
+// include database configuration file
+include '../carrito/dbConfig.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Toys Pizza</title>
+<title>Toys Pizza</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
@@ -15,6 +19,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Ysabeau+Office:wght@600&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Lato:ital@1&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
     <!--Navbar-->
@@ -47,6 +53,9 @@
                 </ul>
               </li>
             </ul>
+            <li class="nav-item">
+            <a href="../carrito/viewCart.php" title="Ver carrito"><i class='bx bxs-cart'></i></a>
+            </li>
               <li class="nav-item navtext">
                 <div class="container">
                   <div class="d-flex justify-content">
@@ -67,57 +76,45 @@
           <a class="nav-link active" href="#">Menu</a>
         </li>
       </ul>
-      <!--Cards reversibles-->
       <section>
-        <div class="container">
-            <div class="row">
-            <?php 
-            include '../class/database.php';
-            $db = new Database();
-            $db->conectarDB();
-            $cons="SELECT * FROM PRODUCTOS GROUP BY NOMBRE";
-            $res=$db->seleccionar($cons);
-            $contador=0;
-            foreach($res as $registro)
-            {
-              if ($contador / 3 == 0) {
-                echo '</div><div class="row">';
-              }
-            echo"<form method='post' action='cart.php' class='col-12 col-lg-4'>
-            <div class='carta'>
-            <div class='face front'>
-            <img src=''>
-            <h3>$registro->NOMBRE</h3>
-            <input name='titulo' type='hidden' id='titulo' value'".$registro->NOMBRE."'>
+      <div class="container">
+    <div id="products" class="row list-group">
+        <?php
+        //get rows query
+        $query = $db->query("SELECT * FROM PRODUCTOS ORDER BY CODIGO ");
+        if($query->num_rows > 0){ 
+            while($row = $query->fetch_assoc()){
+        ?>
+            <div class="carta col-12 col-lg-4">
+            <div class="face front">
+            <img src="../img/pepe.jpg">
+            <h3><?php echo $row["NOMBRE"]; ?></h3>
+            <input name='titulo' type='hidden' id='titulo' value>
             </div>
             <div class='face back'>
-            <h3>$registro->NOMBRE</h3>
-            <p>$registro->DESCRIPCION</p>
+            <h3><?php echo $row["NOMBRE"]; ?></h3>
+            <p><?php echo $row["DESCRIPCION"]; ?></p>
+            <p><?php echo $row["TAMAÑO"];?></p>
             <div class='linka d-flex mb-lg-3'>
-            <button type='submit' class='btn butn-menu'><i class='bx bxs-cart'>Agregar al carrito</i>
-            </button>
-            </div>";
-            $tama="SELECT TAMAÑO FROM PRODUCTOS WHERE NOMBRE ='$registro->NOMBRE'";
-            $tamalos=$db->seleccionar($tama);
-            echo"<select name='tamaño' class='form-select'>";
-            foreach($tamalos as $regi2)
-            {
-              echo"<option value='".$regi2->TAMAÑO."'>".$regi2->TAMAÑO."</option>";
-            }
-            echo"</select>
+            <div class="row">
+                        <div class="col-md-6">
+                            <p class="lead"><?php echo '$'.$row["PRECIO"].' MX'; ?></p>
+                        </div>
+                        <div class="col-md-6">
+                            <a class="btn butn-menu" href="../carrito/cartAction.php?action=addToCart&id=<?php echo $row["CODIGO"]; ?>">Agregar al carrito</a>
+                        </div>
+                    </div>
             </div>
             </div>
-            </form>";
-            $contador++;
-            }
-            $db->desconectarDB();
-            
-            ?>
-           </div> 
-  </div>
-</section>     
-      <!--Footer-->
-      <section >
+            </div>
+        <?php } }else{ ?>
+        <p>No hay productos...</p>
+        <?php } ?>
+    </div>
+</div>
+</section>
+<!--Footer-->
+<section >
         <div class="footer">
             <div class="main position-relative">
                 <div class="colu col-6 col-lg-4">

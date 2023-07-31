@@ -63,7 +63,7 @@ $cart = new Cart;
     </tbody>
     <tfoot>
         <tr>
-            <td><a href="index.php" class="btn btn-warning"><i class="glyphicon glyphicon-menu-left"></i> Continue Shopping</a></td>
+            <td><a href="../views/menu-pizza.php" class="btn btn-warning"><i class="glyphicon glyphicon-menu-left"></i> Continue Shopping</a></td>
             <td colspan="2"></td>
             <?php if($cart->total_items() > 0){ ?>
             <td class="text-center"><strong>Total <?php echo '$'.$cart->total().' MX'; ?></strong></td>

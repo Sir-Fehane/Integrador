@@ -379,21 +379,17 @@ align-items: center;
 }
 .butn-menu
 {
-    display: inline-flex;
     background: var(--main-color)!important;
     border-radius: 0.5rem;
     text-align: center;
-    height: 40px !important;
+    display: inline-block;
+    height: 55px !important;
     width: 100px !important;
-    font-size: 5px;
+    font-size: 15px;
 }
 .butn-menu:hover
 {
     transform: scale(1.1) translateY(5px);
     transition: .4s;
-}
-.butn-menu i
-{
-    color: var(--text-color) !important;
-    font-size: var(--p-font);
+    color: var(--bg-color);
 }
