@@ -74,17 +74,17 @@ class Database{
                 $_SESSION["usuario"] = $usuario;
                 $_SESSION["rol"] = $rol;
 
-                echo "<div class = 'alert altert-success'>";
+                echo "<div class = 'alert alert-success'>";
                 echo "<h2 align = 'center'>Bienvenido ".$_SESSION["usuario"]."</h2> </div>";
                 echo "</div>";
 
                 switch ($_SESSION["rol"])
                 {
-                    case 1: header("location: ../views/admin.php");
+                    case 1: header("refresh:2 ../views/admin.php");
                         break;
                     case 2: header("refresh:2 ../index.php");
                         break;
-                    case 3: header("location: ../views/punto-de-venta.php");
+                    case 3: header("refresh:2 ../views/puntoventa.php");
                         break;
                     default:
                         break;
@@ -92,7 +92,7 @@ class Database{
             }
             else
             {
-                echo "<div class = 'alert altert-danger'>";
+                echo "<div class = 'alert alert-danger'>";
                 echo "<h2 align = 'center'>Usuario o password incorrecto</h2>";
                 echo "</div>";
                 header("refresh:2 ../index.php");
