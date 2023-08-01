@@ -96,7 +96,7 @@ else
         <div class="col-12 col-md-5 col-lg-4">
             <button class="btn card" data-bs-toggle="modal" data-bs-target="#modal<?php echo $value->ID; ?>" id="item">   
                 <span class="titulo-item"><?php echo $value->N; ?></span>
-                <img src="./src/img/pepe.jpg" class="img-item"/>
+                <img src="../img/pepe.jpg" class="img-item"/>
             </button>
         </div>
         <?php } ?>   
