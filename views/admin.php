@@ -6,7 +6,7 @@ if(!isset($_SESSION['rol']))
 }
 else
 {
-  if ($_SESSION["rol"] == 3) { // Admin
+  if ($_SESSION["rol"] == 3) { 
     header("Location: puntoventa.php");
     exit;
   } elseif ($_SESSION["rol"] == 1) { 
@@ -55,9 +55,6 @@ else
 <title>Administracion</title>
 </head>
 <body>
-  <?php
-    session_start();
-  ?>
 <div class="container-fluid">
   <div class="row">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
