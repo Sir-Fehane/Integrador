@@ -10,9 +10,9 @@ else
     header("Location: puntoventa.php");
     exit;
   } elseif ($_SESSION["rol"] == 1) { 
-    if (basename($_SERVER['PHP_SELF']) === 'admin.php') {
+    if (basename($_SERVER['PHP_SELF']) === 'Personal.php') {
     } else {
-        header("Location: admin.php");
+        header("Location: Personal.php");
         exit;
     }
   } elseif ($_SESSION["rol"] == 2) { 
