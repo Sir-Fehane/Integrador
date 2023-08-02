@@ -1,3 +1,19 @@
+<?php
+if(!isset($_SESSION['rol']))
+{
+  header('Location: ../index.php');
+}
+else
+ {
+  if ($_SESSION["rol"] == 2) {
+    header("Location: ../index.php");
+    exit;
+  } elseif ($_SESSION["rol"] == 1) { 
+    header("Location: admin.php");
+    exit;
+  }
+ }
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -28,9 +44,6 @@
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="puntoventa.php">Inicio</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="cocina.php">Cocina</a>
             </li>
             <li class="nav-item dropdown">
               <a
