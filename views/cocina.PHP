@@ -1,26 +1,3 @@
-<?php
-session_start();
-if(!isset($_SESSION['rol']))
-{
- header('location: ../index.php');
-}
-else
-{
-  if ($_SESSION["rol"] == 1) { 
-    header("Location: admin.php");
-    exit;
-  } elseif ($_SESSION["rol"] == 3) { 
-    if (basename($_SERVER['PHP_SELF']) === 'cocina.PHP') {
-    } else {
-        header("Location: cocina.PHP");
-        exit;
-    }
-  } elseif ($_SESSION["rol"] == 2) { 
-    header("Location: ../index.php");
-    exit;
-  }
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
