@@ -20,6 +20,9 @@ if(!isset($_SESSION['rol']))
     exit;
   }
  }
+ include'class/database.php';
+ $db= new Database();
+ $db->conectarDB();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -63,15 +66,32 @@ if(!isset($_SESSION['rol']))
                   <li><a class="dropdown-item drup" href="#">Informacion</a></li>
                 </ul>
               </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle navtext" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Selecciona tu sucursal
+                </a>
+                <ul class="dropdown-menu">
+                  <select name="suc">
+                  <?php 
+                  $consulta="SELECT ID_SUC, NOMBRE FROM SUCURSALES";
+                  $arr=$db->seleccionar($consulta);
+                  foreach($arr as  $xd)
+                  {
+                    echo "<option value='".$xd->ID_SUC."'>".$xd->NOMBRE."</option>";
+                  }
+                  ?>
+                  </select>
+                  <?php 
+                  $_SESSION['SUCURSAL']=1;
+                  ?>
                 </ul>
-            </ul>
+              </li>
+                </ul>
+                
               <li class="nav-item navtext">
                 <div class="container">
                   <div class="d-flex justify-content">
                   <?php
-                  include 'class/database.php';
-                  $db = new Database();
-                  $db->conectarDB();
                     if(isset($_SESSION["usuario"]))
                     {
                       $usuario1 = $_SESSION['usuario'];

@@ -66,6 +66,7 @@ class Database{
                 {
                     $pase = true;
                     $rol = $renglon['ROL'];
+                    $id_usuar=$renglon['ID_USUARIO'];
                 }
             }
             if($pase)
@@ -73,6 +74,7 @@ class Database{
                 session_start();
                 $_SESSION["usuario"] = $usuario;
                 $_SESSION["rol"] = $rol;
+                $_SESSION["IDUSU"]= $id_usuar;
 
                 echo "<div class = 'alert altert-success'>";
                 echo "<h2 align = 'center'>Bienvenido ".$_SESSION["usuario"]."</h2> </div>";
