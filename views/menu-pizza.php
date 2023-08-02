@@ -1,6 +1,11 @@
 <?php
 // include database configuration file
+session_start();
+include'../class/database.php';
+$dbase= new Database();
+$dbase->conectarDB();
 include '../carrito/dbConfig.php';
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,8 +31,8 @@ include '../carrito/dbConfig.php';
     <!--Navbar-->
     <nav class="navbar navbar-expand-lg he">
         <div class="container-fluid">
-            <a class="navbar-brand logo" href="../index.php">
-                <img src="../img/pizza.png" alt="Logo" width="60" height="48" class="d-inline-block align-text-top">
+            <a class="navbar-brand logo" href="#">
+                <img src="img/pizza.png" alt="Logo" width="60" height="48" class="d-inline-block align-text-top">
                 Toy's Pizza
               </a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,10 +41,10 @@ include '../carrito/dbConfig.php';
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active navtext" aria-current="page" href="#">Inicio</a>
+                <a class="nav-link active navtext" aria-current="page" href="../index.php">Inicio</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link navtext" href="menu.php">Menu</a>
+                <a class="nav-link navtext" href="views/menu-pizza.php">Menu</a>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle navtext" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -52,15 +57,50 @@ include '../carrito/dbConfig.php';
                   <li><a class="dropdown-item drup" href="#">Informacion</a></li>
                 </ul>
               </li>
-            </ul>
-            <li class="nav-item">
-            <a href="../carrito/viewCart.php" title="Ver carrito"><i class='bx bxs-cart'></i></a>
-            </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle navtext" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Selecciona tu sucursal
+                </a>
+                <ul class="dropdown-menu">
+                  
+                </ul>
+              </li>
+                </ul>
+                
               <li class="nav-item navtext">
                 <div class="container">
                   <div class="d-flex justify-content">
+                  <?php
+                    if(isset($_SESSION["usuario"]))
+                    {
+                      $usuario1 = $_SESSION['usuario'];
+                      $consulta1 = "SELECT U.ID_USUARIO AS ID, U.NOMBRE AS 'NOMBRE', U.DIRECCION AS 'DIRECCION', U.TELEFONO AS 'TELEFONO', U.CORREO AS 'CORREO',
+                      U.img_chidas FROM USUARIOS U
+                      WHERE NOMBRE = '$usuario1'";
+                      $tabla = $dbase->seleccionar($consulta1);
+                      foreach ($tabla as $registro)
+                      {
+                        $imgchida = $registro->img_chidas;
+                     echo "<img src='$imgchida' style='border-radius: 10px;' alt='img'width= '50px'
+                     height=' 50px'>";
+                      }
+                      echo "<li class='nav-item dropdown'>
+                      <a class='nav-link dropdown-toggle text-white' href='#' role='button' data-bs-toggle='dropdown' aria-expanded='false'>
+                      " . $_SESSION["usuario"] . "</a>
+                      <ul class='dropdown-menu'>
+                      <li><a class='dropdown-item text-black' href='views/verperfilv.php'>Ver perfil</a></li>
+                      <li><a class='dropdown-item text-black' href='scripts/cerrarSesion.php'>Cerrar sesión</a></li>
+                      </ul>
+                      </li>";
+                    }
+                    else
+                    {
+                    ?>
                   <button type="button" class="btn btn-danger jus" data-bs-toggle="modal" data-bs-target="#login">Iniciar Sesion</button>
                   <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#register">Registrate</button>
+                  <?php
+                    }
+                  ?>
                   </div>
               </div>
               </li>
@@ -78,7 +118,7 @@ include '../carrito/dbConfig.php';
       </ul>
       <section>
       <div class="container">
-    <div id="products" class="row list-group">
+    <div id="products" class="row">
         <?php
         //get rows query
         $query = $db->query("SELECT * FROM PRODUCTOS ORDER BY CODIGO ");
@@ -152,5 +192,55 @@ include '../carrito/dbConfig.php';
             </div>
         </div>
     </section>
+
+    <!-- Modal login-->
+<div class="modal fade" id="login" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Iniciar sesion</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form action="../scripts/login.php" method="post">
+                <label for="Nombre" class="form-label">Nombre</label>
+                <input type="text" class="form-control" name="usuario" required>
+                <label for="password" class="form-label">Contraseña</label>
+                <input type="password" class="form-control" name="password" required>
+                <div>
+                  <a href="">Olvide mi contraseña</a>
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-danger">Iniciar sesion</button>
+                </div>
+              </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal register-->
+<div class="modal fade" id="register" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Registro</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form action="../scripts/registrarse.php" method="POST">
+                <label for="Nombre" class="form-label">Nombre</label>
+                <input type="text" class="form-control" name="nombre" required>
+                <label for="password" class="form-label">Contraseña</label>
+                <input type="password" name="password" class="form-control" required>
+                <label for="direccion" class="form-label">Direccion</label>
+                <input type="text" class="form-control" required name="direccion">
+                <label for="celular" class="form-label">Telefono</label>
+                <input type="tel" name="telefono" class="form-control" required>
+                <label for="email" class="form-label">Correo</label>
+                <input type="email" name="correo" placeholder="Opcional" class="form-control">
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-warning">Registrar</button>
+                </div>
+              </form>
 </body>
 </html>

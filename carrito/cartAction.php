@@ -33,7 +33,7 @@ if(isset($_REQUEST['action']) && !empty($_REQUEST['action'])){
         header("Location: viewCart.php");
     }elseif($_REQUEST['action'] == 'placeOrder' && $cart->total_items() > 0 && !empty($_SESSION['sessCustomerID'])){
         // insert order details into database
-        $insertOrder = $db->query("INSERT INTO ORDEN_VENTA (NO_ORDEN, FECHA, USUARIO, TIPO, HORA, TOTAL, FORMA_PAGO, SUCURSAL) VALUES ('','".date("Y-m-d")."','".$_SESSION['sessCustomerID']."','LLEVAR','".date("H:i:s")."','".$cart->total()."','EFECTIVO','1')");
+        $insertOrder = $db->query("INSERT INTO ORDEN_VENTA (NO_ORDEN, USUARIO, TIPO, TOTAL, FORMA_PAGO, SUCURSAL) VALUES ('','".$_SESSION['sessCustomerID']."','LLEVAR','".$cart->total()."','EFECTIVO','1')");
         
         if($insertOrder){
             $orderID = $db->insert_id;
@@ -41,7 +41,7 @@ if(isset($_REQUEST['action']) && !empty($_REQUEST['action'])){
             // get cart items
             $cartItems = $cart->contents();
             foreach($cartItems as $item){
-                $sql .= "INSERT INTO DETALLE_ORDEN (NO_ORDEN,PRODUCTO, CANTIDAD) VALUES ('".$orderID."', '".$item['id']."', '".$item['qty']."');";
+                $sql .= "INSERT INTO DETALLE_ORDEN (NO_ORDEN,PRODUCTO, CANTIDAD, NOTAS, ESTADO) VALUES ('".$orderID."', '".$item['id']."', '".$item['qty']."', '', 'PENDIENTE');";
             }
             // insert order items into database
             $insertOrderItems = $db->multi_query($sql);
