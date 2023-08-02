@@ -1,5 +1,4 @@
-<?php 
-session_start();
+<?php
 if(!isset($_SESSION['rol']))
 {
   header('Location: ../index.php');
