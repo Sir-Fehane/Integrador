@@ -226,7 +226,6 @@ if(!isset($_SESSION['rol']))
           <h2>Comida de calidad</h2>
       </div>
       <div class="container d-inline">
-        
         <div class="row">
       <div class="service-container col-12 col-lg-4 ">
           <div class="s-box">
@@ -280,7 +279,6 @@ if(!isset($_SESSION['rol']))
                         <li><a href="#">Sobre nosotros</a></li>
                         <li><a href="#">Envios</a></li>
                         <li><a href="#">T&C</a></li>
-                       
                     </ul>
                     <div class="social">
                       <a href="https://www.facebook.com/pizzastoystorreon"><i class='bx bxl-facebook' ></i></a>

@@ -33,7 +33,20 @@ else
       rel="stylesheet"
       href="../css/bootstrap.min.css"
     />
-  </head>
+  </head>      
+  <?php 
+    $carrito_mio = $_SESSION['carrito'];
+    $_SESSION['carrito']=$carrito_mio;
+
+    // contamos nuestro carrito
+    if(isset($_SESSION['carrito'])){
+        for($i=0;$i<=count($carrito_mio)-1;$i ++){
+        if($carrito_mio[$i]!=NULL){ 
+        $total_cantidad = $carrito_mio['cantidad'];
+        $total_cantidad ++ ;
+        $totalcantidad += $total_cantidad;
+        }}}
+    ?>
   <body>
     <!--Header/navbar-->
     <nav class="navbar navbar-expand-lg fixed-top" id="barra">
@@ -45,16 +58,16 @@ else
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+              <a class="nav-link active" aria-current="page" href="">Inicio</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Cocina</a>
+              <a class="nav-link" href="cocina.PHP">Cocina</a>
             </li>
             <li>
-              <a class="nav-link" href="#">Cierre</a>
+              <a class="nav-link" href="cierre.php">Cierre</a>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <a class="nav-link dropdown-toggle" href="verperfilv.php" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Perfil
               </a>
               <ul class="dropdown-menu">
@@ -68,29 +81,68 @@ else
         </div>
       </div>
     </nav>
+
     <!--Cuerpo de la pagina-->
     <div class="container" id="cuerpo">
       <div class="div" id="cuerpo1">
         <div class="row" id="renglon">
         <?php
-        include './class/database.php';
+        include '../class/database.php';
         $conexion = new database();
         $conexion->conectarDB();
-        $consulta ="SELECT PRODUCTOS.NOMBRE as N FROM PRODUCTOS GROUP BY PRODUCTOS.NOMBRE";
-        $reg = $conexion->seleccionar($consulta);
-        foreach($reg as $value){
-        echo "
-        <div class='col-12 col-md-5 col-lg-4'>
-            <button class='btn card' data-bs-toggle='modal' data-bs-target='#modal ' id='item' id='$value->N'>
-                <span class='titulo-item'>$value->N</span>
-                <img src='./src/img/pepe.jpg' class='img-item'/>
+        $consulta ="SELECT PRODUCTOS.NOMBRE as N, PRODUCTOS.CODIGO as ID, PRODUCTOS.PRECIO as PR FROM PRODUCTOS GROUP BY PRODUCTOS.NOMBRE";
+        $reg = $conexion->seleccionar($consulta);        
+        foreach($reg as $value){ ?>
+        <div class="col-12 col-md-5 col-lg-4">
+            <button class="btn card" data-bs-toggle="modal" data-bs-target="#modal<?php echo $value->ID; ?>" id="item">   
+                <span class="titulo-item"><?php echo $value->N; ?></span>
+                <img src="../img/pepe.jpg" class="img-item"/>
             </button>
-        </div>";
-        }              
-        ?>   
+        </div>
+        <?php } ?>   
         </div>
       </div>
     </div>
+      <!-- CONFIGURAR -->
+  <?php
+  foreach($reg as $value){ ?>
+<div class="modal fade" id="modal<?php echo $value->ID ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form id="formulario" name="formulario" method="post" action="../scripts/cart.php">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"><input name="titulo" type="Hidden" value="<?php echo $value->N ?>"><?php echo $value->N ?></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <?php
+            $size="SELECT TAMAÑO FROM PRODUCTOS WHERE PRODUCTOS.NOMBRE = '$value->N' ";
+            $sizes=$conexion->seleccionar($size);
+            echo "<label for='tamaño'>Tamaño</label>";
+            echo"<select name='tamaño' class='form-select'>";
+            foreach($sizes as $reg2)
+            {
+              echo"<option value='".$reg2->TAMAÑO."'>".$reg2->TAMAÑO."</option>";
+            }
+            echo"</select>";
+            echo "<br><br>";
+            echo "<label for='cantidad'>Cantidad: </label>";
+            echo "<input type='number' min='1' name='cantidad' id='cantidad' placeholder='1'></input>";
+            echo "<br><br>";
+            echo "<label for='precio'>Precio: </label>";
+            echo "<input name='precio' id='precio' type='hidden' value='$value->PR'";
+          ?>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="submit" class="btn btn-primary">Guardar cambios</button>
+      </div>
+    </div>
+  </div>
+  </form>
+</div>
+<?php } ?>
+
     <!--CARRITOOOO-->
     <div
       class="offcanvas offcanvas-end"
@@ -111,32 +163,51 @@ else
         ></button>
       </div>
       <div class="offcanvas-body">
-        <p>Try scrolling the rest of the page to see this option in action.</p>
+      <div>
+					<div class="p-2">
+						<ul class="list-group mb-3">
+							<?php
+							if(isset($_SESSION['carrito'])){
+							$total=0;
+							for($i=0;$i<=count($carrito_mio)-1;$i ++){
+							if($carrito_mio[$i]!=NULL){
+						
+            ?>
+							<li class="list-group-item d-flex justify-content-between lh-condensed">
+								<div class="row col-12" >
+									<div class="col-6 p-0" style="text-align: left; color: #000000;"><h6 class="my-0">Cantidad: <?php echo $carrito_mio[$i]['cantidad'] ?> : <?php echo $carrito_mio[$i]['titulo']; // echo substr($carrito_mio[$i]['titulo'],0,10); echo utf8_decode($titulomostrado)."..."; ?></h6>
+									</div>
+									<div class="col-6 p-0"  style="text-align: right; color: #000000;" >
+									<span   style="text-align: right; color: #000000;"><?php echo $carrito_mio[$i]['precio'] * $carrito_mio[$i]['cantidad'];    ?> €</span>
+									</div>
+								</div>
+							</li>
+							<?php
+							$total=$total + ($carrito_mio[$i]['precio'] * $carrito_mio[$i]['cantidad']);
+							}
+							}
+							}
+							?>
+							<li class="list-group-item d-flex justify-content-between">
+							<span  style="text-align: left; color: #000000;">Total (EUR)</span>
+							<strong  style="text-align: left; color: #000000;"><?php
+							if(isset($_SESSION['carrito'])){
+							$total=0;
+							for($i=0;$i<=count($carrito_mio)-1;$i ++){
+							if($carrito_mio[$i]!=NULL){ 
+							$total=$total + ($carrito_mio[$i]['precio'] * $carrito_mio[$i]['cantidad']);
+							}}}
+							echo $total; ?> $</strong>
+							</li>
+						</ul>
+					</div>
+				</div>
       </div>
       <div>
         <button class="btn btn-primary" type="button">Proceder al pago</button>
+        <a type="button" class="btn btn-primary" href="../scripts/borrarcarro.php">Vaciar carrito</a>
       </div>
     </div>
-<!-- Pizza Builder -->
-<div class="modal fade" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="titulo-modal">Título del modal</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary">Guardar cambios</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<script src="../js/bootstrap.bundle.js"></script>
-    <script src="../src/app.js"></script>
+    <script src="../js/bootstrap.bundle.js"></script>
   </body>
 </html>
