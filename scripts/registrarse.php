@@ -17,7 +17,7 @@
 
         $hash = password_hash($password, PASSWORD_DEFAULT);
         $cadena = "INSERT INTO USUARIOS(NOMBRE, DIRECCION, TELEFONO, CORREO, CONTRASEÑA, ROL, img_chidas)
-        VALUES ('$nombre','$direccion','$celular','$correo','$hash', 2, 'https://toys-pizza.s3.amazonaws.com/imagenes/usuariotoys.jpg')";
+        VALUES ('$nombre','$direccion','$telefono','$correo','$hash', 2, 'https://toys-pizza.s3.amazonaws.com/imagenes/usuariotoys.jpg')";
 
         $db->ejecutarSQL($cadena);
 
