@@ -36,14 +36,31 @@ $custRow = $query->fetch_assoc();
     </style>
 </head>
 <body>
+<form class="d-flex" action="" method="post" id="sucursal">
+          <?php
+            $cadena = "SELECT ID_SUC,NOMBRE FROM SUCURSALES";
+            $reg = $dbase->seleccionar($cadena);
+            echo "<div class='me-2'>
+            <select name='sucursal' class='form-select'>
+            <option value='0'>Seleccionar sucursal...</option>";
+            foreach ($reg as $value)
+            {
+              echo "<option value='".$value->ID_SUC."'>".$value->NOMBRE."</option>";
+            }
+            echo "</select>
+            </div>";
+            $dbase->desconectarDB();
+            ?>
+          <button type="submit" class="btn btn-warning">Elegir</button>
+        </form>
 <div class="container">
     <h1>Order Preview</h1>
     <table class="table">
     <thead>
         <tr>
-            <th>Product</th>
-            <th>Price</th>
-            <th>Quantity</th>
+            <th>Productos</th>
+            <th>Precios</th>
+            <th>Cantidad</th>
             <th>Subtotal</th>
         </tr>
     </thead>
@@ -56,12 +73,12 @@ $custRow = $query->fetch_assoc();
         ?>
         <tr>
             <td><?php echo $item["name"]; ?></td>
-            <td><?php echo '$'.$item["price"].' USD'; ?></td>
+            <td><?php echo '$'.$item["price"].' MX'; ?></td>
             <td><?php echo $item["qty"]; ?></td>
-            <td><?php echo '$'.$item["subtotal"].' USD'; ?></td>
+            <td><?php echo '$'.$item["subtotal"].' MX'; ?></td>
         </tr>
         <?php } }else{ ?>
-        <tr><td colspan="4"><p>No items in your cart......</p></td>
+        <tr><td colspan="4"><p>No hay nada que mostrar...</p></td>
         <?php } ?>
     </tbody>
     <tfoot>
@@ -74,11 +91,12 @@ $custRow = $query->fetch_assoc();
     </tfoot>
     </table>
     <div class="shipAddr">
-        <h4>Shipping Details</h4>
+        <h4>Detalles de la orden</h4>
         <p><?php echo $custRow['NOMBRE']; ?></p>
         <p><?php echo $custRow['CORREO']; ?></p>
         <p><?php echo $custRow['TELEFONO']; ?></p>
         <p><?php echo $custRow['DIRECCION']; ?></p>
+        <p><?php echo $_SESSION['NombSuc']?></p>
     </div>
     <div class="footBtn">
         <a href="../views/menu-pizza.php" class="btn btn-warning"><i class="glyphicon glyphicon-menu-left"></i> Continue Shopping</a>

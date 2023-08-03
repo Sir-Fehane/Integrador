@@ -134,7 +134,7 @@ include '../carrito/dbConfig.php';
             <div class='face back'>
             <h3><?php echo $row["NOMBRE"]; ?></h3>
             <p><?php echo $row["DESCRIPCION"]; ?></p>
-            <p><?php echo $row["TAMAÑO"];?></p>
+            <p><?php echo $row["TAMANO"];?></p>
             <div class='linka d-flex mb-lg-3'>
             <div class="row">
                         <div class="col-md-6">
