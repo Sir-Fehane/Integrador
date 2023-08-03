@@ -116,6 +116,14 @@ class Database{
     {
         return htmlspecialchars($valor, ENT_QUOTES, 'UTF-8');
     }
+    public function getDB()
+    {
+        if ($this->PDOAws === null) {
+            $this->conectarDB();
+        }
+        return $this->PDOAws;
+    }
+
 }
 
 ?>
