@@ -1,29 +1,32 @@
-<?php session_start(); 
-//aqui empieza el carrito
+<?php
+session_start();
 
-	if(isset($_SESSION['carrito'])){
-		$carrito_mio=$_SESSION['carrito'];
-		if(isset($_POST['titulo'])){
-			$titulo=$_POST['titulo'];
-			$precio=$_POST['precio'];
-			$cantidad=$_POST['cantidad'];
-			$num=0;
-     		$carrito_mio[]=array("titulo"=>$titulo,"precio"=>$precio,"cantidad"=>$cantidad);
- 		}
-	}else{
-		$titulo=$_POST['titulo'];
-		$precio=$_POST['precio'];
-		$cantidad=$_POST['cantidad'];
-		$carrito_mio[]=array("titulo"=>$titulo,"precio"=>$precio,"cantidad"=>$cantidad);	
-	}
-	
+if (isset($_POST['ID'])) {
+  $id = $_POST['ID'];
+  $titulo = $_POST['titulo'];
+  $precio = $_POST['precio'];
+  $cantidad = $_POST['cantidad'];
+  $tamaño = $_POST['tamaño'];
 
-$_SESSION['carrito']=$carrito_mio;
+  // Resto del código para agregar el producto al carrito
+  $producto = array(
+    "titulo" => $titulo,
+    "precio" => $precio,
+    "cantidad" => $cantidad,
+    "tamaño" => $tamaño
+  );
 
-//aqui termina el carrito
+  if (isset($_SESSION['carrito'])) {
+    $carrito_mio = $_SESSION['carrito'];
+  } else {
+    $carrito_mio = array();
+  }
 
-header("Location: ".$_SERVER['HTTP_REFERER']."");
+  $carrito_mio[] = $producto;
+  $_SESSION['carrito'] = $carrito_mio;
+}
+
+// Redireccionar al index.php después de agregar el producto al carrito
+header("Location: ".$_SERVER['HTTP_REFERER']);
+exit();
 ?>
-
-
-

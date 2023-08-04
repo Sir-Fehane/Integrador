@@ -34,19 +34,6 @@ else
       href="../css/bootstrap.min.css"
     />
   </head>      
-  <?php 
-    $carrito_mio = $_SESSION['carrito'];
-    $_SESSION['carrito']=$carrito_mio;
-
-    // contamos nuestro carrito
-    if(isset($_SESSION['carrito'])){
-        for($i=0;$i<=count($carrito_mio)-1;$i ++){
-        if($carrito_mio[$i]!=NULL){ 
-        $total_cantidad = $carrito_mio['cantidad'];
-        $total_cantidad ++ ;
-        $totalcantidad += $total_cantidad;
-        }}}
-    ?>
   <body>
     <!--Header/navbar-->
     <nav class="navbar navbar-expand-lg fixed-top" id="barra">
@@ -93,121 +80,150 @@ else
         $consulta ="SELECT PRODUCTOS.NOMBRE as N, PRODUCTOS.CODIGO as ID, PRODUCTOS.PRECIO as PR FROM PRODUCTOS GROUP BY PRODUCTOS.NOMBRE";
         $reg = $conexion->seleccionar($consulta);        
         foreach($reg as $value){ ?>
-        <div class="col-12 col-md-5 col-lg-4">
-            <button class="btn card" data-bs-toggle="modal" data-bs-target="#modal<?php echo $value->ID; ?>" id="item">   
-                <span class="titulo-item"><?php echo $value->N; ?></span>
-                <img src="../img/pepe.jpg" class="img-item"/>
-            </button>
-        </div>
-        <?php } ?>   
+          <div class="col-12 col-md-5 col-lg-4">
+          <button class="btn card" data-bs-toggle="modal" data-bs-target="#modal<?php echo $value->ID; ?>" data-modal-target="modal<?php echo $value->ID; ?>" id="item" data-titulo="<?php echo $value->N; ?>" data-tamaño="">   
+                  <span class="titulo-item"><?php echo $value->N; ?></span>
+                  <img src="../img/pepe.jpg" class="img-item"/>
+              </button>
+          </div>
+          <?php } ?>
         </div>
       </div>
     </div>
-      <!-- CONFIGURAR -->
-  <?php
-  foreach($reg as $value){ ?>
-<div class="modal fade" id="modal<?php echo $value->ID ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <form id="formulario" name="formulario" method="post" action="../scripts/cart.php">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"><input name="titulo" type="Hidden" value="<?php echo $value->N ?>"><?php echo $value->N ?></h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <!-- CONFIGURAR -->
+    <?php foreach ($reg as $value) { ?>
+    <div class="modal fade" id="modal<?php echo $value->ID ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form id="formulario_<?php echo $value->ID ?>" name="formulario" method="post" action="../scripts/cart.php?ID">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel"><?php echo $value->N ?></h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+              <?php
+                  $size = "SELECT TAMANO as T, PRECIO as PR FROM PRODUCTOS WHERE PRODUCTOS.NOMBRE = '$value->N'";
+                  $sizes = $conexion->seleccionar($size);
+                  echo "<label for='tamaño'>Tamaño</label>";
+                  echo "<select name='tamaño' class='form-select tamaño' data-precio='0'>";
+                  echo "<option value=''>SELECCIONA UNA OPCION</option>";
+                  foreach($sizes as $reg2)
+                  {
+                    echo "<option value='" . $reg2->T . "' data-precio='" . $reg2->PR . "'>" . $reg2->T . " - $" . $reg2->PR . "</option>";
+                  }
+                  ?>
+                  </select>
+                  <br><br>
+                  <label for="cantidad">Cantidad: </label>
+                  <input type="number" min="1"  name="cantidad" class="cantidad" placeholder="0" value="1"></input>
+                  <br><br>
+                  <label for="subtotal">Subtotal: </label>
+                  <h5><span class="subtotal">0</span></h5>
+                
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Cerrar</button>
+                        <input type="hidden" name="titulo" value="<?php echo $value->N; ?>">
+                        <input type="hidden" name="precio" value="0">
+                        <input type="hidden" name="ID" value="<?php echo $value->ID; ?>">
+                        <input type="hidden" name="tamaño" value="">
+                        <button type="submit" class="btn btn-primary" onclick="actualizarCampos(<?php echo $value->ID; ?>)">Guardar cambios</button>
+            </div>
+          </div>
+        </div>
+        </form>
       </div>
-      <div class="modal-body">
-        <?php
-            $size="SELECT TAMAÑO FROM PRODUCTOS WHERE PRODUCTOS.NOMBRE = '$value->N' ";
-            $sizes=$conexion->seleccionar($size);
-            echo "<label for='tamaño'>Tamaño</label>";
-            echo"<select name='tamaño' class='form-select'>";
-            foreach($sizes as $reg2)
-            {
-              echo"<option value='".$reg2->TAMAÑO."'>".$reg2->TAMAÑO."</option>";
-            }
-            echo"</select>";
-            echo "<br><br>";
-            echo "<label for='cantidad'>Cantidad: </label>";
-            echo "<input type='number' min='1' name='cantidad' id='cantidad' placeholder='1'></input>";
-            echo "<br><br>";
-            echo "<label for='precio'>Precio: </label>";
-            echo "<input name='precio' id='precio' type='hidden' value='$value->PR'";
-          ?>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-        <button type="submit" class="btn btn-primary">Guardar cambios</button>
-      </div>
-    </div>
-  </div>
-  </form>
-</div>
-<?php } ?>
+      <?php } ?>
 
     <!--CARRITOOOO-->
-    <div
-      class="offcanvas offcanvas-end"
-      data-bs-scroll="true"
-      tabindex="-1"
-      id="carrito"
-      aria-labelledby="offcanvasWithBothOptionsLabel"
-    >
+    <div class="offcanvas offcanvas-end offcanvas-w-75" data-bs-scroll="true" tabindex="-1" id="carrito" aria-labelledby="offcanvasWithBothOptionsLabel">
       <div class="offcanvas-header">
         <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">
           Resumen de compra
         </h5>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="offcanvas"
-          aria-label="Close"
-        ></button>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body">
-      <div>
-					<div class="p-2">
-						<ul class="list-group mb-3">
-							<?php
-							if(isset($_SESSION['carrito'])){
-							$total=0;
-							for($i=0;$i<=count($carrito_mio)-1;$i ++){
-							if($carrito_mio[$i]!=NULL){
-						
-            ?>
-							<li class="list-group-item d-flex justify-content-between lh-condensed">
-								<div class="row col-12" >
-									<div class="col-6 p-0" style="text-align: left; color: #000000;"><h6 class="my-0">Cantidad: <?php echo $carrito_mio[$i]['cantidad'] ?> : <?php echo $carrito_mio[$i]['titulo']; // echo substr($carrito_mio[$i]['titulo'],0,10); echo utf8_decode($titulomostrado)."..."; ?></h6>
-									</div>
-									<div class="col-6 p-0"  style="text-align: right; color: #000000;" >
-									<span   style="text-align: right; color: #000000;"><?php echo $carrito_mio[$i]['precio'] * $carrito_mio[$i]['cantidad'];    ?> €</span>
-									</div>
-								</div>
-							</li>
-							<?php
-							$total=$total + ($carrito_mio[$i]['precio'] * $carrito_mio[$i]['cantidad']);
-							}
-							}
-							}
-							?>
-							<li class="list-group-item d-flex justify-content-between">
-							<span  style="text-align: left; color: #000000;">Total (EUR)</span>
-							<strong  style="text-align: left; color: #000000;"><?php
-							if(isset($_SESSION['carrito'])){
-							$total=0;
-							for($i=0;$i<=count($carrito_mio)-1;$i ++){
-							if($carrito_mio[$i]!=NULL){ 
-							$total=$total + ($carrito_mio[$i]['precio'] * $carrito_mio[$i]['cantidad']);
-							}}}
-							echo $total; ?> $</strong>
-							</li>
-						</ul>
-					</div>
-				</div>
-      </div>
-      <div>
-        <button class="btn btn-primary" type="button">Proceder al pago</button>
-        <a type="button" class="btn btn-primary" href="../scripts/borrarcarro.php">Vaciar carrito</a>
+        <?php
+              $totalFinal = 0;
+        // Verificar si el carrito tiene productos
+        if (isset($_SESSION['carrito']) && !empty($_SESSION['carrito'])) {
+
+          ?>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Producto</th>
+                <th>Tamaño</th>
+                <th>Precio</th>
+                <th>Cantidad</th>
+                <th>Subtotal</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php
+              // Recorremos los productos en el carrito y los mostramos en la tabla
+              foreach ($_SESSION['carrito'] as $index => $producto) {
+                $subtotal = $producto['precio'] * $producto['cantidad'];
+                $totalFinal += $subtotal; // Sumar el subtotal al total final
+                ?>
+                <tr>
+                  <td><?php echo $producto['titulo']; ?></td>
+                  <td><?php echo $producto['tamaño']; ?></td>
+                  <td>$<?php echo $producto['precio']; ?></td>
+                  <td><?php echo $producto['cantidad']; ?></td>
+                  <td>$<?php echo $subtotal; ?></td>
+                  <td>
+                    <form action="../scripts/eliminar_producto.php" method="post">
+                      <input type="hidden" name="index" value="<?php echo $index; ?>">
+                      <button type="submit" class="btn btn-danger">Eliminar</button>
+                    </form>
+                  </td>
+                </tr>
+                
+                <?php
+                if (isset($_POST['index']) && is_numeric($_POST['index'])) {
+                  $index = intval($_POST['index']);
+              
+                  // Verificar si el índice existe en el carrito
+                  if (isset($_SESSION['carrito'][$index])) {
+                      // Eliminar el ítem del carrito utilizando unset()
+                      unset($_SESSION['carrito'][$index]);
+              
+                      // Reorganizar los índices para evitar huecos en el array
+                      $_SESSION['carrito'] = array_values($_SESSION['carrito']);
+              
+                      // Recalcular el total después de eliminar el producto
+                      $totalFinal = 0;
+                      foreach ($_SESSION['carrito'] as $producto) {
+                          $subtotal = $producto['precio'] * $producto['cantidad'];
+                          $totalFinal += $subtotal;
+                      }
+                  }
+              }
+              }
+              ?>
+            </tbody>
+          </table>
+        <?php
+        } else {
+          // Mostrar mensaje cuando el carrito está vacío
+          echo "<p>El carrito está vacío</p>";
+        }
+        ?>
+          <div id="total" class="mb-3">
+            <span>Total: $<?php echo number_format($totalFinal, 2); ?></span> 
+          </div>
+        <div>
+          <button class="btn btn-primary" type="button">Proceder al pago</button>
+          <a type="button" class="btn btn-primary" href="../scripts/borrarcarro.php">Vaciar carrito</a>
+        </div>
       </div>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../js/bootstrap.bundle.js"></script>
+    <script src="../src/scripts/app.js" defer></script>
   </body>
 </html>
