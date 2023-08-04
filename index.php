@@ -53,7 +53,9 @@ if(!isset($_SESSION['rol']))
                 <a class="nav-link navtext" href="views/menu-pizza.php">Menu</a>
               </li>
                 </ul>
-            </ul>
+                <li class="nav-item">
+            <a href="carrito/viewCart.php" title="Ver carrito"><i class='bx bxs-cart'></i></a>
+            </li>
               <li class="nav-item navtext">
                 <div class="container">
                   <div class="d-flex justify-content">
