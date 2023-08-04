@@ -65,6 +65,9 @@ include '../carrito/dbConfig.php';
                   
                 </ul>
               </li>
+              <li class="nav-item">
+            <a href="../carrito/viewCart.php" title="Ver carrito"><i class='bx bxs-cart'></i></a>
+            </li>
                 </ul>
                 
               <li class="nav-item navtext">

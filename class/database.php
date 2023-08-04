@@ -62,7 +62,7 @@ class Database{
             
             while($renglon = $consulta->fetch(PDO::FETCH_ASSOC))
             {
-                if (password_verify($contra, $renglon['CONTRASEÑA'])) 
+                if (password_verify($contra, $renglon['CONTRASENA'])) 
                 {
                     $pase = true;
                     $rol = $renglon['ROL'];

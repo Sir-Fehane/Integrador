@@ -1,7 +1,6 @@
 <?php
 // include database configuration file
 include 'dbConfig.php';
-
 // initializ shopping cart class
 include 'Cart.php';
 $cart = new Cart;
@@ -19,6 +18,25 @@ $_SESSION['sessCustomerID'] = $nomusu;
 $query = $db->query("SELECT * FROM USUARIOS WHERE ID_USUARIO = ".$_SESSION['sessCustomerID']);
 $custRow = $query->fetch_assoc();
 ?>
+
+<?php
+    if ($_SERVER["REQUEST_METHOD"] === "POST")
+    {
+        
+        if (isset($_POST["sucursal"])) {
+            $sucursal = $_POST["sucursal"];
+            $_SESSION['IDSUCURSAL']=$sucursal;
+            $cons=$db->query("SELECT NOMBRE FROM SUCURSALES WHERE ID_SUC=".$sucursal."");
+            $putrow=$cons->fetch_assoc();
+            $_SESSION['NombSuc']=$putrow['NOMBRE'];
+        }
+        else
+        {
+            $_SESSION['IDSUCURSAL']=0;
+            $_SESSION['NombSuc']="Selecciona sucursal!";
+        }
+    }
+    ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,6 +56,9 @@ $custRow = $query->fetch_assoc();
 <body>
 <form class="d-flex" action="" method="post" id="sucursal">
           <?php
+            include "../class/database.php";
+            $dbase=New Database();
+            $dbase->conectarDB();
             $cadena = "SELECT ID_SUC,NOMBRE FROM SUCURSALES";
             $reg = $dbase->seleccionar($cadena);
             echo "<div class='me-2'>
