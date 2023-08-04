@@ -110,7 +110,7 @@ else
       <div class="col-2 col-lg-1 d-flex align-items-center">
         <ul class="navbar-nav ms-auto me-0">
           <li class="nav-item">
-            <a type="button" class="btn btn-sm btn-primary" href="../scripts/cerrarsesion.php">
+            <a type="button" class="btn btn-sm btn-primary" href="../scripts/cerrarSesion.php">
               Cerrar sesion
             </a>
           </li>

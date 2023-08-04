@@ -32,7 +32,7 @@ include '../carrito/dbConfig.php';
     <nav class="navbar navbar-expand-lg he">
         <div class="container-fluid">
             <a class="navbar-brand logo" href="#">
-                <img src="img/pizza.png" alt="Logo" width="60" height="48" class="d-inline-block align-text-top">
+                <img src="../img/pizza.png" alt="Logo" width="60" height="48" class="d-inline-block align-text-top">
                 Toy's Pizza
               </a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -57,14 +57,7 @@ include '../carrito/dbConfig.php';
                   <li><a class="dropdown-item drup" href="#">Informacion</a></li>
                 </ul>
               </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle navtext" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Selecciona tu sucursal
-                </a>
-                <ul class="dropdown-menu">
-                  
-                </ul>
-              </li>
+
               <li class="nav-item">
             <a href="../carrito/viewCart.php" title="Ver carrito"><i class='bx bxs-cart'></i></a>
             </li>
@@ -113,9 +106,6 @@ include '../carrito/dbConfig.php';
       <!--SUB Barra navegacion-->
       <ul class="nav nav-tabs justify-content-center nav-fill">
         <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="menu.php">Promociones</a>
-        </li>
-        <li class="nav-item">
           <a class="nav-link active" href="#">Menu</a>
         </li>
       </ul>
@@ -124,7 +114,7 @@ include '../carrito/dbConfig.php';
     <div id="products" class="row">
         <?php
         //get rows query
-        $query = $db->query("SELECT * FROM PRODUCTOS ORDER BY CODIGO ");
+        $query = $db->query("SELECT * FROM PRODUCTOS WHERE ESTADO='ACTIVO' ORDER BY CODIGO ");
         if($query->num_rows > 0){ 
             while($row = $query->fetch_assoc()){
         ?>

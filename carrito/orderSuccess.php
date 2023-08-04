@@ -18,6 +18,7 @@ if(!isset($_REQUEST['id'])){
 <div class="container">
     <h1>Order Status</h1>
     <p>Your order has submitted successfully. Order ID is #<?php echo $_GET['id']; ?></p>
+    <?php (header("refresh:3 ; ../index.php")) ?>
 </div>
 </body>
 </html>
