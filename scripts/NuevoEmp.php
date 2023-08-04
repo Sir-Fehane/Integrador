@@ -68,12 +68,12 @@ if(isset($_POST['submit']))
     $hash = password_hash($contra, PASSWORD_DEFAULT);
     if($puesto == "ADMINISTRADOR")
     {
-        $cadena = "INSERT INTO USUARIOS (NOMBRE,DIRECCION,TELEFONO,CONTRASEÑA,ROL) VALUES ('$nombre','$direc','$tel','$hash',1);";
+        $cadena = "INSERT INTO USUARIOS (NOMBRE,DIRECCION,TELEFONO,CONTRASENA,ROL) VALUES ('$nombre','$direc','$tel','$hash',1);";
         $db->ejecutarsql($cadena);
     }
     else
     {
-        $cadena = "INSERT INTO USUARIOS (NOMBRE,DIRECCION,TELEFONO,CONTRASEÑA,ROL) VALUES ('$nombre','$direc','$tel','$hash',3);";
+        $cadena = "INSERT INTO USUARIOS (NOMBRE,DIRECCION,TELEFONO,CONTRASENA,ROL) VALUES ('$nombre','$direc','$tel','$hash',3);";
         $db->ejecutarsql($cadena);
         $cadena = "INSERT INTO EMPLEADO_SUCURSAL (EMPLEADO,PUESTO,SUCURSAL,ESTADO) VALUES ((SELECT ID_USUARIO FROM USUARIOS WHERE NOMBRE = '$nombre' AND ROL = 3
         ORDER BY ID_USUARIO DESC LIMIT 1),'$puesto',$sucur,'ACTIVO');";

@@ -40,18 +40,7 @@ else
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Inicio</a>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Perfil
-                </a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Action</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="#">Something else here</a></li>
-                </ul>
+                <a class="nav-link active" aria-current="page" href="puntoventa.php">Inicio</a>
               </li>
             </ul>
             <!--perfil-->
@@ -150,13 +139,13 @@ if (isset($_POST['cancelar_orden'])) {
         <th>PRODUCTO</th><th>TAMAÑO</th><th>CATIDAD</th><th>NOTAS</th><th>ESTADO</th>
         </tr>
         </thead>";
-        $pizzas = " SELECT DE.NO_ORDEN , P.NOMBRE ,P.TAMAÑO, DE.CANTIDAD AS CANTIDAD_PIZZAS, DE.NOTAS,  DE.ESTADO from DETALLE_ORDEN DE INNER JOIN PRODUCTOS P ON DE.ID_DETALLE = P.CODIGO WHERE DE.NO_ORDEN=$registro->NO_ORDEN group by DE.NO_ORDEN, P.TAMAÑO;";
+        $pizzas = " SELECT DE.NO_ORDEN , P.NOMBRE ,P.TAMANO, DE.CANTIDAD AS CANTIDAD_PIZZAS, DE.NOTAS,  DE.ESTADO from DETALLE_ORDEN DE INNER JOIN PRODUCTOS P ON DE.ID_DETALLE = P.CODIGO WHERE DE.NO_ORDEN=$registro->NO_ORDEN group by DE.NO_ORDEN, P.TAMANO;";
         $tabla2 = $conexion->seleccionar($pizzas);
         foreach($tabla2 as $registro2){ 
        echo "<tbody>";
           echo "<tr>";
           echo "<td> $registro2->NOMBRE </td>";
-          echo "<td> $registro2->TAMAÑO </td>";
+          echo "<td> $registro2->TAMANO </td>";
           echo "<td> $registro2->CANTIDAD_PIZZAS </td>";
           echo "<td> $registro2->NOTAS </td>";
           echo "<td> $registro2->ESTADO </td>";
