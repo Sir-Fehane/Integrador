@@ -98,7 +98,7 @@ if(!isset($_SESSION['rol']))
         </div>
       </nav>
     <!--Cuerpo-->
-    <section class="h" id="h" style="background-image: url('img/fondo\ \(1\).jpg'); background-size: cover; background-position: center; ">
+    <section class="h" id="h" style="background-image: url('https://toys-pizza.s3.amazonaws.com/imagenes/fondo.jpg'); background-size: cover; background-position: center; ">
   <div class="container d-flex align-items-center justify-content-center" id="cont">
     <div class="row">
       <div class="h-t d-flex align-items-center justify-content-center mt-3" style="margin:auto; text-align: center;">
