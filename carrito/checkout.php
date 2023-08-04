@@ -23,17 +23,18 @@ $custRow = $query->fetch_assoc();
     if ($_SERVER["REQUEST_METHOD"] === "POST")
     {
         
-        if (isset($_POST["sucursal"])) {
+        if (!isset($_POST["sucursal"])) 
+        {
+            $_SESSION['IDSUCURSAL']=0;
+            $_SESSION['NombSuc']="Selecciona sucursal!";
+        }
+        else
+        {
             $sucursal = $_POST["sucursal"];
             $_SESSION['IDSUCURSAL']=$sucursal;
             $cons=$db->query("SELECT NOMBRE FROM SUCURSALES WHERE ID_SUC=".$sucursal."");
             $putrow=$cons->fetch_assoc();
             $_SESSION['NombSuc']=$putrow['NOMBRE'];
-        }
-        else
-        {
-            $_SESSION['IDSUCURSAL']=0;
-            $_SESSION['NombSuc']="Selecciona sucursal!";
         }
     }
     ?>
@@ -62,8 +63,9 @@ $custRow = $query->fetch_assoc();
             $cadena = "SELECT ID_SUC,NOMBRE FROM SUCURSALES";
             $reg = $dbase->seleccionar($cadena);
             echo "<div class='me-2'>
-            <select name='sucursal' class='form-select'>
-            <option value='0'>Seleccionar sucursal...</option>";
+            <h4>Selecciona sucursal</h4>
+            <select name='sucursal' class='form-select'>";
+            
             foreach ($reg as $value)
             {
               echo "<option value='".$value->ID_SUC."'>".$value->NOMBRE."</option>";
@@ -117,7 +119,8 @@ $custRow = $query->fetch_assoc();
         <p><?php echo $custRow['CORREO']; ?></p>
         <p><?php echo $custRow['TELEFONO']; ?></p>
         <p><?php echo $custRow['DIRECCION']; ?></p>
-        <p><?php echo $_SESSION['NombSuc']?></p>
+        <p><?php 
+        if(isset($_SESSION))echo $_SESSION['NombSuc']?></p>
     </div>
     <div class="footBtn">
         <a href="../views/menu-pizza.php" class="btn btn-warning"><i class="glyphicon glyphicon-menu-left"></i> Continue Shopping</a>

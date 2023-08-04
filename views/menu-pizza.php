@@ -10,26 +10,20 @@ include '../carrito/dbConfig.php';
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Toys Pizza</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="shortcut icon" href="../img/pizza.png">
+  <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <link rel="stylesheet" href="../css/boot.css">
-    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="shortcut icon" href="../img/pizza.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Ysabeau+Office:wght@600&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Lato:ital@1&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <title>Toys Pizza</title>
 </head>
 <body>
     <!--Navbar-->
-    <nav class="navbar navbar-expand-lg he">
+    <nav class="navbar navbar-expand-lg he" id="nav">
         <div class="container-fluid">
             <a class="navbar-brand logo" href="#">
                 <img src="../img/pizza.png" alt="Logo" width="60" height="48" class="d-inline-block align-text-top">
@@ -44,25 +38,12 @@ include '../carrito/dbConfig.php';
                 <a class="nav-link active navtext" aria-current="page" href="../index.php">Inicio</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link navtext" href="views/menu-pizza.php">Menu</a>
+                <a class="nav-link navtext" href="../views/menu-pizza.php">Menu</a>
               </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle navtext" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Sobre nosotros
-                </a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item drup" href="#">Contacto</a></li>
-                  <li><a class="dropdown-item drup" href="#">Servicio</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item drup" href="#">Informacion</a></li>
                 </ul>
-              </li>
-
-              <li class="nav-item">
+                <li class="nav-item">
             <a href="../carrito/viewCart.php" title="Ver carrito"><i class='bx bxs-cart'></i></a>
             </li>
-                </ul>
-                
               <li class="nav-item navtext">
                 <div class="container">
                   <div class="d-flex justify-content">
@@ -77,15 +58,15 @@ include '../carrito/dbConfig.php';
                       foreach ($tabla as $registro)
                       {
                         $imgchida = $registro->img_chidas;
-                     echo "<img src='$imgchida' style='border-radius: 10px;' alt='img'width= '50px'
+                     echo "<img src='$imgchida' style='border-radius: 10px;' alt='sexogratis'width= '50px'
                      height=' 50px'>";
                       }
                       echo "<li class='nav-item dropdown'>
                       <a class='nav-link dropdown-toggle text-white' href='#' role='button' data-bs-toggle='dropdown' aria-expanded='false'>
                       " . $_SESSION["usuario"] . "</a>
                       <ul class='dropdown-menu'>
-                      <li><a class='dropdown-item text-black' href='views/verperfilv.php'>Ver perfil</a></li>
-                      <li><a class='dropdown-item text-black' href='scripts/cerrarSesion.php'>Cerrar sesión</a></li>
+                      <li><a class='dropdown-item text-black' href='../views/verperfilv.php'>Ver perfil</a></li>
+                      <li><a class='dropdown-item text-black' href='../scripts/cerrarSesion.php'>Cerrar sesión</a></li>
                       </ul>
                       </li>";
                     }
@@ -147,43 +128,39 @@ include '../carrito/dbConfig.php';
 </div>
 </section>
 <!--Footer-->
-<section >
-        <div class="footer">
-            <div class="main position-relative">
-                <div class="colu col-6 col-lg-4">
-                    <h4>Links<br>del Menu</h4>
-                    <ul>
-                        <li><a href="#">Inicio</a></li>
-                        <li><a href="#">Nosotros</a></li>
-                        <li><a href="#">Menu</a></li>
-                        <li><a href="#">Servicio</a></li>
-                    </ul>
-                </div>
-                <div class="colu col-6  col-lg-4">
-                    <h4>Nuestro<br>Servicio</h4>
-                    <ul>
-                        <li><a href="#">Web</a></li>
-                        <li><a href="#">Desarrollo</a></li>
-                        <li><a href="#">Marketing</a></li>
-                        
-                    </ul>
-                </div>
-                <div class="colu col-6 col-lg-4 offset-3 offset-lg-0">
-                    <h4><br>Informacion</h4>
-                    <ul>
-                        <li><a href="#">Sobre nosotros</a></li>
-                        <li><a href="#">Envios</a></li>
-                        <li><a href="#">T&C</a></li>
-                       
-                    </ul>
-                    <div class="social">
-                      <a href="https://www.facebook.com/pizzastoystorreon"><i class='bx bxl-facebook' ></i></a>
-                      <a href="#" style="margin-left: 5%;"><i class='bx bx-phone'></i></a>
-                      </div>
-                </div>
-                
-            </div>
+<section style="background-color: #ccc;" id="fot">
+    <div class="footer">
+    <div class="main position-relative d-flex">
+        <div class="colu col-6 col-lg-4">
+            <h4>ENLACES</h4>
+            <ul class="bx-ul">
+                <li><a href="#nav"><i class='bx bxs-home'></i>INICIO</a></li>
+                <li><a href="#views/menu-pizza.php"><i class='bx bxs-food-menu'></i>MENU</a></li>
+                <li><a href="#servicios"><i class='bx bxs-check-square'></i>SERVICIO</a></li>
+                <li><a href="https://www.facebook.com/pizzastoystorreon/"><i class='bx bxl-facebook-square'></i>FACEBOOK</a></li>
+            </ul>
         </div>
+        <div class="colu col-6 col-lg-6c offset-lg-2">
+            <h4>DIRECCIONES DE SUCURSALES</h4>
+            <?php
+            $cadena = "SELECT ID_SUC,NOMBRE,DIRECCION,TELEFONO FROM SUCURSALES WHERE ESTADO = 'ACTIVO'";
+            $reg = $dbase->seleccionar($cadena);
+            echo "<ul class='bx-ul text-start'>
+            <li>";
+              foreach ($reg as $sucursal)
+              {
+                echo "<form method='post'>
+                <a type='button' class='btn-sm btn-sucursal' data-id='{$sucursal->ID_SUC}' data-nombre='{$sucursal->NOMBRE}' data-direccion='{$sucursal->DIRECCION}' data-telefono='{$sucursal->TELEFONO}' data-bs-toggle='modal' data-bs-target='#sucu'>
+                <i class='bx bxs-map'></i>{$sucursal->NOMBRE}
+                </a>
+                </form>";
+              }             
+            echo "</ul>";
+            $dbase->desconectarDB();
+            ?>
+        </div>                
+    </div>
+</div>
     </section>
 
     <!-- Modal login-->
@@ -235,5 +212,40 @@ include '../carrito/dbConfig.php';
                   <button type="submit" class="btn btn-warning">Registrar</button>
                 </div>
               </form>
+<!-- MODAL SUCURSALES -->
+<div class="modal fade" id="sucu" tabindex="-1" aria-labelledby="sucursales" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">SUCURSAL <span id="sucursal-nombre"></span></h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Dirección: <span id="sucursal-direccion"></span></p>
+                <p>Teléfono: <span id="sucursal-telefono"></span></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const buttons = document.querySelectorAll(".btn-sucursal");
+        buttons.forEach(button => {
+            button.addEventListener("click", function () {
+                const nombre = this.getAttribute("data-nombre");
+                const direccion = this.getAttribute("data-direccion");
+                const telefono = this.getAttribute("data-telefono");
+
+                document.getElementById("sucursal-nombre").textContent = nombre;
+                document.getElementById("sucursal-direccion").textContent = direccion;
+                document.getElementById("sucursal-telefono").textContent = telefono;
+            });
+        });
+    });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </body>
 </html>
