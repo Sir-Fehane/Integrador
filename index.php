@@ -20,25 +20,22 @@ if(!isset($_SESSION['rol']))
     exit;
   }
  }
- include'class/database.php';
- $db= new Database();
- $db->conectarDB();
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/boot.css">
-    <title>Toys Pizza</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/boot.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <title>Toys Pizza</title>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg he">
+<nav class="navbar navbar-expand-lg he" id="nav">
         <div class="container-fluid">
             <a class="navbar-brand logo" href="#">
                 <img src="img/pizza.png" alt="Logo" width="60" height="48" class="d-inline-block align-text-top">
@@ -55,43 +52,15 @@ if(!isset($_SESSION['rol']))
               <li class="nav-item">
                 <a class="nav-link navtext" href="views/menu-pizza.php">Menu</a>
               </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle navtext" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Sobre nosotros
-                </a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item drup" href="#">Contacto</a></li>
-                  <li><a class="dropdown-item drup" href="#">Servicio</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item drup" href="#">Informacion</a></li>
                 </ul>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle navtext" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Selecciona tu sucursal
-                </a>
-                <ul class="dropdown-menu">
-                  <select name="suc">
-                  <?php 
-                  $consulta="SELECT ID_SUC, NOMBRE FROM SUCURSALES";
-                  $arr=$db->seleccionar($consulta);
-                  foreach($arr as  $xd)
-                  {
-                    echo "<option value='".$xd->ID_SUC."'>".$xd->NOMBRE."</option>";
-                  }
-                  ?>
-                  </select>
-                  <?php 
-                  $_SESSION['SUCURSAL']=1;
-                  ?>
-                </ul>
-              </li>
-                </ul>
-                
+            </ul>
               <li class="nav-item navtext">
                 <div class="container">
                   <div class="d-flex justify-content">
                   <?php
+                  include 'class/database.php';
+                  $db = new Database();
+                  $db->conectarDB();
                     if(isset($_SESSION["usuario"]))
                     {
                       $usuario1 = $_SESSION['usuario'];
@@ -109,7 +78,7 @@ if(!isset($_SESSION['rol']))
                       <a class='nav-link dropdown-toggle text-white' href='#' role='button' data-bs-toggle='dropdown' aria-expanded='false'>
                       " . $_SESSION["usuario"] . "</a>
                       <ul class='dropdown-menu'>
-                      <li><a class='dropdown-item text-black' href='views/verperfilv1.php'>Ver perfil</a></li>
+                      <li><a class='dropdown-item text-black' href='views/verperfilv.php'>Ver perfil</a></li>
                       <li><a class='dropdown-item text-black' href='scripts/cerrarSesion.php'>Cerrar sesión</a></li>
                       </ul>
                       </li>";
@@ -129,19 +98,20 @@ if(!isset($_SESSION['rol']))
         </div>
       </nav>
     <!--Cuerpo-->
-    <section class="h" id="h">
-      <div class="container d-inline">
-        <div class="row">
-        <div class="h-t col-lg-6">
-            <h1>BIENVENIDO A TOY'S PIZZA</h1>
-            <a href="#" class="butn">Checa nuestro menú</a>
-        </div>
-        <div class="h-img col-lg-5 containe">
-            <img src="img/piejm.png">
-        </div>
+    <section class="h" id="h" style="background-image: url('img/fondo\ \(1\).jpg'); background-size: cover; background-position: center; ">
+  <div class="container d-flex align-items-center justify-content-center" id="cont">
+    <div class="row">
+      <div class="h-t d-flex align-items-center justify-content-center mt-3" style="margin:auto; text-align: center;">
+        <h1 style="font-family: 'Anton', sans-serif; ">BIENVENIDO A TOY'S PIZZA</h1>
       </div>
-     </div>
-    </section>
+      <div class="h-t col-lg-12 d-flex align-items-center justify-content-center mt-3">
+        <a href="views/menu-pizza.php" class="butn">Checa nuestro menú</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
     <!---->
     <section class="abt" id="abt">
         <div class="abt-img">
@@ -151,7 +121,7 @@ if(!isset($_SESSION['rol']))
             <span>Sobre nosotros</span>
             <h2>Somos una pizzeria <br> familiar!</h2>
             <p>Nos centramos en la calidad y el precio para tu bolsillo, todos nuestros productos están hechos con amor y sobre todo, calidad.</p>
-            <a href="#" class="butn">Contactanos!</a>
+            <a href="#fot" class="butn">Contactanos!</a>
         </div>
     </section>
     <!--Pizzas-->
@@ -160,64 +130,68 @@ if(!isset($_SESSION['rol']))
         <span>Prueba nuestras Pizzas</span>
         <h2>Tenemos una gran variedad de sabores y tamaños para toda ocasión.</h2>
     </div>
-      <div class="container" id="contenedor">
-        <div class="row">
-            <div class="col-12 col-md-6 col-lg-4">
-                <div class="card" style="width: 17rem;">
-                    <img src="img/pepe.jpg" class="card-img-top carts" alt="...">
-                    <div class="card-body estcart">
-                        <h2>Pizza Peperoni</h2>
-                      <p class="card-text">Pizza de Peperoni, queso y salsa de pizza</p>
-                    </div>
-                  </div>
-            </div>
-            <div class="col-12 col-md-6 col-lg-4">
-                <div class="card h-40" style="width: 17rem;">
-                    <img src="img/mexi.jpg" class="card-img-top carts" alt="...">
-                    <div class="card-body estcart">
-                        <h2>Pizza Mexicana</h2>
-                      <p class="card-text">Pizza de carne molida, chile, tomate, cebolla, tocino</p>
-                    </div>
-                  </div>
-            </div>
-            <div class="col-12 col-md-6 col-lg-4">
-                <div class="card h-40" style="width: 17rem;">
-                    <img src="img/cfrias.jpg" class="card-img-top carts" alt="...">
-                    <div class="card-body estcart">
-                        <h2>Pizza C. Frias</h2>
-                      <p class="card-text">Pizza de Jamon / Chorizo / Peperoni. (solo 2 a elegir)</p>
-                    </div>
-                  </div>
-            </div>
-            <div class="col-12 col-md-6 col-lg-4">
-                <div class="card h-40" style="width: 17rem;">
-                    <img src="img/hawa.jpg" class="card-img-top carts" alt="..." >
-                    <div class="card-body estcart">
-                        <h2>Pizza Hawaiiana</h2>
-                      <p class="card-text">Pizza de Jamon, queso y piña<br><br></p>
-                    </div>
-                  </div>
-            </div>
-            <div class="col-12 col-md-6 col-lg-4">
-                <div class="card h-40" style="width: 17rem;">
-                    <img src="img/espe.jpg" class="card-img-top carts" alt="...">
-                    <div class="card-body estcart">
-                        <h2>Pizza Especial</h2>
-                      <p class="card-text">Pizza de jamon, Chorizo, peperoni, champiñones</p>
-                    </div>
-                  </div>
-            </div>
-            <div class="col-12 col-md-6 col-lg-4">
-              <div class="card" style="width: 17rem;">
-                  <img src="img/mollete.jpg" class="card-img-top carts" alt="...">
-                  <div class="card-body estcart">
-                      <h2>Pizza Mollete</h2>
-                    <p class="card-text">Pizza base de frijoles, con queso, chorizo y tocino</p>
-                  </div>
-                </div>
-          </div>
-        </div>
-    </div>    
+    <div id="carousel" class="carousel slide" data-bs-ride="true" data-bs-interval="3500">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    <button type="button" data-bs-target="#carousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
+    <button type="button" data-bs-target="#carousel" data-bs-slide-to="4" aria-label="Slide 5"></button>
+    <button type="button" data-bs-target="#carousel" data-bs-slide-to="5" aria-label="Slide 6"></button>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="img/pepe.jpg" class="d-block w-100" alt="Pizza Pepperoni">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>Pizza Pepperoni</h5>
+        <p>La clasica pizza de pepperoni, con queso y salsa de pizza.</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="img/mexi.jpg" class="d-block w-100" alt="Pizza Mexicana">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>Pizza mexicana</h5>
+        <p>Pizza de carne molida, chile, tomate, cebolla, tocino.</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="img/cfrias.jpg" class="d-block w-100" alt="Pizza Carnes Frias">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>Pizza de carnes frias</h5>
+        <p>Pizza con opcion a elegir 2 ingredientes entre jamon, chorizo, pepperoni.</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="img/hawa.jpg" class="d-block w-100" alt="Pizza Hawaiana">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>Pizza hawaiana</h5>
+        <p>Pizza de jamon, queso y piña.</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="img/espe.jpg" class="d-block w-100" alt="Pizza Especial">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>Pizza especial</h5>
+        <p>Pizza de jamon, chorizo, pepperoni y champiñones.</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="img/mollete.jpg" class="d-block w-100" alt="Pizza Mollete">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>Pizza mollete</h5>
+        <p>Pizza base de frijoles, con queso, chorizo y tocino.</p>
+      </div>
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>    
     </section>
     <!--Servicios-->
     <section class="servicios" id="servicios">
@@ -226,6 +200,7 @@ if(!isset($_SESSION['rol']))
           <h2>Comida de calidad</h2>
       </div>
       <div class="container d-inline">
+        
         <div class="row">
       <div class="service-container col-12 col-lg-4 ">
           <div class="s-box">
@@ -252,44 +227,43 @@ if(!isset($_SESSION['rol']))
     </div>
   </section>
     <!--Footer-->
-    <section >
-        <div class="footer">
-            <div class="main position-relative">
-                <div class="colu col-6 col-lg-4">
-                    <h4>Links<br>del Menu</h4>
-                    <ul>
-                        <li><a href="#">Inicio</a></li>
-                        <li><a href="#">Nosotros</a></li>
-                        <li><a href="#">Menu</a></li>
-                        <li><a href="#">Servicio</a></li>
-                    </ul>
-                </div>
-                <div class="colu col-6  col-lg-4">
-                    <h4>Nuestro<br>Servicio</h4>
-                    <ul>
-                        <li><a href="#">Web</a></li>
-                        <li><a href="#">Desarrollo</a></li>
-                        <li><a href="#">Marketing</a></li>
-                        
-                    </ul>
-                </div>
-                <div class="colu col-6 col-lg-4 offset-3 offset-lg-0">
-                    <h4><br>Informacion</h4>
-                    <ul>
-                        <li><a href="#">Sobre nosotros</a></li>
-                        <li><a href="#">Envios</a></li>
-                        <li><a href="#">T&C</a></li>
-                    </ul>
-                    <div class="social">
-                      <a href="https://www.facebook.com/pizzastoystorreon"><i class='bx bxl-facebook' ></i></a>
-                      <a href="#" style="margin-left: 5%;"><i class='bx bx-phone'></i></a>
-                      </div>
-                </div>
-                
-            </div>
+    <section style="background-color: #ccc;" id="fot">
+    <div class="footer">
+    <div class="main position-relative d-flex">
+        <div class="colu col-6 col-lg-4">
+            <h4>ENLACES</h4>
+            <ul class="bx-ul">
+                <li><a href="#nav"><i class='bx bxs-home'></i>INICIO</a></li>
+                <li><a href="#views/menu-pizza.php"><i class='bx bxs-food-menu'></i>MENU</a></li>
+                <li><a href="#servicios"><i class='bx bxs-check-square'></i>SERVICIO</a></li>
+                <li><a href="https://www.facebook.com/pizzastoystorreon/"><i class='bx bxl-facebook-square'></i>FACEBOOK</a></li>
+            </ul>
         </div>
+        <div class="colu col-6 col-lg-6c offset-lg-2">
+            <h4>DIRECCIONES DE SUCURSALES</h4>
+            <?php
+            $db = new Database();
+            $db->conectarDB();
+            $cadena = "SELECT ID_SUC,NOMBRE,DIRECCION,TELEFONO FROM SUCURSALES WHERE ESTADO = 'ACTIVO'";
+            $reg = $db->seleccionar($cadena);
+            echo "<ul class='bx-ul text-start'>
+            <li>";
+              foreach ($reg as $sucursal)
+              {
+                echo "<form method='post'>
+                <a type='button' class='btn-sm btn-sucursal' data-id='{$sucursal->ID_SUC}' data-nombre='{$sucursal->NOMBRE}' data-direccion='{$sucursal->DIRECCION}' data-telefono='{$sucursal->TELEFONO}' data-bs-toggle='modal' data-bs-target='#sucu'>
+                <i class='bx bxs-map'></i>{$sucursal->NOMBRE}
+                </a>
+                </form>";
+              }             
+            echo "</ul>";
+            $db->desconectarDB();
+            ?>
+        </div>                
+    </div>
+</div>
     </section>
-     <!-- Modal login-->
+  <!-- Modal login-->
 <div class="modal fade" id="login" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -342,5 +316,40 @@ if(!isset($_SESSION['rol']))
       </div>
     </div>
   </div>
+  <!-- MODAL SUCURSALES -->
+<div class="modal fade" id="sucu" tabindex="-1" aria-labelledby="sucursales" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">SUCURSAL <span id="sucursal-nombre"></span></h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Dirección: <span id="sucursal-direccion"></span></p>
+                <p>Teléfono: <span id="sucursal-telefono"></span></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const buttons = document.querySelectorAll(".btn-sucursal");
+        buttons.forEach(button => {
+            button.addEventListener("click", function () {
+                const nombre = this.getAttribute("data-nombre");
+                const direccion = this.getAttribute("data-direccion");
+                const telefono = this.getAttribute("data-telefono");
+
+                document.getElementById("sucursal-nombre").textContent = nombre;
+                document.getElementById("sucursal-direccion").textContent = direccion;
+                document.getElementById("sucursal-telefono").textContent = telefono;
+            });
+        });
+    });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </body>
 </html>
