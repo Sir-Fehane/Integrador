@@ -72,6 +72,8 @@ else
               <button class="dropdown-item" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#emp" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">Personal</button>
               <button class="dropdown-item" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#sol" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">Solicitudes</button>
               <button class="dropdown-item" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#ing" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">Ingresos</button>
+              <button class="dropdown-item" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#cie" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">Cierres</button>
+              <button class="dropdown-item" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#mov" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">Ent/Sal de Inv</button>
             </div>
           </div>
         </div>
@@ -125,6 +127,8 @@ else
     <button class="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#emp" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">Personal</button>
     <button class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#sol" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">Solicitudes</button>
     <button class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#ing" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">Ingresos</button>
+    <button class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#cie" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">Cierres</button>
+    <button class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#mov" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">Ent/Sal de Inv</button>
   </div>
   <div class="tab-content w-100" id="v-pills-tabContent">
     <!--INVENTARIO-->
