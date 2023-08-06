@@ -4,6 +4,9 @@ include 'dbConfig.php';
 // initializ shopping cart class
 include 'Cart.php';
 $cart = new Cart;
+$horainicio="11:00";
+$horacierre="22:00";
+$horaactual=date("H:i");
 
 // redirect to home if cart is empty
 if($cart->total_items() <= 0){
@@ -41,7 +44,7 @@ $custRow = $query->fetch_assoc();
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Checkout - PHP Shopping Cart Tutorial</title>
+    <title>Toy's Pizza</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -55,6 +58,11 @@ $custRow = $query->fetch_assoc();
     </style>
 </head>
 <body>
+<?php
+echo $horaactual;
+    if ($horaactual >= $horainicio && $horaactual <= $horacierre)
+    {
+    ?>
 <form class="d-flex" action="" method="post" id="sucursal">
           <?php
             include "../class/database.php";
@@ -77,7 +85,7 @@ $custRow = $query->fetch_assoc();
           <button type="submit" class="btn btn-warning">Elegir</button>
         </form>
 <div class="container">
-    <h1>Order Preview</h1>
+    <h1>Confirmar pedido</h1>
     <table class="table">
     <thead>
         <tr>
@@ -116,16 +124,45 @@ $custRow = $query->fetch_assoc();
     <div class="shipAddr">
         <h4>Detalles de la orden</h4>
         <p><?php echo $custRow['NOMBRE']; ?></p>
-        <p><?php echo $custRow['CORREO']; ?></p>
+        <p><?php echo $custRow['CORREO']; $_SESSION['CorreoUsua']=$custRow['CORREO']; ?></p>
         <p><?php echo $custRow['TELEFONO']; ?></p>
         <p><?php echo $custRow['DIRECCION']; ?></p>
-        <p><?php 
-        if(isset($_SESSION))echo $_SESSION['NombSuc']?></p>
+        <p>
+        <?php if (!isset($_SESSION['NombSuc']))
+        {
+            echo"<p>Porfavor seleccione una sucursal</p>";
+        }
+        else
+        {
+            echo $_SESSION['NombSuc'];
+        } 
+        ?>
+        </p>
     </div>
     <div class="footBtn">
         <a href="../views/menu-pizza.php" class="btn btn-warning"><i class="glyphicon glyphicon-menu-left"></i> Continue Shopping</a>
+        <?php 
+        if (!isset($_SESSION['NombSuc']))
+        {
+            echo"<p>Porfavor seleccione una sucursal</p>";
+        }
+        else
+        {
+        ?>
         <a href="cartAction.php?action=placeOrder" class="btn btn-success orderBtn">Place Order <i class="glyphicon glyphicon-menu-right"></i></a>
+        <?php }?>
     </div>
 </div>
+<?php
+    } 
+    else 
+    {
+        echo "<div class='alert alert-danger' role='alert'>
+        ¡Lo sentimos!<br>
+        Estamos cerrados :(<br>
+        Nuestro horario de atención es de 11:00 AM a 08:00 PM.
+        </div>";
+    }
+?>
 </body>
 </html>

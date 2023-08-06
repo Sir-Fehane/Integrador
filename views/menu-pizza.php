@@ -207,7 +207,7 @@ include '../carrito/dbConfig.php';
                 <label for="celular" class="form-label">Telefono</label>
                 <input type="tel" name="telefono" class="form-control" required>
                 <label for="email" class="form-label">Correo</label>
-                <input type="email" name="correo" placeholder="Opcional" class="form-control">
+                <input type="email" name="correo" placeholder="Obligatorio" required class="form-control">
                 <div class="modal-footer">
                   <button type="submit" class="btn btn-warning">Registrar</button>
                 </div>

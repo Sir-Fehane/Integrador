@@ -4,6 +4,7 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
+session_start();
 
 //Load Composer's autoloader
 require 'Exception.php';
@@ -25,7 +26,7 @@ try {
 
     //Recipients
     $mail->setFrom('oscare.alvarado17@gmail.com', 'Don Toys');
-    $mail->addAddress('emilianoa.aguilar17@gmail.com');     //La direccion a la cual se va a mandar
+    $mail->addAddress(''.$_SESSION['CorreoUsua'].'');     //La direccion a la cual se va a mandar
                  //Name is optional
 
     //Attachments
@@ -34,8 +35,8 @@ try {
 
     //Content
     $mail->isHTML(true);                                  //Poner diseño a esta cosa, pues es lo que se verá
-    $mail->Subject = 'Hola2';
-    $mail->Body    = 'Segunda prueba, me odio';
+    $mail->Subject = 'PEDIDO CONFIRMADO';
+    $mail->Body    = 'GRACIAS POR ORDENAR, LE INFORMAREMOS SOBRE EL ESTADO DE SU PEDIDO, FAVOR DE ESTAR AL PENDIENTE';
    //$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
     $mail->send();
