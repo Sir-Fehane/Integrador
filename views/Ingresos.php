@@ -53,7 +53,7 @@ else
 if (isset($_POST['sucursal']) && $_POST['sucursal'] != 0) {
   $sucursalId = $_POST['sucursal'];
   if ($sucursalId != 0 && $sucursalId != 999) {
-    $consulta = "SELECT Fecha, TotalEfectivo AS 'Efectivo', TotalTarjeta AS 'Tarjeta', TotalIngresos AS 'Total' FROM BitacoraIngresos Where Sucursal = $sucursalId AND FECHA BEETWEEN;";
+    $consulta = "SELECT Fecha, TotalEfectivo AS 'Efectivo', TotalTarjeta AS 'Tarjeta', TotalIngresos AS 'Total' FROM BitacoraIngresos Where Sucursal = $sucursalId;";
     $tabla = $db->seleccionar($consulta);
   } elseif ($sucursalId == 999) 
   {
