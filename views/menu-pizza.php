@@ -95,11 +95,160 @@ include '../carrito/dbConfig.php';
     <div id="products" class="row">
         <?php
         //get rows query
-        $query = $db->query("SELECT * FROM PRODUCTOS WHERE ESTADO='ACTIVO' ORDER BY CODIGO ");
+        $query = $db->query("SELECT * FROM PRODUCTOS where TAMANO = 'MEDIANA' ORDER BY TAMANO DESC");
         if($query->num_rows > 0){ 
+         echo " <h3>MEDIANA</h3>";
             while($row = $query->fetch_assoc()){
         ?>
             <div class="carta col-12 col-lg-4">
+            <div class="face front">
+            <img src="../img/pepe.jpg">
+            <h3><?php echo $row["NOMBRE"]; ?></h3>
+            <input name='titulo' type='hidden' id='titulo' value>
+            </div>
+            <div class='face back'>
+            <h3><?php echo $row["NOMBRE"]; ?></h3>
+            <p><?php echo $row["DESCRIPCION"]; ?></p>
+            <p><?php echo $row["TAMANO"];?></p>
+            <div class='linka d-flex mb-lg-3'>
+            <div class="row">
+                        <div class="col-md-6">
+                            <p class="lead"><?php echo '$'.$row["PRECIO"].' MX'; ?></p>
+                        </div>
+                        <div class="col-md-6">
+                            <a class="btn butn-menu" href="../carrito/cartAction.php?action=addToCart&id=<?php echo $row["CODIGO"]; ?>">Agregar al carrito</a>
+                        </div>
+                    </div>
+            </div>
+            </div>
+            </div>
+        <?php } }else{ ?>
+        <p>No hay productos...</p>
+        <?php } ?>
+    </div>
+</div>
+<div class="container">
+    <div id="products" class="row">
+        <?php
+        //get rows query
+        $query = $db->query("SELECT * FROM PRODUCTOS WHERE TAMANO = 'GRANDE' ORDER BY TAMANO DESC");
+        if($query->num_rows > 0){ 
+          echo " <h3>GRANDE</h3>";
+            while($row = $query->fetch_assoc()){
+        ?>
+        
+            <div class="carta col-12 col-lg-4">
+            <div class="face front">
+            <img src="../img/pepe.jpg">
+            <h3><?php echo $row["NOMBRE"]; ?></h3>
+            <input name='titulo' type='hidden' id='titulo' value>
+            </div>
+            <div class='face back'>
+            <h3><?php echo $row["NOMBRE"]; ?></h3>
+            <p><?php echo $row["DESCRIPCION"]; ?></p>
+            <p><?php echo $row["TAMANO"];?></p>
+            <div class='linka d-flex mb-lg-3'>
+            <div class="row">
+                        <div class="col-md-6">
+                            <p class="lead"><?php echo '$'.$row["PRECIO"].' MX'; ?></p>
+                        </div>
+                        <div class="col-md-6">
+                            <a class="btn butn-menu" href="../carrito/cartAction.php?action=addToCart&id=<?php echo $row["CODIGO"]; ?>">Agregar al carrito</a>
+                        </div>
+                    </div>
+            </div>
+            </div>
+            </div>
+        <?php } }else{ ?>
+        <p>No hay productos...</p>
+        <?php } ?>
+    </div>
+</div>
+<div class="container">
+    <div id="products" class="row">
+        <?php
+        //get rows query
+        $query = $db->query("SELECT * FROM PRODUCTOS WHERE TAMANO = 'EXTRA' ORDER BY TAMANO DESC");
+        if($query->num_rows > 0){ 
+          echo " <h3>EXTRA</h3>";
+            while($row = $query->fetch_assoc()){
+        ?>
+       
+            <div class="carta col-6 col-lg-4">
+            <div class="face front">
+            <img src="../img/pepe.jpg">
+            <h3><?php echo $row["NOMBRE"]; ?></h3>
+            <input name='titulo' type='hidden' id='titulo' value>
+            </div>
+            <div class='face back'>
+            <h3><?php echo $row["NOMBRE"]; ?></h3>
+            <p><?php echo $row["DESCRIPCION"]; ?></p>
+            <p><?php echo $row["TAMANO"];?></p>
+            <div class='linka d-flex mb-lg-3'>
+            <div class="row">
+                        <div class="col-md-6">
+                            <p class="lead"><?php echo '$'.$row["PRECIO"].' MX'; ?></p>
+                        </div>
+                        <div class="col-md-6">
+                            <a class="btn butn-menu" href="../carrito/cartAction.php?action=addToCart&id=<?php echo $row["CODIGO"]; ?>">Agregar al carrito</a>
+                        </div>
+                    </div>
+            </div>
+            </div>
+            </div>
+        <?php } }else{ ?>
+        <p>No hay productos...</p>
+        <?php } ?>
+    </div>
+</div>
+<div class="container">
+    <div id="products" class="row">
+        <?php
+        //get rows query
+        $query = $db->query("SELECT * FROM PRODUCTOS WHERE TAMANO = 'INDIVIDUAL' ORDER BY TAMANO DESC");
+        if($query->num_rows > 0){ 
+          echo " <h3>INDIVIDUAL</h3>";
+            while($row = $query->fetch_assoc()){
+        ?>
+       
+            <div class="carta col-12 col-lg-4">
+            <div class="face front">
+            <img src="../img/pepe.jpg">
+            <h3><?php echo $row["NOMBRE"]; ?></h3>
+            <input name='titulo' type='hidden' id='titulo' value>
+            </div>
+            <div class='face back'>
+            <h3><?php echo $row["NOMBRE"]; ?></h3>
+            <p><?php echo $row["DESCRIPCION"]; ?></p>
+            <p><?php echo $row["TAMANO"];?></p>
+            <div class='linka d-flex mb-lg-3'>
+            <div class="row">
+                        <div class="col-md-6">
+                            <p class="lead"><?php echo '$'.$row["PRECIO"].' MX'; ?></p>
+                        </div>
+                        <div class="col-md-6">
+                            <a class="btn butn-menu" href="../carrito/cartAction.php?action=addToCart&id=<?php echo $row["CODIGO"]; ?>">Agregar al carrito</a>
+                        </div>
+                    </div>
+            </div>
+            </div>
+            </div>
+        <?php } }else{ ?>
+        <p>No hay productos...</p>
+        <?php } ?>
+    </div>
+</div>
+<div class="container">
+    <div id="products" class="row">
+        <?php
+        //get rows query
+        $query = $db->query("SELECT * FROM PRODUCTOS WHERE TAMANO = 'EVENTOS' ORDER BY TAMANO DESC");
+        if($query->num_rows > 0){ 
+          echo " <h3>EVENTOS</h3>";
+            while($row = $query->fetch_assoc()){
+        ?>
+        
+            <div class="carta col-xs-4 col-lg-4">
             <div class="face front">
             <img src="../img/pepe.jpg">
             <h3><?php echo $row["NOMBRE"]; ?></h3>
