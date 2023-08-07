@@ -77,7 +77,7 @@ else
                 include '../class/database.php';
                 $conexion = new database();
                 $conexion->conectarDB();
-                $consulta ="SELECT INVENTARIO.NOMBRE as N FROM INVENTARIO WHERE INVENTARIO.ESTADO = 'ACTIVO'";
+                $consulta ="SELECT INVENTARIO.NOMBRE as N, INVENTARIO.PRESENTACION as P FROM INVENTARIO WHERE INVENTARIO.ESTADO = 'ACTIVO'";
                 $reg = $conexion->seleccionar($consulta);
               foreach($reg as $value){
                 echo"
