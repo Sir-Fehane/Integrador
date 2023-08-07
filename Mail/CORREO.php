@@ -36,7 +36,7 @@ try {
     //Content
     $mail->isHTML(true);                                  //Poner diseño a esta cosa, pues es lo que se verá
     $mail->Subject = 'PEDIDO CONFIRMADO';
-    $mail->Body    = 'GRACIAS POR ORDENAR, LE INFORMAREMOS SOBRE EL ESTADO DE SU PEDIDO, FAVOR DE ESTAR AL PENDIENTE';
+    $mail->Body    =  include"../Mail/CORREO.php" ;
    //$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
     $mail->send();
