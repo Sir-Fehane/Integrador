@@ -84,7 +84,8 @@ else
                 <tr>
                   <th scope='row'><label class='control-label' for='$value->N'>$value->N</label></th>
                   <td colspan='2' class='table-active'>
-                  <input type='number' name='cantidades[$value->N]' class='form-control' onkeypress='return validarNumero(event)' required> </td>
+                  <input type='number' name='cantidades[$value->N]' class='form-control' onkeypress='return validarNumero(event)' 
+                  required min='0.1' step='0.1'> (<label class='control-label' for='$value->P'>$value->P</label>)</td>
                 </tr>                
                 ";
               }             
