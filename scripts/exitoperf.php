@@ -28,7 +28,7 @@
 </div>
 </div>
 <?php
-    header("refresh:3 ; ../views/verperfilv.php")
+    header("refresh:3 ; ../views/verperfilv1.php")
 ?>
 </body>
 </html>
