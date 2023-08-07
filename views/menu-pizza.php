@@ -65,7 +65,7 @@ include '../carrito/dbConfig.php';
                       <a class='nav-link dropdown-toggle text-white' href='#' role='button' data-bs-toggle='dropdown' aria-expanded='false'>
                       " . $_SESSION["usuario"] . "</a>
                       <ul class='dropdown-menu'>
-                      <li><a class='dropdown-item text-black' href='../views/verperfilv.php'>Ver perfil</a></li>
+                      <li><a class='dropdown-item text-black' href='../views/verperfilv1.php'>Ver perfil</a></li>
                       <li><a class='dropdown-item text-black' href='../scripts/cerrarSesion.php'>Cerrar sesión</a></li>
                       </ul>
                       </li>";

@@ -51,7 +51,7 @@ $cart = new Cart;
         <tr>
             <td><?php echo $item["name"]; ?></td>
             <td><?php echo '$'.$item["price"].' MX'; ?></td>
-            <td><input type="number" min=1 class="form-control text-center" value="<?php echo $item["qty"]; ?>" onchange="updateCartItem(this, '<?php echo $item["rowid"]; ?>')"></td>
+            <td><input type="number" min=1 max=5 class="form-control text-center" value="<?php echo $item["qty"]; ?>" onchange="updateCartItem(this, '<?php echo $item["rowid"]; ?>')"></td>
             <td><?php echo '$'.$item["subtotal"].' MX'; ?></td>
             <td>
                 <a href="cartAction.php?action=removeCartItem&id=<?php echo $item["rowid"]; ?>" class="btn btn-danger" onclick="return confirm('¿Estás seguro?')"><i class="glyphicon glyphicon-trash"></i></a>
