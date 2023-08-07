@@ -53,6 +53,9 @@ else
             <li>
               <a class="nav-link" href="cierre.php">Cierre</a>
             </li>
+            <li>
+              <a class="nav-link" href="solicitar.php">Solicitar</a>
+            </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="verperfilv.php" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Perfil
