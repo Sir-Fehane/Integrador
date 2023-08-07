@@ -65,7 +65,7 @@ else
       <div class="col-lg-1 d-none d-sm-block">
         <img src="../img/pizza.png" alt="Logo" width="60" height="48" class="d-inline-block align-text-top">
       </div>
-      <div class="col-1 col-lg-2 d-flex">
+      <div class="col-1 col-lg-2 d-none">
       <div class="dropdown">
             <button class="btn btn-primary dropdown-toggle d-block" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Menú
@@ -146,7 +146,7 @@ else
     </div>
     <div class="tab-pane fade" id="cie" role="tabpanel" aria-labelledby="cierre" tabindex="0">
     </div>
-  </div>
+      </div>
 </div>
 <script src="../js/bootstrap.min.js"></script>
 <script src="../js/bootstrap.bundle.min.js"></script>
