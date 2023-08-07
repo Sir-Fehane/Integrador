@@ -5,7 +5,7 @@ include 'dbConfig.php';
 include 'Cart.php';
 $cart = new Cart;
 $horainicio="11:00";
-$horacierre="22:00";
+$horacierre="20:00";
 $horaactual=date("H:i");
 
 // redirect to home if cart is empty
@@ -59,7 +59,6 @@ $custRow = $query->fetch_assoc();
 </head>
 <body>
 <?php
-echo $horaactual;
     if ($horaactual >= $horainicio && $horaactual <= $horacierre)
     {
     ?>
