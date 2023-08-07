@@ -38,6 +38,7 @@ if(isset($_REQUEST['action']) && !empty($_REQUEST['action'])){
         if($insertOrder){
             $orderID = $db->insert_id;
             $sql = '';
+            $db->query("INSERT INTO NOTIFICACIONES (ID_NOT, ID_SUC, NUM_ORDEN, ESTADO) VALUES ('', '".$_SESSION['IDSUCURSAL']."','".$orderID."', 'PENDIENTE')" );
             // get cart items
             $cartItems = $cart->contents();
             foreach($cartItems as $item){
