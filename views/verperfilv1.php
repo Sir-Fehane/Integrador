@@ -209,7 +209,7 @@ $db->conectarDB();
         <h2>cambiar foto de perfil</h2>
       <?php
 $imgchida = $registro->img_chidas;
-echo "<img src='$imgchida' alt='sexogratis' id = 'img' class='rounded-circle'>";
+echo "<img src='$imgchida' alt='img' id = 'img' class='rounded-circle'>";
 ?>
  
  <!-- cambio de foto de perfil -->

@@ -73,7 +73,7 @@ if(!isset($_SESSION['rol']))
                       foreach ($tabla as $registro)
                       {
                         $imgchida = $registro->img_chidas;
-                     echo "<img src='$imgchida' style='border-radius: 10px;' alt='sexogratis'width= '50px'
+                     echo "<img src='$imgchida' style='border-radius: 10px;' alt='img'width= '50px'
                      height=' 50px'>";
                       }
                       echo "<li class='nav-item dropdown'>
