@@ -24,29 +24,33 @@ else
 </head>
 <body>
 <?php
-$db = new Database();
-$db->conectarDB();
-
 if (isset($_POST['sucursal'])) 
 {
+  $db = new Database();
+  $db->conectarDB();
   $sucursalId = $_POST['sucursal'];
-  if ($sucursalId != 0 && $sucursalId != 999) 
+  if ($sucursalId != 0 && $sucursalId != 999)
   {
     $consulta = "SELECT NOMBRE FROM SUCURSALES WHERE ID_SUC = $sucursalId";
     $sucursal = $db->seleccionar($consulta);
     $Nombre = $sucursal[0]->NOMBRE;
     echo "<h2>Sucursal $Nombre</h2>";
   }
-  elseif($sucursalId == 0) 
-  {
-    ?>
-    <div class="container">
-        <h4 align="center">Elige una sucursal para iniciar.</h4>
-    </div>
-    <?php
-  }
-if (isset($_POST['sucursal']) && $_POST['sucursal'] != 0) 
+if($sucursalId == 0) 
 {
+  ?>
+  <div class="container">
+      <h4 align="center">Elige una sucursal para iniciar.</h4>
+  </div>
+  <?php
+}
+else
+{
+?>
+<br>
+<?php
+}
+if (isset($_POST['sucursal']) && $_POST['sucursal'] != 0) {
   $sucursalId = $_POST['sucursal'];
   if ($sucursalId != 0 && $sucursalId != 999) {
     $consulta = "SELECT SU.NOMBRE AS 'Sucursal',I.NOMBRE AS 'Insumo',DS.CANTIDAD AS 'Cantidad',
@@ -57,7 +61,8 @@ if (isset($_POST['sucursal']) && $_POST['sucursal'] != 0)
     INNER JOIN INVENTARIO I ON I.ID_INS = DS.INVENTARIO 
     WHERE ID_SUC = $sucursalId AND S.ESTADO = 'solicitado';";
     $tabla = $db->seleccionar($consulta);
-  } elseif ($sucursalId == 999) {
+  } elseif ($sucursalId == 999) 
+  {
     $consulta = "SELECT SU.NOMBRE AS 'Sucursal',I.NOMBRE AS 'Insumo', DS.CANTIDAD AS 'Cantidad', S.FECHA AS 'Fecha',S.ESTADO AS 'Estado'
     FROM SOLICITUDES S
     INNER JOIN DETALLE_SOLICITUD DS ON DS.SOLICITUD = S.ID_SOLICITUD
@@ -67,36 +72,35 @@ if (isset($_POST['sucursal']) && $_POST['sucursal'] != 0)
     $tabla = $db->seleccionar($consulta);
   }
 
-  echo "<table class='table table-hover' id='tabla-xs'>";
+  echo "<table class='table table-hover tabla-xs' id='tabla'>";
   echo "<thead class='table-primary' align='center'>";
   echo "<tr>";
   if ($sucursalId == 999) {
     echo "<th>Sucursal</th>";
   }
-  echo "<th class='col-4 col-lg-3'>Insumo</th>";
-  echo "<th class='col-1 col-lg-1'>Cantidad solicitada</th>";
-  echo "<th class='col-4 col-lg-1'>Fecha de solicitud</th>";
-  if($sucursalId != 999){
-      echo "<th class='col-3 col-lg-1'>Estado</th>";
-  }
+  echo "<th class='col-2 col-lg-3'>Sucursal</th>";
+  echo "<th class='col-1 col-lg-1'>Insumo</th>";
+  echo "<th class='col-1 col-lg-1'>Cantidad</th>";
+  echo "<th class='col-1 col-lg-1'>Fecha</th>";
+  echo "<th class='col-1 col-lg-1'>Estado</th>";
   echo "</tr>";
   echo "</thead>";
   echo "<tbody align='center'>";
-  foreach ($tabla as $registro) 
-  {
+  foreach ($tabla as $registro) {
     echo "<tr>";
     if ($sucursalId == 999) {
       echo "<td>$registro->Sucursal</td>";
     }
+    echo "<td>$registro->Sucursal</td>";
     echo "<td>$registro->Insumo</td>";
     echo "<td>$registro->Cantidad</td>";
     echo "<td>$registro->Fecha</td>";
-    if($sucursalId != 999) {
-          echo "<td>$registro->Estado</td>";
-    }
+    echo "<td>$registro->Estado</td>";
+    echo "</tr>";
   }
+  echo "</tbody>";
+  echo "</table>";
 }
-$db->desconectarDB();
 }
 else
 {

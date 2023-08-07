@@ -29,7 +29,8 @@ if (isset($_POST['sucursal']))
   $db = new Database();
   $db->conectarDB();
   $sucursalId = $_POST['sucursal'];
-  if ($sucursalId != 0 && $sucursalId != 999) {
+  if ($sucursalId != 0 && $sucursalId != 999)
+  {
     $consulta = "SELECT NOMBRE FROM SUCURSALES WHERE ID_SUC = $sucursalId";
     $sucursal = $db->seleccionar($consulta);
     $Nombre = $sucursal[0]->NOMBRE;
@@ -49,7 +50,6 @@ else
 <br>
 <div class="d-flex justify-content-center">
 <a class="btn btn-primary mb-3" href="../scripts/NuevoInv.php">Añadir nuevo insumo</a>
-
 </div>
 <?php
 }
