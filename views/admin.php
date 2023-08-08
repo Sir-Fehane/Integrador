@@ -20,6 +20,7 @@ else
     exit;
   }
 }
+$sucursalId = 0;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -65,17 +66,16 @@ else
       <div class="col-lg-1 d-none d-sm-block">
         <img src="../img/pizza.png" alt="Logo" width="60" height="48" class="d-inline-block align-text-top">
       </div>
-      <div class="col-1 col-lg-2 d-none">
+      <div class="col-1 col-lg-2">
       <div class="dropdown">
-            <button class="btn btn-primary dropdown-toggle d-block" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Menú
-            </button>   
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <button class="dropdown-item" id="v-pills-inv-tab" data-bs-toggle="pill" data-bs-target="#inv" type="button" role="tab" aria-controls="v-pills-home" aria-selected="false">Inventario</button>
-              <button class="dropdown-item" id="v-pills-emp-tab" data-bs-toggle="pill" data-bs-target="#emp" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">Personal</button>
-              <button class="dropdown-item" id="v-pills-rep-tab" data-bs-toggle="pill" data-bs-target="#rep" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">Reportes</button>
-            </div>
-          </div>
+        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Menú
+        </button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" data-target="#inv">Inventario</a></li>
+          <li><a class="dropdown-item" data-target="#emp">Personal</a></li>
+        </ul>
+      </div>
       </div>
       <div class="col-5 col-lg-4 d-flex align-items-center">
         <form class="d-flex" action="" method="post">
@@ -120,9 +120,13 @@ else
     </nav>
   </div>
 </div>
+<?php
+if (isset($_POST['sucursal']) || $sucursalId != 0) 
+{
+  ?>
 <div class="d-lg-flex align-items-start">
   <div class="nav flex-column me-3 bg-light d-lg-flex d-none" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-    <button class="nav-link" id="inventario" data-bs-toggle="pill" data-bs-target="#inv" type="button" role="tab" aria-controls="v-pills-home" aria-selected="false">Inventario</button>
+    <button class="nav-link active" id="inventario" data-bs-toggle="pill" data-bs-target="#inv" type="button" role="tab" aria-controls="v-pills-home" aria-selected="false">Inventario</button>
     <button class="nav-link" id="personal" data-bs-toggle="pill" data-bs-target="#emp" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">Personal</button>
     <button class="nav-link" id="solicitudes" data-bs-toggle="pill" data-bs-target="#sol" type="button" role="tab" aria-controls="v-pills-rep" aria-selected="false">Solicitudes</button>
     <button class="nav-link" id="ingresos" data-bs-toggle="pill" data-bs-target="#ing" type="button" role="tab" aria-controls="v-pills-rep" aria-selected="false">Ingresos</button>
@@ -130,7 +134,7 @@ else
   </div>
   <div class="tab-content w-100" id="v-pills-tabContent">
     <!--INVENTARIO-->
-    <div class="tab-pane fade" id="inv" role="tabpanel" aria-labelledby="inventario" tabindex="0">
+    <div class="tab-pane fade show active" id="inv" role="tabpanel" aria-labelledby="inventario" tabindex="0">
       <?php include 'Inventario.php'; ?>
     </div>
     <!--PERSONAL-->
@@ -148,7 +152,40 @@ else
     </div>
       </div>
 </div>
+<?php
+}elseif(!isset($_POST['sucursal']) || $sucursalId == 0)
+{
+  ?>
+  <div class="container">
+      <h4 align="center">Elige una sucursal para iniciar.</h4>
+      <h6 align="center">Selecciona la sucursal que deseas ver en la barra superior y presiona el boton elegir.</h6><br>
+      <h6 align="center">Puedes ver el tipo de reportes que desees en las secciones de la izquierda<br>(O en la parte de arriba si esta en dispositivo movil).</h6>
+  </div>
+  <?php
+}?>
 <script src="../js/bootstrap.min.js"></script>
 <script src="../js/bootstrap.bundle.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const dropdownOptions = document.querySelectorAll(".dropdown-item[data-target]");
+
+  dropdownOptions.forEach(option => {
+    option.addEventListener("click", function() {
+      const targetPaneId = option.getAttribute("data-target");
+      const targetPane = document.querySelector(targetPaneId);
+
+      if (targetPane) {
+        // Activate the selected tab-pane and deactivate others
+        const allTabPanes = document.querySelectorAll(".tab-pane");
+        allTabPanes.forEach(pane => {
+          pane.classList.remove("show", "active");
+        });
+        targetPane.classList.add("show", "active");
+      }
+    });
+  });
+});
+</script>
+
 </body>
 </html>

@@ -41,6 +41,8 @@ if($sucursalId == 0)
   ?>
   <div class="container">
       <h4 align="center">Elige una sucursal para iniciar.</h4>
+      <h6 align="center">Selecciona la sucursal que deseas ver en la barra superior y presiona el boton elegir.</h6><br>
+      <h6 align="center">Puedes ver el tipo de reportes que desees en las secciones de la izquierda<br>(O en la parte de arriba si esta en dispositivo movil).</h6>
   </div>
   <?php
 }
