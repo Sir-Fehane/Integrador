@@ -66,7 +66,8 @@ else
     </nav>
     <!--Contenido-->
     <div class="container" #id="cuerpo">
-      <h2 align="center">Cierre</h2>
+      <hr>
+      <h2 align="center">Cierre del día</h2>
       <hr>
       <div class="justify-content-center" id="contenedor">
         <div class="table-responsive">
@@ -82,10 +83,10 @@ else
               foreach($reg as $value){
                 echo"
                 <tr>
-                  <th scope='row'><label class='control-label' for='$value->N'>$value->N</label></th>
+                  <th scope='row'><label class='control-label' for='$value->N'>$value->N</label> </th>
                   <td colspan='2' class='table-active'>
                   <input type='number' name='cantidades[$value->N]' class='form-control' onkeypress='return validarNumero(event)' 
-                  required min='0.1' step='0.1'> (<label class='control-label' for='$value->P'>$value->P</label>)</td>
+                  placeholder='Ingresa la cantidad sobrante del insumo:' required min='0.1' step='0.1'> (<label class='control-label' for='$value->P'>$value->P</label>)</td>
                 </tr>                
                 ";
               }             
@@ -100,14 +101,16 @@ else
           </div>
         </div> 
       </div>    
-    <script src="./js/bootstrap.bundle.js"></script>
+    <script src="../js/bootstrap.bundle.js"></script>
     <script>
-      function validarNumero(event) {
+            function validarNumero(event) {
     const charCode = (event.which) ? event.which : event.keyCode;
-    if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57)) {
-        return false;
+
+    if (charCode == 46 || (charCode >= 48 && charCode <= 57)) {
+        return true;
     }
-    return true;
+
+    return false;
 }
     </script>
   </body>

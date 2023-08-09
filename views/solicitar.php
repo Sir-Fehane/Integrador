@@ -68,6 +68,7 @@ else
     <div class="container" #id="cuerpo">
       <h2 align="center">Solicitar Insumos</h2>
       <hr>
+      <h4 align="center">Selecciona los insumos que deseas solicitar:</h4>
       <div class="justify-content-center" id="contenedor">
         <div class="table-responsive">
         <form action="../scripts/soli.php" method="post">
@@ -120,60 +121,62 @@ else
 </div>
 <script src="../js/bootstrap.bundle.js"></script>
 <script>
-      function validarNumero(event) {
+              function validarNumero(event) {
     const charCode = (event.which) ? event.which : event.keyCode;
 
-    // Permitir el punto decimal (.) y números del 0 al 9
     if (charCode == 46 || (charCode >= 48 && charCode <= 57)) {
         return true;
     }
 
     return false;
-}
+  }
+
       let elementosAgregados = false;
       document.querySelector("form").addEventListener("submit", function(event) 
       {
           if (!elementosAgregados) 
           {
-          event.preventDefault(); // Detener el envío del formulario
-          alert("Añade al menos un insumo antes de solicitar."); // Mostrar un mensaje
+          event.preventDefault();
+          alert("Añade al menos un insumo antes de solicitar."); 
           }
       });
 
       const insumosSeleccionados = [];
 
-        // Evento para añadir el insumo seleccionado a la tabla
         function agregarValorSeleccionado() {
     const select = document.querySelector("select[name='insumo[]']");
     const selectedInsumo = select.value;
     const selectedInsumoText = select.options[select.selectedIndex].text;
 
-    // Verificar si el insumo ya está en la tabla
+    if (selectedInsumo !== "" && selectedInsumoText !== "Seleccionar insumo...") 
+    {
+
     if (!isInsumoRepetido(selectedInsumoText)) {
-        // Agregar un campo oculto al formulario con el valor del insumo seleccionado
+
         const hiddenInput = document.createElement("input");
         hiddenInput.type = "hidden";
         hiddenInput.name = "insumosSeleccionados[]";
         hiddenInput.value = selectedInsumo;
         document.querySelector("form").appendChild(hiddenInput);
 
-        // Ahora puedes agregar el valor al arreglo insumosSeleccionados
+
         insumosSeleccionados.push(selectedInsumo);
-        // Crear nueva fila en la tabla
+
         const newRow = document.createElement("tr");
         newRow.innerHTML = `
             <td>${selectedInsumoText}</td>
-            <td><input type="number" class="form-control form-control-sm" name='cantidad[ ]' min="0.1" step='0.1' required></td>
+            <td><input type="number" class="form-control form-control-sm" name='cantidad[ ]' min="0.1" step='0.1' placeholder='Ingresa la cantidad restante:'
+            required onkeypress='return validarNumero(event)' ></td>
             <td><button type="button" class="btn btn-danger btn-sm" onclick="eliminarFila(this)">Eliminar</button></td>`;
 
             newRow.setAttribute("data-insumo",selectedInsumo);
-        // Agregar la fila a la tabla
+
         document.getElementById("tablaInsumos").querySelector("tbody").appendChild(newRow);
         elementosAgregados = true;
         }
+    }
       };
 
-    // Función para verificar si un insumo ya está en la tabla
     function isInsumoRepetido(insumo) {
         const tablaInsumos = document.getElementById("tablaInsumos");
         const insumos = tablaInsumos.querySelectorAll("td:first-child");
@@ -185,22 +188,36 @@ else
         return false;
     }
 
-    // Función para eliminar una fila de la tabla
+
     function eliminarFila(btn) {
     const fila = btn.closest("tr");
     const insumo = fila.getAttribute("data-insumo");
 
-    // Buscar el insumo en el arreglo utilizando el mismo enfoque que en agregarValorSeleccionado()
+
     const index = insumosSeleccionados.indexOf(insumo);
     if (index !== -1) {
-        insumosSeleccionados.splice(index, 1);
+        const newQuantity = parseInt(insumosSeleccionados[index]) - 1;
+        
+
+        if (newQuantity > 0) {
+            insumosSeleccionados[index] = newQuantity.toString();
+        } else {
+
+            insumosSeleccionados.splice(index, 1);
+            
+
+            const hiddenInput = document.querySelector(`input[name='insumosSeleccionados[]'][value='${insumo}']`);
+            if (hiddenInput) {
+                hiddenInput.remove();
+            }
+        }
     }
 
-    // Actualizar la variable elementosAgregados
     elementosAgregados = insumosSeleccionados.length > 0;
 
     fila.remove();
 }
+
 
 </script>
 </body>
