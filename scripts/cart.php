@@ -10,6 +10,7 @@ if (isset($_POST['ID'])) {
 
   // Resto del código para agregar el producto al carrito
   $producto = array(
+    "ID" => $id,
     "titulo" => $titulo,
     "precio" => $precio,
     "cantidad" => $cantidad,

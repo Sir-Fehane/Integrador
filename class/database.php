@@ -40,6 +40,19 @@ class Database{
             echo $e->getMessage();
         }
     }
+    function selec($consulta)
+    {
+        try
+        {
+            $resultado = $this->PDOAws->query($consulta);
+            $fila = $resultado->fetchAll(PDO::FETCH_ASSOC);
+            return $fila;
+        }
+        catch(PDOException $e)
+        {
+            echo $e->getMessage();
+        }
+    }
 
     function ejecutarSQL($consulta)
     {

@@ -11,6 +11,13 @@ body{
     background-color: #000;
     display: flex;
 }
+#cuerpo11 h1{
+    align-content: center;
+}
+#cuerpo11{
+    width: 80%;
+    display: flex;
+}
 #cuerpo1 #renglon{
     width: 80%;
     display: flex;
