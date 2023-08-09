@@ -29,7 +29,8 @@ if (isset($_POST['sucursal']))
   $db = new Database();
   $db->conectarDB();
   $sucursalId = $_POST['sucursal'];
-  if ($sucursalId != 0 && $sucursalId != 999) {
+  if ($sucursalId != 0 && $sucursalId != 999)
+  {
     $consulta = "SELECT NOMBRE FROM SUCURSALES WHERE ID_SUC = $sucursalId";
     $sucursal = $db->seleccionar($consulta);
     $Nombre = $sucursal[0]->NOMBRE;
@@ -39,7 +40,9 @@ if($sucursalId == 0)
 {
   ?>
   <div class="container">
-      <h4 align="center">Elige una sucursal para iniciar.</h4>
+      <h4 align="center">Elige una sucursal para iniciar.</h4><br>
+      <h6 align="center">Selecciona la sucursal que deseas ver en la barra superior y presiona el boton elegir.</h6><br>
+      <h6 align="center">Puedes ver el tipo de reportes que desees en las secciones de la izquierda<br>(O en la parte de arriba si esta en dispositivo movil).</h6>
   </div>
   <?php
 }
@@ -49,7 +52,6 @@ else
 <br>
 <div class="d-flex justify-content-center">
 <a class="btn btn-primary mb-3" href="../scripts/NuevoInv.php">Añadir nuevo insumo</a>
-
 </div>
 <?php
 }

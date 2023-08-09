@@ -22,15 +22,15 @@
         <input type="hidden" name="id" value="<?php echo $id; ?>">
         <div class="mb-3">
             <label for="nuevonom" class="form-label">Nombre:</label>
-            <input type="text" name="nuevonom" class="form-control" value="<?php echo $nombre;?>">
+            <input type="text" name="nuevonom" class="form-control" value="<?php echo $nombre;?>" required>
         </div>
         <div class="mb-3">
             <label for="nuevodirec" class="form-label">direccion:</label>
-            <input type="text" name="nuevodirec" class="form-control" value="<?php echo $direccion;?>">
+            <input type="text" name="nuevodirec" class="form-control" value="<?php echo $direccion;?>" required>
         </div>
         <div class="mb-3">
             <label for="nuevotel" class="form-label">Telefono:</label>
-            <input type="text" name="nuevotel" class="form-control" value="<?php echo $tel;?>">
+            <input type="text" name="nuevotel" class="form-control" value="<?php echo $tel;?>" required>
         </div>
         <div class="mb-3">
         <label for="nuevopues" class="form-label">Puesto:</label>

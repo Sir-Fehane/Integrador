@@ -136,7 +136,7 @@ $db->conectarDB();
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active navtext" aria-current="page" href="../src.php">Inicio</a>
+                <a class="nav-link active navtext" aria-current="page" href="../index.php">Inicio</a>
               </li>
 
                 </ul>
@@ -209,7 +209,7 @@ $db->conectarDB();
         <h2>cambiar foto de perfil</h2>
       <?php
 $imgchida = $registro->img_chidas;
-echo "<img src='$imgchida' alt='sexogratis' id = 'img' class='rounded-circle'>";
+echo "<img src='$imgchida' alt='img' id = 'img' class='rounded-circle'>";
 ?>
  
  <!-- cambio de foto de perfil -->

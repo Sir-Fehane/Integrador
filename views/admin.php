@@ -1,3 +1,4 @@
+
 <?php
 session_start();
 if(!isset($_SESSION['rol']))
@@ -51,6 +52,10 @@ else
     display: none;
   }
 }
+@media (min-width: 576px){
+  cont-nav{
+  flex:1;}
+}
 </style>
 <title>Administracion</title>
 </head>
@@ -61,20 +66,17 @@ else
       <div class="col-lg-1 d-none d-sm-block">
         <img src="../img/pizza.png" alt="Logo" width="60" height="48" class="d-inline-block align-text-top">
       </div>
-      <div class="col-1 col-lg-2 d-flex">
-        <div class="nav flex-column me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-          <div class="dropdown">
-            <button class="btn btn-primary dropdown-toggle d-block d-lg-none" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <div class="col-1 col-lg-2 d-none">
+      <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle d-block" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Menú
             </button>   
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <button class="dropdown-item" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#inv" type="button" role="tab" aria-controls="v-pills-home" aria-selected="false">Inventario</button>
-              <button class="dropdown-item" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#emp" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">Personal</button>
-              <button class="dropdown-item" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#sol" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">Solicitudes</button>
-              <button class="dropdown-item" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#ing" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">Ingresos</button>
+              <button class="dropdown-item" id="v-pills-inv-tab" data-bs-toggle="pill" data-bs-target="#inv" type="button" role="tab" aria-controls="v-pills-home" aria-selected="false">Inventario</button>
+              <button class="dropdown-item" id="v-pills-emp-tab" data-bs-toggle="pill" data-bs-target="#emp" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">Personal</button>
+              <button class="dropdown-item" id="v-pills-rep-tab" data-bs-toggle="pill" data-bs-target="#rep" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">Reportes</button>
             </div>
           </div>
-        </div>
       </div>
       <div class="col-5 col-lg-4 d-flex align-items-center">
         <form class="d-flex" action="" method="post">
@@ -121,38 +123,32 @@ else
 </div>
 <div class="d-lg-flex align-items-start">
   <div class="nav flex-column me-3 bg-light d-lg-flex d-none" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-    <button class="nav-link" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#inv" type="button" role="tab" aria-controls="v-pills-home" aria-selected="false">Inventario</button>
-    <button class="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#emp" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">Personal</button>
-    <button class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#sol" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">Solicitudes</button>
-    <button class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#ing" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">Ingresos</button>
+    <button class="nav-link" id="inventario" data-bs-toggle="pill" data-bs-target="#inv" type="button" role="tab" aria-controls="v-pills-home" aria-selected="false">Inventario</button>
+    <button class="nav-link" id="personal" data-bs-toggle="pill" data-bs-target="#emp" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">Personal</button>
+    <button class="nav-link" id="solicitudes" data-bs-toggle="pill" data-bs-target="#sol" type="button" role="tab" aria-controls="v-pills-rep" aria-selected="false">Solicitudes</button>
+    <button class="nav-link" id="ingresos" data-bs-toggle="pill" data-bs-target="#ing" type="button" role="tab" aria-controls="v-pills-rep" aria-selected="false">Ingresos</button>
+    <button class="nav-link" id="cie" data-bs-toggle="pill" data-bs-target="#cie" type="button" role="tab" aria-controls="v-pills-rep" aria-selected="false">Cierres</button>
   </div>
   <div class="tab-content w-100" id="v-pills-tabContent">
     <!--INVENTARIO-->
-    <div class="tab-pane fade" id="inv" role="tabpanel" aria-labelledby="v-pills-home-tab" tabindex="0">
-    <?php
-      include 'Inventario.php';
-    ?>
+    <div class="tab-pane fade" id="inv" role="tabpanel" aria-labelledby="inventario" tabindex="0">
+      <?php include 'Inventario.php'; ?>
     </div>
     <!--PERSONAL-->
-    <div class="tab-pane fade" id="emp" role="tabpanel" aria-labelledby="v-pills-profile-tab" tabindex="0">
-    <?php
-      include 'Personal.php';
-    ?>
+    <div class="tab-pane fade" id="emp" role="tabpanel" aria-labelledby="personal" tabindex="0">
+      <?php include 'Personal.php'; ?>
     </div>
-    <!--SOLICITUDES-->
-    <div class="tab-pane fade" id="sol" role="tabpanel" aria-labelledby="v-pills-profile-tab" tabindex="0">
-    <?php
-      include 'Solicitudes.php';
-    ?>
+    <!--Reportes-->
+    <div class="tab-pane fade" id="sol" role="tabpanel" aria-labelledby="solicitude" tabindex="0">
+      <?php include 'Solicitudes.php'; ?>
     </div>
-    <!--INGRESOS-->
-    <div class="tab-pane fade" id="ing" role="tabpanel" aria-labelledby="v-pills-profile-tab" tabindex="0">
-    <?php
-      include 'Ingresos.php';
-    ?>
+    <div class="tab-pane fade" id="ing" role="tabpanel" aria-labelledby="ingresos" tabindex="0">
+      <?php include 'Ingresos.php'; ?>
     </div>
+    <div class="tab-pane fade" id="cie" role="tabpanel" aria-labelledby="cierre" tabindex="0">
     </div>
-    </div>
+      </div>
+</div>
 <script src="../js/bootstrap.min.js"></script>
 <script src="../js/bootstrap.bundle.min.js"></script>
 </body>

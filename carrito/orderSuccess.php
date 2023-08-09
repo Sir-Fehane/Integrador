@@ -16,8 +16,11 @@ if(!isset($_REQUEST['id'])){
 </head>
 <body>
 <div class="container">
-    <h1>Order Status</h1>
-    <p>Your order has submitted successfully. Order ID is #<?php echo $_GET['id']; ?></p>
+    <h1>Estatus de la orden</h1>
+    <p>Tu orden se realizo correctamente, tu orden es la #<?php echo $_GET['id']; ?></p>
+    <?php include"../Mail/CORREO.php"?>
+    <p>Se le ha enviado informacion de su orden en su correo, favor de checar su correo.</p>
+    
     <?php (header("refresh:3 ; ../index.php")) ?>
 </div>
 </body>

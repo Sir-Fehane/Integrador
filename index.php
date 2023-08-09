@@ -4,19 +4,10 @@ if(!isset($_SESSION['rol']))
 {
 
 }
- else
+else
  {
-  if ($_SESSION["rol"] == 1) { 
-    header("Location: views/admin.php");
-    exit;
-  } elseif ($_SESSION["rol"] == 2) { 
-    if (basename($_SERVER['PHP_SELF']) === 'index.php') {
-    } else {
-        header("Location: index.php");
-        exit;
-    }
-  } elseif ($_SESSION["rol"] == 3) { 
-    header("Location: views/admin.php");
+  if ($_SESSION["rol"] == 1) {
+    header("Location: ../admin.php");
     exit;
   }
  }
@@ -73,14 +64,14 @@ if(!isset($_SESSION['rol']))
                       foreach ($tabla as $registro)
                       {
                         $imgchida = $registro->img_chidas;
-                     echo "<img src='$imgchida' style='border-radius: 10px;' alt='sexogratis'width= '50px'
+                     echo "<img src='$imgchida' style='border-radius: 10px;' alt='img'width= '50px'
                      height=' 50px'>";
                       }
                       echo "<li class='nav-item dropdown'>
                       <a class='nav-link dropdown-toggle text-white' href='#' role='button' data-bs-toggle='dropdown' aria-expanded='false'>
                       " . $_SESSION["usuario"] . "</a>
                       <ul class='dropdown-menu'>
-                      <li><a class='dropdown-item text-black' href='views/verperfilv.php'>Ver perfil</a></li>
+                      <li><a class='dropdown-item text-black' href='views/verperfilv1.php'>Ver perfil</a></li>
                       <li><a class='dropdown-item text-black' href='scripts/cerrarSesion.php'>Cerrar sesión</a></li>
                       </ul>
                       </li>";
@@ -309,7 +300,7 @@ if(!isset($_SESSION['rol']))
                 <label for="celular" class="form-label">Telefono</label>
                 <input type="tel" name="telefono" class="form-control" required>
                 <label for="email" class="form-label">Correo</label>
-                <input type="email" name="correo" placeholder="Opcional" class="form-control">
+                <input type="email" name="correo" placeholder="Obligatorio" required class="form-control">
                 <div class="modal-footer">
                   <button type="submit" class="btn btn-warning">Registrar</button>
                 </div>
