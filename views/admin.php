@@ -128,6 +128,7 @@ else
     <button class="nav-link" id="solicitudes" data-bs-toggle="pill" data-bs-target="#sol" type="button" role="tab" aria-controls="v-pills-rep" aria-selected="false">Solicitudes</button>
     <button class="nav-link" id="ingresos" data-bs-toggle="pill" data-bs-target="#ing" type="button" role="tab" aria-controls="v-pills-rep" aria-selected="false">Ingresos</button>
     <button class="nav-link" id="cie" data-bs-toggle="pill" data-bs-target="#cie" type="button" role="tab" aria-controls="v-pills-rep" aria-selected="false">Cierres</button>
+    <button class="nav-link" id="productos" data-bs-toggle="pill" data-bs-target="#pro" type="button" role="tab" aria-controls="v-pills-rep" aria-selected="false">Productos</button>
   </div>
   <div class="tab-content w-100" id="v-pills-tabContent">
     <!--INVENTARIO-->
@@ -144,6 +145,9 @@ else
     </div>
     <div class="tab-pane fade" id="ing" role="tabpanel" aria-labelledby="ingresos" tabindex="0">
       <?php include 'Ingresos.php'; ?>
+    </div>
+    <div class="tab-pane fade" id="pro" role="tabpanel" aria-labelledby="productos" tabindex="0">
+      <?php include 'Productos.php'; ?>
     </div>
     <div class="tab-pane fade" id="cie" role="tabpanel" aria-labelledby="cierre" tabindex="0">
     </div>
