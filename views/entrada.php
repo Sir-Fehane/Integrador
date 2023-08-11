@@ -66,13 +66,13 @@ else
     </nav>
     <!--Contenido-->
     <div class="container" #id="cuerpo">
+    <hr>
+      <h2 align="center">Entrada de insumos</h2>
       <hr>
-      <h2 align="center">Solicitar Insumos</h2>
-      <hr>
-      <h4 align="center">Selecciona los insumos que deseas solicitar:</h4>
+      <h5 align="center">Selecciona los insumos que llegaron a la sucursal y su cantidad:</h5>
       <div class="justify-content-center" id="contenedor">
         <div class="table-responsive">
-        <form action="../scripts/soli.php" method="post">
+        <form action="../scripts/guardarentrada.php" method="post">
         <table class="table table-striped table-hover">
         <!--<table class="table align-middle table-sm">-->
                     <tbody>
@@ -104,7 +104,7 @@ else
                     <thead>
                     <tr>
                         <th>Insumo</th>
-                        <th>Cantidad Restante</th>
+                        <th>Cantidad Entrante</th>
                         <th></th>
                     </tr>
                     </thead>
@@ -114,7 +114,7 @@ else
 
                 </table>
                 <div class="d-grid gap-2">
-                    <button class="btn btn-primary" type="submit">Solicitar</button>
+                    <button class="btn btn-primary" type="submit">Guardar</button>
                 </div>
         </form>
         </div>
@@ -138,7 +138,7 @@ else
           if (!elementosAgregados) 
           {
           event.preventDefault();
-          alert("Añade al menos un insumo antes de solicitar."); 
+          alert("Añade al menos un insumo antes de guardar."); 
           }
       });
 
@@ -166,7 +166,7 @@ else
         const newRow = document.createElement("tr");
         newRow.innerHTML = `
             <td>${selectedInsumoText}</td>
-            <td><input type="number" class="form-control form-control-sm" name='cantidad[ ]' min="0.1" step='0.1' placeholder='Ingresa la cantidad restante:'
+            <td><input type="number" class="form-control form-control-sm" name='cantidad[ ]' min="0.1" step='0.1' placeholder='Ingresa la cantidad que llegó a la sucursal:'
             required onkeypress='return validarNumero(event)' ></td>
             <td><button type="button" class="btn btn-danger btn-sm" onclick="eliminarFila(this)">Eliminar</button></td>`;
 
@@ -198,23 +198,19 @@ else
     if (index !== -1) {
         const newQuantity = parseInt(insumosSeleccionados[index]) - 1;
         
-
         if (newQuantity > 0) {
             insumosSeleccionados[index] = newQuantity.toString();
         } else {
 
             insumosSeleccionados.splice(index, 1);
-            
-
+    
             const hiddenInput = document.querySelector(`input[name='insumosSeleccionados[]'][value='${insumo}']`);
             if (hiddenInput) {
                 hiddenInput.remove();
             }
         }
     }
-
     elementosAgregados = insumosSeleccionados.length > 0;
-
     fila.remove();
 }
 </script>
