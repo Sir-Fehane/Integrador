@@ -40,7 +40,7 @@ else
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="">Inicio</a>
+              <a class="nav-link active" aria-current="page" href="puntoventa.php">Inicio</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="cocina.PHP">Cocina</a>
@@ -60,9 +60,6 @@ else
               </ul>
             </li>
           </ul>
-          <form class="d-flex" role="search">
-            <button class="btn btn-outline" id="btn-carrito" type="button" data-bs-toggle="offcanvas" data-bs-target="#carrito" aria-controls="offcanvasScrolling">Resumen de compra</button>
-          </form>
         </div>
       </div>
     </nav>
