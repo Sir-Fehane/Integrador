@@ -58,6 +58,7 @@ if (isset($_POST['pagar'])) {
             echo "No se encontró la sucursal del empleado.";
         }
     }
+    unset($_SESSION['carrito']);
 }
 header("Location: ../views/puntoventa.php");
 exit();
