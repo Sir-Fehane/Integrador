@@ -1,4 +1,5 @@
 <?php
+session_start();
 if(!isset($_SESSION['rol']))
 {
   header('Location: ../index.php');
@@ -23,38 +24,28 @@ else
     <title>Editar</title>
 </head>
 <body>
-    <?php
-    include '../class/database.php';
-    $db = new database();
-    $db->conectarDB();
-    ?>
 <div class="container w-75 p-5">
     <div class="d-flex">
-        <a class="btn btn-primary" href="../views/verperfilv.php">Regresar</a>
-        <h3 align="center" style="margin-left: 30%;">Editar Perfil</h3>
+        <a class="btn btn-primary justify-content-center" href="../views/admin.php">Regresar</a>
+        <h3 align="center" style="margin-left: 30%;">Editar Sucursal</h3>
     </div>
     <form action="" method="POST">
         <?php
         extract($_POST);
         ?>
-        <input type="hidden" name="id" value="<?php echo $id; ?>">
+        <input type="hidden" name="nuvsuc" value="<?php echo $suc; ?>">
         <div class="mb-3">
-            <label for="nuevonom" class="form-label">Nombre</label>
-            <input type="text" name="nuevonom" class="form-control" value="<?php echo $nombre;?>">
+            <label for="nuevonom" class="form-label">Nombre de la Sucursal:</label>
+            <input type="text" name="nuevonom" class="form-control" value="<?php echo $nom;?>">
         </div>
         <div class="mb-3">
-        <label for="nuevocat" class="form-label">Direccion</label>
-        <input type="text" name="nuevodir" class="form-control" value="<?php echo $direccion;?>">
+            <label for="nuevonom" class="form-label">Direccion:</label>
+            <input type="text" name="nuevodir" class="form-control" value="<?php echo $dir;?>">
         </div>
         <div class="mb-3">
         <label for="nuevotel" class="form-label">Telefono:</label>
-        <input type="text" name="nuevotel" class="form-control" value="<?php echo $telefono;?>">
-        </div>
-        <div class="mb-3">
-        <label for="nuevopres" class="form-label">Correo:</label>
-        <input type="text" name="nuevocor" class="form-control" value="<?php echo $correo;?>">
-        </div>
-
+            <input type="text" name="nuevotel" class="form-control" value="<?php echo $tel;?>">
+        </div> 
         <div class="d-grid gap-2">
             <button type="submit" name="submit" class="btn btn-primary">Guardar</button>
         </div>
@@ -62,10 +53,14 @@ else
     <?php
             if(isset($_POST['submit']))
             {
-                $cadena = "UPDATE USUARIOS SET NOMBRE = '$nuevonom', DIRECCION = '$nuevodir', TELEFONO = '$nuevotel' , CORREO = '$nuevocor' WHERE ID_USUARIO = $id";
+                include "../class/database.php";
+                $db = new Database();
+                $db->conectarDB();
+                $cadena = "UPDATE SUCURSALES SET NOMBRE = '$nuevonom', DIRECCION = '$nuevodir', TELEFONO = '$nuevotel'
+                WHERE ID_SUC = $nuvsuc";
                 $db->ejecutarsql($cadena);
                 $db->desconectarDB();
-                header("Location: exitoperf.php");
+                header("Location: Exito.php");
                 exit;
             }
         ?>

@@ -20,7 +20,7 @@ if(isset($_POST['eliminar']))
         $db = new Database();
         $db->conectarDB();
     extract($_POST);
-    $cadena = "UPDATE INVENTARIO SET ESTADO = 'INACTIVO' WHERE ID_INS = $id";
+    $cadena = "UPDATE SUCURSALES SET ESTADO = 'INACTIVO' WHERE ID_SUC = $suc";
     $db->ejecutarsql($cadena);
     $db->desconectarDB();
     header("Location: Exito.php");
