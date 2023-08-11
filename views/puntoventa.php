@@ -56,8 +56,11 @@ else
             <li>
               <a class="nav-link" href="solicitar.php">Solicitar</a>
             </li>
+            <li>
+              <a class="nav-link" href="entrada.php">Entrada</a>
+            </li>
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="verperfilv.php" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <a class="nav-link dropdown-toggle" href="verperfilv1.php" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Perfil
               </a>
               <ul class="dropdown-menu">
@@ -201,7 +204,7 @@ else
         <input type="hidden" name="total_general" value="<?php echo number_format($totalFinal, 2); ?>">
       </div>
       <div>
-        <button class="btn btn-primary" type="submit" name="btn_proceder_pago">Proceder al pago</button>
+      <button class="btn btn-primary" type="submit" name="btn_proceder_pago" <?php echo (empty($_SESSION['carrito']) ? 'disabled' : ''); ?>>Proceder al pago</button>
         <a type="button" class="btn btn-primary" href="../scripts/borrarcarro.php">Vaciar carrito</a>
       </div>
     </form>
