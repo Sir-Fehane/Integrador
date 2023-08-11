@@ -57,7 +57,7 @@ else
               <a class="nav-link" href="solicitar.php">Solicitar</a>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="verperfilv.php" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <a class="nav-link dropdown-toggle" href="verperfilv1.php" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Perfil
               </a>
               <ul class="dropdown-menu">
