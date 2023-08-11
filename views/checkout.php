@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../css/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/check.css">
 </head>
 
 <body>
@@ -52,71 +52,72 @@
           <h3 align="center">Detalle orden</h3>
         </div>
       </div>
-        <div class="row">
-          <div class="col-lg-12">
-            <?php if (isset($_SESSION['carrito'])) {?>
-            <?php echo $nombreCliente;?>
-            <table class="table align-middle table-sm">
-            <thead class="table-light">
-                <tr>
-                    <td colspan="3" class="text-center">
-                        
-                    <form method="post" action="../scripts/completarpago.php">
-                        <label for="forma_pago">Forma de pago:</label>
-                        <select name="forma_pago" id="forma_pago"  class="form-select form-select-md mb-3 text-center" >
-                            <option value="EFECTIVO">Efectivo</option>
-                            <option value="TARJETA">Tarjeta</option>
-                        </select>           
-                    </td>
-                    <td colspan="2" class="text-center">
-                        <label for="tipo_pedido">Tipo de pedido:</label>
-                        <select name="tipo_pedido" id="tipo_pedido"  class="form-select form-select-md mb-3 text-center">
-                            <option value="AQUI">Para comer aqui</option>
-                            <option value="LLEVAR">Para llevar</option>
-                        </select>
-                    </td> 
-                </tr>
-                <tr>
-                    <th class="text-center">Producto</th>
-                    <th class="text-center">Tamaño</th>
-                    <th class="text-center">Cantidad</th>
-                    <th class="text-center">Precio unitario</th>
-                    <th class="text-center">Subtotal</th>
-                </tr>
-              </thead>
-                    <?php foreach ($_SESSION['carrito'] as $producto) { ?>
-                    <tbody>
-                    <tr>  
-                        <td class="text-center"><?php echo $producto['titulo']; ?></td>
-                        <td class="text-center"><?php echo $producto['tamaño']; ?></td>
-                        <td class="text-center"><?php echo $producto['cantidad']; ?></td>
-                        <td class="text-center"><?php echo $producto['precio']; ?></td>
-                        <td class="text-center"><?php echo $producto['precio'] * $producto['cantidad']; ?></td>
-                    </tr>
-                </tbody>
-                <?php } ?>
-                <tfoot>
-                    <tr>
-                        <td colspan="4" class="table-light" ></td>
-                        <td colspan="1">
-                        <h3>Total: $<?php echo $totalGeneral; ?></h3>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="3" class="table-light"></td>
-                        <td colspan="2" class="text-center">
-                        <div class="d-grid gap-1">
-                          <input type="hidden" name="totalfinal" value="<?php echo $totalGeneral; ?>">
-                            <button type="submit" class="btn btn-lg btn-success" name="pagar">Pagar</button>
-                            </form>
-                        </div>
-                        </td>
-                    </tr>
-                </tfoot>
-              </table>
-        </div>
-      </div>
-                    </div></div>  
+      <div class="row" id="Renglon">
+        <div class="col-lg-12 table-responsive">
+          <?php if (isset($_SESSION['carrito'])) {?>
+          <?php echo $nombreCliente;?>
+          <table class="table align-middle table-sm">
+          <thead class="table-light">
+              <tr>
+                  <td colspan="3" class="text-center">
+                      
+                  <form method="post" action="../scripts/completarpago.php">
+                      <label for="forma_pago">Forma de pago:</label>
+                      <select name="forma_pago" id="forma_pago"  class="form-select form-select-md mb-3 text-center" >
+                          <option value="EFECTIVO">Efectivo</option>
+                          <option value="TARJETA">Tarjeta</option>
+                      </select>           
+                  </td>
+                  <td colspan="2" class="text-center">
+                      <label for="tipo_pedido">Tipo de pedido:</label>
+                      <select name="tipo_pedido" id="tipo_pedido"  class="form-select form-select-md mb-3 text-center">
+                          <option value="AQUI">Para comer aqui</option>
+                          <option value="LLEVAR">Para llevar</option>
+                      </select>
+                  </td> 
+              </tr>
+              <tr>
+                  <th class="text-center">Producto</th>
+                  <th class="text-center">Tamaño</th>
+                  <th class="text-center">Cantidad</th>
+                  <th class="text-center">Precio unitario</th>
+                  <th class="text-center">Subtotal</th>
+              </tr>
+            </thead>
+                  <?php foreach ($_SESSION['carrito'] as $producto) { ?>
+                  <tbody>
+                  <tr>  
+                      <td class="text-center"><?php echo $producto['titulo']; ?></td>
+                      <td class="text-center"><?php echo $producto['tamaño']; ?></td>
+                      <td class="text-center"><?php echo $producto['cantidad']; ?></td>
+                      <td class="text-center"><?php echo $producto['precio']; ?></td>
+                      <td class="text-center"><?php echo $producto['precio'] * $producto['cantidad']; ?></td>
+                  </tr>
+              </tbody>
+              <?php } ?>
+              <tfoot>
+                  <tr>
+                      <td colspan="4" class="table-light" ></td>
+                      <td colspan="1">
+                      <h3>Total: $<?php echo $totalGeneral; ?></h3>
+                      </td>
+                  </tr>
+                  <tr>
+                      <td colspan="3" class="table-light"></td>
+                      <td colspan="2" class="text-center">
+                      <div class="d-grid gap-1">
+                        <input type="hidden" name="totalfinal" value="<?php echo $totalGeneral; ?>">
+                          <button type="submit" class="btn btn-lg btn-success" name="pagar">Pagar</button>
+                          </form>
+                      </div>
+                      </td>
+                  </tr>
+              </tfoot>
+            </table>
+         </div>
+       </div>
+     </div>
+   </div>  
     <?php } else {	
         echo "El carrito está vacío.";
     } ?>

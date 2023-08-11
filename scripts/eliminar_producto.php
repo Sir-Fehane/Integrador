@@ -16,5 +16,5 @@ if (isset($_POST['index']) && is_numeric($_POST['index'])) {
 }
 
 // Redireccionar a la página anterior después de eliminar el producto del carrito
-header("Location: ".$_SERVER['HTTP_REFERER']);
+header("Location: ../views/puntoventa.php");
 ?>

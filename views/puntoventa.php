@@ -147,7 +147,6 @@ else
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body">
-      <form method="POST" action="./checkout.php">
       <input type="text" name="nombre-cliente" id="nombre-cliente">
       <?php
       $totalFinal = 0;
@@ -181,7 +180,7 @@ else
                 <td>
                   <form action="../scripts/eliminar_producto.php" method="post">
                     <input type="hidden" name="index" value="<?php echo $index; ?>">
-                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                    <button type="submit" class="btn btn-danger" name="eliminar">Eliminar</button>
                   </form>
                 </td>
               </tr>
@@ -196,6 +195,7 @@ else
         echo "<p>El carrito está vacío</p>";
       }
       ?>
+      <form method="POST" action="./checkout.php">
       <div id="total" class="mb-3">
         <span>Total: $<?php echo number_format($totalFinal, 2); ?></span>
         <input type="hidden" name="total_general" value="<?php echo number_format($totalFinal, 2); ?>">
