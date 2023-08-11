@@ -107,10 +107,11 @@ else
   <div class="nav flex-column me-3 bg-light d-lg-flex d-none" id="v-pills-tab" role="tablist" aria-orientation="vertical">
     <button class="nav-link active" id="inventario" data-bs-toggle="pill" data-bs-target="#inv" type="button" role="tab" aria-controls="v-pills-home" aria-selected="false">Inventario</button>
     <button class="nav-link" id="productos" data-bs-toggle="pill" data-bs-target="#pro" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">Productos</button>
+    <button class="nav-link" id="sucursales" data-bs-toggle="pill" data-bs-target="#suc" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">Sucursales</button>
     <button class="nav-link" id="personal" data-bs-toggle="pill" data-bs-target="#emp" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">Personal</button>
     <button class="nav-link" id="solicitudes" data-bs-toggle="pill" data-bs-target="#sol" type="button" role="tab" aria-controls="v-pills-rep" aria-selected="false">Solicitudes</button>
     <button class="nav-link" id="ingresos" data-bs-toggle="pill" data-bs-target="#ing" type="button" role="tab" aria-controls="v-pills-rep" aria-selected="false">Ingresos</button>
-    <button class="nav-link" id="cierre" data-bs-toggle="pill" data-bs-target="#cie" type="button" role="tab" aria-controls="v-pills-rep" aria-selected="false">Cierres</button>
+    <button class="nav-link" id="cierres" data-bs-toggle="pill" data-bs-target="#cie" type="button" role="tab" aria-controls="v-pills-rep" aria-selected="false">Cierres</button>
     <button class="nav-link" id="movimientos" data-bs-toggle="pill" data-bs-target="#mov" type="button" role="tab" aria-controls="v-pills-rep" aria-selected="false">Movimientos<br> en inv</button>
   </div>
   <div class="tab-content w-100" id="v-pills-tabContent">
@@ -122,12 +123,16 @@ else
     <div class="tab-pane fade" id="pro" role="tabpanel" aria-labelledby="productos" tabindex="0">
       <?php include 'Productos.php'; ?>
     </div>
+    <!--SUCURSALES-->
+    <div class="tab-pane fade" id="suc" role="tabpanel" aria-labelledby="sucursales" tabindex="0">
+      <?php include 'Sucursales.php'; ?>
+    </div>
     <!--PERSONAL-->
     <div class="tab-pane fade" id="emp" role="tabpanel" aria-labelledby="personal" tabindex="0">
       <?php include 'Personal.php'; ?>
     </div>
     <!--Reportes-->
-    <div class="tab-pane fade" id="sol" role="tabpanel" aria-labelledby="solicitude" tabindex="0">
+    <div class="tab-pane fade" id="sol" role="tabpanel" aria-labelledby="solicitudes" tabindex="0">
       <?php include 'Solicitudes.php'; ?>
     </div>
     <div class="tab-pane fade" id="ing" role="tabpanel" aria-labelledby="ingresos" tabindex="0">
@@ -136,7 +141,7 @@ else
     <div class="tab-pane fade" id="pro" role="tabpanel" aria-labelledby="productos" tabindex="0">
       <?php include 'Productos.php'; ?>
     </div>
-    <div class="tab-pane fade" id="cie" role="tabpanel" aria-labelledby="cierre" tabindex="0">
+    <div class="tab-pane fade" id="cie" role="tabpanel" aria-labelledby="cierres" tabindex="0">
       <?php include 'ReporCierre.php'; ?>
     </div>
     <div class="tab-pane fade" id="mov" role="tabpanel" aria-labelledby="movimento" tabindex="0">
