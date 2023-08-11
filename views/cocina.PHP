@@ -32,22 +32,40 @@ else
   </style>
     <!--header-->
     <nav class="navbar navbar-expand-lg fixed-top" id="barra">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#" id="logo">Toy's Pizza</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="puntoventa.php">Inicio</a>
-              </li>
-            </ul>
-            <!--perfil-->
-
-          </div>
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#" id="logo">Toy's Pizza</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="">Inicio</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="cocina.PHP">Cocina</a>
+            </li>
+            <li>
+              <a class="nav-link" href="cierre.php">Cierre</a>
+            </li>
+            <li>
+              <a class="nav-link" href="solicitar.php">Solicitar</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="verperfilv.php" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Perfil
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="../scripts/cerrarSesion.php">Cerrar Sesión</a></li>
+              </ul>
+            </li>
+          </ul>
+          <form class="d-flex" role="search">
+            <button class="btn btn-outline" id="btn-carrito" type="button" data-bs-toggle="offcanvas" data-bs-target="#carrito" aria-controls="offcanvasScrolling">Resumen de compra</button>
+          </form>
         </div>
-      </nav>
+      </div>
+    </nav>
       <!--cuerpo-->
       <?php      
       $sexo = 0;
