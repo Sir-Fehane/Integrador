@@ -1,3 +1,20 @@
+<?php
+session_start();
+if(!isset($_SESSION['rol']))
+{
+  header('Location: ../index.php');
+}
+else
+ {
+  if ($_SESSION["rol"] == 2) {
+    header("Location: ../index.php");
+    exit;
+  } elseif ($_SESSION["rol"] == 3) { 
+    header("Location: puntoventa.php");
+    exit;
+  }
+ }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,14 +36,18 @@
         $db->conectarDB();
         extract($_POST);
         ?>
-        <input type="hidden" name="id" value="<?php echo $id; ?>">
+        <input type="hidden" name="idemp" value="<?php echo $idemp; ?>">
         <div class="mb-3">
             <label for="nuevonom" class="form-label">Nombre:</label>
             <input type="text" name="nuevonom" class="form-control" value="<?php echo $nombre;?>" required>
         </div>
         <div class="mb-3">
-            <label for="nuevodirec" class="form-label">direccion:</label>
+            <label for="nuevodirec" class="form-label">Direccion:</label>
             <input type="text" name="nuevodirec" class="form-control" value="<?php echo $direccion;?>" required>
+        </div>
+        <div class="mb-3">
+            <label for="nuevocorr" class="form-label">Correo:</label>
+            <input type="text" name="nuevocor" class="form-control" value="<?php echo $cor;?>" required>
         </div>
         <div class="mb-3">
             <label for="nuevotel" class="form-label">Telefono:</label>
@@ -61,10 +82,10 @@
     <?php
         if(isset($_POST['submit']))
             {
-                $cadena = "UPDATE USUARIOS SET NOMBRE = '$nuevonom', DIRECCION = '$nuevodirec', TELEFONO = '$nuevotel' WHERE ID_USUARIO = $id";
+                $cadena = "UPDATE USUARIOS SET NOMBRE = '$nuevonom', DIRECCION = '$nuevodirec', TELEFONO = '$nuevotel', CORREO = '$nuevocor' WHERE ID_USUARIO = $idemp";
                 $db->ejecutarsql($cadena);
                 $cadena = "UPDATE EMPLEADO_SUCURSAL SET PUESTO = '$nuevopues', SUCURSAL = $nuevosucur
-                WHERE EMPLEADO = $id";
+                WHERE EMPLEADO = $idemp";
                 $db->ejecutarsql($cadena);
                 $db->desconectarDB();
                 header("Location: Exito.php");
