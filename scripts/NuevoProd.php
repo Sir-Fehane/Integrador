@@ -21,6 +21,27 @@
         <input type="hidden" value="ACTIVO" name="estado">
         <div class="mb-3">
             <label for="nombre" class="form-label">Nombre del producto:</label>
+<<<<<<< HEAD
+            <input type="text" name="nombre" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label for="tamaño" class="form-label">Tamaño:</label>
+            <select class="form-control" name="tamaño">
+                <option value="INDIVIDUAL">Individual</option>
+                <option value="MEDIANA">Mediana</option>
+                <option value="GRANDE">Grande</option>
+                <option value="EXTRA">Extra</option>
+                <option value="EVENTOS">Eventos</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="desc" class="form-label">Descripcion:</label>
+            <input type="text" name="desc" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label for="prec" class="form-label">Precio:</label>
+            <input type="number" name="prec" class="form-control" required onkeypress="return validarNumero(event)>
+=======
             <input type="text" name="nombre" class="form-control">
         </div>
         <div class="mb-3">
@@ -34,6 +55,7 @@
         <div class="mb-3">
             <label for="contra" class="form-label">Precio:</label>
             <input type="text" name="prec" class="form-control">
+>>>>>>> a1fc7d817ff273894346e518e325ad3a2b7f05c2
         </div>
         
         <div class="mb-3">
@@ -90,5 +112,17 @@ if(isset($_POST['submit']))
     }
 }
 ?>
+<<<<<<< HEAD
+<script>
+      function validarNumero(event) {
+    const charCode = (event.which) ? event.which : event.keyCode;
+    if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57)) {
+        return false;
+    }
+    return true;
+}
+    </script>
+=======
+>>>>>>> a1fc7d817ff273894346e518e325ad3a2b7f05c2
 </body>
 </html>
