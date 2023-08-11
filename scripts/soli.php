@@ -8,15 +8,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
         $insumos = $_POST['insumosSeleccionados'];
         $cantidades = $_POST['cantidad'];
 
-        //echo "Cantidad de insumos: " . count($insumos) . "<br>";
-        //echo "Cantidad de cantidades: " . count($cantidades) . "<br>";
-
-        //echo "Arreglo de insumos:<br>";
-        //var_dump($insumos);
-
-        //echo "Arreglo de cantidades:<br>";
-        //var_dump($cantidades);
-
         if (count($insumos) === count($cantidades)) 
         {
             include "../class/database.php";
@@ -38,17 +29,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
             {
                 $sucursal_id = $resultado_sucursal[0]->SUCURSAL;
 
-                $fecha = date("Y-m-d H:i:s");
 
                 //Insertar en SOLICITUDES
-                $consulta = "INSERT INTO SOLICITUDES (SUCURSAL, ESTADO, FECHA) VALUES ($sucursal_id, 'SOLICITADO', '$fecha')";
+                $consulta = "INSERT INTO SOLICITUDES (SUCURSAL, ESTADO, FECHA) VALUES ($sucursal_id, 'SOLICITADO', NOW())";
                 $db->ejecutarSQL($consulta);
 
                 for ($i = 0; $i < count($insumos); $i++) 
                 {
                     $cantidad = $cantidades[$indice];
                     {
-                    $consulta_solicitud = "SELECT ID_SOLICITUD FROM SOLICITUDES WHERE SUCURSAL = $sucursal_id AND FECHA = '$fecha'";
+                    $consulta_solicitud = "SELECT ID_SOLICITUD FROM SOLICITUDES WHERE SUCURSAL = $sucursal_id AND FECHA = NOW()";
                     $resultado_solicitud = $db->seleccionar($consulta_solicitud);
 
                     if($resultado_solicitud && count($resultado_solicitud) > 0)
