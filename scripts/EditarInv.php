@@ -1,3 +1,20 @@
+<?php
+session_start();
+if(!isset($_SESSION['rol']))
+{
+  header('Location: ../index.php');
+}
+else
+ {
+  if ($_SESSION["rol"] == 2) {
+    header("Location: ../index.php");
+    exit;
+  } elseif ($_SESSION["rol"] == 3) { 
+    header("Location: puntoventa.php");
+    exit;
+  }
+ }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +26,7 @@
 <body>
 <div class="container w-75 p-5">
     <div class="d-flex">
-        <a class="btn btn-primary" href="../views/admin.php">Regresar</a>
+        <a class="btn btn-primary justify-content-center" href="../views/admin.php">Regresar</a>
         <h3 align="center" style="margin-left: 30%;">Editar Insumo</h3>
     </div>
     <form action="" method="POST">

@@ -4,19 +4,10 @@ if(!isset($_SESSION['rol']))
 {
 
 }
- else
+else
  {
-  if ($_SESSION["rol"] == 1) { 
-    header("Location: views/admin.php");
-    exit;
-  } elseif ($_SESSION["rol"] == 2) { 
-    if (basename($_SERVER['PHP_SELF']) === 'index.php') {
-    } else {
-        header("Location: index.php");
-        exit;
-    }
-  } elseif ($_SESSION["rol"] == 3) { 
-    header("Location: views/admin.php");
+  if ($_SESSION["rol"] == 1) {
+    header("Location: ../admin.php");
     exit;
   }
  }

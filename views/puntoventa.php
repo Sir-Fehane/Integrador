@@ -10,7 +10,7 @@ else
     header("Location: admin.php");
     exit;
   } elseif ($_SESSION["rol"] == 3) { 
-    if (basename($_SERVER['PHP_SELF']) === 'puntoventa.php') {
+    if (basename($_SERVER['PHP_SELF']) === 'puntoventa.php') {    
     } else {
         header("Location: puntoventa.php");
         exit;
@@ -45,7 +45,7 @@ else
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="">Inicio</a>
+              <a class="nav-link active" aria-current="page" href="puntoventa.php">Inicio</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="cocina.PHP">Cocina</a>
@@ -105,7 +105,7 @@ else
                     </div>
                     <div class="modal-body">
               <?php
-                  $size = "SELECT TAMANO as T, PRECIO as PR FROM PRODUCTOS WHERE PRODUCTOS.NOMBRE = '$value->N'";
+                  $size = "SELECT TAMANO as T, PRECIO as PR, CODIGO as ID FROM PRODUCTOS WHERE PRODUCTOS.NOMBRE = '$value->N'";
                   $sizes = $conexion->seleccionar($size);
                   echo "<label for='tamaño'>Tamaño</label>";
                   echo "<select name='tamaño' class='form-select tamaño' data-precio='0'>";
@@ -147,86 +147,69 @@ else
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body">
-        <?php
-              $totalFinal = 0;
-        // Verificar si el carrito tiene productos
-        if (isset($_SESSION['carrito']) && !empty($_SESSION['carrito'])) {
-
-          ?>
-          <table class="table">
-            <thead>
+      <input type="text" name="nombre-cliente" id="nombre-cliente">
+      <?php
+      $totalFinal = 0;
+      // Verificar si el carrito tiene productos
+      if (isset($_SESSION['carrito']) && !empty($_SESSION['carrito'])) {
+      ?>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Producto</th>
+              <th>Tamaño</th>
+              <th>Precio</th>
+              <th>Cantidad</th>
+              <th>Subtotal</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php
+            // Recorremos los productos en el carrito y los mostramos en la tabla
+            foreach ($_SESSION['carrito'] as $index => $producto) {
+              $subtotal = $producto['precio'] * $producto['cantidad'];
+              $totalFinal += $subtotal; // Sumar el subtotal al total final
+            ?>
               <tr>
-                <th>Producto</th>
-                <th>Tamaño</th>
-                <th>Precio</th>
-                <th>Cantidad</th>
-                <th>Subtotal</th>
-                <th></th>
+                <td><?php echo $producto['titulo']; ?></td>
+                <td><?php echo $producto['tamaño']; ?></td>
+                <td>$<?php echo $producto['precio']; ?></td>
+                <td><?php echo $producto['cantidad']; ?></td>
+                <td>$<?php echo $subtotal; ?></td>
+                <td>
+                  <form action="../scripts/eliminar_producto.php" method="post">
+                    <input type="hidden" name="index" value="<?php echo $index; ?>">
+                    <button type="submit" class="btn btn-danger" name="eliminar">Eliminar</button>
+                  </form>
+                </td>
               </tr>
-            </thead>
-            <tbody>
-              <?php
-              // Recorremos los productos en el carrito y los mostramos en la tabla
-              foreach ($_SESSION['carrito'] as $index => $producto) {
-                $subtotal = $producto['precio'] * $producto['cantidad'];
-                $totalFinal += $subtotal; // Sumar el subtotal al total final
-                ?>
-                <tr>
-                  <td><?php echo $producto['titulo']; ?></td>
-                  <td><?php echo $producto['tamaño']; ?></td>
-                  <td>$<?php echo $producto['precio']; ?></td>
-                  <td><?php echo $producto['cantidad']; ?></td>
-                  <td>$<?php echo $subtotal; ?></td>
-                  <td>
-                    <form action="../scripts/eliminar_producto.php" method="post">
-                      <input type="hidden" name="index" value="<?php echo $index; ?>">
-                      <button type="submit" class="btn btn-danger">Eliminar</button>
-                    </form>
-                  </td>
-                </tr>
-                
-                <?php
-                if (isset($_POST['index']) && is_numeric($_POST['index'])) {
-                  $index = intval($_POST['index']);
-              
-                  // Verificar si el índice existe en el carrito
-                  if (isset($_SESSION['carrito'][$index])) {
-                      // Eliminar el ítem del carrito utilizando unset()
-                      unset($_SESSION['carrito'][$index]);
-              
-                      // Reorganizar los índices para evitar huecos en el array
-                      $_SESSION['carrito'] = array_values($_SESSION['carrito']);
-              
-                      // Recalcular el total después de eliminar el producto
-                      $totalFinal = 0;
-                      foreach ($_SESSION['carrito'] as $producto) {
-                          $subtotal = $producto['precio'] * $producto['cantidad'];
-                          $totalFinal += $subtotal;
-                      }
-                  }
-              }
-              }
-              ?>
-            </tbody>
-          </table>
-        <?php
-        } else {
-          // Mostrar mensaje cuando el carrito está vacío
-          echo "<p>El carrito está vacío</p>";
-        }
-        ?>
-          <div id="total" class="mb-3">
-            <span>Total: $<?php echo number_format($totalFinal, 2); ?></span> 
-          </div>
-        <div>
-          <button class="btn btn-primary" type="button">Proceder al pago</button>
-          <a type="button" class="btn btn-primary" href="../scripts/borrarcarro.php">Vaciar carrito</a>
-        </div>
+            <?php
+            }
+            ?>
+          </tbody>
+        </table>
+      <?php
+      } else {
+        // Mostrar mensaje cuando el carrito está vacío
+        echo "<p>El carrito está vacío</p>";
+      }
+      ?>
+      <form method="POST" action="./checkout.php">
+      <div id="total" class="mb-3">
+        <span>Total: $<?php echo number_format($totalFinal, 2); ?></span>
+        <input type="hidden" name="total_general" value="<?php echo number_format($totalFinal, 2); ?>">
+      </div>
+      <div>
+        <button class="btn btn-primary" type="submit" name="btn_proceder_pago">Proceder al pago</button>
+        <a type="button" class="btn btn-primary" href="../scripts/borrarcarro.php">Vaciar carrito</a>
+      </div>
+    </form>
       </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../js/bootstrap.bundle.js"></script>
-    <script src="../src/scripts/app.js" defer></script>
+    <script src="../src/app.js" defer></script>
   </body>
 </html>

@@ -1,5 +1,5 @@
 <?php
-session_start(); // Asegurarse de iniciar la sesión si aún no está iniciada
+session_start(); 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") 
 {
@@ -8,24 +8,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
         $insumos = $_POST['insumosSeleccionados'];
         $cantidades = $_POST['cantidad'];
 
-        echo "Cantidad de insumos: " . count($insumos) . "<br>";
-        echo "Cantidad de cantidades: " . count($cantidades) . "<br>";
+        //echo "Cantidad de insumos: " . count($insumos) . "<br>";
+        //echo "Cantidad de cantidades: " . count($cantidades) . "<br>";
 
-        // Imprimir los arreglos completos para depuración
-        echo "Arreglo de insumos:<br>";
-        var_dump($insumos);
+        //echo "Arreglo de insumos:<br>";
+        //var_dump($insumos);
 
-        echo "Arreglo de cantidades:<br>";
-        var_dump($cantidades);
+        //echo "Arreglo de cantidades:<br>";
+        //var_dump($cantidades);
 
-        // Asegurarse de que los arrays tengan la misma cantidad de elementos
         if (count($insumos) === count($cantidades)) 
         {
             include "../class/database.php";
             $db = new Database();
             $db->conectarDB();
 
-            // Obtener el ID de usuario basado en la sesión
             $nombre_usuario = $_SESSION["usuario"];
             $consulta_usuario = "SELECT ID_USUARIO FROM USUARIOS WHERE NOMBRE = '$nombre_usuario'";
             $resultado_usuario = $db->seleccionar($consulta_usuario);
@@ -33,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
             if ($resultado_usuario && count($resultado_usuario) > 0) 
             {
                 $id_usuario = $resultado_usuario[0]->ID_USUARIO;
-                // Consultar la tabla EMPLEADO_SUCURSAL para obtener el sucursal_id del empleado
+
             $consulta_sucursal = "SELECT SUCURSAL FROM EMPLEADO_SUCURSAL WHERE EMPLEADO = '$id_usuario'";
             $resultado_sucursal = $db->seleccionar($consulta_sucursal);
 
@@ -41,14 +38,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
             {
                 $sucursal_id = $resultado_sucursal[0]->SUCURSAL;
 
-                $fecha = '2023-08-07 03:08:03';
+                $fecha = date("Y-m-d H:i:s");
 
-                // Insertar registro en la tabla SOLICITUDES
-                //$consulta = "INSERT INTO SOLICITUDES (SUCURSAL, ESTADO, FECHA) VALUES ($sucursal_id, 'SOLICITADO', '$fecha')";
-                //$db->ejecutarSQL($consulta);
+                //Insertar en SOLICITUDES
+                $consulta = "INSERT INTO SOLICITUDES (SUCURSAL, ESTADO, FECHA) VALUES ($sucursal_id, 'SOLICITADO', '$fecha')";
+                $db->ejecutarSQL($consulta);
 
                 for ($i = 0; $i < count($insumos); $i++) 
-                //foreach ($insumos as $indice => $insumo) 
                 {
                     $cantidad = $cantidades[$indice];
                     {
@@ -68,17 +64,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
                         {
                         $id_insumo = $resultado_i[0]->ID_INS;
 
-                    // Ejemplo de cómo ejecutar una consulta INSERT en la base de datos
+                    //Insertar en DETALLE_SOLICITUD
                     $consulta = "INSERT INTO DETALLE_SOLICITUD (SOLICITUD, INVENTARIO, CANTIDAD) 
                     VALUES ('$solicitud_id', '$id_insumo', '$cantidad')";
                     $db->ejecutarSQL($consulta);
-                    // Verificar $resultado_insert y manejar cualquier error
                         }
                     }
                     }
                 }
             }
-                // Cerrar la conexión a la base de datos
                 $db->desconectarDB();
                 header("Location: ExitoPV.php");
             exit();
