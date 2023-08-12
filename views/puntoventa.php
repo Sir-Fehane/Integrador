@@ -83,7 +83,7 @@ else
         include '../class/database.php';
         $conexion = new database();
         $conexion->conectarDB();
-        $consulta ="SELECT PRODUCTOS.NOMBRE as N, PRODUCTOS.CODIGO as ID, PRODUCTOS.PRECIO as PR FROM PRODUCTOS GROUP BY PRODUCTOS.NOMBRE";
+        $consulta ="SELECT PRODUCTOS.NOMBRE as N, PRODUCTOS.CODIGO as ID, PRODUCTOS.PRECIO as PR FROM PRODUCTOS WHERE PRODUCTOS.ESTADO = 'ACTIVO' GROUP BY PRODUCTOS.NOMBRE";
         $reg = $conexion->seleccionar($consulta);        
         foreach($reg as $value){ ?>
           <div class="col-12 col-md-5 col-lg-4">
