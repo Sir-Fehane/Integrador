@@ -28,7 +28,7 @@ else
   $fechaActual = date("d/m/Y");
   $db = new Database();
   $db->conectarDB();
-    echo "<h6 align='center'>Reporte de <strong>cierre de turno</strong> de todas las sucursales ";
+    echo "<h6 align='center'>Reporte de <strong>merma</strong> de todas las sucursales ";
     echo
     "</h6>"; ?>
     <h6 align='center'>Selecciona solamente fecha inicial para ver resultados de tal fecha.</h6>
@@ -38,11 +38,11 @@ else
         <div class="row">
             <div class="col-12 col-lg-4 mb-3">
                 <label class="form-label" for="fec01">Buscar con fecha inicial:</label>
-                <input type="date" class="form-control" name="fec1" id="fec01" max="<?php echo date('Y-m-d'); ?>">
+                <input type="date" class="form-control" name="fec1" id="fec001" max="<?php echo date('Y-m-d'); ?>">
             </div>
             <div class="col-12 col-lg-4 mb-3">
                 <label class="form-label" for="fec02">Buscar con fecha final:</label>
-                <input type="date" class="form-control" name="fec2" id="fec02" max="<?php echo date('Y-m-d'); ?>">
+                <input type="date" class="form-control" name="fec2" id="fec002" max="<?php echo date('Y-m-d'); ?>">
             </div>
             <div class="col-12 col-lg-4 mb-3">
                 <label class="form-label" for="suc">Buscar por sucursal: (Obligatorio)</label>
@@ -64,12 +64,12 @@ else
             </div>
         </div>
         <div class="d-flex justify-content-center">
-            <input class="btn btn-primary" type="submit" value="Buscar" name="CIERRES">
+            <input class="btn btn-primary" type="submit" value="Buscar" name="MERMA">
         </div>
     </form>
 </div>
   <?php
-        if (isset($_POST['CIERRES']) && ((isset($_POST['suc']) && $_POST['suc'] != 0)))
+        if (isset($_POST['MERMA']) && ((isset($_POST['suc']) && $_POST['suc'] != 0)))
         {
           ?>
     <div class="container d-lg-none d-block">
@@ -77,42 +77,31 @@ else
     </div>
     <?php
           extract($_POST);
-          $cadena = "SELECT S.NOMBRE AS 'Sucursal', BC.FECHA AS 'Fecha', BC.INSUMO AS 'Insumo', 
-      BC.CANTIDAD_ANTERIOR AS 'Inventario_Inicial', BC.CANTIDAD_NUEVA AS 'Inventario_Final',
-      BC.CANTIDAD_NUEVA - BC.CANTIDAD_ANTERIOR AS 'Diferencia'
-      FROM BitacoraCierre BC
-      INNER JOIN SUCURSALES S ON S.ID_SUC = BC.Sucursal";
+          $cadena = "SELECT S.NOMBRE AS 'Sucursal', BM.FECHA AS 'Fecha', BM.TAMANO AS 'Tamaño', 
+      BM.CANTIDAD AS 'Cantidad'
+      FROM BitacoraMerma BM
+      INNER JOIN SUCURSALES S ON S.ID_SUC = BM.SUCURSAL";
 
       if ($suc != 999) {
-          $cadena .= " WHERE BC.SUCURSAL = $suc";
+          $cadena .= " WHERE BM.SUCURSAL = $suc";
       }
       if (isset($_POST['fec1']) && $_POST['fec1'] !== "" && !isset($_POST['fec2'])) {
           $fechaFiltrada = $_POST['fec'];
           if ($suc != 999) {
-              $cadena .= " AND BC.FECHA = '$fechaFiltrada'";
+              $cadena .= " AND BM.FECHA = '$fechaFiltrada'";
           } else {
-              $cadena .= " WHERE BC.FECHA = '$fechaFiltrada'";
+              $cadena .= " WHERE BM.FECHA = '$fechaFiltrada'";
           }
       }
       if ((isset($_POST['fec1']) && $_POST['fec1'] !== "") && (isset($_POST['fec2']) && $_POST['fec2'] !== "")) {
           $fechaFiltrada = $_POST['fec1'];
           $fechaFiltrada2 = $_POST['fec2'];
           if ($suc != 999){
-            $cadena .= " AND Fecha BETWEEN '$fechaFiltrada' AND '$fechaFiltrada2'";
+            $cadena .= " AND BM.FECHA BETWEEN '$fechaFiltrada' AND '$fechaFiltrada2'";
           } else {
-            $cadena .= " WHERE Fecha BETWEEN '$fechaFiltrada' AND '$fechaFiltrada2'";
+            $cadena .= " WHERE BM.FECHA BETWEEN '$fechaFiltrada' AND '$fechaFiltrada2'";
         }
       }
-
-      if(isset($_POST['nom'])) {
-          $nom = $_POST['nom'];
-          if ($suc != 999 || (isset($_POST['fec']) && $_POST['fec'] !== "")) {
-              $cadena .= " AND BC.INSUMO like '%$nom%'";
-          } else {
-              $cadena .= " WHERE BC.INSUMO like '%$nom%'";
-          }
-      }
-
       $tabla = $db->seleccionar($cadena);
     ?>
     <div class="container justify-content-center">
@@ -125,10 +114,8 @@ else
             echo "<th class='sortable'>Sucursal</th>";
         }
         echo "<th class='col-2 col-lg-3 sortable'>Fecha</th>";
-        echo "<th class='col-2 col-lg-3 sortable'>Insumo</th>";
-        echo "<th class='col-1 col-lg-1 sortable'>Inventario_Inicial</th>";
-        echo "<th class='col-1 col-lg-1 sortable'>Inventario_Final</th>";
-        echo "<th class='col-1 col-lg-3 sortable'>Diferencia</th>";
+        echo "<th class='col-2 col-lg-3 sortable'>Tamaño</th>";
+        echo "<th class='col-1 col-lg-1 sortable'>Cantidad</th>";
         echo "</tr>";
         echo "</thead>";
         echo "<tbody align='center'>";
@@ -138,10 +125,8 @@ else
                 echo "<td>$registro->Sucursal</td>";
             }
             echo "<td>$registro->Fecha</td>";
-            echo "<td>$registro->Insumo</td>";
-            echo "<td>$registro->Inventario_Inicial</td>";
-            echo "<td>$registro->Inventario_Final</td>";
-            echo "<td>$registro->Diferencia</td>";
+            echo "<td>$registro->Tamaño</td>";
+            echo "<td>$registro->Cantidad</td>";
             echo "</tr>";
         }
         echo "</tbody>";
@@ -161,8 +146,8 @@ else
   }?>
   <script>
     document.addEventListener("DOMContentLoaded", function() {
-        const fec1Input = document.getElementById("fec01");
-        const fec2Input = document.getElementById("fec02");
+        const fec1Input = document.getElementById("fec001");
+        const fec2Input = document.getElementById("fec002");
 
         fec1Input.addEventListener("input", function() {
             if (fec1Input.value === "") {
@@ -181,8 +166,8 @@ else
 </script>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        const fec1Input = document.getElementById("fec01");
-        const fec2Input = document.getElementById("fec02");
+        const fec1Input = document.getElementById("fec001");
+        const fec2Input = document.getElementById("fec002");
 
         fec1Input.addEventListener("input", function() {
             if (fec1Input.value === "") {
@@ -207,9 +192,8 @@ else
   <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
   <script>
     $(document).ready(function() {
-      $('#DetalleCie').DataTable();
+      $('#DetalleMer').DataTable();
     });
   </script>
-
 </body>
 </html>

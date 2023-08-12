@@ -127,5 +127,6 @@ $db->conectarDB();
       $('#DetallePro').DataTable();
     });
   </script>
+
 </body>
 </html>

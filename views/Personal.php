@@ -53,7 +53,7 @@ else
                 <?php
                 $db = new Database();
                 $db->conectarDB();
-                $cadena = "SELECT ID_SUC,NOMBRE FROM SUCURSALES";
+                $cadena = "SELECT ID_SUC,NOMBRE FROM SUCURSALES WHERE ESTADO = 'ACTIVO'";
                 $reg = $db->seleccionar($cadena);
                 echo "<div class='me-2'>
                 <select name='suc' class='form-select'>
@@ -202,5 +202,6 @@ else
       $('#DetalleInv').DataTable();
     });
   </script>
+
 </body>
 </html>

@@ -30,16 +30,6 @@ else
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
 <style>
-  #tabla
-  {
-    margin: auto;
-    width: 90%;
-  }
-  #tabla-xs
-  {
-    margin: auto;
-    width: 60%;
-  }
   h2
   {
     margin: auto;
@@ -47,15 +37,6 @@ else
   }
   .select-wrapper {
   margin-right: 10px;
-}
-@media (max-width:576) {
-  #ocultar{
-    display: none;
-  }
-}
-@media (min-width: 576px){
-  cont-nav{
-  flex:1;}
 }
 </style>
 <title>Administracion</title>
@@ -80,6 +61,7 @@ else
           <li><a class="dropdown-item" data-target="#ing">Ingresos</a></li>
           <li><a class="dropdown-item" data-target="#cie">Cierres</a></li>
           <li><a class="dropdown-item" data-target="#mov">Movimientos inv</a></li>
+          <li><a class="dropdown-item" data-target="#mer">Merma</a></li>
         </ul>
       </div>
       </div>
@@ -113,6 +95,7 @@ else
     <button class="nav-link" id="ingresos" data-bs-toggle="pill" data-bs-target="#ing" type="button" role="tab" aria-controls="v-pills-rep" aria-selected="false">Ingresos</button>
     <button class="nav-link" id="cierres" data-bs-toggle="pill" data-bs-target="#cie" type="button" role="tab" aria-controls="v-pills-rep" aria-selected="false">Cierres</button>
     <button class="nav-link" id="movimientos" data-bs-toggle="pill" data-bs-target="#mov" type="button" role="tab" aria-controls="v-pills-rep" aria-selected="false">Movimientos<br> en inv</button>
+    <button class="nav-link" id="merma" data-bs-toggle="pill" data-bs-target="#mer" type="button" role="tab" aria-controls="v-pills-rep" aria-selected="false">Merma</button>
   </div>
   <div class="tab-content w-100" id="v-pills-tabContent">
     <!--INVENTARIO-->
@@ -131,47 +114,33 @@ else
     <div class="tab-pane fade" id="emp" role="tabpanel" aria-labelledby="personal" tabindex="0">
       <?php include 'Personal.php'; ?>
     </div>
-    <!--Reportes-->
+    <!--SOLICITUDES-->
     <div class="tab-pane fade" id="sol" role="tabpanel" aria-labelledby="solicitudes" tabindex="0">
       <?php include 'Solicitudes.php'; ?>
     </div>
+        <!--SOLICITUDES-->
     <div class="tab-pane fade" id="ing" role="tabpanel" aria-labelledby="ingresos" tabindex="0">
       <?php include 'Ingresos.php'; ?>
     </div>
+    <!--PRODUCTOS-->
     <div class="tab-pane fade" id="pro" role="tabpanel" aria-labelledby="productos" tabindex="0">
       <?php include 'Productos.php'; ?>
     </div>
+    <!--CIERRES-->
     <div class="tab-pane fade" id="cie" role="tabpanel" aria-labelledby="cierres" tabindex="0">
       <?php include 'ReporCierre.php'; ?>
     </div>
+    <!--MOVIMIENTOS-->
     <div class="tab-pane fade" id="mov" role="tabpanel" aria-labelledby="movimento" tabindex="0">
       <?php include 'Movimientos.php'; ?>
+    </div>
+    <!--MERMA-->
+    <div class="tab-pane fade" id="mer" role="tabpanel" aria-labelledby="merma" tabindex="0">
+      <?php include 'Merma.php'; ?>
     </div>
       </div>
 </div>
 <script src="../js/bootstrap.min.js"></script>
 <script src="../js/bootstrap.bundle.min.js"></script>
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-  const dropdownOptions = document.querySelectorAll(".dropdown-item[data-target]");
-
-  dropdownOptions.forEach(option => {
-    option.addEventListener("click", function() {
-      const targetPaneId = option.getAttribute("data-target");
-      const targetPane = document.querySelector(targetPaneId);
-
-      if (targetPane) {
-        // Activate the selected tab-pane and deactivate others
-        const allTabPanes = document.querySelectorAll(".tab-pane");
-        allTabPanes.forEach(pane => {
-          pane.classList.remove("show", "active");
-        });
-        targetPane.classList.add("show", "active");
-      }
-    });
-  });
-});
-</script>
-
 </body>
 </html>
