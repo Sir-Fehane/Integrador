@@ -83,18 +83,18 @@ class Database{
             echo $e->getMessage();
         }
     }
-    function verifica($usuario, $contra)
+    function verifica($correo, $contra)
     {
         try
         {
             $pase = false;
-            $query = "SELECT * FROM USUARIOS WHERE NOMBRE = '$usuario'";
+            $query = "SELECT * FROM USUARIOS WHERE CORREO = '$correo'";
             $consulta = $this->PDOAws->query($query);
-            
             while($renglon = $consulta->fetch(PDO::FETCH_ASSOC))
             {
                 if (password_verify($contra, $renglon['CONTRASENA'])) 
                 {
+                    $nombre = $renglon['NOMBRE'];
                     $pase = true;
                     $rol = $renglon['ROL'];
                     $id_usuar=$renglon['ID_USUARIO'];
@@ -103,7 +103,8 @@ class Database{
             if($pase)
             {
                 session_start();
-                $_SESSION["usuario"] = $usuario;
+                $_SESSION["correo"] = $correo;
+                $_SESSION["usuario"] = $nombre;
                 $_SESSION["rol"] = $rol;
                 $_SESSION["IDUSU"]= $id_usuar;
 
