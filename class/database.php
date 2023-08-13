@@ -8,6 +8,10 @@ class Database{
     {
         try
         {
+            $options=array(
+                PDO::ATTR_EMULATE_PREPARES=>false,
+                PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION
+              );
             $this->PDOAws= new PDO($this->server, $this->user, $this->password);
         }
         catch(PDOException $e)
@@ -46,6 +50,20 @@ class Database{
         {
             $resultado = $this->PDOAws->query($consulta);
             $fila = $resultado->fetchAll(PDO::FETCH_ASSOC);
+            return $fila;
+        }
+        catch(PDOException $e)
+        {
+            echo $e->getMessage();
+        }
+    }
+
+    function selecsinall($consulta)
+    {
+        try
+        {
+            $resultado = $this->PDOAws->query($consulta);
+            $fila = $resultado->fetch(PDO::FETCH_ASSOC);
             return $fila;
         }
         catch(PDOException $e)
@@ -136,7 +154,10 @@ class Database{
         }
         return $this->PDOAws;
     }
-
+    function prepararConsulta($query) {
+        return $this->PDOAws->prepare($query);
+    }
 }
+
 
 ?>
