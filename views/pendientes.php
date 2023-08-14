@@ -14,7 +14,7 @@ $idemp=$_SESSION["IDUSU"];
     <script src="../js/bootstrap.bundle.js"></script>
     <script src="../src/app.js"></script>
     <link rel="stylesheet" href="../css/style.css">
-    <title>Cocina</title>
+    <title>Pendientes</title>
 </head>
 <body>
 
@@ -40,14 +40,7 @@ $idemp=$_SESSION["IDUSU"];
       </nav>
       <!--cuerpo-->
       <?php
-        $Notificaciones=$conexion->seleccionar("SELECT ORDEN_VENTA.NO_ORDEN, PRODUCTOS.NOMBRE, PRODUCTOS.TAMANO, DETALLE_ORDEN.CANTIDAD, ORDEN_VENTA.TOTAL
-        FROM NOTIFICACIONES
-        Inner Join ORDEN_VENTA on ORDEN_VENTA.NO_ORDEN=NOTIFICACIONES.NUM_ORDEN
-        INNER JOIN DETALLE_ORDEN on DETALLE_ORDEN.NO_ORDEN=ORDEN_VENTA.NO_ORDEN
-        INNER JOIN PRODUCTOS on PRODUCTOS.CODIGO=DETALLE_ORDEN.PRODUCTO
-        WHERE NOTIFICACIONES.ID_SUC=".$_SESSION['IDSUCUR']." AND NOTIFICACIONES.ESTADO='PENDIENTE' GROUP BY ORDEN_VENTA.NO_ORDEN");
-
-        $tabla = $Notificaciones=$conexion->seleccionar("SELECT ORDEN_VENTA.NO_ORDEN, ORDEN_VENTA.TOTAL, USUARIOS.NOMBRE, USUARIOS.TELEFONO, USUARIOS.CORREO
+        $tabla = $conexion->seleccionar("SELECT NOTIFICACIONES.ID_NOT, ORDEN_VENTA.NO_ORDEN, ORDEN_VENTA.TOTAL, USUARIOS.NOMBRE, USUARIOS.TELEFONO, USUARIOS.CORREO
         FROM NOTIFICACIONES
         Inner Join ORDEN_VENTA on ORDEN_VENTA.NO_ORDEN=NOTIFICACIONES.NUM_ORDEN
         Inner Join USUARIOS ON USUARIOS.ID_USUARIO = ORDEN_VENTA.USUARIO
@@ -56,17 +49,18 @@ $idemp=$_SESSION["IDUSU"];
         {
         echo  "<div class='container'>
         <div class='rows d-flex justify-content-center'>";
-        echo "<div class='col-lg-9 offset-lg-7'> <h2 >ORDEN $registro->NO_ORDEN</h2>  </div>"; ?>   
+        echo "<div class='col-lg-9 offset-lg-2'> <h2 >ORDEN #$registro->NO_ORDEN</h2>  </div>"; ?>   
         <?php
         $ORDEN=$registro->NO_ORDEN;
         $CORREO=$registro->CORREO;
+        $NOTI=$registro->ID_NOT;
        echo "</div>";
         
         echo "</div>";
         echo "<table class = 'table table-hover'>
         <thead class = 'table-danger'>
         <tr>
-        <th>PRODUCTO</th><th>TAMAÑO</th><th>CATIDAD</th>
+        <th>PRODUCTO</th><th>TAMAÑO</th><th>CANTIDAD</th>
         </tr>
         </thead>";  
         $prods=$conexion->seleccionar("SELECT PRODUCTOS.NOMBRE, PRODUCTOS.TAMANO, DETALLE_ORDEN.CANTIDAD FROM ORDEN_VENTA INNER JOIN DETALLE_ORDEN on DETALLE_ORDEN.NO_ORDEN=ORDEN_VENTA.NO_ORDEN
@@ -99,15 +93,19 @@ $idemp=$_SESSION["IDUSU"];
         <div class= 'col-lg-6 offset-lg-4 d-inline-flex col-6 offset-3'>
         <row class='col-lg-6'>
         <form action='../scripts/aceptarp.php' method='post' class='col-6 col-lg-6'>
-        <input type='hidden' id='correo' value='".$CORREO."'>
-        <input type='hidden' id='noorder' value='".$ORDEN."'>
+        <input type='hidden' name='correo' id='correo' value='".$CORREO."'>
+        <input type='hidden' name='noorder' id='noorder' value='".$ORDEN."'>
+        <input type='hidden' name='OV' id='OV' value='EN PROCESO'>
+        <input type='hidden' name='noti' id='noti' value='".$NOTI."'>
         <button type='submit' class='btn btn-primary'>Aceptar pedido </button>
         </form>
         </row>
         <row class='col-lg-6'>
-        <form action='rechazarp.php' method='post' class='col-6 col-lg-6'>
-        <input type='hidden' id='correo' value='".$CORREO."'>
-        <input type='hidden' id='noorder' value='".$ORDEN."'>
+        <form action='../scripts/aceptarp.php' method='post' class='col-6 col-lg-6'>
+        <input type='hidden' name='correo' id='correo' value='".$CORREO."'>
+        <input type='hidden' name='noorder' id='noorder' value='".$ORDEN."'>
+        <input type='hidden' name='noti' id='noti' value='".$NOTI."'>
+        <input type='hidden' name='OV' id='OV' value='CANCELADA'>
         <button type='submit' class='btn btn-danger'>Rechazar pedido </button>
         </form>
         </row>
