@@ -1,11 +1,13 @@
 <?php
 // include database configuration file
-include 'dbConfig.php';
 // initializ shopping cart class
 include 'Cart.php';
+include '../class/database.php';
+$db= new Database();
+$db->conectarDB();
 $cart = new Cart;
-$horainicio="11:00";
-$horacierre="20:00";
+$horainicio="00:00";
+$horacierre="22:00";
 $horaactual=date("H:i");
 
 // redirect to home if cart is empty
@@ -18,8 +20,7 @@ $nomusu=$_SESSION['IDUSU'];
 $_SESSION['sessCustomerID'] = $nomusu;
 
 // get customer details by session customer ID
-$query = $db->query("SELECT * FROM USUARIOS WHERE ID_USUARIO = ".$_SESSION['sessCustomerID']);
-$custRow = $query->fetch_assoc();
+$custRow = $db->selecsinall("SELECT * FROM USUARIOS WHERE ID_USUARIO = ".$_SESSION['sessCustomerID']);
 ?>
 
 <?php
@@ -35,8 +36,7 @@ $custRow = $query->fetch_assoc();
         {
             $sucursal = $_POST["sucursal"];
             $_SESSION['IDSUCURSAL']=$sucursal;
-            $cons=$db->query("SELECT NOMBRE FROM SUCURSALES WHERE ID_SUC=".$sucursal."");
-            $putrow=$cons->fetch_assoc();
+            $putrow=$db->selecsinall("SELECT NOMBRE FROM SUCURSALES WHERE ID_SUC=".$sucursal."");
             $_SESSION['NombSuc']=$putrow['NOMBRE'];
         }
     }
@@ -64,11 +64,8 @@ $custRow = $query->fetch_assoc();
     ?>
 <form class="d-flex" action="" method="post" id="sucursal">
           <?php
-            include "../class/database.php";
-            $dbase=New Database();
-            $dbase->conectarDB();
             $cadena = "SELECT ID_SUC,NOMBRE FROM SUCURSALES";
-            $reg = $dbase->seleccionar($cadena);
+            $reg = $db->seleccionar($cadena);
             echo "<div class='me-2'>
             <h4>Selecciona sucursal</h4>
             <select name='sucursal' class='form-select'>";
@@ -79,7 +76,7 @@ $custRow = $query->fetch_assoc();
             }
             echo "</select>
             </div>";
-            $dbase->desconectarDB();
+           
             ?>
           <button type="submit" class="btn btn-warning">Elegir</button>
         </form>

@@ -8,13 +8,27 @@ $cart = new Cart;
 <head>
     <title>Toy's Pizza</title>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/boot.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <style>
     .container{padding: 50px;}
     input[type="number"]{width: 20%;}
     </style>
+    <script>
+var numero = document.getElementById('numero');
+function comprueba(valor){
+  if(valor.value < 0){
+    valor.value = 1;
+  }
+
+}
+    </script>
     <script>
     function updateCartItem(obj,id){
         $.get("cartAction.php", {action:"updateCartItem", id:id, qty:obj.value}, function(data){
@@ -51,7 +65,7 @@ $cart = new Cart;
         <tr>
             <td><?php echo $item["name"]; ?></td>
             <td><?php echo '$'.$item["price"].' MX'; ?></td>
-            <td><input type="number" min=1 max=5 class="form-control text-center" value="<?php echo $item["qty"]; ?>" onchange="updateCartItem(this, '<?php echo $item["rowid"]; ?>')"></td>
+            <td><input id="numero" type="number" min="1" max="8" onkeypress="comprueba(this)" pattern="^[0-9]+"  value="<?php echo $item["qty"]; ?>" onchange="updateCartItem(this, '<?php echo $item["rowid"]; ?>')"></td>
             <td><?php echo '$'.$item["subtotal"].' MX'; ?></td>
             <td>
                 <a href="cartAction.php?action=removeCartItem&id=<?php echo $item["rowid"]; ?>" class="btn btn-danger" onclick="return confirm('¿Estás seguro?')"><i class="glyphicon glyphicon-trash"></i></a>

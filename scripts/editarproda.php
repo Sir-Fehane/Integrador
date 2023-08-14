@@ -44,15 +44,19 @@ else
         </div>
         <div class="mb-3">
         <label for="nuevocat" class="form-label">Direccion</label>
-        <input type="text" name="nuevodir" class="form-control" value="<?php echo $direccion;?>">
+        <input type="text" name="nuevodir" class="form-control" value="<?php echo $tamaño;?>">
         </div>
         <div class="mb-3">
         <label for="nuevotel" class="form-label">Telefono:</label>
-        <input type="text" name="nuevotel" class="form-control" value="<?php echo $telefono;?>">
+        <input type="text" name="nuevotel" class="form-control" value="<?php echo $tamaño;?>">
         </div>
         <div class="mb-3">
         <label for="nuevopres" class="form-label">Correo:</label>
-        <input type="text" name="nuevocor" class="form-control" value="<?php echo $correo;?>">
+        <input type="text" name="nuevocor" class="form-control" value="<?php echo $desc;?>">
+        </div>
+        <div class="mb-3">
+        <label for="nuevopres" class="form-label">precio:</label>
+        <input type="text" name="nuevocor1" class="form-control" value="<?php echo $precio;?>">
         </div>
 
         <div class="d-grid gap-2">
@@ -62,7 +66,7 @@ else
     <?php
             if(isset($_POST['submit']))
             {
-                $cadena = "UPDATE USUARIOS SET NOMBRE = '$nuevonom', DIRECCION = '$nuevodir', TELEFONO = '$nuevotel' , CORREO = '$nuevocor' WHERE ID_USUARIO = $id";
+                $cadena = "UPDATE PRODUCTOS SET NOMBRE = '$nuevonom', TAMANO = '$nuevodir', TAMANO = '$nuevotel' , DESCRIPCION = '$nuevocor', PRECIO = '$nuevocor1' WHERE CODIGO = $id";
                 $db->ejecutarsql($cadena);
                 $db->desconectarDB();
                 header("Location: exitoperf.php");

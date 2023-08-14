@@ -56,10 +56,10 @@ else
                   $db->conectarDB();
                     if(isset($_SESSION["usuario"]))
                     {
-                      $usuario1 = $_SESSION['usuario'];
+                      $usuario1 = $_SESSION['correo'];
                       $consulta1 = "SELECT U.ID_USUARIO AS ID, U.NOMBRE AS 'NOMBRE', U.DIRECCION AS 'DIRECCION', U.TELEFONO AS 'TELEFONO', U.CORREO AS 'CORREO',
                       U.img_chidas FROM USUARIOS U
-                      WHERE NOMBRE = '$usuario1'";
+                      WHERE CORREO = '$usuario1'";
                       $tabla = $db->seleccionar($consulta1);
                       foreach ($tabla as $registro)
                       {
@@ -266,8 +266,8 @@ else
         </div>
         <div class="modal-body">
             <form action="scripts/login.php" method="post">
-                <label for="Nombre" class="form-label">Nombre</label>
-                <input type="text" class="form-control" name="usuario" required>
+            <label for="Nombre" class="form-label">Correo</label>
+                <input type="email" class="form-control" name="correo" required>
                 <label for="password" class="form-label">Contraseña</label>
                 <input type="password" class="form-control" name="password" required>
                 <div>
@@ -290,7 +290,7 @@ else
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <form action="scripts/registrarse.php" method="POST">
+        <form action="scripts/registrarse.php" method="POST">
                 <label for="Nombre" class="form-label">Nombre</label>
                 <input type="text" class="form-control" name="nombre" required>
                 <label for="password" class="form-label">Contraseña</label>
@@ -301,6 +301,7 @@ else
                 <input type="tel" name="telefono" class="form-control" required>
                 <label for="email" class="form-label">Correo</label>
                 <input type="email" name="correo" placeholder="Obligatorio" required class="form-control">
+                <span style="color: red;"><?php if(isset($correoError)) echo $correoError; ?></span>
                 <div class="modal-footer">
                   <button type="submit" class="btn btn-warning">Registrar</button>
                 </div>
