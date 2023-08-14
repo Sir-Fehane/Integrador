@@ -87,7 +87,8 @@ else
 </div>
 <div class="d-lg-flex align-items-start">
   <div class="nav flex-column me-3 bg-light d-lg-flex d-none" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-    <button class="nav-link active" id="inventario" data-bs-toggle="pill" data-bs-target="#inv" type="button" role="tab" aria-controls="v-pills-home" aria-selected="false">Inventario</button>
+    <button class="nav-link active d-none" id="none" data-bs-toggle="pill" data-bs-target="#non" type="button" role="tab" aria-controls="v-pills-home" aria-selected="false"></button>
+    <button class="nav-link" id="inventario" data-bs-toggle="pill" data-bs-target="#inv" type="button" role="tab" aria-controls="v-pills-home" aria-selected="false">Inventario</button>
     <button class="nav-link" id="productos" data-bs-toggle="pill" data-bs-target="#pro" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">Productos</button>
     <button class="nav-link" id="sucursales" data-bs-toggle="pill" data-bs-target="#suc" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">Sucursales</button>
     <button class="nav-link" id="personal" data-bs-toggle="pill" data-bs-target="#emp" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">Personal</button>
@@ -98,8 +99,12 @@ else
     <button class="nav-link" id="merma" data-bs-toggle="pill" data-bs-target="#mer" type="button" role="tab" aria-controls="v-pills-rep" aria-selected="false">Merma</button>
   </div>
   <div class="tab-content w-100" id="v-pills-tabContent">
+  <div class="tab-pane fade show active" id="non" role="tabpanel" aria-labelledby="none" tabindex="0">
+    <h6 align="center">Selecciona una pestaña en la seccion de la izquierda.</h6>
+    <h6 align="center">Si ya buscaste resultados en alguna, vuelve a ella para visualizarlos.</h6>
+    </div>
     <!--INVENTARIO-->
-    <div class="tab-pane fade show active" id="inv" role="tabpanel" aria-labelledby="inventario" tabindex="0">
+    <div class="tab-pane fade" id="inv" role="tabpanel" aria-labelledby="inventario" tabindex="0">
       <?php include 'Inventario.php'; ?>
     </div>
     <!--PRODUCTOS-->

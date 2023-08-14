@@ -79,7 +79,7 @@ else
     </div>
     <?php
     extract($_POST);
-    $cadena = "SELECT SU.NOMBRE AS 'Sucursal',I.NOMBRE AS 'Insumo',DS.CANTIDAD AS 'Cantidad',
+    $cadena = "SELECT S.ID_SOLICITUD AS 'ID', SU.NOMBRE AS 'Sucursal',I.NOMBRE AS 'Insumo',DS.CANTIDAD AS 'Cantidad',
     S.FECHA AS 'Fecha', S.ESTADO AS 'Estado'
     FROM SOLICITUDES S
     INNER JOIN DETALLE_SOLICITUD DS ON DS.SOLICITUD = S.ID_SOLICITUD
@@ -102,13 +102,14 @@ else
                 <tr>
                     <?php
                     if (isset($_POST['suc']) && ($_POST['suc'] == 999 || $_POST['suc'] == 0)) {
-                        echo "<th class='sortable'>Sucursal</th>";
+                        echo "<th class='col-1 col-lg-2 sortable'>Sucursal</th>";
                     }
                     ?>
                     <th class='col-2 col-lg-3 sortable'>Insumo</th>
                     <th class='col-1 col-lg-1 sortable'>Cantidad</th>
-                    <th class='col-1 col-lg-1 sortable'>Fecha</th>
-                    <th class='col-1 col-lg-3 sortable'>Estado</th>
+                    <th class='col-1 col-lg-2 sortable'>Fecha</th>
+                    <th class='col-1 col-lg-2 sortable'>Estado</th>
+                    <th class='col-1 col-lg-2'>Marcar como cancelada</th>
                 </tr>
             </thead>
             <tbody align='center'>
@@ -122,6 +123,13 @@ else
                     echo "<td>$registro->Cantidad</td>";
                     echo "<td>$registro->Fecha</td>";
                     echo "<td>$registro->Estado</td>";
+                    echo "<td>";?>
+                    <form action="../scripts/EliminarSol.php" method="post">
+                      <input type="hidden" name="id" value="<?php echo $registro->ID; ?>">
+                      <button type="submit" class="btn btn-danger" name="cancelar">Cancelar</button>
+                    </form>
+                    <?php
+                    echo "</td>";
                     echo "</tr>";
                 }
                 ?>
