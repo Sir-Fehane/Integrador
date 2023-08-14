@@ -1,23 +1,9 @@
 <?php
+include '../class/database.php';
+$conexion = new Database();
+$conexion->conectarDB(); 
 session_start();
-if(!isset($_SESSION['rol']))
-{
-  header('Location: ../index.php');
-}
-else
- {
-  if ($_SESSION["rol"] == 2) {
-    header("Location: ../index.php");
-    exit;
-  } elseif ($_SESSION["rol"] == 1) { 
-    header("Location: admin.php");
-    exit;
-  }
-  else
-  {
-    header("Location: ../index.php")
-  }
- }
+$idemp=$_SESSION["IDUSU"];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -53,111 +39,81 @@ else
         </div>
       </nav>
       <!--cuerpo-->
-      <?php      
-      $sexo = 0;
-      
-        include '../class/database.php';
-        $conexion = new Database();
-        $conexion->conectarDB();
-        $ordenesact = "SELECT DE.NO_ORDEN from DETALLE_ORDEN DE inner join ORDEN_VENTA OV ON OV.NO_ORDEN = DE.NO_ORDEN where DATE(OV.HORA_FECHA) = CURDATE()  AND DE.ESTADO='EN PROCESO' group by DE.NO_ORDEN;";
-        $tabla = $conexion->seleccionar($ordenesact);
+      <?php
+        $Notificaciones=$conexion->seleccionar("SELECT ORDEN_VENTA.NO_ORDEN, PRODUCTOS.NOMBRE, PRODUCTOS.TAMANO, DETALLE_ORDEN.CANTIDAD, ORDEN_VENTA.TOTAL
+        FROM NOTIFICACIONES
+        Inner Join ORDEN_VENTA on ORDEN_VENTA.NO_ORDEN=NOTIFICACIONES.NUM_ORDEN
+        INNER JOIN DETALLE_ORDEN on DETALLE_ORDEN.NO_ORDEN=ORDEN_VENTA.NO_ORDEN
+        INNER JOIN PRODUCTOS on PRODUCTOS.CODIGO=DETALLE_ORDEN.PRODUCTO
+        WHERE NOTIFICACIONES.ID_SUC=".$_SESSION['IDSUCUR']." AND NOTIFICACIONES.ESTADO='PENDIENTE' GROUP BY ORDEN_VENTA.NO_ORDEN");
+
+        $tabla = $Notificaciones=$conexion->seleccionar("SELECT ORDEN_VENTA.NO_ORDEN, ORDEN_VENTA.TOTAL, USUARIOS.NOMBRE, USUARIOS.TELEFONO, USUARIOS.CORREO
+        FROM NOTIFICACIONES
+        Inner Join ORDEN_VENTA on ORDEN_VENTA.NO_ORDEN=NOTIFICACIONES.NUM_ORDEN
+        Inner Join USUARIOS ON USUARIOS.ID_USUARIO = ORDEN_VENTA.USUARIO
+        WHERE NOTIFICACIONES.ID_SUC=".$_SESSION['IDSUCUR']." AND NOTIFICACIONES.ESTADO='PENDIENTE' GROUP BY ORDEN_VENTA.NO_ORDEN");
         foreach ($tabla as $registro)  
         {
-        echo "<div class='container'>
+        echo  "<div class='container'>
         <div class='rows d-flex justify-content-center'>";
-        echo "<div class='col-lg-9'> <h2 >ORDEN $registro->NO_ORDEN</h2>  </div>" ?>   
-<div class="col-lg-3">
-    <form action="../views/cocina.PHP" method="post">
-        <input type="hidden" name="no_orden" value="<?php echo $registro->NO_ORDEN; ?>">
-        <button type="submit" class="col-auto btn btn-sm btn-success" name="editar_orden">Terminar</button>
-        <button type="submit" class="col-auto btn btn-sm btn-danger" name="cancelar_orden">Cancelar</button>
-    </form>
-</div>
+        echo "<div class='col-lg-9 offset-lg-7'> <h2 >ORDEN $registro->NO_ORDEN</h2>  </div>"; ?>   
         <?php
-       echo "</div>";?>
-<?php
-// ... (código anterior) ...
-
-if (isset($_POST['editar_orden'])) {
-    // Obtener el número de orden enviado desde el formulario
-    $no_orden = $_POST['no_orden'];
-
-    // Realizar el UPDATE en la base de datos para cambiar el estado de la orden
-    try {
-        $estado_nuevo = "ENTREGADA"; // Reemplaza con el nuevo estado deseado
-        $update_sql = "UPDATE DETALLE_ORDEN SET ESTADO = :estado_nuevo WHERE NO_ORDEN = :no_orden";
-
-        // Preparar la consulta
-        $stmt = $conexion->getDB()->prepare($update_sql);
-
-        // Asignar valores a los parámetros
-        $stmt->bindParam(':estado_nuevo', $estado_nuevo);
-        $stmt->bindParam(':no_orden', $no_orden);
-
-        // Ejecutar la consulta
-        $stmt->execute();
-
-
-    } catch (PDOException $e) {
-        // En caso de error, mostrar el mensaje de error
-        echo "Error: " . $e->getMessage();
-    }
-    header("location: cocina.PHP");
-}
-
-if (isset($_POST['cancelar_orden'])) {
-  // Obtener el número de orden enviado desde el formulario
-  $no_orden = $_POST['no_orden'];
-
-  // Realizar el UPDATE en la base de datos para cambiar el estado de la orden
-  try {
-      $estado_nuevo = "CANCELADA"; // Reemplaza con el nuevo estado deseado
-      $update_sql = "UPDATE DETALLE_ORDEN SET ESTADO = :estado_nuevo WHERE NO_ORDEN = :no_orden";
-
-      // Preparar la consulta
-      $stmt = $conexion->getDB()->prepare($update_sql);
-
-      // Asignar valores a los parámetros
-      $stmt->bindParam(':estado_nuevo', $estado_nuevo);
-      $stmt->bindParam(':no_orden', $no_orden);
-
-      // Ejecutar la consulta
-      $stmt->execute();
-
-
-  } catch (PDOException $e) {
-      // En caso de error, mostrar el mensaje de error
-      echo "Error: " . $e->getMessage();
-  }
-   header("location: cocina.PHP");
-}
-
-        ?>
-<input type="hidden">
-        </form>
-        <?php
+        $ORDEN=$registro->NO_ORDEN;
+        $CORREO=$registro->CORREO;
+       echo "</div>";
+        
         echo "</div>";
         echo "<table class = 'table table-hover'>
-        <thead class = 'table-dark'>
+        <thead class = 'table-danger'>
         <tr>
-        <th>PRODUCTO</th><th>TAMAÑO</th><th>CATIDAD</th><th>NOTAS</th><th>ESTADO</th>
+        <th>PRODUCTO</th><th>TAMAÑO</th><th>CATIDAD</th>
         </tr>
-        </thead>";
-        $pizzas = " SELECT DE.NO_ORDEN , P.NOMBRE ,P.TAMANO, DE.CANTIDAD AS CANTIDAD_PIZZAS, DE.NOTAS,  DE.ESTADO from DETALLE_ORDEN DE INNER JOIN PRODUCTOS P ON DE.ID_DETALLE = P.CODIGO WHERE DE.NO_ORDEN=$registro->NO_ORDEN group by DE.NO_ORDEN, P.TAMANO;";
-        $tabla2 = $conexion->seleccionar($pizzas);
-        foreach($tabla2 as $registro2){ 
-       echo "<tbody>";
-          echo "<tr>";
-          echo "<td> $registro2->NOMBRE </td>";
-          echo "<td> $registro2->TAMANO </td>";
-          echo "<td> $registro2->CANTIDAD_PIZZAS </td>";
-          echo "<td> $registro2->NOTAS </td>";
-          echo "<td> $registro2->ESTADO </td>";
-          echo "</tr>";
+        </thead>";  
+        $prods=$conexion->seleccionar("SELECT PRODUCTOS.NOMBRE, PRODUCTOS.TAMANO, DETALLE_ORDEN.CANTIDAD FROM ORDEN_VENTA INNER JOIN DETALLE_ORDEN on DETALLE_ORDEN.NO_ORDEN=ORDEN_VENTA.NO_ORDEN
+        INNER JOIN PRODUCTOS on PRODUCTOS.CODIGO=DETALLE_ORDEN.PRODUCTO WHERE ORDEN_VENTA.NO_ORDEN =".$ORDEN."");
+        foreach($prods as $reg)
+        {
+        echo "<tbody class='table-warning'>";
+        echo "<tr>";
+        echo "<td> $reg->NOMBRE </td>";
+        echo "<td> $reg->TAMANO </td>";
+        echo "<td> $reg->CANTIDAD </td>";
+        echo "</tr>";
         }
         echo "</tbody>";
         echo "</table>";
-        echo "</div>";
+        echo "<div class='col-lg-6 offset-lg-3'><h3> Datos del cliente </h3><table class = 'table table-hover'>
+        <thead class = 'table-primary'>
+        <tr>
+        <th>Cliente</th><th>Numero</th><th>Total</th>
+        </tr>
+        </thead>
+        <tbody class='table-warning'>";
+          echo "<tr>";
+          echo "<td> $registro->NOMBRE </td>";
+          echo "<td> $registro->TELEFONO </td>";
+          echo "<td> $".$registro->TOTAL." </td>";
+          echo "</tr> </tbody> </table>
+        </div>";
+        echo"
+        <div class= 'col-lg-6 offset-lg-4 d-inline-flex col-6 offset-3'>
+        <row class='col-lg-6'>
+        <form action='../scripts/aceptarp.php' method='post' class='col-6 col-lg-6'>
+        <input type='hidden' id='correo' value='".$CORREO."'>
+        <input type='hidden' id='noorder' value='".$ORDEN."'>
+        <button type='submit' class='btn btn-primary'>Aceptar pedido </button>
+        </form>
+        </row>
+        <row class='col-lg-6'>
+        <form action='rechazarp.php' method='post' class='col-6 col-lg-6'>
+        <input type='hidden' id='correo' value='".$CORREO."'>
+        <input type='hidden' id='noorder' value='".$ORDEN."'>
+        <button type='submit' class='btn btn-danger'>Rechazar pedido </button>
+        </form>
+        </row>
+        </div>
+        <hr>
+        </div> ";
         }
         ?>
 </body>

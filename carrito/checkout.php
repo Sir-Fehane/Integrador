@@ -36,8 +36,7 @@ $custRow = $db->selecsinall("SELECT * FROM USUARIOS WHERE ID_USUARIO = ".$_SESSI
         {
             $sucursal = $_POST["sucursal"];
             $_SESSION['IDSUCURSAL']=$sucursal;
-            $cons=$db->query("SELECT NOMBRE FROM SUCURSALES WHERE ID_SUC=".$sucursal."");
-            $putrow=$cons->fetch_assoc();
+            $putrow=$db->selecsinall("SELECT NOMBRE FROM SUCURSALES WHERE ID_SUC=".$sucursal."");
             $_SESSION['NombSuc']=$putrow['NOMBRE'];
         }
     }
@@ -77,7 +76,7 @@ $custRow = $db->selecsinall("SELECT * FROM USUARIOS WHERE ID_USUARIO = ".$_SESSI
             }
             echo "</select>
             </div>";
-            $db->desconectarDB();
+           
             ?>
           <button type="submit" class="btn btn-warning">Elegir</button>
         </form>
