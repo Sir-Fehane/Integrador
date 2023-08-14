@@ -269,7 +269,7 @@ try {
           
         
                     
-              <form action="../scripts/verperfil.php" method="post">
+              <form action="../scripts/editarproda.php" method="post">
          <input type="hidden" name="id" value="<?php echo $registro->CODIGO; ?>">
           <input type="hidden" name="nombre" value="<?php echo $registro->NOMBRE; ?>">
           <input type="hidden" name="tamaño" value="<?php echo $registro->TAMANO; ?>">

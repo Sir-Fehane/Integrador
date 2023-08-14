@@ -261,7 +261,7 @@ try {
     extract($_POST);
     $cadena = "UPDATE USUARIOS SET img_chidas='https://toys-pizza.s3.amazonaws.com/imagenes/$nombreArchivo' WHERE ID_USUARIO = $registro->ID;";
     $db->ejecutarsql($cadena);
-    header("location: verperfil1.php");
+    header("location: verperfilv1.php");
 
 } catch (S3Exception $e) {
     // En caso de error, captura la excepción y muestra un mensaje
