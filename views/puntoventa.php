@@ -77,7 +77,7 @@ setInterval(tiempoReal, 1000);
     <!--Header/navbar-->
     <nav class="navbar navbar-expand-lg fixed-top" id="barra">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#" id="logo">Toy's Pizza</a>
+        <a class="navbar-brand" href="../index.php" id="logo">Toy's Pizza</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -278,6 +278,28 @@ setInterval(tiempoReal, 1000);
     </form>
       </div>
     </div>
+    <script>
+function habilitarDeshabilitarBoton(id) {
+    const select = document.querySelector(`#modal${id} select.tamaño`);
+    const botonAgregar = document.querySelector(`#agregar_${id}`);
+    
+    if (select.value === '') {
+        botonAgregar.disabled = true;
+    } else {
+        botonAgregar.disabled = false;
+    }
+}
+window.addEventListener('load', () => {
+    <?php foreach ($reg as $value) { ?>
+        habilitarDeshabilitarBoton(<?php echo $value->ID; ?>);
+    <?php } ?>
+    <?php foreach ($reg as $value) { ?>
+        document.querySelector(`#modal<?php echo $value->ID; ?> select.tamaño`).addEventListener('change', () => {
+            habilitarDeshabilitarBoton(<?php echo $value->ID; ?>);
+        });
+    <?php } ?>
+});
+</script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../js/bootstrap.bundle.js"></script>
     <script src="../src/app.js" defer></script>
