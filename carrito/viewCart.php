@@ -12,7 +12,6 @@ $cart = new Cart;
     <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
-  
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <link rel="stylesheet" href="../css/carro.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -29,6 +28,15 @@ $cart = new Cart;
     valor.value = 1;}
 }
     </script>
+      <!--Script para evitar numeros mas grandes que 8-->
+      <script>
+    var numero = document.getElementById('numero');
+    function comprueba2(valor){
+    if(valor.value > 9){
+    valor.value = 8;}
+}
+    </script>
+<!--Script que no permite poner decimales-->
 <script>
 function filtro()
 {
@@ -37,6 +45,7 @@ if (['.','e'].includes(tecla))
    event.preventDefault()
 }
 </script>
+<!--Script para el correcto funcionamiento del carro-->
     <script>
     function updateCartItem(obj,id){
         $.get("cartAction.php", {action:"updateCartItem", id:id, qty:obj.value}, function(data){
@@ -53,10 +62,9 @@ if (['.','e'].includes(tecla))
     <?php if(isset($_SESSION["usuario"])){?>
 <div class="container">
     <div class="row content">
-    <div class="row inline">
-    <img src="../img/pizza.png" style="width: 20%;">
+    <img src="../img/pizza.png" id="img-toys">
     <h1>Carrito Toys</h1>
-    </div>
+    
     <table class="table col-lg-12 col-6">
     <thead>
         <tr>
@@ -77,7 +85,7 @@ if (['.','e'].includes(tecla))
         <tr>
             <td><?php echo $item["name"]; ?></td>
             <td><?php echo '$'.$item["price"].' MX'; ?></td>
-            <td><input id="numero" type="number" min="1" max="8" onkeypress="comprueba(this)" pattern="^[0-9]+" onkeydown="filtro()" value="<?php echo $item["qty"]; ?>" onchange="updateCartItem(this, '<?php echo $item["rowid"]; ?>')"></td>
+            <td><input id="numero" type="number" min="1" max="8" onkeypress="comprueba(this), comprueba2(this)" pattern="^[0-9]+" onkeydown="filtro()" value="<?php echo $item["qty"]; ?>" onchange="updateCartItem(this, '<?php echo $item["rowid"]; ?>')"></td>
             <td><?php echo '$'.$item["subtotal"].' MX'; ?></td>
             <td>
                 <a href="cartAction.php?action=removeCartItem&id=<?php echo $item["rowid"]; ?>" class="btn btn-danger" onclick="return confirm('¿Estás seguro?')"><i class='bx bxs-trash'></i></a>
