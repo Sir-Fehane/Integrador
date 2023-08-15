@@ -58,7 +58,7 @@ else
                     {
                       $usuario1 = $_SESSION['correo'];
                       $consulta1 = "SELECT U.ID_USUARIO AS ID, U.NOMBRE AS 'NOMBRE', U.DIRECCION AS 'DIRECCION', U.TELEFONO AS 'TELEFONO', U.CORREO AS 'CORREO',
-                      U.img_chidas FROM USUARIOS U
+                      U.ESTADO, U.img_chidas FROM USUARIOS U
                       WHERE CORREO = '$usuario1'";
                       $tabla = $db->seleccionar($consulta1);
                       foreach ($tabla as $registro)
@@ -68,7 +68,7 @@ else
                      echo "<img src='$imgchida' style='border-radius: 10px;' alt='img'width= '50px'
                      height=' 50px'>";
                       }
-                      if ($estado == 'ACTIVADO') 
+                      if ($registro->ESTADO == 'ACTIVADO') 
                       {
                         echo "<li class='nav-item dropdown'>
                                   <a class='nav-link dropdown-toggle text-white' href='#' role='button' data-bs-toggle='dropdown' aria-expanded='false'>
@@ -78,7 +78,7 @@ else
                                   <li><a class='dropdown-item text-black' href='scripts/cerrarSesion.php'>Cerrar sesión</a></li>
                                   </ul>
                                   </li>";
-                    } elseif ($estado == 'INACTIVO') {
+                    } elseif ($registro->ESTADO == 'INACTIVO') {
                         header("Location: scripts/verificar_codigo.php");
                         exit;
                     }
