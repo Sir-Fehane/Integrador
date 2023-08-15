@@ -2,25 +2,19 @@
 session_start();
 if(!isset($_SESSION['rol']))
 {
- header('location: ../index.php');
+  header('Location: ../index.php');
 }
 else
-{
-  if ($_SESSION["rol"] == 3) { 
-    header("Location: puntoventa.php");
-    exit;
-  } elseif ($_SESSION["rol"] == 1) { 
-    if (basename($_SERVER['PHP_SELF']) === 'admin.php') {
-    } else {
-        header("Location: admin.php");
-        exit;
-    }
-  } elseif ($_SESSION["rol"] == 2) { 
+ {
+  if ($_SESSION["rol"] == 2) {
     header("Location: ../index.php");
     exit;
+  } elseif ($_SESSION["rol"] == 3) { 
+    header("Location: puntoventa.php");
+    exit;
   }
-  include "../class/database.php";
-}
+ }
+ include "../class/database.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -42,26 +36,27 @@ else
 <title>Administracion</title>
 </head>
 <body>
-<div class="container-fluid">
+<div class="container-fluid justify-content-center">
   <div class="row">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="col-lg-2 d-none d-lg-block">
+    <nav class="navbar navbar-light bg-light">
+      <div class="col-1 col-lg-">
         <img src="../img/pizza.png" alt="Logo" width="60" height="48" class="d-inline-block align-text-top">
       </div>
-      <div class="col-3 col-lg-4">
-      <div class="dropdown ml-3">
-      <button class="btn btn-secondary dropdown-toggle d-lg-none d-block" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+      <div class="col-5 offset-1 d-lg-none">
+      <div class="dropdown">
+        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
           Menú
-        </button>
+        </a>
         <ul class="dropdown-menu">
-          <li><a class="dropdown-item" data-target="#inv">Inventario</a></li>
-          <li><a class="dropdown-item" data-target="#pro">Productos</a></li>
-          <li><a class="dropdown-item" data-target="#emp">Personal</a></li>
-          <li><a class="dropdown-item" data-target="#sol">Solicitudes</a></li>
-          <li><a class="dropdown-item" data-target="#ing">Ingresos</a></li>
-          <li><a class="dropdown-item" data-target="#cie">Cierres</a></li>
-          <li><a class="dropdown-item" data-target="#mov">Movimientos inv</a></li>
-          <li><a class="dropdown-item" data-target="#mer">Merma</a></li>
+          <li><a class="dropdown-item" data-target="inv">Inventario</a></li>
+          <li><a class="dropdown-item" data-target="pro">Productos</a></li>
+          <li><a class="dropdown-item" data-target="suc">Sucursales</a></li>
+          <li><a class="dropdown-item" data-target="emp">Empleados</a></li>
+          <li><a class="dropdown-item" data-target="sol">Solicitudes</a></li>
+          <li><a class="dropdown-item" data-target="ing">Ingresos</a></li>
+          <li><a class="dropdown-item" data-target="cie">Cierres</a></li>
+          <li><a class="dropdown-item" data-target="mov">Movimientos inv</a></li>
+          <li><a class="dropdown-item" data-target="mer">Merma</a></li>
         </ul>
       </div>
       </div>
@@ -73,11 +68,11 @@ else
         }
         ?>
       </div>
-      <div class="col-3 col-lg-2 d-flex align-items-center">
+      <div class="col-5 col-lg-3 d-flex justify-content-end">
         <ul class="navbar-nav">
           <li class="nav-item">
             <a type="button" class="btn btn-sm btn-primary" href="../scripts/cerrarSesion.php">
-              Cerrar sesion
+              Cerrar sesión
             </a>
           </li>
         </ul>
@@ -85,8 +80,9 @@ else
     </nav>
   </div>
 </div>
+
 <div class="d-lg-flex align-items-start">
-  <div class="nav flex-column me-3 bg-light d-lg-flex d-none" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+  <div class="nav flex-column me-3 bg-light  d-lg-flex d-none" id="v-pills-tab" role="tablist" aria-orientation="vertical">
     <button class="nav-link active d-none" id="none" data-bs-toggle="pill" data-bs-target="#non" type="button" role="tab" aria-controls="v-pills-home" aria-selected="false"></button>
     <button class="nav-link" id="inventario" data-bs-toggle="pill" data-bs-target="#inv" type="button" role="tab" aria-controls="v-pills-home" aria-selected="false">Inventario</button>
     <button class="nav-link" id="productos" data-bs-toggle="pill" data-bs-target="#pro" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">Productos</button>
@@ -100,7 +96,7 @@ else
   </div>
   <div class="tab-content w-100" id="v-pills-tabContent">
   <div class="tab-pane fade show active" id="non" role="tabpanel" aria-labelledby="none" tabindex="0">
-    <h6 align="center">Selecciona una pestaña en la seccion de la izquierda.</h6>
+    <h6 align="center">Selecciona una pestaña en la seccion de la izquierda (arriba en dispositivos moviles).</h6>
     <h6 align="center">Si ya buscaste resultados en alguna, vuelve a ella para visualizarlos.</h6>
     </div>
     <!--INVENTARIO-->
@@ -147,5 +143,33 @@ else
 </div>
 <script src="../js/bootstrap.min.js"></script>
 <script src="../js/bootstrap.bundle.min.js"></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+  const dropdownItems = document.querySelectorAll(".dropdown-item");
+  const tabContent = document.getElementById("v-pills-tabContent");
+
+  dropdownItems.forEach(function (item) {
+    item.addEventListener("click", function (event) {
+      event.preventDefault();
+      const target = this.getAttribute("data-target");
+      showTabContent(target);
+    });
+  });
+
+  function showTabContent(target) {
+    const tabs = tabContent.querySelectorAll(".tab-pane");
+    tabs.forEach(function (tab) {
+      tab.classList.remove("show", "active");
+    });
+
+    const selectedTab = tabContent.querySelector(`#${target}`);
+    if (selectedTab) {
+      selectedTab.classList.add("show", "active");
+    }
+  }
+});
+
+</script>
 </body>
 </html>

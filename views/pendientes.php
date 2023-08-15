@@ -45,10 +45,23 @@ $idemp=$_SESSION["IDUSU"];
         Inner Join ORDEN_VENTA on ORDEN_VENTA.NO_ORDEN=NOTIFICACIONES.NUM_ORDEN
         Inner Join USUARIOS ON USUARIOS.ID_USUARIO = ORDEN_VENTA.USUARIO
         WHERE NOTIFICACIONES.ID_SUC=".$_SESSION['IDSUCUR']." AND NOTIFICACIONES.ESTADO='PENDIENTE' GROUP BY ORDEN_VENTA.NO_ORDEN");
+        $CONSNUMNOT=$conexion->seleccionar("SELECT COUNT(ID_NOT) AS 'NOT' FROM NOTIFICACIONES WHERE ID_SUC=".$_SESSION['IDSUCUR']." AND ESTADO='PENDIENTE'");
+        ///TABLA DONDE SE DESPLIEGAN LOS REGISTROS //////////////////////////////
+        foreach($CONSNUMNOT as $x)
+        {
+        $CountNotifs= $x->NOT;
+        }
+        if($CountNotifs==0)
+        {
+            echo"<h1> No hay pedidos... </h1>";
+        }
+        else
+        {
         foreach ($tabla as $registro)  
         {
         echo  "<div class='container'>
         <div class='rows d-flex justify-content-center'>";
+        
         echo "<div class='col-lg-9 offset-lg-2'> <h2 >ORDEN #$registro->NO_ORDEN</h2>  </div>"; ?>   
         <?php
         $ORDEN=$registro->NO_ORDEN;
@@ -113,6 +126,7 @@ $idemp=$_SESSION["IDUSU"];
         <hr>
         </div> ";
         }
+     }
         ?>
 </body>
 </html>

@@ -6,8 +6,8 @@ include '../class/database.php';
 $db= new Database();
 $db->conectarDB();
 $cart = new Cart;
-$horainicio="00:00";
-$horacierre="22:00";
+$horainicio="10:00";
+$horacierre="20:00";
 $horaactual=date("H:i");
 
 // redirect to home if cart is empty
@@ -46,23 +46,18 @@ $custRow = $db->selecsinall("SELECT * FROM USUARIOS WHERE ID_USUARIO = ".$_SESSI
 <head>
     <title>Toy's Pizza</title>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <style>
-    .container{width: 100%;padding: 50px;}
-    .table{width: 65%;float: left;}
-    .shipAddr{width: 30%;float: left;margin-left: 30px;}
-    .footBtn{width: 95%;float: left;}
-    .orderBtn {float: right;}
-    </style>
+    <link rel="stylesheet" href="../css/carro.css">
 </head>
 <body>
 <?php
     if ($horaactual >= $horainicio && $horaactual <= $horacierre)
     {
     ?>
-<form class="d-flex" action="" method="post" id="sucursal">
+    <form class="d-flex" action="" method="post" id="sucursal">
           <?php
             $cadena = "SELECT ID_SUC,NOMBRE FROM SUCURSALES";
             $reg = $db->seleccionar($cadena);
@@ -86,7 +81,7 @@ $custRow = $db->selecsinall("SELECT * FROM USUARIOS WHERE ID_USUARIO = ".$_SESSI
     <thead>
         <tr>
             <th>Productos</th>
-            <th>Precios</th>
+            <th>Precio</th>
             <th>Cantidad</th>
             <th>Subtotal</th>
         </tr>

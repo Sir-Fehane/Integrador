@@ -40,6 +40,7 @@ else
                 <select name="sol" class="form-select">
                     <option value="solicitado">Ver solicitadas</option>
                     <option value="recibido">Ver recibidas</option>
+                    <option value="cancelado">Ver canceladas</option>
                 </select>
             </div>
             <div class="col-md-4 mt-3">
@@ -109,7 +110,9 @@ else
                     <th class='col-1 col-lg-1 sortable'>Cantidad</th>
                     <th class='col-1 col-lg-2 sortable'>Fecha</th>
                     <th class='col-1 col-lg-2 sortable'>Estado</th>
-                    <th class='col-1 col-lg-2'>Marcar como cancelada</th>
+                    <?php if($sol == 'solicitado'){
+                      echo "<th class='col-1 col-lg-2'>Marcar como cancelada</th>";
+                    }?>
                 </tr>
             </thead>
             <tbody align='center'>
@@ -123,12 +126,15 @@ else
                     echo "<td>$registro->Cantidad</td>";
                     echo "<td>$registro->Fecha</td>";
                     echo "<td>$registro->Estado</td>";
-                    echo "<td>";?>
+                    if($sol == 'solicitado'){
+                      echo "<td>";?>
                     <form action="../scripts/EliminarSol.php" method="post">
                       <input type="hidden" name="id" value="<?php echo $registro->ID; ?>">
                       <button type="submit" class="btn btn-danger" name="cancelar">Cancelar</button>
                     </form>
                     <?php
+                    }
+                    
                     echo "</td>";
                     echo "</tr>";
                 }

@@ -102,39 +102,28 @@ class Database{
             }
             if($pase)
             {
-                session_start();
                 $_SESSION["correo"] = $correo;
                 $_SESSION["usuario"] = $nombre;
                 $_SESSION["rol"] = $rol;
                 $_SESSION["IDUSU"]= $id_usuar;
 
-                echo "<div class = 'alert alert-success'>";
-                echo "<h2 align = 'center'>Bienvenido ".$_SESSION["usuario"]."</h2> </div>";
-                echo "</div>";
-
-                switch ($_SESSION["rol"])
-                {
-                    case 1: header("refresh:2 ../views/admin.php");
-                        break;
-                    case 2: header("refresh:2 ../index.php");
-                        break;
-                    case 3: header("refresh:2 ../views/puntoventa.php");
-                        break;
-                    default:
-                        break;
-                }
+                //echo "<div class = 'alert alert-success'>";
+                //echo "<h2 align = 'center'>Bienvenido ".$_SESSION["usuario"]."</h2> </div>";
+                //echo "</div>";
+                return true;
             }
             else
             {
-                echo "<div class = 'alert alert-danger'>";
-                echo "<h2 align = 'center'>Usuario o password incorrecto</h2>";
-                echo "</div>";
-                header("refresh:2 ../index.php");
+                //echo "<div class = 'alert alert-danger'>";
+                //echo "<h2 align = 'center'>Usuario o password incorrecto</h2>";
+                //echo "</div>";
+                return false;
             }
         }
         catch(PDOException $e)
         {
             echo $e->getMessage();
+            return false;
         }
     }
     function cerrarSesion()

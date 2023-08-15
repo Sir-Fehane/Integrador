@@ -1,0 +1,39 @@
+/*Base*/
+*
+{
+    box-sizing: border-box;
+    font-family: 'Anton', sans-serif;
+    scroll-behavior: smooth;
+    list-style: none;
+    text-decoration: none;
+}
+a{
+    text-decoration: none;
+}
+:root
+{
+--main-color:#FECB00;
+--text-color:#2A52D5;
+--bg-color:#BB0E10;
+--big-font:4rem;
+--h2-font:2.25rem;
+--p-font:0.9rem;
+}
+*::selection
+{
+    background: var(--main-color);
+    color:#f2f2f2;
+}
+body{
+    color:var(--text-color);
+    background-image: url(../img/fondocar.jpg);
+    background-repeat: repeat;
+}
+    .shipAddr{width: 30%;float: left;margin-left: 30px;}
+    .footBtn{width: 95%;float: left;}
+    .orderBtn {float: right;}
+
+.content
+{
+    margin-top: 10rem;
+}
