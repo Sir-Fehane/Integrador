@@ -57,7 +57,7 @@ else
         </div>
         <div class="mb-3">
         <label for="nuevocant" class="form-label">Cantidad:</label>
-        <input type="number" name="nuevocant" class="form-control" value="<?php echo $existencia;?>" required>
+        <input type="number" name="nuevocant" min="0" id="numero" class="form-control" value="<?php echo $existencia;?>" required>
         </div>
         <div class="mb-3">
         <label for="nuevopres" class="form-label">Presentacion:</label>
@@ -110,5 +110,12 @@ else
             }
         ?>
 </div>
+<script>
+    var numero = document.getElementById('numero');
+    function comprueba(valor){
+    if(valor.value < 0){
+    valor.value = 1;}
+}
+    </script>
 </body>
 </html>
