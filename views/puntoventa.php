@@ -96,12 +96,6 @@ setInterval(tiempoReal, 1000);
               <h6 id="miTabla"></h6>
             </li>
             <li>
-              <a class="nav-link" href="terminadas.php">Terminadas</a>
-            </li>
-            <li>
-              <h6 id="miTabla2"></h6>
-            </li>
-            <li>
               <a class="nav-link" href="cierre.php">Cierre</a>
             </li>
             <li>

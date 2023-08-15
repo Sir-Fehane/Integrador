@@ -103,7 +103,7 @@ $idemp=$_SESSION["IDUSU"];
         echo"
         <div class= 'col-lg-6 offset-lg-4 d-inline-flex col-6 offset-3'>
         <row class='col-lg-6'>
-        <form action='../scripts/aceptarp.php' method='post' class='col-6 col-lg-6'>
+        <form action='../scripts/poto.php' method='post' class='col-6 col-lg-6'>
         <input type='hidden' name='correo' id='correo' value='".$CORREO."'>
         <input type='hidden' name='noorder' id='noorder' value='".$ORDEN."'>
         <input type='hidden' name='OV' id='OV' value='ENTREGADA'>
@@ -111,7 +111,7 @@ $idemp=$_SESSION["IDUSU"];
         </form>
         </row>
         <row class='col-lg-6'>
-        <form action='../scripts/aceptarp.php' method='post' class='col-6 col-lg-6'>
+        <form action='../scripts/pato.php' method='post' class='col-6 col-lg-6'>
         <input type='hidden' name='correo' id='correo' value='".$CORREO."'>
         <input type='hidden' name='noorder' id='noorder' value='".$ORDEN."'>
         <input type='hidden' name='OV' id='OV' value='CANCELADA'>

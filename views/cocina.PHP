@@ -166,7 +166,7 @@ if (isset($_POST['editar_orden'])) {
       $_SESSION['CORREO'] = $cry->CORREO;
     }
     try {
-        $estado_nuevo = "TERMINADO";
+        $estado_nuevo = "ENTREGADO";
         $update_sql = "UPDATE ORDEN_VENTA SET ESTADO = :estado_nuevo WHERE NO_ORDEN = :no_orden";
 
         $stmt = $conexion->getDB()->prepare($update_sql);
@@ -187,7 +187,8 @@ if (isset($_POST['cancelar_orden'])) {
       $asd=$conexion->seleccionar("SELECT USUARIOS.CORREO FROM USUARIOS INNER JOIN ORDEN_VENTA ON ORDEN_VENTA.NO_ORDEN WHERE ORDEN_VENTA.NO_ORDEN=".$no_orden."");
     foreach($asd as $cry)
     {
-      $_SESSION['CORREO'] = $cry->CORREO;
+      $dfg= $cry->CORREO;
+      $_SESSION['CORREO'] = $dfg;
     }
         $estado_nuevo = "CANCELADA";
         $update_sql = "UPDATE ORDEN_VENTA SET ESTADO = :estado_nuevo WHERE NO_ORDEN = :no_orden";

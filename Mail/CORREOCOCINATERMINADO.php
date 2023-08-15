@@ -19,7 +19,7 @@ require 'SMTP.php';
     $mail->isHTML(true); 
     try {
         $mail->Subject = 'PEDIDO TERMINADO';//Poner diseño a esta cosa, pues es lo que se verá
-        $mail->Body    =  'Su pedido ha sido terminado, favor de recoger en sucursal.' ;
+        $mail->Body    =  'Su pedido ha sido terminado, favor de recoger en sucursal en 30 min.' ;
       //$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
         $mail->send();
       echo "<h1> PEDIDO MARCADO COMO TERMINADO </h1>";
