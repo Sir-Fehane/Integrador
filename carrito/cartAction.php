@@ -92,6 +92,7 @@ if(isset($_REQUEST['action']) && !empty($_REQUEST['action'])){
     $stmtOrder->bindParam(':estado',$estado,PDO::PARAM_STR);
     $stmtOrder->execute();  
     $orderID = $pdo->lastInsertId();
+       $_SESSION['orden']=$orderID;
     
     /*
         Con esto verificamos que hubo una inserción ...

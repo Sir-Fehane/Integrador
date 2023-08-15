@@ -20,8 +20,7 @@ if(!isset($_REQUEST['id'])){
     <p>Tu orden se realizo correctamente, tu orden es la #<?php echo $_GET['id']; ?></p>
     <?php include"../Mail/CORREO.php"?>
     <p>Se le ha enviado informacion de su orden en su correo, favor de checar su correo.</p>
-    
-    <?php (header("refresh:3 ; ../index.php")) ?>
+    <?php unset($_SESSION['TOTAL']); ?>
 </div>
 </body>
 </html>
