@@ -63,11 +63,12 @@ else
                       $tabla = $db->seleccionar($consulta1);
                       foreach ($tabla as $registro)
                       {
+                        $estado=$registro->ESTADO;
                         $imgchida = $registro->img_chidas;
                      echo "<img src='$imgchida' style='border-radius: 10px;' alt='img'width= '50px'
                      height=' 50px'>";
                       }
-                      if ($registro->ESTADO == 'ACTIVADO') 
+                      if ($estado == 'ACTIVADO') 
                       {
                         echo "<li class='nav-item dropdown'>
                                   <a class='nav-link dropdown-toggle text-white' href='#' role='button' data-bs-toggle='dropdown' aria-expanded='false'>
@@ -77,7 +78,7 @@ else
                                   <li><a class='dropdown-item text-black' href='scripts/cerrarSesion.php'>Cerrar sesión</a></li>
                                   </ul>
                                   </li>";
-                    } elseif ($registro->ESTADO == 'INACTIVO') {
+                    } elseif ($estado == 'INACTIVO') {
                         header("Location: scripts/verificar_codigo.php");
                         exit;
                     }
