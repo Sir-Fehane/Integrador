@@ -41,23 +41,23 @@ else
         <input type="hidden" name="id" value="<?php echo $id; ?>">
         <div class="mb-3">
             <label for="nuevonom" class="form-label">Nombre</label>
-            <input type="text" name="nuevonom" class="form-control" value="<?php echo $nombre;?>">
+            <input type="text" name="nuevonom" class="form-control" value="<?php echo $nombre;?>" required>
         </div>
         <div class="mb-3">
         <label for="nuevocat" class="form-label">Direccion</label>
-        <input type="text" name="nuevodir" class="form-control" value="<?php echo $tamaño;?>">
+        <input type="text" name="nuevodir" class="form-control" value="<?php echo $tamaño;?>" required>
         </div>
         <div class="mb-3">
         <label for="nuevotel" class="form-label">Telefono:</label>
-        <input type="text" name="nuevotel" class="form-control" value="<?php echo $tamaño;?>">
+        <input type="text" name="nuevotel" class="form-control" value="<?php echo $tamaño;?>" required>
         </div>
         <div class="mb-3">
         <label for="nuevopres" class="form-label">Correo:</label>
-        <input type="text" name="nuevocor" class="form-control" value="<?php echo $desc;?>">
+        <input type="text" name="nuevocor" class="form-control" value="<?php echo $desc;?>" required>
         </div>
         <div class="mb-3">
         <label for="nuevopres" class="form-label">precio:</label>
-        <input type="text" name="nuevocor1" class="form-control" value="<?php echo $precio;?>">
+        <input type="text" name="nuevocor1" class="form-control" value="<?php echo $precio;?>" required>
         </div>
 
         <div class="d-grid gap-2">

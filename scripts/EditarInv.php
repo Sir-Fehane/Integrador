@@ -36,7 +36,7 @@ else
         <input type="hidden" name="id" value="<?php echo $id; ?>">
         <div class="mb-3">
             <label for="nuevonom" class="form-label">Nombre del insumo:</label>
-            <input type="text" name="nuevonom" class="form-control" value="<?php echo $nombre;?>">
+            <input type="text" name="nuevonom" class="form-control" value="<?php echo $nombre;?>" required>
         </div>
         <div class="mb-3">
         <label for="nuevocat" class="form-label">Categoria:</label>
@@ -57,7 +57,7 @@ else
         </div>
         <div class="mb-3">
         <label for="nuevocant" class="form-label">Cantidad:</label>
-        <input type="number" name="nuevocant" class="form-control" value="<?php echo $existencia;?>">
+        <input type="number" name="nuevocant" class="form-control" value="<?php echo $existencia;?>" required>
         </div>
         <div class="mb-3">
         <label for="nuevopres" class="form-label">Presentacion:</label>
@@ -94,13 +94,19 @@ else
     <?php
             if(isset($_POST['submit']))
             {
-                $cadena = "UPDATE INVENTARIO SET NOMBRE = '$nuevonom', CATEGORIA = $nuevocat, PRESENTACION = '$nuevopres' WHERE ID_INS = $id";
+                try{
+                    $cadena = "UPDATE INVENTARIO SET NOMBRE = '$nuevonom', CATEGORIA = $nuevocat, PRESENTACION = '$nuevopres' WHERE ID_INS = $id";
                 $db->ejecutarsql($cadena);
                 $cadena = "UPDATE INV_SUC SET SUCURSAL = $nuevosucur, CANTIDAD = $nuevocant WHERE INVENTARIO = $id";
                 $db->ejecutarsql($cadena);
                 $db->desconectarDB();
                 header("Location: Exito.php");
                 exit;
+                }
+                catch(PDOException $e) 
+                {
+                    header("Location: Fallo.php");
+                }
             }
         ?>
 </div>

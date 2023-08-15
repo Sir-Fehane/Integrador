@@ -33,23 +33,23 @@ else
         <input type="hidden" value="ACTIVO" name="estado">
         <div class="mb-3">
             <label for="nombre" class="form-label">Nombre del empleado:</label>
-            <input type="text" name="nombre" class="form-control">
+            <input type="text" name="nombre" class="form-control" required>
         </div>
         <div class="mb-3">
             <label for="direc" class="form-label">Direccion:</label>
-            <input type="text" name="direc" class="form-control">
+            <input type="text" name="direc" class="form-control" required>
         </div>
         <div class="mb-3">
             <label for="tel" class="form-label">Telefono:</label>
-            <input type="text" name="tel" class="form-control">
+            <input type="text" name="tel" class="form-control" required>
         </div>
         <div class="mb-3">
             <label for="cor" class="form-label">Correo:</label>
-            <input type="email" name="cor" class="form-control">
+            <input type="email" name="cor" class="form-control" required>
         </div>
         <div class="mb-3">
             <label for="contra" class="form-label">Contraseña:</label>
-            <input type="password" name="contra" class="form-control">
+            <input type="password" name="contra" class="form-control" required >
         </div>
         <div class="mb-3">
         <label for="puesto" class="form-label">Puesto:</label>
@@ -85,7 +85,8 @@ else
 <?php
 if(isset($_POST['submit']))
 {
-    extract($_POST);
+    try{
+        extract($_POST);
     $hash = password_hash($contra, PASSWORD_DEFAULT);
     if($puesto == "ADMINISTRADOR")
     {
@@ -102,8 +103,13 @@ if(isset($_POST['submit']))
     }
     
     $db->desconectarDB();
-    header("Location: Exito.php");
+    header("Location: Fallo.php");
     exit;
+    } catch(PDOException $e) 
+    {
+        header("Location: Fallo.php");
+    }
+    
 }
 ?>
 </body>

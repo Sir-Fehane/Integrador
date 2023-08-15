@@ -54,7 +54,8 @@ else
 <?php
 if(isset($_POST['submit']))
 {
-    include "../class/database.php";
+    try{
+        include "../class/database.php";
     $db = new Database();
     $db->conectarDB();
     extract($_POST);
@@ -63,6 +64,11 @@ if(isset($_POST['submit']))
             $db->desconectarDB();
     header("Location: Exito.php");
     exit;
+    }
+    catch(PDOException $e) 
+    {
+        header("Location: Fallo.php");
+    }
 }
 ?>
 </body>
