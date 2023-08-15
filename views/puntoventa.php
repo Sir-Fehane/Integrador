@@ -127,7 +127,7 @@ setInterval(tiempoReal, 1000);
     </nav>
 
     <!--Cuerpo de la pagina-->
-    <div class="container" id="cuerpo">
+    <div class="container">
         <div class="row" id="renglon">
         <?php
         $consulta ="SELECT PRODUCTOS.NOMBRE as N, PRODUCTOS.CODIGO as ID, PRODUCTOS.PRECIO as PR, PRODUCTOS.img_prod as IMG FROM PRODUCTOS WHERE PRODUCTOS.ESTADO = 'ACTIVO' GROUP BY PRODUCTOS.NOMBRE";
