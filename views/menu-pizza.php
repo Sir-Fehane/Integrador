@@ -75,6 +75,7 @@ include '../carrito/dbConfig.php';
                         header("Location: ../scripts/verificar_codigo.php");
                         exit;
                     }
+                  }
                     else
                     {
                     ?>
