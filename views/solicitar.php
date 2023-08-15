@@ -30,15 +30,7 @@ else
     <nav class="navbar navbar-expand-lg fixed-top" id="barra">
       <div class="container-fluid">
         <a class="navbar-brand" href="#" id="logo">Toy's Pizza</a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -46,14 +38,26 @@ else
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="puntoventa.php">Inicio</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="cocina.PHP">Cocina</a>
+            </li>
+            <li>
+              <a class="nav-link" href="pendientes.php">Pendientes</a>
+            </li>
+            <li>
+              <h6 id="miTabla"></h6>
+            </li>
+            <li>
+              <a class="nav-link" href="cierre.php">Cierre</a>
+            </li>
+            <li>
+              <a class="nav-link" href="solicitar.php">Solicitar</a>
+            </li>
+            <li>
+              <a class="nav-link" href="entrada.php">Entrada</a>
+            </li>
             <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle"
-                href="#"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
+              <a class="nav-link dropdown-toggle" href="verperfilv1.php" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Perfil
               </a>
               <ul class="dropdown-menu">
@@ -73,7 +77,7 @@ else
       <div class="justify-content-center" id="contenedor">
         <div class="table-responsive">
         <form action="../scripts/soli.php" method="post">
-        <table class="table table-striped table-hover">
+        <table class="table table-hover">
         <!--<table class="table align-middle table-sm">-->
                     <tbody>
                     <tr>
@@ -100,8 +104,8 @@ else
                     </tbody>
                 </table>
 
-                <table class="table table-striped table-hover" id="tablaInsumos">
-                    <thead>
+                <table class="table table-hover" id="tablaInsumos">
+                    <thead class="table-dark">
                     <tr>
                         <th>Insumo</th>
                         <th>Cantidad Restante</th>
@@ -168,7 +172,7 @@ else
             <td>${selectedInsumoText}</td>
             <td><input type="number" class="form-control form-control-sm" name='cantidad[ ]' min="0.1" step='0.1' placeholder='Ingresa la cantidad restante:'
             required onkeypress='return validarNumero(event)' ></td>
-            <td><button type="button" class="btn btn-danger btn-sm" onclick="eliminarFila(this)">Eliminar</button></td>`;
+            <td><button type="button" class="btn btn-danger btn-sm" onclick="eliminarFila(this)">X</button></td>`;
 
             newRow.setAttribute("data-insumo",selectedInsumo);
 
