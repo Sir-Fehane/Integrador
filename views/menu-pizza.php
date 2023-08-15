@@ -177,7 +177,7 @@ include '../carrito/dbConfig.php';
         <div class="modal-body">
             <form action="../scripts/login.php" method="post">
                 <label for="Nombre" class="form-label">Nombre</label>
-                <input type="text" class="form-control" name="usuario" required>
+                <input type="email" class="form-control" name="correo" required>
                 <label for="password" class="form-label">Contraseña</label>
                 <input type="password" class="form-control" name="password" required>
                 <div>
