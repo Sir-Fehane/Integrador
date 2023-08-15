@@ -55,7 +55,7 @@ if(!isset($_SESSION['rol']))
                 $cadena = "UPDATE USUARIOS SET NOMBRE = '$nuevonom', DIRECCION = '$nuevodir', TELEFONO = '$nuevotel' WHERE ID_USUARIO = $id";
                 $db->ejecutarsql($cadena);
                 $db->desconectarDB();
-                header("Location: exitoperf.php");
+                header("Location: ../views/verperfilv1.php");
                 exit;
             }
         ?>
