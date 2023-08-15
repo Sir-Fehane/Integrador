@@ -82,7 +82,8 @@ else
     <?php
         if(isset($_POST['submit']))
             {
-                $cadena = "UPDATE USUARIOS SET NOMBRE = '$nuevonom', DIRECCION = '$nuevodirec', TELEFONO = '$nuevotel', CORREO = '$nuevocor' WHERE ID_USUARIO = $idemp";
+                try{
+                    $cadena = "UPDATE USUARIOS SET NOMBRE = '$nuevonom', DIRECCION = '$nuevodirec', TELEFONO = '$nuevotel', CORREO = '$nuevocor' WHERE ID_USUARIO = $idemp";
                 $db->ejecutarsql($cadena);
                 $cadena = "UPDATE EMPLEADO_SUCURSAL SET PUESTO = '$nuevopues', SUCURSAL = $nuevosucur
                 WHERE EMPLEADO = $idemp";
@@ -90,6 +91,12 @@ else
                 $db->desconectarDB();
                 header("Location: Exito.php");
                 exit;
+                }
+                catch(PDOException $e) 
+    {
+        header("Location: Fallo.php");
+    }
+    
             }
         ?>
 </div>

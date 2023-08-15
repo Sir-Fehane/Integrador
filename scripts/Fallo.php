@@ -22,7 +22,7 @@
 <div class="alert alert-danger d-flex align-items-center" role="alert">
   <svg class="bi flex-shrink-0 me-2" width="1.5rem" height="1.5rem" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
   <div>
-    Algo salio mal. Intenta de nuevo.
+    Ocurrió un error. Posible falta de registros o regitro duplicado. Por favor intente de nuevo.
   </div>
 </div>
 </div>

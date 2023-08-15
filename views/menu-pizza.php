@@ -50,7 +50,7 @@ $dbase->conectarDB();
                     {
                       $usuario1 = $_SESSION['usuario'];
                       $consulta1 = "SELECT U.ID_USUARIO AS ID, U.NOMBRE AS 'NOMBRE', U.DIRECCION AS 'DIRECCION', U.TELEFONO AS 'TELEFONO', U.CORREO AS 'CORREO',
-                      U.img_chidas FROM USUARIOS U
+                      U.ESTADO, U.img_chidas FROM USUARIOS U
                       WHERE NOMBRE = '$usuario1'";
                       $tabla = $dbase->seleccionar($consulta1);
                       foreach ($tabla as $registro)

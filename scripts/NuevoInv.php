@@ -99,7 +99,8 @@ else
 <?php
 if(isset($_POST['submit']))
 {
-    extract($_POST);
+    try{
+        extract($_POST);
             $cadena = "INSERT INTO INVENTARIO (NOMBRE, CATEGORIA, PRESENTACION, ESTADO) VALUES ('$nombre', '$categoria', '$pres', '$estado')";
             $db->ejecutarsql($cadena);
     if($sucur == 0)
@@ -120,6 +121,10 @@ if(isset($_POST['submit']))
     $db->desconectarDB();
     header("Location: Exito.php");
     exit;
+    }catch(PDOException $e) 
+    {
+        header("Location: Fallo.php");
+    }
 }
 ?>
 <script>

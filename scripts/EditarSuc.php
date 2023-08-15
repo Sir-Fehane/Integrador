@@ -36,15 +36,15 @@ else
         <input type="hidden" name="nuvsuc" value="<?php echo $suc; ?>">
         <div class="mb-3">
             <label for="nuevonom" class="form-label">Nombre de la Sucursal:</label>
-            <input type="text" name="nuevonom" class="form-control" value="<?php echo $nom;?>">
+            <input type="text" name="nuevonom" class="form-control" value="<?php echo $nom;?>" required>
         </div>
         <div class="mb-3">
             <label for="nuevonom" class="form-label">Direccion:</label>
-            <input type="text" name="nuevodir" class="form-control" value="<?php echo $dir;?>">
+            <input type="text" name="nuevodir" class="form-control" value="<?php echo $dir;?>" required>
         </div>
         <div class="mb-3">
         <label for="nuevotel" class="form-label">Telefono:</label>
-            <input type="text" name="nuevotel" class="form-control" value="<?php echo $tel;?>">
+            <input type="text" name="nuevotel" class="form-control" value="<?php echo $tel;?>" required>
         </div> 
         <div class="d-grid gap-2">
             <button type="submit" name="submit" class="btn btn-primary">Guardar</button>
@@ -53,7 +53,8 @@ else
     <?php
             if(isset($_POST['submit']))
             {
-                include "../class/database.php";
+                try{
+                    include "../class/database.php";
                 $db = new Database();
                 $db->conectarDB();
                 $cadena = "UPDATE SUCURSALES SET NOMBRE = '$nuevonom', DIRECCION = '$nuevodir', TELEFONO = '$nuevotel'
@@ -62,6 +63,11 @@ else
                 $db->desconectarDB();
                 header("Location: Exito.php");
                 exit;
+                }
+                catch(PDOException $e) 
+                {
+                    header("Location: Fallo.php");
+                }
             }
         ?>
 </div>
