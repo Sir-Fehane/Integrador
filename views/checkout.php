@@ -106,6 +106,7 @@
                       <td colspan="3" class="table-light"></td>
                       <td colspan="2" class="text-center">
                       <div class="d-grid gap-1">
+                        <form action="../scripts/completarpago.php" method="post">
                         <input type="hidden" name="totalfinal" value="<?php echo $totalGeneral; ?>">
                           <button type="submit" class="btn btn-lg btn-success" name="pagar">Pagar</button>
                           </form>

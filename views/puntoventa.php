@@ -111,13 +111,14 @@ foreach($resultadocons as $abc)
       <div class="div" id="cuerpo1">
         <div class="row" id="renglon">
         <?php
-        $consulta ="SELECT PRODUCTOS.NOMBRE as N, PRODUCTOS.CODIGO as ID, PRODUCTOS.PRECIO as PR FROM PRODUCTOS WHERE PRODUCTOS.ESTADO = 'ACTIVO' GROUP BY PRODUCTOS.NOMBRE";
+        $consulta ="SELECT PRODUCTOS.NOMBRE as N, PRODUCTOS.CODIGO as ID, PRODUCTOS.PRECIO as PR, PRODUCTOS.img_prod as IMG FROM PRODUCTOS WHERE PRODUCTOS.ESTADO = 'ACTIVO' GROUP BY PRODUCTOS.NOMBRE";
         $reg = $conexion->seleccionar($consulta);        
         foreach($reg as $value){ ?>
           <div class="col-5 col-md-5 col-lg-4">
           <button class="btn card" data-bs-toggle="modal" data-bs-target="#modal<?php echo $value->ID; ?>" data-modal-target="modal<?php echo $value->ID; ?>" id="item" data-titulo="<?php echo $value->N; ?>" data-tamaño="">   
+          <?php $imagen = $value->IMG; ?>
                   <span class="titulo-item"><?php echo $value->N; ?></span>
-                  <img src="../img/pepe.jpg" class="img-item"/>
+                  <img src="<?php echo $imagen;?>" class="img-item"/>
               </button>
           </div>
           <?php } ?>
