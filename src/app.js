@@ -48,7 +48,12 @@ function resetValues(modal) {
   var subtotalElement = modal.querySelector('.subtotal');
   subtotalElement.textContent = "0";
 }
-
+function validateCantidad(input) {
+  const cantidad = parseInt(input.value);
+  if (cantidad < 1) {
+      input.value = 1; 
+  }
+}
 // Función para actualizar el tamaño y precio antes de enviar el formulario
 function actualizarCampos(id) {
   const modal = document.querySelector(`#modal${id}`);
@@ -84,3 +89,4 @@ document.addEventListener('shown.bs.modal', function (event) {
     actualizarTotal(); // Llamar a la función para actualizar el total
   });
 });
+

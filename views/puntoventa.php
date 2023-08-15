@@ -173,7 +173,7 @@ setInterval(tiempoReal, 1000);
                   </select>
                   <br><br>
                   <label for="cantidad">Cantidad: </label>
-                  <input type="number" min="1"  name="cantidad" class="cantidad" placeholder="0" value="1"></input>
+                  <input type="number" min="1" name="cantidad" class="cantidad" placeholder="0" value="1" oninput="validateCantidad(this)">
                   <br><br>
                   <label for="subtotal">Subtotal: </label>
                   <h5><span class="subtotal">0</span></h5>
