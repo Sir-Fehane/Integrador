@@ -40,8 +40,8 @@ if(!isset($_SESSION['rol']))
         <input type="text" name="nuevodir" class="form-control" value="<?php echo $direccion;?>">
         </div>
         <div class="mb-3">
-        <label for="nuevotel" class="form-label">Telefono:</label>
-        <input type="text" name="nuevotel" class="form-control" value="<?php echo $telefono;?>">
+        <label for="nuevotel" class="form-label" >Telefono (10 caracteres):</label>
+        <input type="text" name="telefono" class="form-control" oninput="filterNonNumeric(event)" required pattern="[0-9]{10}" required inputmode="numeric"value="<?php echo $telefono;?>">
         </div>
 
 
@@ -60,5 +60,7 @@ if(!isset($_SESSION['rol']))
             }
         ?>
 </div>
+<script src="../src/validaciones.js">
+</script>
 </body>
 </html>
