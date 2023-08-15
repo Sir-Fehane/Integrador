@@ -4,8 +4,16 @@ if(!isset($_SESSION['rol']))
 {
   header('Location: ../index.php');
 }
-
- 
+else
+ {
+  if ($_SESSION["rol"] == 2) {
+    header("Location: ../index.php");
+    exit;
+  } elseif ($_SESSION["rol"] == 3) { 
+    header("Location: puntoventa.php");
+    exit;
+  }
+ }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,16 +23,16 @@ if(!isset($_SESSION['rol']))
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <title>Editar</title>
 </head>
-<body style="background-color: #D6CFCF;">
+<body>
     <?php
     include '../class/database.php';
     $db = new database();
     $db->conectarDB();
     ?>
-<div class="container w-75 mt-5 shadow p-3 mb-5 rounded" style="width: 60%;  height: 30%; background-color:white">
+<div class="container w-75 p-5">
     <div class="d-flex">
-        <a class="btn btn-primary" href="../views/verperfilv1.php">Regresar</a>
-        <h3 align="center" style="margin-left: 30%;">Editar Perfil</h3>
+        <a class="btn btn-primary" href="../views/admin.php">Regresar</a>
+        <h3 align="center" style="margin-left: 30%;">Editar Producto</h3>
     </div>
     <form action="" method="POST">
         <?php
@@ -37,13 +45,20 @@ if(!isset($_SESSION['rol']))
         </div>
         <div class="mb-3">
         <label for="nuevocat" class="form-label">Direccion</label>
-        <input type="text" name="nuevodir" class="form-control" value="<?php echo $direccion;?>">
+        <input type="text" name="nuevodir" class="form-control" value="<?php echo $tamaño;?>">
         </div>
         <div class="mb-3">
         <label for="nuevotel" class="form-label">Telefono:</label>
-        <input type="text" name="nuevotel" class="form-control" value="<?php echo $telefono;?>">
+        <input type="text" name="nuevotel" class="form-control" value="<?php echo $tamaño;?>">
         </div>
-
+        <div class="mb-3">
+        <label for="nuevopres" class="form-label">Correo:</label>
+        <input type="text" name="nuevocor" class="form-control" value="<?php echo $desc;?>">
+        </div>
+        <div class="mb-3">
+        <label for="nuevopres" class="form-label">precio:</label>
+        <input type="text" name="nuevocor1" class="form-control" value="<?php echo $precio;?>">
+        </div>
 
         <div class="d-grid gap-2">
             <button type="submit" name="submit" class="btn btn-primary">Guardar</button>
@@ -52,10 +67,10 @@ if(!isset($_SESSION['rol']))
     <?php
             if(isset($_POST['submit']))
             {
-                $cadena = "UPDATE USUARIOS SET NOMBRE = '$nuevonom', DIRECCION = '$nuevodir', TELEFONO = '$nuevotel' WHERE ID_USUARIO = $id";
+                $cadena = "UPDATE PRODUCTOS SET NOMBRE = '$nuevonom', TAMANO = '$nuevodir', TAMANO = '$nuevotel' , DESCRIPCION = '$nuevocor', PRECIO = '$nuevocor1' WHERE CODIGO = $id";
                 $db->ejecutarsql($cadena);
                 $db->desconectarDB();
-                header("Location: ../views/verperfilv1.php");
+                header("Location: ../views/admin.php");
                 exit;
             }
         ?>

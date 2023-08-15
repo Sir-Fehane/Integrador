@@ -46,7 +46,7 @@ echo
                 <?php
                 $db = new Database();
                 $db->conectarDB();
-                $cadena = "SELECT ID_SUC,NOMBRE FROM SUCURSALES";
+                $cadena = "SELECT ID_SUC,NOMBRE FROM SUCURSALES WHERE ESTADO = 'ACTIVO'";
                 $reg = $db->seleccionar($cadena);
                 echo "<select name='suc' class='form-select'>
                 <option value='0' disabled selected>Seleccionar sucursal...</option>";

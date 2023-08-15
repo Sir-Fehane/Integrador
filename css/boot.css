@@ -380,7 +380,7 @@ align-items: center;
 .butn-menu
 {
     background: var(--main-color)!important;
-    border-radius: 0.5rem;
+    border-radius: 0.9rem;
     text-align: center;
     display: inline-block;
     height: 55px !important;

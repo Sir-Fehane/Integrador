@@ -91,190 +91,44 @@ include '../carrito/dbConfig.php';
         </li>
       </ul>
       <section>
+<!--Productos-->
+    <?php 
+        $TAMAÑOS= $dbase->seleccionar("SELECT PRODUCTOS.TAMANO FROM PRODUCTOS WHERE PRODUCTOS.ESTADO='ACTIVO' GROUP BY PRODUCTOS.TAMANO");
+        foreach($TAMAÑOS as $tm){ 
+          $consu="SELECT * FROM PRODUCTOS WHERE TAMANO='".$tm->TAMANO."' AND PRODUCTOS.ESTADO='ACTIVO' ORDER BY PRODUCTOS.TAMANO DESC";   
+        $PIZZAS=$dbase->seleccionar($consu);
+         ?>
       <div class="container">
     <div id="products" class="row">
-        <?php
-        //get rows query
-        $query = $db->query("SELECT * FROM PRODUCTOS where TAMANO = 'MEDIANA' ORDER BY TAMANO DESC");
-        if($query->num_rows > 0){ 
-         echo " <h3>MEDIANA</h3>";
-            while($row = $query->fetch_assoc()){
-        ?>
-            <div class="carta col-12 col-lg-4">
+      <h3 class="mt-5"><?php echo $tm->TAMANO ?></h3>
+      <?php foreach($PIZZAS as $row){?>
+      <div class="carta col-12 col-lg-4">
             <div class="face front">
-            <img src="../img/pepe.jpg">
-            <h3><?php echo $row["NOMBRE"]; ?></h3>
-            <input name='titulo' type='hidden' id='titulo' value>
+            <img src="<?php echo $row->img_prod ?>">
+            <h3><?php echo $row->NOMBRE; ?></h3>
             </div>
             <div class='face back'>
-            <h3><?php echo $row["NOMBRE"]; ?></h3>
-            <p><?php echo $row["DESCRIPCION"]; ?></p>
-            <p><?php echo $row["TAMANO"];?></p>
+            <h3><?php echo $row->NOMBRE; ?></h3>
+            <p><?php echo $row->DESCRIPCION; ?></p>
+            <p><?php echo $row->TAMANO;?></p>
             <div class='linka d-flex mb-lg-3'>
             <div class="row">
                         <div class="col-md-6">
-                            <p class="lead"><?php echo '$'.$row["PRECIO"].' MX'; ?></p>
+                            <p class="lead"><?php echo '$'.$row->PRECIO.' MX'; ?></p>
                         </div>
                         <div class="col-md-6">
-                            <a class="btn butn-menu" href="../carrito/cartAction.php?action=addToCart&id=<?php echo $row["CODIGO"]; ?>">Agregar al carrito</a>
+                            <a class="btn butn-menu" href="../carrito/cartAction.php?action=addToCart&id=<?php echo $row->CODIGO; ?>">Agregar</a>
                         </div>
                     </div>
             </div>
             </div>
             </div>
-        <?php } }else{ ?>
-        <p>No hay productos...</p>
-        <?php } ?>
-    </div>
-</div>
-<div class="container">
-    <div id="products" class="row">
-        <?php
-        //get rows query
-        $query = $db->query("SELECT * FROM PRODUCTOS WHERE TAMANO = 'GRANDE' ORDER BY TAMANO DESC");
-        if($query->num_rows > 0){ 
-          echo " <h3>GRANDE</h3>";
-            while($row = $query->fetch_assoc()){
-        ?>
-        
-            <div class="carta col-12 col-lg-4">
-            <div class="face front">
-            <img src="../img/pepe.jpg">
-            <h3><?php echo $row["NOMBRE"]; ?></h3>
-            <input name='titulo' type='hidden' id='titulo' value>
-            </div>
-            <div class='face back'>
-            <h3><?php echo $row["NOMBRE"]; ?></h3>
-            <p><?php echo $row["DESCRIPCION"]; ?></p>
-            <p><?php echo $row["TAMANO"];?></p>
-            <div class='linka d-flex mb-lg-3'>
-            <div class="row">
-                        <div class="col-md-6">
-                            <p class="lead"><?php echo '$'.$row["PRECIO"].' MX'; ?></p>
-                        </div>
-                        <div class="col-md-6">
-                            <a class="btn butn-menu" href="../carrito/cartAction.php?action=addToCart&id=<?php echo $row["CODIGO"]; ?>">Agregar al carrito</a>
-                        </div>
-                    </div>
-            </div>
-            </div>
-            </div>
-        <?php } }else{ ?>
-        <p>No hay productos...</p>
-        <?php } ?>
-    </div>
-</div>
-<div class="container">
-    <div id="products" class="row">
-        <?php
-        //get rows query
-        $query = $db->query("SELECT * FROM PRODUCTOS WHERE TAMANO = 'EXTRA' ORDER BY TAMANO DESC");
-        if($query->num_rows > 0){ 
-          echo " <h3>EXTRA</h3>";
-            while($row = $query->fetch_assoc()){
-        ?>
-       
-            <div class="carta col-6 col-lg-4">
-            <div class="face front">
-            <img src="../img/pepe.jpg">
-            <h3><?php echo $row["NOMBRE"]; ?></h3>
-            <input name='titulo' type='hidden' id='titulo' value>
-            </div>
-            <div class='face back'>
-            <h3><?php echo $row["NOMBRE"]; ?></h3>
-            <p><?php echo $row["DESCRIPCION"]; ?></p>
-            <p><?php echo $row["TAMANO"];?></p>
-            <div class='linka d-flex mb-lg-3'>
-            <div class="row">
-                        <div class="col-md-6">
-                            <p class="lead"><?php echo '$'.$row["PRECIO"].' MX'; ?></p>
-                        </div>
-                        <div class="col-md-6">
-                            <a class="btn butn-menu" href="../carrito/cartAction.php?action=addToCart&id=<?php echo $row["CODIGO"]; ?>">Agregar al carrito</a>
-                        </div>
-                    </div>
-            </div>
-            </div>
-            </div>
-        <?php } }else{ ?>
-        <p>No hay productos...</p>
-        <?php } ?>
-    </div>
-</div>
-<div class="container">
-    <div id="products" class="row">
-        <?php
-        //get rows query
-        $query = $db->query("SELECT * FROM PRODUCTOS WHERE TAMANO = 'INDIVIDUAL' ORDER BY TAMANO DESC");
-        if($query->num_rows > 0){ 
-          echo " <h3>INDIVIDUAL</h3>";
-            while($row = $query->fetch_assoc()){
-        ?>
-       
-            <div class="carta col-12 col-lg-4">
-            <div class="face front">
-            <img src="../img/pepe.jpg">
-            <h3><?php echo $row["NOMBRE"]; ?></h3>
-            <input name='titulo' type='hidden' id='titulo' value>
-            </div>
-            <div class='face back'>
-            <h3><?php echo $row["NOMBRE"]; ?></h3>
-            <p><?php echo $row["DESCRIPCION"]; ?></p>
-            <p><?php echo $row["TAMANO"];?></p>
-            <div class='linka d-flex mb-lg-3'>
-            <div class="row">
-                        <div class="col-md-6">
-                            <p class="lead"><?php echo '$'.$row["PRECIO"].' MX'; ?></p>
-                        </div>
-                        <div class="col-md-6">
-                            <a class="btn butn-menu" href="../carrito/cartAction.php?action=addToCart&id=<?php echo $row["CODIGO"]; ?>">Agregar al carrito</a>
-                        </div>
-                    </div>
-            </div>
-            </div>
-            </div>
-        <?php } }else{ ?>
-        <p>No hay productos...</p>
-        <?php } ?>
-    </div>
-</div>
-<div class="container">
-    <div id="products" class="row">
-        <?php
-        //get rows query
-        $query = $db->query("SELECT * FROM PRODUCTOS WHERE TAMANO = 'EVENTOS' ORDER BY TAMANO DESC");
-        if($query->num_rows > 0){ 
-          echo " <h3>EVENTOS</h3>";
-            while($row = $query->fetch_assoc()){
-        ?>
-        
-            <div class="carta col-xs-4 col-lg-4">
-            <div class="face front">
-            <img src="../img/pepe.jpg">
-            <h3><?php echo $row["NOMBRE"]; ?></h3>
-            <input name='titulo' type='hidden' id='titulo' value>
-            </div>
-            <div class='face back'>
-            <h3><?php echo $row["NOMBRE"]; ?></h3>
-            <p><?php echo $row["DESCRIPCION"]; ?></p>
-            <p><?php echo $row["TAMANO"];?></p>
-            <div class='linka d-flex mb-lg-3'>
-            <div class="row">
-                        <div class="col-md-6">
-                            <p class="lead"><?php echo '$'.$row["PRECIO"].' MX'; ?></p>
-                        </div>
-                        <div class="col-md-6">
-                            <a class="btn butn-menu" href="../carrito/cartAction.php?action=addToCart&id=<?php echo $row["CODIGO"]; ?>">Agregar al carrito</a>
-                        </div>
-                    </div>
-            </div>
-            </div>
-            </div>
-        <?php } }else{ ?>
-        <p>No hay productos...</p>
-        <?php } ?>
-    </div>
-</div>
+            <?php } ?>
+          </div>
+        </div>
+      
+      <?php }?>
+    
 </section>
 <!--Footer-->
 <section style="background-color: #ccc;" id="fot">
@@ -313,30 +167,60 @@ include '../carrito/dbConfig.php';
     </section>
 
     <!-- Modal login-->
-<div class="modal fade" id="login" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="login" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Iniciar sesion</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Iniciar sesion</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            <?php
+                if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                    $db = new Database();
+                    $db->conectarDB();
+
+                    extract($_POST);
+
+                    $verificacionExitosa=$db->verifica($correo, $password);
+                    if($verificacionExitosa)
+                    {
+                      echo "<script>alert('Bienvenido: ".$_SESSION["usuario"].");</script>";
+                      switch ($_SESSION["rol"])
+                      {
+                          case 1: echo "<script>window.location.href = 'views/puntoventa.php';</script>";
+                              break;
+                          case 2:
+                                echo "<script>window.location.href = '../index.php';</script>";
+                                break;
+                          case 3: echo "<script>window.location.href = 'views/puntoventa.php';</script>";
+                              break;
+                          default:
+                              break;
+                      }
+
+                    }else
+                    {
+                      echo "<script>alert('Usuario o contraseña incorrectos');</script>";
+                    }
+                }
+                ?>
+                <form method="post">
+                    <label for="Nombre" class="form-label">Correo</label>
+                    <input type="email" class="form-control" name="correo" required>
+                    <label for="password" class="form-label">Contraseña</label>
+                    <input type="password" class="form-control" name="password" required>
+                    <div>
+                        <a href="">Olvide mi contraseña</a>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-danger">Iniciar sesion</button>
+                    </div>
+                </form>
+            </div>
         </div>
-        <div class="modal-body">
-            <form action="../scripts/login.php" method="post">
-                <label for="Nombre" class="form-label">Nombre</label>
-                <input type="text" class="form-control" name="usuario" required>
-                <label for="password" class="form-label">Contraseña</label>
-                <input type="password" class="form-control" name="password" required>
-                <div>
-                  <a href="">Olvide mi contraseña</a>
-                </div>
-                <div class="modal-footer">
-                  <button type="submit" class="btn btn-danger">Iniciar sesion</button>
-                </div>
-              </form>
-        </div>
-      </div>
     </div>
-  </div>
+</div>
   <!-- Modal register-->
 <div class="modal fade" id="register" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">

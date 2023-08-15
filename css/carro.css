@@ -1,0 +1,81 @@
+/*Base*/
+*
+{
+    box-sizing: border-box;
+    font-family: 'Anton', sans-serif;
+    scroll-behavior: smooth;
+    list-style: none;
+    text-decoration: none;
+}
+a{
+    text-decoration: none;
+}
+:root
+{
+--main-color:#FECB00;
+--text-color:#2A52D5;
+--bg-color:#BB0E10;
+--big-font:4rem;
+--h2-font:2.25rem;
+--p-font:0.9rem;
+}
+*::selection
+{
+    background: var(--main-color);
+    color:#f2f2f2;
+}
+body{
+    color:var(--text-color);
+    background-image: url(../img/fondocar.jpg);
+    background-repeat: repeat;
+}
+    .shipAddr{
+        background-color: #ffff;
+        width: 300px;
+        text-align: center; 
+        border-radius: 35px; 
+        border: 2px solid #FECB00;
+    }
+    .footBtn{width: 95%;float: left;}
+    .orderBtn {float: right;}
+    #img-toys{display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+.formcarro{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.formcarro
+input
+{
+    width: 20%;
+}
+@media (max-width:576px)
+{.content
+    {
+        margin-top: 5rem;
+    }
+    #img-toys{width: 40%;}
+    a{width: auto;}
+    .shipAddr{margin-left: 2.5rem;}
+    .formcarro button
+{
+    margin-left: 9.8rem;
+}
+}
+@media (min-width:576px)
+{
+    .shipAddr{margin-left: 28rem;}
+    .content{margin-top: 3rem;}
+    #img-toys{width: 20%;}
+    .formcarro button
+{
+    margin-left: 9.8rem;
+}
+}
+h4, h1
+{
+    font-weight: bold;
+}

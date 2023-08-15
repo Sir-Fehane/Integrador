@@ -56,10 +56,10 @@ else
                   $db->conectarDB();
                     if(isset($_SESSION["usuario"]))
                     {
-                      $usuario1 = $_SESSION['usuario'];
+                      $usuario1 = $_SESSION['correo'];
                       $consulta1 = "SELECT U.ID_USUARIO AS ID, U.NOMBRE AS 'NOMBRE', U.DIRECCION AS 'DIRECCION', U.TELEFONO AS 'TELEFONO', U.CORREO AS 'CORREO',
                       U.img_chidas FROM USUARIOS U
-                      WHERE NOMBRE = '$usuario1'";
+                      WHERE CORREO = '$usuario1'";
                       $tabla = $db->seleccionar($consulta1);
                       foreach ($tabla as $registro)
                       {
@@ -257,30 +257,60 @@ else
 </div>
     </section>
   <!-- Modal login-->
-<div class="modal fade" id="login" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="login" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Iniciar sesion</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Iniciar sesion</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            <?php
+                if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                    $db = new Database();
+                    $db->conectarDB();
+
+                    extract($_POST);
+
+                    $verificacionExitosa=$db->verifica($correo, $password);
+                    if($verificacionExitosa)
+                    {
+                      echo "<script>alert('Bienvenido: ".$_SESSION["usuario"].");</script>";
+                      switch ($_SESSION["rol"])
+                      {
+                          case 1: echo "<script>window.location.href = 'views/puntoventa.php';</script>";
+                              break;
+                          case 2:
+                                echo "<script>window.location.href = 'index.php';</script>";
+                                break;
+                          case 3: echo "<script>window.location.href = 'views/puntoventa.php';</script>";
+                              break;
+                          default:
+                              break;
+                      }
+
+                    }else
+                    {
+                      echo "<script>alert('Usuario o contraseña incorrectos');</script>";
+                    }
+                }
+                ?>
+                <form method="post">
+                    <label for="Nombre" class="form-label">Correo</label>
+                    <input type="email" class="form-control" name="correo" required>
+                    <label for="password" class="form-label">Contraseña</label>
+                    <input type="password" class="form-control" name="password" required>
+                    <div>
+                        <a href="">Olvide mi contraseña</a>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-danger">Iniciar sesion</button>
+                    </div>
+                </form>
+            </div>
         </div>
-        <div class="modal-body">
-            <form action="scripts/login.php" method="post">
-                <label for="Nombre" class="form-label">Nombre</label>
-                <input type="text" class="form-control" name="usuario" required>
-                <label for="password" class="form-label">Contraseña</label>
-                <input type="password" class="form-control" name="password" required>
-                <div>
-                  <a href="">Olvide mi contraseña</a>
-                </div>
-                <div class="modal-footer">
-                  <button type="submit" class="btn btn-danger">Iniciar sesion</button>
-                </div>
-              </form>
-        </div>
-      </div>
     </div>
-  </div>
+</div>
   <!-- Modal register-->
 <div class="modal fade" id="register" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -290,7 +320,7 @@ else
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <form action="scripts/registrarse.php" method="POST">
+        <form action="scripts/registrarse.php" method="POST">
                 <label for="Nombre" class="form-label">Nombre</label>
                 <input type="text" class="form-control" name="nombre" required>
                 <label for="password" class="form-label">Contraseña</label>
@@ -301,6 +331,7 @@ else
                 <input type="tel" name="telefono" class="form-control" required>
                 <label for="email" class="form-label">Correo</label>
                 <input type="email" name="correo" placeholder="Obligatorio" required class="form-control">
+                <span style="color: red;"><?php if(isset($correoError)) echo $correoError; ?></span>
                 <div class="modal-footer">
                   <button type="submit" class="btn btn-warning">Registrar</button>
                 </div>

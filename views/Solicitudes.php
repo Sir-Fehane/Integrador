@@ -40,6 +40,7 @@ else
                 <select name="sol" class="form-select">
                     <option value="solicitado">Ver solicitadas</option>
                     <option value="recibido">Ver recibidas</option>
+                    <option value="cancelado">Ver canceladas</option>
                 </select>
             </div>
             <div class="col-md-4 mt-3">
@@ -51,7 +52,7 @@ else
                 <?php
                 $db = new Database();
                 $db->conectarDB();
-                $cadena = "SELECT ID_SUC,NOMBRE FROM SUCURSALES";
+                $cadena = "SELECT ID_SUC,NOMBRE FROM SUCURSALES WHERE ESTADO = 'ACTIVO'";
                 $reg = $db->seleccionar($cadena);
                 echo "<div class='me-2'>
                 <select name='suc' class='form-select'>
@@ -79,7 +80,7 @@ else
     </div>
     <?php
     extract($_POST);
-    $cadena = "SELECT SU.NOMBRE AS 'Sucursal',I.NOMBRE AS 'Insumo',DS.CANTIDAD AS 'Cantidad',
+    $cadena = "SELECT S.ID_SOLICITUD AS 'ID', SU.NOMBRE AS 'Sucursal',I.NOMBRE AS 'Insumo',DS.CANTIDAD AS 'Cantidad',
     S.FECHA AS 'Fecha', S.ESTADO AS 'Estado'
     FROM SOLICITUDES S
     INNER JOIN DETALLE_SOLICITUD DS ON DS.SOLICITUD = S.ID_SOLICITUD
@@ -102,13 +103,16 @@ else
                 <tr>
                     <?php
                     if (isset($_POST['suc']) && ($_POST['suc'] == 999 || $_POST['suc'] == 0)) {
-                        echo "<th class='sortable'>Sucursal</th>";
+                        echo "<th class='col-1 col-lg-2 sortable'>Sucursal</th>";
                     }
                     ?>
                     <th class='col-2 col-lg-3 sortable'>Insumo</th>
                     <th class='col-1 col-lg-1 sortable'>Cantidad</th>
-                    <th class='col-1 col-lg-1 sortable'>Fecha</th>
-                    <th class='col-1 col-lg-3 sortable'>Estado</th>
+                    <th class='col-1 col-lg-2 sortable'>Fecha</th>
+                    <th class='col-1 col-lg-2 sortable'>Estado</th>
+                    <?php if($sol == 'solicitado'){
+                      echo "<th class='col-1 col-lg-2'>Marcar como</th>";
+                    }?>
                 </tr>
             </thead>
             <tbody align='center'>
@@ -122,6 +126,20 @@ else
                     echo "<td>$registro->Cantidad</td>";
                     echo "<td>$registro->Fecha</td>";
                     echo "<td>$registro->Estado</td>";
+                    if($sol == 'solicitado'){
+                      echo "<td>";?>
+                      <form action="../scripts/EntregarSol.php" method="post">
+                        <input type="hidden" name="id" value="<?php echo $registro->ID; ?>">
+                        <button type="submit" name="entregar" class="btn btn-sm btn-primary mb-1">Entregada</button>
+                    </form>
+                    <form action="../scripts/EliminarSol.php" method="post">
+                      <input type="hidden" name="id" value="<?php echo $registro->ID; ?>">
+                      <button type="submit" class="btn btn-danger" name="cancelar">Cancelada</button>
+                    </form>
+                    <?php
+                    }
+                    
+                    echo "</td>";
                     echo "</tr>";
                 }
                 ?>

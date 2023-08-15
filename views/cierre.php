@@ -42,10 +42,19 @@ else
               <a class="nav-link" href="cocina.PHP">Cocina</a>
             </li>
             <li>
+              <a class="nav-link" href="pendientes.php">Pendientes</a>
+            </li>
+            <li>
+              <h6 id="miTabla"></h6>
+            </li>
+            <li>
               <a class="nav-link" href="cierre.php">Cierre</a>
             </li>
             <li>
               <a class="nav-link" href="solicitar.php">Solicitar</a>
+            </li>
+            <li>
+              <a class="nav-link" href="entrada.php">Entrada</a>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="verperfilv1.php" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -64,35 +73,45 @@ else
       <hr>
       <h2 align="center">Cierre del día</h2>
       <hr>
+      <h4 align="center">Ingresa las cantidades sobrantes del día de cada insumo</h4>
       <div class="justify-content-center" id="contenedor">
         <div class="table-responsive">
         <form action="../scripts/guardarcierre.php" method="post">
-          <table class="table align-middle table-sm">
-            <tbody>
-              <?php
-                include '../class/database.php';
-                $conexion = new database();
-                $conexion->conectarDB();
-                $consulta ="SELECT INVENTARIO.NOMBRE as N, INVENTARIO.PRESENTACION as P FROM INVENTARIO WHERE INVENTARIO.ESTADO = 'ACTIVO'";
-                $reg = $conexion->seleccionar($consulta);
-              foreach($reg as $value){
-                echo"
+    <table class="table table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>Insumo</th>
+                <th>Cantidad</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            include '../class/database.php';
+            $conexion = new database();
+            $conexion->conectarDB();
+            $consulta = "SELECT INVENTARIO.NOMBRE as N, INVENTARIO.PRESENTACION as P FROM INVENTARIO WHERE INVENTARIO.ESTADO = 'ACTIVO'";
+            $reg = $conexion->seleccionar($consulta);
+            foreach ($reg as $value) {
+                echo "
                 <tr>
-                  <th scope='row'><label class='control-label' for='$value->N'>$value->N</label> </th>
-                  <td colspan='2' class='table-active'>
-                  <input type='number' name='cantidades[$value->N]' class='form-control' onkeypress='return validarNumero(event)' 
-                  placeholder='Ingresa la cantidad sobrante del insumo:' required min='0.1' step='0.1'> (<label class='control-label' for='$value->P'>$value->P</label>)</td>
-                </tr>                
+                    <td><label class='control-label' for='$value->N'>$value->N</label></td>
+                    <td class='table-active'>
+                        <input type='number' name='cantidades[$value->N]' class='form-control' onkeypress='return validarNumero(event)' 
+                        placeholder='Ingresa la cantidad sobrante del insumo:' required min='0.1' step='0.1'>
+                    </td>
+                    <td><label class='control-label' for='$value->P'>$value->P</label></td>
+                </tr>
                 ";
-              }             
-              ?>             
-            </tbody>
-            </table>
-            <br>
-            <div class="d-grid gap-2">
-                <button class="btn btn-primary" type="submit">Guardar</button>
-            </div>
-          </form>
+            }
+            ?>
+        </tbody>
+    </table>
+    <br>
+    <div class="d-grid gap-2">
+        <button class="btn btn-primary" type="submit">Guardar</button>
+    </div>
+</form>
           </div>
         </div> 
       </div>    

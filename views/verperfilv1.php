@@ -116,10 +116,10 @@ session_start();
 include '../class/database.php';
 $db = new Database();
 $db->conectarDB();
-  $usuario1 = $_SESSION['usuario'];
+  $usuario1 = $_SESSION['correo'];
   $consulta1 = "SELECT U.ID_USUARIO AS ID, U.NOMBRE AS 'NOMBRE', U.DIRECCION AS 'DIRECCION', U.TELEFONO AS 'TELEFONO', U.CORREO AS 'CORREO',
   U.img_chidas FROM USUARIOS U
-  WHERE NOMBRE = '$usuario1';";
+  WHERE CORREO = '$usuario1';";
   $tabla = $db->seleccionar($consulta1);
     foreach($tabla as $registro){}
     $imghead = "https://toys-pizza.s3.amazonaws.com/imagenes/pizza.png"
@@ -214,13 +214,13 @@ echo "<img src='$imgchida' alt='img' id = 'img' class='rounded-circle'>";
  
  <!-- cambio de foto de perfil -->
  <div class="row g-3 text-center">
-<form action="../views/verperfilv.php" method="post" enctype="multipart/form-data">
+<form action="../views/verperfilv1.php" method="post" enctype="multipart/form-data">
 <div class="col-sm-9 col-lg-10">
               <input class="form-control" type="file" name="archivo" id="archivo">
             </div>
             
             <div class="col-sm-3 col-lg-2 ">
-              <button type="button" class="btn btn-secondary "value="Subir archivo">Cambiar Foto</button>
+              <button type="submit" class="btn btn-secondary " value="Subir archivo">Cambiar Foto</button>
             </div>
             </form>
 </div>
@@ -261,7 +261,6 @@ try {
     extract($_POST);
     $cadena = "UPDATE USUARIOS SET img_chidas='https://toys-pizza.s3.amazonaws.com/imagenes/$nombreArchivo' WHERE ID_USUARIO = $registro->ID;";
     $db->ejecutarsql($cadena);
-    header("location: verperfil1.php");
 
 } catch (S3Exception $e) {
     // En caso de error, captura la excepción y muestra un mensaje
@@ -290,12 +289,7 @@ try {
             <h3> <label for="firstName" class="form-label">Telefono</label></h3>
              <h4> <label for="firstName" class="form-label d-block p-2  "><?php echo $registro->TELEFONO;?> </label> </h4>
             </div>
-
-            <div class="col-12">
-            <h3> <label for="firstName" class="form-label">Correo</label></h3>
-             <h4> <label for="firstName" class="form-label d-block p-2  "><?php echo $registro->CORREO;?> </label> </h4>
-            </div>
-          
+        
         
                     
               <form action="../scripts/verperfil.php" method="post">
@@ -303,7 +297,6 @@ try {
           <input type="hidden" name="nombre" value="<?php echo $registro->NOMBRE; ?>">
           <input type="hidden" name="direccion" value="<?php echo $registro->DIRECCION; ?>">
           <input type="hidden" name="telefono" value="<?php echo $registro->TELEFONO; ?>">
-          <input type="hidden" name="correo" value="<?php echo $registro->CORREO; ?>">
           <button class="w-100 btn btn-primary btn-lg" type="submit">Editar Perfil</button>
         </form>
       

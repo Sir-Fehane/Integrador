@@ -1,4 +1,7 @@
 <?php
+include '../class/database.php';
+$conexion = new database();
+$conexion->conectarDB();
 session_start();
 if(!isset($_SESSION['rol']))
 {
@@ -19,6 +22,12 @@ else
     header("Location: ../index.php");
     exit;
   }
+}
+$cons="SELECT SUCURSALES.ID_SUC FROM SUCURSALES INNER JOIN EMPLEADO_SUCURSAL ON EMPLEADO_SUCURSAL.SUCURSAL=SUCURSALES.ID_SUC INNER JOIN USUARIOS ON USUARIOS.ID_USUARIO=EMPLEADO_SUCURSAL.EMPLEADO WHERE USUARIOS.ID_USUARIO=".$_SESSION["IDUSU"]."";
+$resultadocons=$conexion->seleccionar($cons);
+foreach($resultadocons as $abc)
+{
+  $_SESSION['IDSUCUR']=$abc->ID_SUC;
 }
 ?>
 <!DOCTYPE html>
@@ -52,6 +61,12 @@ else
               <a class="nav-link" href="cocina.PHP">Cocina</a>
             </li>
             <li>
+              <a class="nav-link" href="pendientes.php">Pendientes</a>
+            </li>
+            <li>
+              <h6 id="miTabla"></h6>
+            </li>
+            <li>
               <a class="nav-link" href="cierre.php">Cierre</a>
             </li>
             <li>
@@ -81,13 +96,10 @@ else
       <div class="div" id="cuerpo1">
         <div class="row" id="renglon">
         <?php
-        include '../class/database.php';
-        $conexion = new database();
-        $conexion->conectarDB();
         $consulta ="SELECT PRODUCTOS.NOMBRE as N, PRODUCTOS.CODIGO as ID, PRODUCTOS.PRECIO as PR FROM PRODUCTOS WHERE PRODUCTOS.ESTADO = 'ACTIVO' GROUP BY PRODUCTOS.NOMBRE";
         $reg = $conexion->seleccionar($consulta);        
         foreach($reg as $value){ ?>
-          <div class="col-12 col-md-5 col-lg-4">
+          <div class="col-5 col-md-5 col-lg-4">
           <button class="btn card" data-bs-toggle="modal" data-bs-target="#modal<?php echo $value->ID; ?>" data-modal-target="modal<?php echo $value->ID; ?>" id="item" data-titulo="<?php echo $value->N; ?>" data-tamaño="">   
                   <span class="titulo-item"><?php echo $value->N; ?></span>
                   <img src="../img/pepe.jpg" class="img-item"/>

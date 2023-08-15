@@ -58,7 +58,7 @@ $db->conectarDB();
     echo "<th class='col-4 col-lg-3 sortable'>Tamaño</th>";
     echo "<th class=' col-lg-3'>Descripcion</th>"; 
     echo "<th class='col-1 col-lg-3 sortable'>Precio</th>";
-    echo "<th class=' col-lg-3 d-none d-lg-table-cell'>IMG</th>";
+    echo "<th class=' col-lg-3'>IMG</th>";
     echo "<th class='col-2 col-lg-3 sortable'>Editar</th>";
     echo "</tr>";
     echo "</thead>";
@@ -127,5 +127,6 @@ $db->conectarDB();
       $('#DetallePro').DataTable();
     });
   </script>
+
 </body>
 </html>

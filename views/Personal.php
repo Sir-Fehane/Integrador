@@ -53,7 +53,7 @@ else
                 <?php
                 $db = new Database();
                 $db->conectarDB();
-                $cadena = "SELECT ID_SUC,NOMBRE FROM SUCURSALES";
+                $cadena = "SELECT ID_SUC,NOMBRE FROM SUCURSALES WHERE ESTADO = 'ACTIVO'";
                 $reg = $db->seleccionar($cadena);
                 echo "<div class='me-2'>
                 <select name='suc' class='form-select'>
@@ -110,7 +110,7 @@ else
     }
     $tabla = $db->seleccionar($cadena);
     ?>
-    <div class="container justify-content-center">
+    <div class="container-fluid justify-content-center mr-3">
     <div class="table-responsive">
         <?php
         echo "<table class='table table-hover' id='DetalleInv'>";
@@ -175,9 +175,9 @@ else
       </div>
       <div class="modal-footer">
         <form action="../scripts/EliminarEmp.php" method="post">
-          <input type="hidden" name="id" value="<?php echo $registro->ID; ?>">
+          <input type="hidden" name="id" value="<?php echo $registro->IDEMP; ?>">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-          <button type="submit" class="btn btn-danger" name="eliminar">Eliminar</button>
+          <button type="submit" class="btn btn-danger" name="baja">Eliminar</button>
         </form>
       </div>
     </div>
@@ -202,5 +202,6 @@ else
       $('#DetalleInv').DataTable();
     });
   </script>
+
 </body>
 </html>

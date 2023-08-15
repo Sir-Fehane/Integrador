@@ -36,6 +36,7 @@ if (isset($_POST['pagar'])) {
             print_r($noOrden);
             foreach($noOrden as $OV){
                 $idorden = $OV['IDO']; 
+                $_SESSION['orden1'] = $idorden;
                 if($idorden == 0){
                     $idorden = 1;
                 } 
@@ -60,6 +61,7 @@ if (isset($_POST['pagar'])) {
     }
     unset($_SESSION['carrito']);
 }
+include "../Mail/CORREOPV.php";
 header("Location: ../views/puntoventa.php");
 exit();
 ?>

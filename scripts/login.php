@@ -15,9 +15,7 @@
 
         extract($_POST);
 
-        $db->verifica("$usuario","$password");
-        $db->desconectarDB();
-
+        $db->verifica("$correo","$password");
         $db->desconectarDB();
         
         ?>

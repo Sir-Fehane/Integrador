@@ -8,6 +8,10 @@ class Database{
     {
         try
         {
+            $options=array(
+                PDO::ATTR_EMULATE_PREPARES=>false,
+                PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION
+              );
             $this->PDOAws= new PDO($this->server, $this->user, $this->password);
         }
         catch(PDOException $e)
@@ -54,6 +58,20 @@ class Database{
         }
     }
 
+    function selecsinall($consulta)
+    {
+        try
+        {
+            $resultado = $this->PDOAws->query($consulta);
+            $fila = $resultado->fetch(PDO::FETCH_ASSOC);
+            return $fila;
+        }
+        catch(PDOException $e)
+        {
+            echo $e->getMessage();
+        }
+    }
+
     function ejecutarSQL($consulta)
     {
         try
@@ -65,18 +83,18 @@ class Database{
             echo $e->getMessage();
         }
     }
-    function verifica($usuario, $contra)
+    function verifica($correo, $contra)
     {
         try
         {
             $pase = false;
-            $query = "SELECT * FROM USUARIOS WHERE NOMBRE = '$usuario'";
+            $query = "SELECT * FROM USUARIOS WHERE CORREO = '$correo'";
             $consulta = $this->PDOAws->query($query);
-            
             while($renglon = $consulta->fetch(PDO::FETCH_ASSOC))
             {
                 if (password_verify($contra, $renglon['CONTRASENA'])) 
                 {
+                    $nombre = $renglon['NOMBRE'];
                     $pase = true;
                     $rol = $renglon['ROL'];
                     $id_usuar=$renglon['ID_USUARIO'];
@@ -84,38 +102,28 @@ class Database{
             }
             if($pase)
             {
-                session_start();
-                $_SESSION["usuario"] = $usuario;
+                $_SESSION["correo"] = $correo;
+                $_SESSION["usuario"] = $nombre;
                 $_SESSION["rol"] = $rol;
                 $_SESSION["IDUSU"]= $id_usuar;
 
-                echo "<div class = 'alert alert-success'>";
-                echo "<h2 align = 'center'>Bienvenido ".$_SESSION["usuario"]."</h2> </div>";
-                echo "</div>";
-
-                switch ($_SESSION["rol"])
-                {
-                    case 1: header("refresh:2 ../views/admin.php");
-                        break;
-                    case 2: header("refresh:2 ../index.php");
-                        break;
-                    case 3: header("refresh:2 ../views/puntoventa.php");
-                        break;
-                    default:
-                        break;
-                }
+                //echo "<div class = 'alert alert-success'>";
+                //echo "<h2 align = 'center'>Bienvenido ".$_SESSION["usuario"]."</h2> </div>";
+                //echo "</div>";
+                return true;
             }
             else
             {
-                echo "<div class = 'alert alert-danger'>";
-                echo "<h2 align = 'center'>Usuario o password incorrecto</h2>";
-                echo "</div>";
-                header("refresh:2 ../index.php");
+                //echo "<div class = 'alert alert-danger'>";
+                //echo "<h2 align = 'center'>Usuario o password incorrecto</h2>";
+                //echo "</div>";
+                return false;
             }
         }
         catch(PDOException $e)
         {
             echo $e->getMessage();
+            return false;
         }
     }
     function cerrarSesion()
@@ -136,7 +144,10 @@ class Database{
         }
         return $this->PDOAws;
     }
-
+    function prepararConsulta($query) {
+        return $this->PDOAws->prepare($query);
+    }
 }
+
 
 ?>
