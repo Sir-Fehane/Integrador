@@ -6,7 +6,7 @@ include '../class/database.php';
 $db= new Database();
 $db->conectarDB();
 $cart = new Cart;
-$horainicio="00:00";
+$horainicio="06:00";
 $horacierre="20:00";
 $horaactual=date("H:i");
 
