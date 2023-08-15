@@ -63,7 +63,7 @@ $pdf->Ln(3);
 # Tabla de productos #
 $pdf->Cell(10,5,utf8_decode("Cant."),0,0,'C');
 $pdf->Cell(19,5,utf8_decode("Precio"),0,0,'C');
-$pdf->Cell(28,5,utf8_decode("Total"),0,0,'C');
+$pdf->Cell(28,5,utf8_decode("Subtotal"),0,0,'C');
 
 $pdf->Ln(3);
 $pdf->Cell(72,5,utf8_decode("-------------------------------------------------------------------"),0,0,'C');

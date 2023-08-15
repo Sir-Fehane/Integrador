@@ -43,6 +43,35 @@ foreach($resultadocons as $abc)
       href="../css/bootstrap.min.css"
     />
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    <script type="text/javascript">
+
+		function tiempoReal()
+		{
+			var tabla = $.ajax({
+				url:'tablaConsulta.php',
+				dataType:'text',
+				async:false
+			}).responseText;
+
+			document.getElementById("miTabla").innerHTML = tabla;
+		}
+		setInterval(tiempoReal, 1000);
+		</script>
+<script type="text/javascript">
+function tiempoReal2()
+{
+  var tabla = $.ajax({
+    url:'tablaConsultaT.php',
+    dataType:'text',
+    async:false
+  }).responseText;
+
+  document.getElementById("miTabla2").innerHTML = tabla;
+}
+setInterval(tiempoReal, 1000);
+</script>
   </head>      
   <body>
     <!--Header/navbar-->
@@ -65,6 +94,12 @@ foreach($resultadocons as $abc)
             </li>
             <li>
               <h6 id="miTabla"></h6>
+            </li>
+            <li>
+              <a class="nav-link" href="terminadas.php">Terminadas</a>
+            </li>
+            <li>
+              <h6 id="miTabla2"></h6>
             </li>
             <li>
               <a class="nav-link" href="cierre.php">Cierre</a>
@@ -93,21 +128,24 @@ foreach($resultadocons as $abc)
 
     <!--Cuerpo de la pagina-->
     <div class="container" id="cuerpo">
-      <div class="div" id="cuerpo1">
         <div class="row" id="renglon">
         <?php
         $consulta ="SELECT PRODUCTOS.NOMBRE as N, PRODUCTOS.CODIGO as ID, PRODUCTOS.PRECIO as PR, PRODUCTOS.img_prod as IMG FROM PRODUCTOS WHERE PRODUCTOS.ESTADO = 'ACTIVO' GROUP BY PRODUCTOS.NOMBRE";
         $reg = $conexion->seleccionar($consulta);        
         foreach($reg as $value){ ?>
-          <div class="col-5 col-md-5 col-lg-4">
-          <button class="btn card" data-bs-toggle="modal" data-bs-target="#modal<?php echo $value->ID; ?>" data-modal-target="modal<?php echo $value->ID; ?>" id="item" data-titulo="<?php echo $value->N; ?>" data-tamaño="">   
+          <div class="col-6 col-md-5 col-lg-4">
+          <button class="btn justify-content-center" data-bs-toggle="modal" data-bs-target="#modal<?php echo $value->ID; ?>" data-modal-target="modal<?php echo $value->ID; ?>" id="item" data-titulo="<?php echo $value->N; ?>" data-tamaño="" style="height:225px">   
           <?php $imagen = $value->IMG; ?>
                   <span class="titulo-item"><?php echo $value->N; ?></span>
-                  <img src="<?php echo $imagen;?>" class="img-item"/>
+                  <div class="d-lg-none d-block">
+                      <img src="<?php echo $imagen;?>" class="img-item" style="width: 125px; height:100px">
+                  </div>
+                  <div class="d-none d-lg-block">
+                      <img src="<?php echo $imagen;?>" class="img-item" style="width: 250px; height:150px">
+                  </div>
               </button>
           </div>
           <?php } ?>
-        </div>
       </div>
     </div>
     <!-- CONFIGURAR -->
