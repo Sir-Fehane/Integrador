@@ -43,6 +43,13 @@ else
               <li class="nav-item">
                 <a class="nav-link navtext" href="views/menu-pizza.php">Menu</a>
               </li>
+              <?php
+    if (isset($_SESSION['rol']) && $_SESSION['rol'] == 3) {
+        echo '<li class="nav-item">
+                  <a class="nav-link navtext" href="views/puntoventa.php">Punto de Venta</a>
+              </li>';
+    }
+    ?>
                 </ul>
                 <li class="nav-item">
             <a href="carrito/viewCart.php" title="Ver carrito"><i class='bx bxs-cart'></i></a>
