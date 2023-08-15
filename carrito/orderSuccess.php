@@ -6,22 +6,25 @@ if(!isset($_REQUEST['id'])){
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Order Success - PHP Shopping Cart Tutorial</title>
+    <title>Toy's Pizza</title>
+    <link rel="stylesheet" href="../css/carro.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <meta charset="utf-8">
-    <style>
-    .container{width: 100%;padding: 50px;}
-    p{color: #34a853;font-size: 18px;}
-    </style>
-</head>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+  <style>p{color:#2A52D5;}h1{color:#2A52D5;}</style>
 </head>
 <body>
-<div class="container">
+<div class="container" style="text-align:center;">
     <h1>Estatus de la orden</h1>
     <p>Tu orden se realizo correctamente, tu orden es la #<?php echo $_GET['id']; ?></p>
     <?php include"../Mail/CORREO.php"?>
     <p>Se le ha enviado informacion de su orden en su correo, favor de checar su correo.</p>
-    
-    <?php (header("refresh:3 ; ../index.php")) ?>
+    <br>
+    <img src="../img/pizza.png" id="img-toys">
+    <?php unset($_SESSION['TOTAL']); header("location: ../index.php")?>
+
 </div>
 </body>
 </html>

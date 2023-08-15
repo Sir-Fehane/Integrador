@@ -152,7 +152,6 @@ try {
    //$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
    $mail->addAttachment('mi_pdf.pdf', 'ticket.pdf');
     $mail->send();
-    echo 'Ya se envió';
 } catch (Exception $e) {
     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
 }

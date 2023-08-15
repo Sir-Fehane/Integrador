@@ -29,11 +29,53 @@ body{
     background-image: url(../img/fondocar.jpg);
     background-repeat: repeat;
 }
-    .shipAddr{width: 30%;float: left;margin-left: 30px;}
+    .shipAddr{
+        background-color: #ffff;
+        width: 300px;
+        text-align: center; 
+        border-radius: 35px; 
+        border: 2px solid #FECB00;
+    }
     .footBtn{width: 95%;float: left;}
     .orderBtn {float: right;}
-
-.content
+    #img-toys{display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+.formcarro{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.formcarro
+input
 {
-    margin-top: 10rem;
+    width: 20%;
+}
+@media (max-width:576px)
+{.content
+    {
+        margin-top: 5rem;
+    }
+    #img-toys{width: 40%;}
+    a{width: auto;}
+    .shipAddr{margin-left: 2.5rem;}
+    .formcarro button
+{
+    margin-left: 9.8rem;
+}
+}
+@media (min-width:576px)
+{
+    .shipAddr{margin-left: 28rem;}
+    .content{margin-top: 3rem;}
+    #img-toys{width: 20%;}
+    .formcarro button
+{
+    margin-left: 9.8rem;
+}
+}
+h4, h1
+{
+    font-weight: bold;
 }
