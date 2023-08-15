@@ -111,7 +111,7 @@ else
                     <th class='col-1 col-lg-2 sortable'>Fecha</th>
                     <th class='col-1 col-lg-2 sortable'>Estado</th>
                     <?php if($sol == 'solicitado'){
-                      echo "<th class='col-1 col-lg-2'>Otros</th>";
+                      echo "<th class='col-1 col-lg-2'>Marcar como</th>";
                     }?>
                 </tr>
             </thead>
@@ -134,7 +134,7 @@ else
                     </form>
                     <form action="../scripts/EliminarSol.php" method="post">
                       <input type="hidden" name="id" value="<?php echo $registro->ID; ?>">
-                      <button type="submit" class="btn btn-danger" name="cancelar">Cancelar</button>
+                      <button type="submit" class="btn btn-danger" name="cancelar">Cancelada</button>
                     </form>
                     <?php
                     }
