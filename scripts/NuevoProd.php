@@ -21,7 +21,6 @@
         <input type="hidden" value="ACTIVO" name="estado">
         <div class="mb-3">
             <label for="nombre" class="form-label">Nombre del producto:</label>
-<<<<<<< HEAD
             <input type="text" name="nombre" class="form-control" required>
         </div>
         <div class="mb-3">
@@ -41,21 +40,6 @@
         <div class="mb-3">
             <label for="prec" class="form-label">Precio:</label>
             <input type="number" name="prec" class="form-control" required onkeypress="return validarNumero(event)>
-=======
-            <input type="text" name="nombre" class="form-control">
-        </div>
-        <div class="mb-3">
-            <label for="direc" class="form-label">Tamaño:</label>
-            <input type="text" name="tamaño" class="form-control">
-        </div>
-        <div class="mb-3">
-            <label for="tel" class="form-label">Descripcion:</label>
-            <input type="text" name="desc" class="form-control">
-        </div>
-        <div class="mb-3">
-            <label for="contra" class="form-label">Precio:</label>
-            <input type="text" name="prec" class="form-control">
->>>>>>> a1fc7d817ff273894346e518e325ad3a2b7f05c2
         </div>
         
         <div class="mb-3">

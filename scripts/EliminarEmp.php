@@ -14,13 +14,15 @@ else
     exit;
   }
  }
-if(isset($_POST['eliminar']))
+if(isset($_POST['baja']))
 {
     include "../class/database.php";
         $db = new Database();
         $db->conectarDB();
     extract($_POST);
-    $cadena = "UPDATE EMPLEADO_SUCURSAL SET ESTADO = 'INACTIVO' WHERE EMPLEADO = $id";
+    $cadena = "UPDATE USUARIOS SET ESTADO = 'INACTIVO' WHERE ID_USUARIO = $id;";
+    $db->ejecutarsql($cadena);
+    $cadena = "UPDATE EMPLEADO_SUCURSAL SET ESTADO = 'INACTIVO' WHERE EMPLEADO = $id;";
     $db->ejecutarsql($cadena);
     $db->desconectarDB();
     header("Location: Exito.php");
