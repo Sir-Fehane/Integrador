@@ -1,4 +1,5 @@
 <?php
+session_start();
 if(!isset($_SESSION['rol']))
 {
   header('Location: ../index.php');
@@ -30,8 +31,8 @@ else
     ?>
 <div class="container w-75 p-5">
     <div class="d-flex">
-        <a class="btn btn-primary" href="../views/verperfilv1.php">Regresar</a>
-        <h3 align="center" style="margin-left: 30%;">Editar Perfil</h3>
+        <a class="btn btn-primary" href="../views/admin.php">Regresar</a>
+        <h3 align="center" style="margin-left: 30%;">Editar Producto</h3>
     </div>
     <form action="" method="POST">
         <?php
@@ -69,7 +70,7 @@ else
                 $cadena = "UPDATE PRODUCTOS SET NOMBRE = '$nuevonom', TAMANO = '$nuevodir', TAMANO = '$nuevotel' , DESCRIPCION = '$nuevocor', PRECIO = '$nuevocor1' WHERE CODIGO = $id";
                 $db->ejecutarsql($cadena);
                 $db->desconectarDB();
-                header("Location: exitoperf.php");
+                header("Location: ../views/admin.php");
                 exit;
             }
         ?>
