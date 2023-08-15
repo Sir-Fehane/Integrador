@@ -100,112 +100,97 @@ foreach($resultadocons as $abc)
       </div>
     </nav>
       <!--cuerpo-->
-      <?php      
-      $sexo = 0;
-        $ordenesact = "SELECT DE.NO_ORDEN from DETALLE_ORDEN DE inner join ORDEN_VENTA OV ON OV.NO_ORDEN = DE.NO_ORDEN where DATE(OV.HORA_FECHA) = CURDATE() 
-        AND OV.ESTADO='EN PROCESO' group by DE.NO_ORDEN;";
-        $tabla = $conexion->seleccionar($ordenesact);
-        foreach ($tabla as $registro)  
-        {
-        echo "<div class='container'>
-        <div class='rows d-flex justify-content-center'>";
-        echo "<div class='col-lg-9'> <h2 >ORDEN $registro->NO_ORDEN</h2>  </div>" ?>   
-<div class="col-lg-3">
-    <form action="../views/cocina.PHP" method="post">
-        <input type="hidden" name="no_orden" value="<?php echo $registro->NO_ORDEN; ?>">
-        <button type="submit" class="col-auto btn btn-sm btn-success" name="editar_orden">Terminar</button>
-        <button type="submit" class="col-auto btn btn-sm btn-danger" name="cancelar_orden">Cancelar</button>
-    </form>
-</div>
-        <?php
-       echo "</div>";?>
-<?php
+      <?php
+$ordenesact = "SELECT DE.NO_ORDEN FROM DETALLE_ORDEN DE INNER JOIN ORDEN_VENTA OV ON OV.NO_ORDEN = DE.NO_ORDEN WHERE DATE(OV.HORA_FECHA) = CURDATE() AND OV.ESTADO='EN PROCESO' GROUP BY DE.NO_ORDEN;";
+$tabla = $conexion->seleccionar($ordenesact);
+
+echo "<div class='container'>
+        <div class='table-responsive'>";
+
+if (count($tabla) > 0) {
+    foreach ($tabla as $registro) {
+        echo "<div class='col-lg-9'>
+                  <h2>ORDEN $registro->NO_ORDEN</h2>
+              </div>
+              <div class='table-responsive'>
+                  <form action='../views/cocina.PHP' method='post'>
+                      <input type='hidden' name='no_orden' value='$registro->NO_ORDEN'>
+                      <button type='submit' class='btn btn-sm btn-success' name='editar_orden'>Terminar</button>
+                      <button type='submit' class='btn btn-sm btn-danger' name='cancelar_orden'>Cancelar</button>
+                  </form>
+              </div>
+              <hr>";
+        echo "<div class='col-lg-12'>
+                  <div class='table-responsive-md' style='overflow-x: auto;'>
+                      <table class='table table-hover table-striped'>
+                          <thead class='table-dark'>
+                              <tr>
+                                  <th>PRODUCTO</th><th>TAMAÑO</th><th>CANTIDAD</th><th>NOTAS</th><th>ESTADO</th>
+                              </tr>
+                          </thead>
+                          <tbody>";
+
+        $pizzas = "SELECT DE.NO_ORDEN, P.NOMBRE, P.TAMANO, DE.CANTIDAD AS CANTIDAD_PIZZAS, DE.NOTAS, OV.ESTADO 
+                   FROM DETALLE_ORDEN DE 
+                   INNER JOIN ORDEN_VENTA OV ON OV.NO_ORDEN = DE.NO_ORDEN 
+                   INNER JOIN PRODUCTOS P ON DE.PRODUCTO = P.CODIGO 
+                   WHERE DE.NO_ORDEN = $registro->NO_ORDEN;";
+
+        $tabla2 = $conexion->seleccionar($pizzas);
+
+        foreach ($tabla2 as $registro2) { 
+            echo "<tr>";
+            echo "<td> $registro2->NOMBRE </td>";
+            echo "<td> $registro2->TAMANO </td>";
+            echo "<td> $registro2->CANTIDAD_PIZZAS </td>";
+            echo "<td> $registro2->NOTAS </td>";
+            echo "<td> $registro2->ESTADO </td>";
+            echo "</tr>";
+        }
+
+        echo "</tbody></table></div></div>";
+    }
+} else 
+{
+    echo "<br>";
+    echo "<h3 align='center'>Por el momento no hay órdenes...</h3>";
+}
+
+echo "</div></div>";
 
 if (isset($_POST['editar_orden'])) {
-    // Obtener el número de orden enviado desde el formulario
     $no_orden = $_POST['no_orden'];
 
-    // Realizar el UPDATE en la base de datos para cambiar el estado de la orden
     try {
-        $estado_nuevo = "TERMINADO"; // Reemplaza con el nuevo estado deseado
+        $estado_nuevo = "TERMINADO";
         $update_sql = "UPDATE ORDEN_VENTA SET ESTADO = :estado_nuevo WHERE NO_ORDEN = :no_orden";
 
-        // Preparar la consulta
         $stmt = $conexion->getDB()->prepare($update_sql);
-
-        // Asignar valores a los parámetros
         $stmt->bindParam(':estado_nuevo', $estado_nuevo);
         $stmt->bindParam(':no_orden', $no_orden);
-
-        // Ejecutar la consulta
         $stmt->execute();
-
-
     } catch (PDOException $e) {
-        // En caso de error, mostrar el mensaje de error
+        echo "Error: " . $e->getMessage();
+    }
+    echo "<script>window.location.href = 'cocina.PHP';</script>";
+}
+
+if (isset($_POST['cancelar_orden'])) {
+    $no_orden = $_POST['no_orden'];
+
+    try {
+        $estado_nuevo = "CANCELADA";
+        $update_sql = "UPDATE ORDEN_VENTA SET ESTADO = :estado_nuevo WHERE NO_ORDEN = :no_orden";
+
+        $stmt = $conexion->getDB()->prepare($update_sql);
+        $stmt->bindParam(':estado_nuevo', $estado_nuevo);
+        $stmt->bindParam(':no_orden', $no_orden);
+        $stmt->execute();
+    } catch (PDOException $e) {
         echo "Error: " . $e->getMessage();
     }
     header("location: cocina.PHP");
 }
-
-if (isset($_POST['cancelar_orden'])) {
-  // Obtener el número de orden enviado desde el formulario
-  $no_orden = $_POST['no_orden'];
-
-  // Realizar el UPDATE en la base de datos para cambiar el estado de la orden
-  try {
-      $estado_nuevo = "CANCELADA"; // Reemplaza con el nuevo estado deseado
-      $update_sql = "UPDATE ORDEN_VENTA SET ESTADO = :estado_nuevo WHERE NO_ORDEN = :no_orden";
-
-      // Preparar la consulta
-      $stmt = $conexion->getDB()->prepare($update_sql);
-
-      // Asignar valores a los parámetros
-      $stmt->bindParam(':estado_nuevo', $estado_nuevo);
-      $stmt->bindParam(':no_orden', $no_orden);
-
-      // Ejecutar la consulta
-      $stmt->execute();
-
-
-  } catch (PDOException $e) {
-      // En caso de error, mostrar el mensaje de error
-      echo "Error: " . $e->getMessage();
-  }
-   header("location: cocina.PHP");
-}
-
-        ?>
-<input type="hidden">
-        </form>
-        <?php
-        echo "<div class ='table-responsive'>";
-        echo "<table class = 'table table-hover'>
-        <thead class = 'table-dark'>
-        <tr>
-        <th>PRODUCTO</th><th>TAMAÑO</th><th>CANTIDAD</th><th>NOTAS</th><th>ESTADO</th>
-        </tr>
-        </thead>";
-        $pizzas = " SELECT DE.NO_ORDEN , P.NOMBRE ,P.TAMANO, DE.CANTIDAD AS CANTIDAD_PIZZAS, DE.NOTAS,  OV.ESTADO 
-        FROM DETALLE_ORDEN DE 
-        INNER JOIN ORDEN_VENTA OV ON OV.NO_ORDEN = DE.NO_ORDEN 
-        INNER JOIN PRODUCTOS P ON DE.PRODUCTO = P.CODIGO 
-        WHERE DE.NO_ORDEN=$registro->NO_ORDEN;";
-        $tabla2 = $conexion->seleccionar($pizzas);
-        foreach($tabla2 as $registro2){ 
-       echo "<tbody>";
-          echo "<tr>";
-          echo "<td> $registro2->NOMBRE </td>";
-          echo "<td> $registro2->TAMANO </td>";
-          echo "<td> $registro2->CANTIDAD_PIZZAS </td>";
-          echo "<td> $registro2->NOTAS </td>";
-          echo "<td> $registro2->ESTADO </td>";
-          echo "</tr>";
-        }
-        echo "</tbody>";
-        echo "</table>";
-        echo "</div>";
-        }
-        ?>
+?>
 </body>
 </html>
