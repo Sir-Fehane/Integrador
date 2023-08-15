@@ -1,18 +1,11 @@
 <?php
+session_start();
 if(!isset($_SESSION['rol']))
 {
   header('Location: ../index.php');
 }
-else
- {
-  if ($_SESSION["rol"] == 2) {
-    header("Location: ../index.php");
-    exit;
-  } elseif ($_SESSION["rol"] == 3) { 
-    header("Location: puntoventa.php");
-    exit;
-  }
- }
+
+ 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -50,10 +43,7 @@ else
         <label for="nuevotel" class="form-label">Telefono:</label>
         <input type="text" name="nuevotel" class="form-control" value="<?php echo $telefono;?>">
         </div>
-        <div class="mb-3">
-        <label for="nuevopres" class="form-label">Correo:</label>
-        <input type="text" name="nuevocor" class="form-control" value="<?php echo $correo;?>">
-        </div>
+
 
         <div class="d-grid gap-2">
             <button type="submit" name="submit" class="btn btn-primary">Guardar</button>
@@ -62,10 +52,10 @@ else
     <?php
             if(isset($_POST['submit']))
             {
-                $cadena = "UPDATE USUARIOS SET NOMBRE = '$nuevonom', DIRECCION = '$nuevodir', TELEFONO = '$nuevotel' , CORREO = '$nuevocor' WHERE ID_USUARIO = $id";
+                $cadena = "UPDATE USUARIOS SET NOMBRE = '$nuevonom', DIRECCION = '$nuevodir', TELEFONO = '$nuevotel' WHERE ID_USUARIO = $id";
                 $db->ejecutarsql($cadena);
                 $db->desconectarDB();
-                header("Location: exitoperf.php");
+                header("Location: ../views/verperfilv1.php");
                 exit;
             }
         ?>
