@@ -332,7 +332,7 @@ else
                     <label for="direccion" class="form-label">Direccion</label>
                     <input type="text" class="form-control" required name="direccion">
                     <label for="celular" class="form-label">Telefono (10 dígitos)</label>
-                    <input type="tel" name="telefono" class="form-control" required pattern="[0-9]{10}">
+                    <input type="tel" name="telefono" class="form-control" required inputmode="numeric" required pattern="[0-9]{10}" oninput="filterNonNumeric(event)">
                     <label for="email" class="form-label">Correo</label>
                     <input type="email" name="correo" placeholder="Obligatorio" required class="form-control">
                     <span style="color: red;"><?php if(isset($correoError)) echo $correoError; ?></span>
