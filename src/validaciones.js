@@ -6,7 +6,7 @@ function validateForm() {
         return false;
     }
 
-    // Check if phone number has 10 digits
+    // telefono de 10 digitos
     var telefono = document.getElementsByName('telefono')[0].value;
     if (!/^\d{10}$/.test(telefono)) {
         alert("El número de teléfono debe tener exactamente 10 dígitos numéricos.");
@@ -15,4 +15,10 @@ function validateForm() {
 
     // All validations passed
     return true;
+}
+function filterNonNumeric(event) {
+    const input = event.target;
+    const value = input.value;
+    const filteredValue = value.replace(/\D/g, ''); // Remove all non-numeric characters
+    input.value = filteredValue;
 }
