@@ -4,8 +4,6 @@ session_start();
 include'../class/database.php';
 $dbase= new Database();
 $dbase->conectarDB();
-include '../carrito/dbConfig.php';
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -52,7 +50,7 @@ include '../carrito/dbConfig.php';
                     {
                       $usuario1 = $_SESSION['usuario'];
                       $consulta1 = "SELECT U.ID_USUARIO AS ID, U.NOMBRE AS 'NOMBRE', U.DIRECCION AS 'DIRECCION', U.TELEFONO AS 'TELEFONO', U.CORREO AS 'CORREO',
-                      U.img_chidas FROM USUARIOS U
+                      U.ESTADO, U.img_chidas FROM USUARIOS U
                       WHERE NOMBRE = '$usuario1'";
                       $tabla = $dbase->seleccionar($consulta1);
                       foreach ($tabla as $registro)
@@ -61,15 +59,21 @@ include '../carrito/dbConfig.php';
                      echo "<img src='$imgchida' style='border-radius: 10px;' alt='img'width= '50px'
                      height=' 50px'>";
                       }
-                      echo "<li class='nav-item dropdown'>
-                      <a class='nav-link dropdown-toggle text-white' href='#' role='button' data-bs-toggle='dropdown' aria-expanded='false'>
-                      " . $_SESSION["usuario"] . "</a>
-                      <ul class='dropdown-menu'>
-                      <li><a class='dropdown-item text-black' href='../views/verperfilv1.php'>Ver perfil</a></li>
-                      <li><a class='dropdown-item text-black' href='../scripts/cerrarSesion.php'>Cerrar sesión</a></li>
-                      </ul>
-                      </li>";
+                      if ($registro->ESTADO == 'ACTIVADO') 
+                      {
+                        echo "<li class='nav-item dropdown'>
+                                  <a class='nav-link dropdown-toggle text-white' href='#' role='button' data-bs-toggle='dropdown' aria-expanded='false'>
+                                  " . $_SESSION["usuario"] . "</a>
+                                  <ul class='dropdown-menu'>
+                                  <li><a class='dropdown-item text-black' href='../views/verperfilv1.php'>Ver perfil</a></li>
+                                  <li><a class='dropdown-item text-black' href='../scripts/cerrarSesion.php'>Cerrar sesión</a></li>
+                                  </ul>
+                                  </li>";
+                    } elseif ($registro->ESTADO == 'INACTIVO') {
+                        header("Location: ../scripts/verificar_codigo.php");
+                        exit;
                     }
+                  }
                     else
                     {
                     ?>
@@ -210,9 +214,6 @@ include '../carrito/dbConfig.php';
                     <input type="email" class="form-control" name="correo" required>
                     <label for="password" class="form-label">Contraseña</label>
                     <input type="password" class="form-control" name="password" required>
-                    <div>
-                        <a href="">Olvide mi contraseña</a>
-                    </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-danger">Iniciar sesion</button>
                     </div>

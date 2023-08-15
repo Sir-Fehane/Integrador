@@ -2,6 +2,14 @@
 // initializ shopping cart class
 include 'Cart.php';
 $cart = new Cart;
+include '../class/database.php';
+$db=New Database();
+$db->conectarDB();
+$Consulta=$db->seleccionar("SELECT USUARIOS.ESTADO FROM USUARIOS WHERE USUARIOS.ID_USUARIO=".$_SESSION['IDUSU']."");
+foreach($Consulta as $x)
+{
+    $EstadoUsu=$x->ESTADO;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -59,7 +67,8 @@ if (['.','e'].includes(tecla))
     </script>
 </head>
 <body>
-    <?php if(isset($_SESSION["usuario"])){?>
+    <?php if(isset($_SESSION["usuario"])){
+        if($EstadoUsu=='ACTIVADO'){?>
 <div class="container">
     <div class="row content">
     <img src="../img/pizza.png" id="img-toys">
@@ -111,6 +120,22 @@ if (['.','e'].includes(tecla))
     </table>
 </div>
 </div>
+<?php } else {?>
+
+    <div class="text-center">
+            <row>
+        <img src="../img/pizza.png" style="width:30%;" class="col-lg-12 col-12"/>
+        <h1>Parece que te has perdido un poco...</h1>
+        <h3>Tu cuenta no está activada</h3>
+        <br><br><br>
+        <h4>¡Activala para poder continuar con tu experiencia!</h4>
+        <a href="../index.php" class="btn btn-danger col-lg-4 col-4 ">Volver al Index</a>
+        </row>
+        </div>
+        <?php $cart->destroy();
+         } ?>
+         <br> <br> <br>
+
     <?php }else { ?>
         <div class="text-center">
             <row>
