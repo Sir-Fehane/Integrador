@@ -44,6 +44,10 @@
     $conexion = new database();
     $conexion->conectarDB();
     $nombreCliente = isset($_POST['nombre-cliente']) ? $_POST['nombre-cliente'] : '';
+    $domCliente = $_POST["dom-cliente"];
+    $telCliente = $_POST["tel-cliente"];
+    $notes = $_POST["notes"];
+    $notas = "Nombre: $nombreCliente, Domicilio: $domCliente, Teléfono: $telCliente, Nota: $notes";
     $totalGeneral = isset($_POST['total_general']) ? $_POST['total_general'] : 0;
     ?>
     <div class="container" id="cuerpo11">
@@ -55,7 +59,6 @@
       <div class="row" id="Renglon">
         <div class="col-lg-12 table-responsive">
           <?php if (isset($_SESSION['carrito'])) {?>
-          <?php echo $nombreCliente;?>
           <table class="table align-middle table-sm">
           <thead class="table-light">
               <tr>
