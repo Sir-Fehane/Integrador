@@ -29,6 +29,11 @@ $DIRECCIONU = $info1->DIRECCIONU;
 $FECHA = $info1->HORA_FECHA;
 // Crea un nuevo objeto FPDF
 
+$NOMBREUC = $_SESSION['cliente'];
+$TELEFONOU = $_SESSION['domclien'];
+$DIRECCIONU = $_SESSION['telclien'];
+$NOTASU = $_SESSION['notas'];
+
 
 $pdf = new PDF_Code128('P','mm',array(80,258));
 
@@ -57,6 +62,12 @@ $pdf->SetFont('Arial','',9);
 $pdf->Ln(1);
 $pdf->Cell(0,5,utf8_decode("-------------------------------------------------------------------"),0,0,'C');
 $pdf->Ln(3);
+$pdf->MultiCell(0,5,utf8_decode("Cliente: "."$NOMBREUC"),0,'C',false);
+$pdf->MultiCell(0,5,utf8_decode("Teléfono: "."$TELEFONOU"),0,'C',false);
+$pdf->MultiCell(0,5,utf8_decode("Dirección: "."$DIRECCIONU"),0,'C',false);
+$pdf->MultiCell(0,5,utf8_decode("Notas: "."$NOTASU"),0,'C',false);
+$pdf->Cell(0,5,utf8_decode("------------------------------------------------------"),0,0,'C');
+$pdf->Ln(5);
 
 # Tabla de productos #
 $pdf->Cell(10,5,utf8_decode("Cant."),0,0,'C');
@@ -115,7 +126,7 @@ header('Content-Disposition: attachment; filename="' . $nombreArchivo . '"');
 header('Content-Length: ' . filesize($nombreArchivo));
 readfile($nombreArchivo);
 
-header("location: ../views/puntoventa.php");
+
 exit();
 ?>
 

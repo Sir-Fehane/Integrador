@@ -48,6 +48,10 @@
     $telCliente = $_POST["tel-cliente"];
     $notes = $_POST["notes"];
     $notas = "Nombre: $nombreCliente, Domicilio: $domCliente, Teléfono: $telCliente, Nota: $notes";
+    $_SESSION['cliente'] = $nombreCliente;
+    $_SESSION['domclien'] = $domCliente;
+    $_SESSION['telclien'] = $telCliente;
+    $_SESSION['notas'] = $notes;
     $totalGeneral = isset($_POST['total_general']) ? $_POST['total_general'] : 0;
     ?>
     <div class="container" id="cuerpo11">
