@@ -33,6 +33,7 @@ else
       rel="stylesheet"
       href="../css/bootstrap.min.css"
     />
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
   </head>      
   <body>
     <!--Header/navbar-->
@@ -112,7 +113,7 @@ else
                   $sizes = $conexion->seleccionar($size);
                   echo "<label for='tamaño'>Tamaño</label>";
                   echo "<select name='tamaño' class='form-select tamaño' data-precio='0'>";
-                  echo "<option value=''>SELECCIONA UNA OPCION</option>";
+                  echo "<option value='' >SELECCIONA UNA OPCION</option>";
                   foreach($sizes as $reg2)
                   {
                     echo "<option value='" . $reg2->T . "' data-precio='" . $reg2->PR . "'>" . $reg2->T . " - $" . $reg2->PR . "</option>";
@@ -125,7 +126,6 @@ else
                   <br><br>
                   <label for="subtotal">Subtotal: </label>
                   <h5><span class="subtotal">0</span></h5>
-                
             </div>
             <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Cerrar</button>
@@ -133,7 +133,7 @@ else
                         <input type="hidden" name="precio" value="0">
                         <input type="hidden" name="ID" value="<?php echo $value->ID; ?>">
                         <input type="hidden" name="tamaño" value="">
-                        <button type="submit" class="btn btn-primary" onclick="actualizarCampos(<?php echo $value->ID; ?>)">Guardar cambios</button>
+                        <button type="submit" class="btn btn-primary" onclick="actualizarCampos(<?php echo $value->ID; ?>)" id="agregar">Agregar</button>
             </div>
           </div>
         </div>
@@ -142,75 +142,91 @@ else
       <?php } ?>
 
     <!--CARRITOOOO-->
-    <div class="offcanvas offcanvas-end offcanvas-w-75" data-bs-scroll="true" tabindex="-1" id="carrito" aria-labelledby="offcanvasWithBothOptionsLabel">
+    <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="carrito" aria-labelledby="offcanvasWithBothOptionsLabel">
       <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">
+        <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel" align="center">
           Resumen de compra
         </h5>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
+      <div class="row">
+        <div class="col-11 col-lg-11" style="margin-left: 4%">
+        </div>          
+      </div>
       <div class="offcanvas-body">
-      <input type="text" name="nombre-cliente" id="nombre-cliente">
-      <?php
-      $totalFinal = 0;
-      // Verificar si el carrito tiene productos
-      if (isset($_SESSION['carrito']) && !empty($_SESSION['carrito'])) {
-      ?>
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Producto</th>
-              <th>Tamaño</th>
-              <th>Precio</th>
-              <th>Cantidad</th>
-              <th>Subtotal</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <?php
-            // Recorremos los productos en el carrito y los mostramos en la tabla
-            foreach ($_SESSION['carrito'] as $index => $producto) {
-              $subtotal = $producto['precio'] * $producto['cantidad'];
-              $totalFinal += $subtotal; // Sumar el subtotal al total final
-            ?>
+      <div class="row table-responsive d-flex flex-column justify-content-between" style="height: 100%; padding:5px;">
+        <?php
+        $totalFinal = 0;
+        
+        // Verificar si el carrito tiene productos
+        if (isset($_SESSION['carrito']) && !empty($_SESSION['carrito'])) {
+        ?>
+
+          <table class="table table-sm text-center">
+            <thead>
               <tr>
-                <td><?php echo $producto['titulo']; ?></td>
-                <td><?php echo $producto['tamaño']; ?></td>
-                <td>$<?php echo $producto['precio']; ?></td>
-                <td><?php echo $producto['cantidad']; ?></td>
-                <td>$<?php echo $subtotal; ?></td>
-                <td>
-                  <form action="../scripts/eliminar_producto.php" method="post">
-                    <input type="hidden" name="index" value="<?php echo $index; ?>">
-                    <button type="submit" class="btn btn-danger" name="eliminar">Eliminar</button>
-                  </form>
-                </td>
+                <th>Producto</th>
+                <th>Tamaño</th>
+                <th>Precio</th>
+                <th>Cantidad</th>
+                <th>Subtotal</th>
+                <th></th>
               </tr>
-            <?php
-            }
-            ?>
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              <?php
+              // Recorremos los productos en el carrito y los mostramos en la tabla
+              foreach ($_SESSION['carrito'] as $index => $producto) {
+                $subtotal = $producto['precio'] * $producto['cantidad'];
+                $totalFinal += $subtotal; // Sumar el subtotal al total final
+              ?>
+                <tr>
+                  <td><?php echo $producto['titulo']; ?></td>
+                  <td><?php echo $producto['tamaño']; ?></td>
+                  <td>$<?php echo $producto['precio']; ?></td>
+                  <td><?php echo $producto['cantidad']; ?></td>
+                  <td>$<?php echo $subtotal; ?></td>
+                  <td>
+                    <form action="../scripts/eliminar_producto.php" method="post">
+                      <input type="hidden" name="index" value="<?php echo $index; ?>">
+                      <button type="submit" class="btn btn-danger" name="eliminar"><i class='bx bxs-trash'></i></button>
+                    </form>
+                  </td>
+                </tr>
+              <?php
+              }
+              ?>
+            </tbody>
+            </table>             
+        </div>      
+      </div>      
       <?php
       } else {
         // Mostrar mensaje cuando el carrito está vacío
-        echo "<p>El carrito está vacío</p>";
+        echo "<h3 align='center'>(vacío)</h3>";
       }
       ?>
+
       <form method="POST" action="./checkout.php">
-      <div id="total" class="mb-3">
-        <span>Total: $<?php echo number_format($totalFinal, 2); ?></span>
+      <div class="row">
+        <div class="col-12 col-lg-12" >
+        <input type="text" class="form-control"  name="nombre-cliente" id="nombre-cliente" placeholder="Nombre" require>
+          <input type="text" class="form-control"  name="dom-cliente" id="dom-cliente" placeholder="Domicilio">
+          <input type="text" class="form-control"  name="tel-cliente" id="tel-cliente" placeholder="Telefono">
+          <input type="text" class="form-control"  name="notes" id="notes" placeholder="Notas">
+        </div>
+      </div>
+      <div id="total" class="mb-3" style="padding-left: 5%;">
+        <strong>Total: $<?php echo number_format($totalFinal, 2); ?></strong>
         <input type="hidden" name="total_general" value="<?php echo number_format($totalFinal, 2); ?>">
       </div>
-      <div>
-      <button class="btn btn-primary" type="submit" name="btn_proceder_pago" <?php echo (empty($_SESSION['carrito']) ? 'disabled' : ''); ?>>Proceder al pago</button>
-        <a type="button" class="btn btn-primary" href="../scripts/borrarcarro.php">Vaciar carrito</a>
+      <div class="btn-group" role="group" aria-label="Basic example" style="padding-left: 9%; padding-bottom: 5%">
+        <button class="btn btn-success btn-lg" type="submit" name="btn_proceder_pago" <?php echo (empty($_SESSION['carrito']) ? 'disabled' : ''); ?>>Proceder al pago</button>
+        <a type="button" class="btn btn-dark btn-lg" href="../scripts/borrarcarro.php">Vaciar</a>
       </div>
     </form>
       </div>
     </div>
-
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../js/bootstrap.bundle.js"></script>
     <script src="../src/app.js" defer></script>

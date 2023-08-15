@@ -7,6 +7,10 @@ body{
     background-color: #BB0E10;
     position:sticky;
 }
+.offcanvas {
+    max-width: 1500px; /* Cambia el porcentaje según tus necesidades */
+  }
+  
 #cuerpo{
     background-color: #000;
     display: flex;
@@ -33,6 +37,7 @@ body{
     padding: 20px;
     transition: .3s;
     margin-right: 5%;
+    width: 95%;
 }
 #cuerpo1 #item .img-item{
     width: 100%;
@@ -42,29 +47,14 @@ body{
     scale: 1.05;
 }
 #cuerpo1 #item .titulo-item{
-    display: block;
+
     font-weight: bold;
     align-items: center;
     text-align: center;
-    text-transform: uppercase;
-}
-#cuerpo1 #item .precio-item{
-    display: block;
-    text-align: center;
-    font-weight: bold;
-    font-size: 22px;
+    font-size: 15px;
 }
 
-#cuerpo1 #item .boton-item{
-    display: block;
-    margin: 10px auto;
-    border: none;
-    background-color: black;
-    color: #fff;
-    padding: 5px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-}
+
 #logo{
     color: #FECB00;
     text-shadow: -0.5px -0.5px 0 #000, 0.5px -0.5px 0 #000, -0.5px 0.5px 0 #000, 0.5px 0.5px 0 #000;

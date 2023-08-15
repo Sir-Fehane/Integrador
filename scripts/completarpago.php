@@ -7,7 +7,7 @@ $cajero = $_SESSION['IDUSU'];
 $formaPago = isset($_POST['forma_pago']) ? $_POST['forma_pago'] : '';
 $tipoPedido = isset($_POST['tipo_pedido']) ? $_POST['tipo_pedido'] : '';    
 $totalGeneral = isset($_POST['totalfinal']) ? $_POST['totalfinal'] : 0;
-$notas = '';
+$notas = isset($_POST['notas']) ? $_POST['notas'] : '';   
 $cajero = $_SESSION['IDUSU'];
 
 $consulta_usuario = "SELECT NOMBRE FROM USUARIOS WHERE ID_USUARIO = '$cajero'";
