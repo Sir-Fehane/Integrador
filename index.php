@@ -111,9 +111,9 @@ else
             <img src="img/logotp.jpg">
         </div>
         <div>
-            <span>Sobre nosotros</span>
+            <span>Sobre nosotros:</span>
             <h2>Somos una pizzeria <br> familiar!</h2>
-            <p>Nos centramos en la calidad y el precio para tu bolsillo, todos nuestros productos están hechos con amor y sobre todo, calidad.</p>
+            <p>Nos centramos en la calidad y el precio para tu bolsillo; todos nuestros productos están hechos con amor y, sobre todo, calidad.</p>
             <a href="#fot" class="butn">Contactanos!</a>
         </div>
     </section>

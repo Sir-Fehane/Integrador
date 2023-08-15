@@ -184,7 +184,7 @@ setInterval(tiempoReal, 1000);
                         <input type="hidden" name="precio" value="0">
                         <input type="hidden" name="ID" value="<?php echo $value->ID; ?>">
                         <input type="hidden" name="tamaño" value="">
-                        <button type="submit" class="btn btn-primary" onclick="actualizarCampos(<?php echo $value->ID; ?>)" id="agregar">Agregar</button>
+                        <button type="submit" class="btn btn-primary" onclick="actualizarCampos(<?php echo $value->ID; ?>)" id="agregar_<?php echo $value->ID; ?>">Agregar</button>
             </div>
           </div>
         </div>
@@ -303,5 +303,27 @@ window.addEventListener('load', () => {
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../js/bootstrap.bundle.js"></script>
     <script src="../src/app.js" defer></script>
+    <script>
+function habilitarDeshabilitarBoton(id) {
+    const select = document.querySelector(`#modal${id} select.tamaño`);
+    const botonAgregar = document.querySelector(`#agregar_${id}`);
+    
+    if (select.value === '') {
+        botonAgregar.disabled = true;
+    } else {
+        botonAgregar.disabled = false;
+    }
+}
+window.addEventListener('load', () => {
+    <?php foreach ($reg as $value) { ?>
+        habilitarDeshabilitarBoton(<?php echo $value->ID; ?>);
+    <?php } ?>
+    <?php foreach ($reg as $value) { ?>
+        document.querySelector(`#modal<?php echo $value->ID; ?> select.tamaño`).addEventListener('change', () => {
+            habilitarDeshabilitarBoton(<?php echo $value->ID; ?>);
+        });
+    <?php } ?>
+});
+</script>
   </body>
 </html>
