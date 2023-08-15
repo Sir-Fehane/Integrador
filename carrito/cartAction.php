@@ -58,7 +58,7 @@ if(isset($_REQUEST['action']) && !empty($_REQUEST['action'])){
     $sqla="INSERT INTO ORDEN_VENTA (NO_ORDEN, USUARIO, TIPO, TOTAL, FORMA_PAGO, SUCURSAL, ESTADO) VALUES (:no_orden,:usuario,:tipo,:total,:forma_pago,:sucursal,:estado)";
     $stmtOrder = $pdo->prepare($sqla);
     
-    $sqlb="INSERT INTO NOTIFICACIONES (ID_NOT, ID_SUC, NUM_ORDEN, ESTADO) VALUES (:id_not,:id_suc,:num_orden,:estado)";
+    $sqlb="INSERT INTO NOTIFICACIONES (ID_NOT, ID_SUC, NUM_ORDEN, ESTADO, FECHA) VALUES (:id_not,:id_suc,:num_orden,:estado, :fecha)";
     $stmtNotification = $pdo->prepare($sqlb);
     
     $sqlc="INSERT INTO DETALLE_ORDEN (NO_ORDEN,PRODUCTO, CANTIDAD, NOTAS) VALUES (:no_orden, :producto, :cantidad, :notas)";
@@ -77,8 +77,9 @@ if(isset($_REQUEST['action']) && !empty($_REQUEST['action'])){
     $empty='';
     $tipo='LLEVAR';
     $forma_pago='EFECTIVO';
-    $sucursal=sprintf('%s %s',$_SESSION['IDSUCURSAL'],date('Y-m-d H:i:s'));
+    $sucursal=sprintf('%s %s',$_SESSION['IDSUCURSAL'],date('Y-m-d'));
     $estado='PENDIENTE';
+    $fechanotis=date('Y-m-d');
     
     /*
         Vinculación de datos de la primera consulta
@@ -108,7 +109,8 @@ if(isset($_REQUEST['action']) && !empty($_REQUEST['action'])){
         $stmtNotification->bindParam(':id_not',$empty,PDO::PARAM_STR);
         $stmtNotification->bindParam(':id_suc',$_SESSION['IDSUCURSAL'],PDO::PARAM_STR);
         $stmtNotification->bindParam(':num_orden',$orderID,PDO::PARAM_STR);
-        $stmtNotification->bindParam(':estado',$estado,PDO::PARAM_STR);     
+        $stmtNotification->bindParam(':estado',$estado,PDO::PARAM_STR);
+        $stmtNotification->bindParam(':fecha',$fechanotis,PDO::PARAM_STR);
         $stmtNotification->execute();   
         
         

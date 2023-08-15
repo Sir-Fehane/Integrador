@@ -6,8 +6,8 @@ include '../class/database.php';
 $db= new Database();
 $db->conectarDB();
 $cart = new Cart;
-$horainicio="10:00";
-$horacierre="23:59";
+$horainicio="00:00";
+$horacierre="20:00";
 $horaactual=date("H:i");
 
 // redirect to home if cart is empty

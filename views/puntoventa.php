@@ -43,6 +43,35 @@ foreach($resultadocons as $abc)
       href="../css/bootstrap.min.css"
     />
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    <script type="text/javascript">
+
+		function tiempoReal()
+		{
+			var tabla = $.ajax({
+				url:'tablaConsulta.php',
+				dataType:'text',
+				async:false
+			}).responseText;
+
+			document.getElementById("miTabla").innerHTML = tabla;
+		}
+		setInterval(tiempoReal, 1000);
+		</script>
+<script type="text/javascript">
+function tiempoReal2()
+{
+  var tabla = $.ajax({
+    url:'tablaConsultaT.php',
+    dataType:'text',
+    async:false
+  }).responseText;
+
+  document.getElementById("miTabla2").innerHTML = tabla;
+}
+setInterval(tiempoReal, 1000);
+</script>
   </head>      
   <body>
     <!--Header/navbar-->
@@ -65,6 +94,12 @@ foreach($resultadocons as $abc)
             </li>
             <li>
               <h6 id="miTabla"></h6>
+            </li>
+            <li>
+              <a class="nav-link" href="terminadas.php">Terminadas</a>
+            </li>
+            <li>
+              <h6 id="miTabla2"></h6>
             </li>
             <li>
               <a class="nav-link" href="cierre.php">Cierre</a>

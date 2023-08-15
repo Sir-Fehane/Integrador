@@ -14,7 +14,7 @@ $idemp=$_SESSION["IDUSU"];
     <script src="../js/bootstrap.bundle.js"></script>
     <script src="../src/app.js"></script>
     <link rel="stylesheet" href="../css/style.css">
-    <title>Pendientes</title>
+    <title>Terminadas</title>
 </head>
 <body>
 
@@ -40,12 +40,11 @@ $idemp=$_SESSION["IDUSU"];
       </nav>
       <!--cuerpo-->
       <?php
-        $tabla = $conexion->seleccionar("SELECT NOTIFICACIONES.ID_NOT, ORDEN_VENTA.NO_ORDEN, ORDEN_VENTA.TOTAL, USUARIOS.NOMBRE, USUARIOS.TELEFONO, USUARIOS.CORREO
-        FROM NOTIFICACIONES
-        Inner Join ORDEN_VENTA on ORDEN_VENTA.NO_ORDEN=NOTIFICACIONES.NUM_ORDEN
+        $tabla = $conexion->seleccionar("SELECT ORDEN_VENTA.NO_ORDEN, ORDEN_VENTA.TOTAL, USUARIOS.NOMBRE, USUARIOS.TELEFONO, USUARIOS.CORREO
+        FROM ORDEN_VENTA
         Inner Join USUARIOS ON USUARIOS.ID_USUARIO = ORDEN_VENTA.USUARIO
-        WHERE NOTIFICACIONES.ID_SUC=".$_SESSION['IDSUCUR']." AND NOTIFICACIONES.ESTADO='PENDIENTE' AND NOTIFICACIONES.FECHA=CURDATE() GROUP BY ORDEN_VENTA.NO_ORDEN");
-        $CONSNUMNOT=$conexion->seleccionar("SELECT COUNT(ID_NOT) AS 'NOT' FROM NOTIFICACIONES WHERE ID_SUC=".$_SESSION['IDSUCUR']." AND ESTADO='PENDIENTE' AND NOTIFICACIONES.FECHA=CURDATE()");
+        WHERE ORDEN_VENTA.SUCURSAL=".$_SESSION['IDSUCUR']." AND ORDEN_VENTA.ESTADO='TERMINADO'  GROUP BY ORDEN_VENTA.NO_ORDEN");
+        $CONSNUMNOT=$conexion->seleccionar("SELECT COUNT(NO_ORDEN) AS 'NOT' FROM ORDEN_VENTA WHERE ORDEN_VENTA.SUCURSAL=".$_SESSION['IDSUCUR']." AND ORDEN_VENTA.ESTADO='TERMINADO'");
         ///TABLA DONDE SE DESPLIEGAN LOS REGISTROS //////////////////////////////
         foreach($CONSNUMNOT as $x)
         {
@@ -53,7 +52,7 @@ $idemp=$_SESSION["IDUSU"];
         }
         if($CountNotifs==0)
         {
-            echo"<h1> No hay pedidos... </h1>";
+            echo"<h1> No hay pedidos terminados... </h1>";
         }
         else
         {
@@ -66,7 +65,6 @@ $idemp=$_SESSION["IDUSU"];
         <?php
         $ORDEN=$registro->NO_ORDEN;
         $CORREO=$registro->CORREO;
-        $NOTI=$registro->ID_NOT;
        echo "</div>";
         
         echo "</div>";
@@ -77,7 +75,7 @@ $idemp=$_SESSION["IDUSU"];
         </tr>
         </thead>";  
         $prods=$conexion->seleccionar("SELECT PRODUCTOS.NOMBRE, PRODUCTOS.TAMANO, DETALLE_ORDEN.CANTIDAD FROM ORDEN_VENTA INNER JOIN DETALLE_ORDEN on DETALLE_ORDEN.NO_ORDEN=ORDEN_VENTA.NO_ORDEN
-        INNER JOIN PRODUCTOS on PRODUCTOS.CODIGO=DETALLE_ORDEN.PRODUCTO WHERE ORDEN_VENTA.NO_ORDEN =".$ORDEN."");
+        INNER JOIN PRODUCTOS on PRODUCTOS.CODIGO=DETALLE_ORDEN.PRODUCTO WHERE ORDEN_VENTA.NO_ORDEN =".$ORDEN." AND ORDEN_VENTA.ESTADO='TERMINADO'");
         foreach($prods as $reg)
         {
         echo "<tbody class='table-warning'>";
@@ -108,8 +106,7 @@ $idemp=$_SESSION["IDUSU"];
         <form action='../scripts/aceptarp.php' method='post' class='col-6 col-lg-6'>
         <input type='hidden' name='correo' id='correo' value='".$CORREO."'>
         <input type='hidden' name='noorder' id='noorder' value='".$ORDEN."'>
-        <input type='hidden' name='OV' id='OV' value='EN PROCESO'>
-        <input type='hidden' name='noti' id='noti' value='".$NOTI."'>
+        <input type='hidden' name='OV' id='OV' value='ENTREGADA'>
         <button type='submit' class='btn btn-primary'>Aceptar pedido </button>
         </form>
         </row>
@@ -117,7 +114,6 @@ $idemp=$_SESSION["IDUSU"];
         <form action='../scripts/aceptarp.php' method='post' class='col-6 col-lg-6'>
         <input type='hidden' name='correo' id='correo' value='".$CORREO."'>
         <input type='hidden' name='noorder' id='noorder' value='".$ORDEN."'>
-        <input type='hidden' name='noti' id='noti' value='".$NOTI."'>
         <input type='hidden' name='OV' id='OV' value='CANCELADA'>
         <button type='submit' class='btn btn-danger'>Rechazar pedido </button>
         </form>

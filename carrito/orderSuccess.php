@@ -23,7 +23,7 @@ if(!isset($_REQUEST['id'])){
     <p>Se le ha enviado informacion de su orden en su correo, favor de checar su correo.</p>
     <br>
     <img src="../img/pizza.png" id="img-toys">
-    <?php unset($_SESSION['TOTAL']); header("location: ../index.php")?>
+    <?php unset($_SESSION['TOTAL']); header("refresh:5 ; ../index.php")?>
 
 </div>
 </body>

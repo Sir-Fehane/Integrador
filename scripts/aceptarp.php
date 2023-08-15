@@ -68,7 +68,7 @@ try {
     }
     header('refresh:5 ; ../views/pendientes.php');
 } catch (Exception $e) {
-    echo "Chale, valió barriga sr. v. Error: {$mail->ErrorInfo}";
+    echo "Sucedió un error inesperado. Error: {$mail->ErrorInfo}";
 }
 }
 else
