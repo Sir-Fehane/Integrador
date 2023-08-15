@@ -17,8 +17,6 @@
 
         $db->verifica("$correo","$password");
         $db->desconectarDB();
-
-        $db->desconectarDB();
         
         ?>
     </div>
