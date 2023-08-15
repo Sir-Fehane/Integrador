@@ -315,35 +315,35 @@ else
         </div>
     </div>
 </div>
-  <!-- Modal register-->
+<!-- Modal register-->
 <div class="modal fade" id="register" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Registro</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Registro</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="scripts/registrarse.php" method="POST" onsubmit="return validateForm()">
+                    <label for="Nombre" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" name="nombre" required>
+                    <label for="password" class="form-label">Contraseña (8 o más caracteres)</label>
+                    <input type="password" name="password" class="form-control" required minlength="8">
+                    <label for="direccion" class="form-label">Direccion</label>
+                    <input type="text" class="form-control" required name="direccion">
+                    <label for="celular" class="form-label">Telefono (10 dígitos)</label>
+                    <input type="tel" name="telefono" class="form-control" required pattern="[0-9]{10}">
+                    <label for="email" class="form-label">Correo</label>
+                    <input type="email" name="correo" placeholder="Obligatorio" required class="form-control">
+                    <span style="color: red;"><?php if(isset($correoError)) echo $correoError; ?></span>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-warning">Registrar</button>
+                    </div>
+                </form>
+            </div>
         </div>
-        <div class="modal-body">
-        <form action="scripts/registrarse.php" method="POST">
-                <label for="Nombre" class="form-label">Nombre</label>
-                <input type="text" class="form-control" name="nombre" required>
-                <label for="password" class="form-label">Contraseña</label>
-                <input type="password" name="password" class="form-control" required>
-                <label for="direccion" class="form-label">Direccion</label>
-                <input type="text" class="form-control" required name="direccion">
-                <label for="celular" class="form-label">Telefono</label>
-                <input type="tel" name="telefono" class="form-control" required>
-                <label for="email" class="form-label">Correo</label>
-                <input type="email" name="correo" placeholder="Obligatorio" required class="form-control">
-                <span style="color: red;"><?php if(isset($correoError)) echo $correoError; ?></span>
-                <div class="modal-footer">
-                  <button type="submit" class="btn btn-warning">Registrar</button>
-                </div>
-              </form>
-        </div>
-      </div>
     </div>
-  </div>
+</div>
   <!-- MODAL SUCURSALES -->
 <div class="modal fade" id="sucu" tabindex="-1" aria-labelledby="sucursales" aria-hidden="true">
     <div class="modal-dialog">
@@ -379,5 +379,6 @@ else
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="./src/validaciones.js"></script>
 </body>
 </html>
