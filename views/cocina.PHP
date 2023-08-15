@@ -160,7 +160,11 @@ echo "</div></div>";
 
 if (isset($_POST['editar_orden'])) {
     $no_orden = $_POST['no_orden'];
-
+    $asd=$conexion->seleccionar("SELECT USUARIOS.CORREO FROM USUARIOS INNER JOIN ORDEN_VENTA ON ORDEN_VENTA.NO_ORDEN WHERE ORDEN_VENTA.NO_ORDEN=".$no_orden."");
+    foreach($asd as $cry)
+    {
+      $_SESSION['CORREO'] = $cry->CORREO;
+    }
     try {
         $estado_nuevo = "TERMINADO";
         $update_sql = "UPDATE ORDEN_VENTA SET ESTADO = :estado_nuevo WHERE NO_ORDEN = :no_orden";
@@ -169,6 +173,7 @@ if (isset($_POST['editar_orden'])) {
         $stmt->bindParam(':estado_nuevo', $estado_nuevo);
         $stmt->bindParam(':no_orden', $no_orden);
         $stmt->execute();
+        include "../Mail/CORREOCOCINATERMINADO.php";
     } catch (PDOException $e) {
         echo "Error: " . $e->getMessage();
     }
@@ -179,6 +184,11 @@ if (isset($_POST['cancelar_orden'])) {
     $no_orden = $_POST['no_orden'];
 
     try {
+      $asd=$conexion->seleccionar("SELECT USUARIOS.CORREO FROM USUARIOS INNER JOIN ORDEN_VENTA ON ORDEN_VENTA.NO_ORDEN WHERE ORDEN_VENTA.NO_ORDEN=".$no_orden."");
+    foreach($asd as $cry)
+    {
+      $_SESSION['CORREO'] = $cry->CORREO;
+    }
         $estado_nuevo = "CANCELADA";
         $update_sql = "UPDATE ORDEN_VENTA SET ESTADO = :estado_nuevo WHERE NO_ORDEN = :no_orden";
 
@@ -186,6 +196,7 @@ if (isset($_POST['cancelar_orden'])) {
         $stmt->bindParam(':estado_nuevo', $estado_nuevo);
         $stmt->bindParam(':no_orden', $no_orden);
         $stmt->execute();
+        include "";
     } catch (PDOException $e) {
         echo "Error: " . $e->getMessage();
     }
