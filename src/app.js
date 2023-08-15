@@ -1,25 +1,3 @@
-// Función para actualizar el tamaño y precio antes de enviar el formulario
-function actualizarCampos(id) {
-  const modal = document.querySelector(`#modal${id}`);
-  const selectTamaño = modal.querySelector('.tamaño');
-  const selectedOption = selectTamaño.options[selectTamaño.selectedIndex];
-  const precio = selectedOption.getAttribute('data-precio');
-  const inputPrecio = modal.querySelector('input[name="precio"]');
-  const inputTamaño = modal.querySelector('input[name="tamaño"]');
-  
-  if (selectedOption.value === '') {
-    alert("Selecciona una opcion valida");
-    console.log("Selecciona una opción válida antes de agregar");
-    return; // No envía el formulario
-  }
-  
-  inputPrecio.value = precio;
-  inputTamaño.value = selectedOption.value;
-  
-  // Envía el formulario
-  modal.querySelector('form').submit();
-}
-
 // Función para actualizar el subtotal dentro del modal
 function updatePrice(modal) {
   var select = modal.querySelector('.tamaño');
