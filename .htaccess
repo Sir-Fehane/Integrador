@@ -1,0 +1,4 @@
+   RewriteEngine On
+   RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /index\.(php|html?)\ HTTP/
+   RewriteRule ^index\.(php|html?)$ / [R=301,L]
+   Options -Indexes

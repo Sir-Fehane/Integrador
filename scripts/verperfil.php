@@ -15,13 +15,13 @@ if(!isset($_SESSION['rol']))
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <title>Editar</title>
 </head>
-<body>
+<body style="background-color: #D6CFCF;">
     <?php
     include '../class/database.php';
     $db = new database();
     $db->conectarDB();
     ?>
-<div class="container w-75 p-5">
+<div class="container w-75 mt-5 shadow p-3 mb-5 rounded" style="width: 60%;  height: 30%; background-color:white">
     <div class="d-flex">
         <a class="btn btn-primary" href="../views/verperfilv1.php">Regresar</a>
         <h3 align="center" style="margin-left: 30%;">Editar Perfil</h3>

@@ -117,7 +117,7 @@ include '../carrito/dbConfig.php';
                             <p class="lead"><?php echo '$'.$row->PRECIO.' MX'; ?></p>
                         </div>
                         <div class="col-md-6">
-                            <a class="btn butn-menu" href="../carrito/cartAction.php?action=addToCart&id=<?php echo $row->CODIGO; ?>">Agregar al carrito</a>
+                            <a class="btn butn-menu" href="../carrito/cartAction.php?action=addToCart&id=<?php echo $row->CODIGO; ?>">Agregar</a>
                         </div>
                     </div>
             </div>
