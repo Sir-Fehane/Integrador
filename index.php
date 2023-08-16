@@ -336,8 +336,10 @@ else
                     <input type="text" class="form-control" name="nombre" required>
                     <label for="password" class="form-label">Contraseña (8 o más caracteres)</label>
                     <input type="password" name="password" class="form-control" required minlength="8">
-                    <label for="direccion" class="form-label">Direccion</label>
-                    <input type="text" class="form-control" required name="direccion">
+                    <label for="calle" class="form-label">Direccion</label>
+                    <input type="text" class="form-control" required name="calle" placeholder="Calle y numero"><br>
+                    <input type="text" class="form-control" required name="colonia" placeholder="Colonia"><br>
+                    <input type="text" class="form-control" required name="cp" placeholder="Codigo postal"><br>
                     <label for="celular" class="form-label">Telefono (10 dígitos)</label>
                     <input type="tel" name="telefono" class="form-control" required inputmode="numeric" required pattern="[0-9]{10}" oninput="filterNonNumeric(event)">
                     <label for="email" class="form-label">Correo</label>
