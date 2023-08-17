@@ -224,6 +224,15 @@ echo "<img src='$imgchida' alt='img' id = 'img' class='rounded-circle'>";
             </div>
             </form>
 </div>
+<script>
+    // JavaScript para habilitar o deshabilitar el botón según si se seleccionó un archivo
+    const archivoInput = document.getElementById('archivo');
+    const btnCambiarFoto = document.getElementById('btnCambiarFoto');
+
+    archivoInput.addEventListener('change', function() {
+        btnCambiarFoto.disabled = !archivoInput.value; // Habilitar si se seleccionó un archivo, deshabilitar si no
+    });
+</script>
 
    <?php
 require '../vendor/autoload.php'; // Carga el autoload del AWS SDK para PHP
