@@ -1,49 +1,61 @@
-<?php 
+<?php
 session_start();
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (isset($_POST['insumosSeleccionados']) && isset($_POST['cantidad'])) 
-    {
-        $insumos = $_POST['insumosSeleccionados'];
-        $cantidades = $_POST['cantidad'];
+if (!isset($_SESSION['rol'])) {
+    header('Location: ../index.php');
+    exit;
+} else {
+    if ($_SESSION["rol"] == 2) {
+        header("Location: ../index.php");
+        exit;
+    } elseif ($_SESSION["rol"] == 1) { 
+        header("Location: admin.php");
+        exit;
+    }
+}
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    if (isset($_POST['cantidades']) && !empty($_POST['cantidades']) && isset($_POST['guardarSolicitud'])) {
+        include '../class/database.php';
+        $conexion = new database();
+        $conexion->conectarDB();
+        $id_usuario = $_SESSION["IDUSU"];
 
-        if (count($insumos) === count($cantidades)) 
-        {
-            include "../class/database.php";
-            $db = new Database();
-            $db->conectarDB();
+        $consulta_sucursal = "SELECT SUCURSAL FROM EMPLEADO_SUCURSAL WHERE EMPLEADO = '$id_usuario'";
+        $resultado_sucursal = $conexion->seleccionar($consulta_sucursal);
 
-            $id_usuario = $_SESSION["IDUSU"];
+        if ($resultado_sucursal && count($resultado_sucursal) > 0) {
+            $sucursal_id = $resultado_sucursal[0]->SUCURSAL;
 
-            $consulta_sucursal = "SELECT SUCURSAL FROM EMPLEADO_SUCURSAL WHERE EMPLEADO = '$id_usuario'";
-            $resultado_sucursal = $db->seleccionar($consulta_sucursal);
-
-            if ($resultado_sucursal && count($resultado_sucursal) > 0) 
-            {
-                $sucursal_id = $resultado_sucursal[0]->SUCURSAL;
-
-                foreach ($insumos as $indice => $nombreInsumo) 
-                {
-                    // Id insumo
+            foreach ($_POST['cantidades'] as $idSolicitud => $insumos) {
+                foreach ($insumos as $nombreInsumo => $cantidadNueva) {
+                    // Obtén el ID del insumo basado en el nombre
                     $consultaIdInsumo = "SELECT ID_INS FROM INVENTARIO WHERE NOMBRE = '$nombreInsumo'";
-                    $resultadoIdInsumo = $db->seleccionar($consultaIdInsumo);
+                    $resultadoIdInsumo = $conexion->seleccionar($consultaIdInsumo);
                     $idInsumo = $resultadoIdInsumo[0]->ID_INS;
 
-                    // Cantidad existente
+                    // Obtén la cantidad existente del insumo en INV_SUC
                     $consultaCantidadExistente = "SELECT CANTIDAD FROM INV_SUC WHERE INVENTARIO = $idInsumo AND SUCURSAL = $sucursal_id";
-                    $resultadoCantidadExistente = $db->seleccionar($consultaCantidadExistente);
+                    $resultadoCantidadExistente = $conexion->seleccionar($consultaCantidadExistente);
                     $cantidadExistente = $resultadoCantidadExistente[0]->CANTIDAD;
 
-                    // Cantidad nueva
-                    $nuevaCantidad = $cantidadExistente + $cantidades[$indice];
+                    // Calcula la nueva cantidad
+                    $nuevaCantidad = $cantidadExistente + $cantidadNueva;
 
-                    $actualizarinv = "UPDATE INV_SUC SET CANTIDAD = $nuevaCantidad, FECHA = NOW() WHERE INVENTARIO = $idInsumo AND SUCURSAL = $sucursal_id";
-                    $db->ejecutarSQL($actualizarinv);
+                    // Realiza la actualización en INV_SUC
+                    $actualizacion = "UPDATE INV_SUC SET CANTIDAD = $nuevaCantidad, FECHA = NOW() WHERE INVENTARIO = $idInsumo AND SUCURSAL = $sucursal_id";
+                    $conexion->ejecutarSQL($actualizacion);
                 }
-                header("Location: ExitoPV.php");
+
+                // Actualiza el estado en SOLICITUDES
+                $nuevoEstado = 'recibido';
+                $actualizacionSolicitudes = "UPDATE SOLICITUDES SET ESTADO = '$nuevoEstado' WHERE ID_SOLICITUD = $idSolicitud";
+                $conexion->ejecutarSQL($actualizacionSolicitudes);
             }
-            echo "No se encontró la sucursal";
+
+            header("Location: ExitoPV.php");
+        } else {
+            echo "No se recibieron datos válidos.";
         }
     }
-    echo "No se encontraron los datos";
 }
+
 ?>

@@ -23,12 +23,12 @@
   <svg class="bi flex-shrink-0 me-2" width="1.5rem" height="1.5rem" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
   <div>
     <strong>¡Operacion realizada con exito!</strong><hr>
-    Redirigiendo a la pagina principal...
+    Redirigiendo a entrada de insumos...
   </div>
 </div>
 </div>
 <?php
-    header("refresh:2 ; ../views/puntoventa.php")
+    header("refresh:2 ; ../views/entrada.php")
 ?>
 </body>
 </html>

@@ -147,6 +147,22 @@ class Database{
     function prepararConsulta($query) {
         return $this->PDOAws->prepare($query);
     }
+    function execute($query, $params = array()) {
+        try {
+            $consulta_preparada = $this->PDOAws->prepare($query);
+            
+            foreach ($params as $param => $value) {
+                $consulta_preparada->bindValue($param, $value);
+            }
+            
+            $resultado = $consulta_preparada->execute();
+            
+            return $resultado;
+        } catch (PDOException $e) {
+            // Manejar errores si es necesario
+            return false;
+        }
+    }
 }
 
 

@@ -1,11 +1,11 @@
-<?php
+<?php 
 session_start();
 if(!isset($_SESSION['rol']))
 {
   header('Location: ../index.php');
 }
 else
- {
+{
   if ($_SESSION["rol"] == 2) {
     header("Location: ../index.php");
     exit;
@@ -13,19 +13,20 @@ else
     header("Location: admin.php");
     exit;
   }
- }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Solicitar</title>
-    <link rel="stylesheet" href="../css/estilo.css" />
-    <link rel="stylesheet" href="../css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../css/estilo.css">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <script src="../js/bootstrap.min.js"></script>
     <script src="../src/app.js"></script>
-  </head>
-  <body>
+</head>
+<body>
     <!--Header/navbar-->
     <nav class="navbar navbar-expand-lg fixed-top" id="barra">
       <div class="container-fluid">
@@ -54,7 +55,7 @@ else
               <a class="nav-link" href="solicitar.php">Solicitar</a>
             </li>
             <li>
-              <a class="nav-link" href="entrada.php">Entrada</a>
+              <a class="nav-link" href="solicitudnueva.php">Entrada</a>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="verperfilv1.php" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -68,65 +69,115 @@ else
         </div>
       </div>
     </nav>
-    <!--Contenido-->
-    <div class="container" #id="cuerpo">
-    <hr>
-      <h2 align="center">Entrada de insumos</h2>
-      <hr>
-      <h5 align="center">Selecciona los insumos que llegaron a la sucursal y su cantidad:</h5>
-      <div class="justify-content-center" id="contenedor">
-        <div class="table-responsive">
-        <form action="../scripts/guardarentrada.php" method="post">
-        <table class="table table-striped table-hover">
-        <!--<table class="table align-middle table-sm">-->
-                    <tbody>
-                    <tr>
-                        <td>
+    <!-- Contenido -->
+    <div class="container mt-5">
+        <h2 class="text-center">Entrada de insumos</h2>
+        <hr>
+        <?php
+        include '../class/database.php';
+        $conexion = new database();
+        $conexion->conectarDB();
+        $id_usuario = $_SESSION["IDUSU"];
+        $consulta_sucursal = "SELECT SUCURSAL FROM EMPLEADO_SUCURSAL WHERE EMPLEADO = '$id_usuario'";
+        $resultado_sucursal = $conexion->seleccionar($consulta_sucursal);
+        $sucursal_id = $resultado_sucursal[0]->SUCURSAL;
+
+        $consulta = "SELECT DISTINCT SOLICITUDES.ID_SOLICITUD as S, SOLICITUDES.FECHA as F FROM SOLICITUDES 
+        INNER JOIN DETALLE_SOLICITUD ON SOLICITUDES.ID_SOLICITUD = DETALLE_SOLICITUD.SOLICITUD
+        WHERE SOLICITUDES.ESTADO = 'solicitado' AND SOLICITUDES.SUCURSAL = $sucursal_id";
+        $reg = $conexion->seleccionar($consulta);
+        if (empty($reg)) {
+          echo '<h4 class="text-center">Por el momento no hay solicitudes pendientes...</h4>';
+      } else 
+      {
+        echo '<h4 class="text-center">Ingresa las cantidades que llegaron de cada insumo: </h4>';
+        echo '<hr>';
+        echo '<h6 class="text-center">Nota: Si llegó algo adicional, agrégalo con el botón "Añadir insumo" </h6>';
+        foreach ($reg as $value) : ?>
+            <form action="../scripts/guardarentrada.php" method="post">
+                <div class="table-responsive">
+                    <table class="table table-bordered mt-4">
+                        <thead class="table-dark">
+                            <tr>
+                                <th colspan="12" class="text-center">Solicitud: <?php echo $value->S; ?></th>
+                            </tr>
+                            <tr>
+                                <th colspan="12" class="text-center">Fecha de solicitud: <?php echo $value->F; ?></th>
+                            </tr>
+                        </thead>
+                        <tbody>
                             <?php
-                            include "../class/database.php";
-                            $db = new Database();
-                            $db->conectarDB();
-                            $cadena = "SELECT INVENTARIO.NOMBRE as N, INVENTARIO.PRESENTACION as P FROM INVENTARIO WHERE INVENTARIO.ESTADO = 'ACTIVO'";
-                            $reg = $db->seleccionar($cadena);
-                            echo "<select name='insumo[]' class='form-select'>";
-                            echo "<option value='0'>Seleccionar insumo...</option>";
-                            foreach ($reg as $value) {
-                                echo "<option value='" . $value->N . "'>" . $value->N . "(" . $value->P . ")</option>";
-                            }
-                            echo "</select>";
-                            $db->desconectarDB();
-                            ?>
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-primary" onclick="agregarValorSeleccionado()">Añadir</button>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+                            $solicitud_id = $value->S;
+                            $consulta_detalles = "SELECT INVENTARIO.NOMBRE as N, INVENTARIO.PRESENTACION as P 
+                            FROM SOLICITUDES 
+                            INNER JOIN DETALLE_SOLICITUD ON SOLICITUDES.ID_SOLICITUD = DETALLE_SOLICITUD.SOLICITUD
+                            INNER JOIN INVENTARIO ON INVENTARIO.ID_INS = DETALLE_SOLICITUD.INVENTARIO 
+                            WHERE SOLICITUDES.ID_SOLICITUD = $solicitud_id";
+                            $detalles = $conexion->seleccionar($consulta_detalles);
 
-                <table class="table table-striped table-hover" id="tablaInsumos">
-                    <thead class="table-dark">
-                    <tr>
-                        <th>Insumo</th>
-                        <th>Cantidad Entrante</th>
-                        <th></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-
-                    </tbody>
-
-                </table>
-                <div class="d-grid gap-2">
-                    <button class="btn btn-primary" type="submit">Guardar</button>
+                            foreach ($detalles as $detalle) : ?>
+                              <tr>
+                                  <td colspan="6"><?php echo $detalle->N; ?> (<?php echo $detalle->P; ?>)</td>
+                                  <td colspan="6">
+                                      <input type="number" 
+                                             name="cantidades[<?php echo $value->S; ?>][<?php echo $detalle->N; ?>]" 
+                                             class="form-control" 
+                                             data-nombre="<?php echo $detalle->N; ?>"
+                                             onkeypress="return validarNumero(event)" 
+                                             placeholder="Ingresa la cantidad que llegó del insumo:" 
+                                             required min="0" step="0.1">
+                                  </td>
+                              </tr>
+                          <?php endforeach; ?>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="12" class="text-center">
+                                    <button class="btn btn-success" type="submit" name="guardarSolicitud" value='<?php echo $value->S; ?>'>Guardar Solicitud <?php echo $value->S; ?></button>
+                                    <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#AgregarInsumo">Añadir Insumo</button>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
                 </div>
-        </form>
+            </form>
+        <?php endforeach; ?>
+        <?php } ?>
+    </div>
+  <div class="modal fade" id="AgregarInsumo" tabindex="-1" aria-labelledby="modalAgregarInsumoLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalAgregarInsumoLabel">Añadir Insumo</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="../scripts/detallesoli.php" method="post" id="agregarInsumoForm">
+                    <input type="hidden" name="idSolicitud" value="<?php echo $solicitud_id; ?>">
+                    <label for="insumo">Selecciona un insumo:</label>
+                    <select name="insumo" class="form-control" id="modalInsumoSelect">
+                        <?php
+                      $consulta_insumos = "SELECT ID_INS, NOMBRE, PRESENTACION FROM INVENTARIO WHERE ESTADO = 'ACTIVO' 
+                      AND ID_INS NOT IN (SELECT INVENTARIO FROM DETALLE_SOLICITUD WHERE SOLICITUD = $solicitud_id)";
+                      $insumos_activos = $conexion->seleccionar($consulta_insumos);
+                      foreach ($insumos_activos as $insumo) {
+                      echo "<option value='{$insumo->ID_INS}'>{$insumo->NOMBRE} ({$insumo->PRESENTACION})</option>";
+                      }
+                      ?>
+                    </select>
+                    <br>
+                    <button type="submit" class="btn btn-primary" id="modalAddButton">Agregar Insumo</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
         </div>
     </div>
 </div>
-<script src="../js/bootstrap.bundle.js"></script>
 <script>
-              function validarNumero(event) {
+    function validarNumero(event) 
+    {
     const charCode = (event.which) ? event.which : event.keyCode;
 
     if (charCode == 46 || (charCode >= 48 && charCode <= 57)) {
@@ -135,88 +186,20 @@ else
 
     return false;
   }
+    document.addEventListener('DOMContentLoaded', function () {
+        const addButton = document.getElementById('modalAddButton');
+        const insumoSelect = document.getElementById('modalInsumoSelect');
+        const agregarInsumoForm = document.getElementById('agregarInsumoForm');
+        const solicitudListContainer = document.getElementById('solicitudListContainer');
 
-      let elementosAgregados = false;
-      document.querySelector("form").addEventListener("submit", function(event) 
-      {
-          if (!elementosAgregados) 
-          {
-          event.preventDefault();
-          alert("Añade al menos un insumo antes de guardar."); 
-          }
-      });
-
-      const insumosSeleccionados = [];
-
-        function agregarValorSeleccionado() {
-    const select = document.querySelector("select[name='insumo[]']");
-    const selectedInsumo = select.value;
-    const selectedInsumoText = select.options[select.selectedIndex].text;
-
-    if (selectedInsumo !== "" && selectedInsumoText !== "Seleccionar insumo...") 
-    {
-
-    if (!isInsumoRepetido(selectedInsumoText)) {
-
-        const hiddenInput = document.createElement("input");
-        hiddenInput.type = "hidden";
-        hiddenInput.name = "insumosSeleccionados[]";
-        hiddenInput.value = selectedInsumo;
-        document.querySelector("form").appendChild(hiddenInput);
-
-
-        insumosSeleccionados.push(selectedInsumo);
-
-        const newRow = document.createElement("tr");
-        newRow.innerHTML = `
-            <td>${selectedInsumoText}</td>
-            <td><input type="number" class="form-control form-control-sm" name='cantidad[ ]' min="0.1" step='0.1' placeholder='Ingresa la cantidad que llegó a la sucursal:'
-            required onkeypress='return validarNumero(event)' ></td>
-            <td><button type="button" class="btn btn-danger btn-sm" onclick="eliminarFila(this)">X</button></td>`;
-
-            newRow.setAttribute("data-insumo",selectedInsumo);
-
-        document.getElementById("tablaInsumos").querySelector("tbody").appendChild(newRow);
-        elementosAgregados = true;
-        }
-    }
-      };
-
-    function isInsumoRepetido(insumo) {
-        const tablaInsumos = document.getElementById("tablaInsumos");
-        const insumos = tablaInsumos.querySelectorAll("td:first-child");
-        for (let i = 0; i < insumos.length; i++) {
-            if (insumos[i].textContent === insumo) {
-                return true;
+        addButton.addEventListener('click', function () {
+            const selectedInsumoId = insumoSelect.value;
+            if (selectedInsumoId !== '') {
+                agregarInsumoForm.submit();
             }
-        }
-        return false;
-    }
-
-    function eliminarFila(btn) {
-    const fila = btn.closest("tr");
-    const insumo = fila.getAttribute("data-insumo");
-
-
-    const index = insumosSeleccionados.indexOf(insumo);
-    if (index !== -1) {
-        const newQuantity = parseInt(insumosSeleccionados[index]) - 1;
-        
-        if (newQuantity > 0) {
-            insumosSeleccionados[index] = newQuantity.toString();
-        } else {
-
-            insumosSeleccionados.splice(index, 1);
-    
-            const hiddenInput = document.querySelector(`input[name='insumosSeleccionados[]'][value='${insumo}']`);
-            if (hiddenInput) {
-                hiddenInput.remove();
-            }
-        }
-    }
-    elementosAgregados = insumosSeleccionados.length > 0;
-    fila.remove();
-}
+        });
+    });
 </script>
+
 </body>
 </html>
