@@ -1,4 +1,6 @@
 <?php
+session_start();
+include '../class/database.php';
 if (!isset($_SESSION['rol'])) {
     header('Location: ../index.php');
 } else {
@@ -21,15 +23,30 @@ if (!isset($_SESSION['rol'])) {
     <title>Inventario</title>
 </head>
 <body>
+<div class="container mt-3">
+<div class="btn-group d-flex bg-light" role="group" style="overflow-x: auto; white-space: nowrap; width: 100%;">
+    <a class="btn btn-warning flex-fill" href="admin.php">Volver al inicio</a>
+    <a class="btn btn-primary flex-fill" href="Inventario.php">Inventario</a>
+    <a class="btn btn-primary flex-fill" href="Ordenes.php">Ordenes</a>
+    <a class="btn btn-primary flex-fill" href="Productos.php">Productos</a>
+    <a class="btn btn-primary flex-fill" href="Sucursales.php">Sucursales</a>
+    <a class="btn btn-primary flex-fill" href="Personal.php">Personal</a>
+    <a class="btn btn-primary flex-fill" href="Solicitudes.php">Solicitudes</a>
+    <a class="btn btn-primary flex-fill disabled" href="Ingresos.php" aria-disabled="true">Ingresos</a>
+    <a class="btn btn-primary flex-fill" href="ReporCierre.php">Cierres</a>
+    <a class="btn btn-primary flex-fill" href="Movimientos.php">Movimientos en inv</a>
+    <a class="btn btn-primary flex-fill" href="Merma.php">Merma</a>
+</div>
+</div>
 <?php
 $fechaActual = date("d/m/Y");
 $db = new Database();
 $db->conectarDB();
-echo "<h6 align='center'>Reporte de <strong>ingresos</strong> de todas las sucursales ";
+echo "<h4 align='center'>Reporte de <strong>ingresos</strong> de todas las sucursales ";
 echo
-"</h6>"; ?>
-<h6 align='center'>Selecciona solamente fecha inicial para ver los ingresos de tal fecha.</h6>
-<h6 align='center'>Selecciona ambas fechas para ver los ingresos en ese rango.</h6>
+"</h4>"; ?>
+<h4 align='center'>Selecciona solamente fecha inicial para ver los ingresos de tal fecha.</h4>
+<h4 align='center'>Selecciona ambas fechas para ver los ingresos en ese rango.</h4>
 <div class="container">
     <form class="" method="post">
         <div class="row">
@@ -61,7 +78,7 @@ echo
         <div class="container mt-3 d-flex justify-content-center">
             <div class="row mb-3">
                 <div class="col-6 col-lg-12">
-                    <input class="btn btn-primary" type="submit" value="Buscar" name="EMPLEADOS">
+                    <input class="btn btn-primary" type="submit" value="Buscar" name="INGRESOS">
                 </div>
             </div>
         </div>
@@ -75,6 +92,7 @@ if (isset($_POST['INGRESOS']) && ((isset($_POST['suc']) && $_POST['suc'] != 0)))
       <h6 align="center">Desliza la tabla para ver toda la informacion</h6>
     </div>
     <?php
+    $valor = 0;
     extract($_POST);
     $cadena = "SELECT S.NOMBRE AS 'Sucursal', Fecha, TotalEfectivo AS 'Efectivo', TotalTarjeta AS 'Tarjeta', TotalIngresos AS 'Total' FROM BitacoraIngresos BI
     INNER JOIN SUCURSALES S ON S.ID_SUC = BI.Sucursal";
@@ -94,11 +112,12 @@ if (isset($_POST['INGRESOS']) && ((isset($_POST['suc']) && $_POST['suc'] != 0)))
     ?>
     <div class="container justify-content-center">
         <div class="table-responsive">
-            <table class='table table-hover' id='DetalleSol'>
+            <table class='table table-hover' id='DetalleIng'>
                 <thead class='table-primary' align='center'>
                 <tr>
                     <?php
                     if (isset($_POST['suc']) && ($_POST['suc'] == 999 || $_POST['suc'] == 0)) {
+                        $valor = 1;
                         echo "<th class='sortable'>Sucursal</th>";
                     }
                     ?>
@@ -127,10 +146,11 @@ if (isset($_POST['INGRESOS']) && ((isset($_POST['suc']) && $_POST['suc'] != 0)))
         </div>
     </div>
     <?php
+    echo '<script>saveActiveTab("ingresos");</script>';
 } else {
     ?>
     <div class="container">
-        <h6 align="center">Por favor, selecciona una sucursal primero.</h6>
+        <h4 align="center">Por favor, selecciona una sucursal primero.</h4>
     </div>
     <?php
 }
@@ -183,9 +203,11 @@ if (isset($_POST['INGRESOS']) && ((isset($_POST['suc']) && $_POST['suc'] != 0)))
 <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
 <script>
-    $(document).ready(function () {
-        $('#DetalleSol').DataTable();
+    $(document).ready(function() {
+    $('#DetalleIng').DataTable({
+        "order": [[<?php echo $valor; ?>, 'desc']]
     });
-</script>
+});
+  </script>
 </body>
 </html>

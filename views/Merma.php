@@ -1,4 +1,6 @@
 <?php
+session_start();
+include '../class/database.php';
 if(!isset($_SESSION['rol']))
 {
   header('Location: ../index.php');
@@ -24,15 +26,30 @@ else
   <title>Inventario</title>
 </head>
 <body>
+<div class="container mt-3">
+<div class="btn-group d-flex bg-light" role="group" style="overflow-x: auto; white-space: nowrap; width: 100%;">
+    <a class="btn btn-warning flex-fill" href="admin.php">Volver al inicio</a>
+    <a class="btn btn-primary flex-fill" href="Inventario.php">Inventario</a>
+    <a class="btn btn-primary flex-fill" href="Ordenes.php">Ordenes</a>
+    <a class="btn btn-primary flex-fill" href="Productos.php">Productos</a>
+    <a class="btn btn-primary flex-fill" href="Sucursales.php">Sucursales</a>
+    <a class="btn btn-primary flex-fill" href="Personal.php">Personal</a>
+    <a class="btn btn-primary flex-fill" href="Solicitudes.php">Solicitudes</a>
+    <a class="btn btn-primary flex-fill" href="Ingresos.php">Ingresos</a>
+    <a class="btn btn-primary flex-fill" href="ReporCierre.php">Cierres</a>
+    <a class="btn btn-primary flex-fill" href="Movimientos.php">Movimientos en inv</a>
+    <a class="btn btn-primary flex-fill disabled" href="Merma.php" aria-disabled="true">Merma</a>
+</div>
+</div>
 <?php
   $fechaActual = date("d/m/Y");
   $db = new Database();
   $db->conectarDB();
-    echo "<h6 align='center'>Reporte de <strong>merma</strong> de todas las sucursales ";
+    echo "<h4 align='center'>Reporte de <strong>merma</strong> de todas las sucursales ";
     echo
-    "</h6>"; ?>
-    <h6 align='center'>Selecciona solamente fecha inicial para ver resultados de tal fecha.</h6>
-    <h6 align='center'>Selecciona ambas fechas para ver resultados en ese rango.</h6>
+    "</h4>"; ?>
+    <h4 align='center'>Selecciona solamente fecha inicial para ver resultados de tal fecha.</h4>
+    <h4 align='center'>Selecciona ambas fechas para ver resultados en ese rango.</h4>
     <div class="container">
     <form class="" method="post">
         <div class="row">
@@ -136,11 +153,12 @@ else
 </div>
 
   <?php
+  echo '<script>saveActiveTab("merma");</script>';
   }
   else {
   ?>
   <div class="container">
-    <h6 align="center">Por favor, selecciona una sucursal primero.</h6>
+    <h4 align="center">Por favor, selecciona una sucursal primero.</h4>
   </div>
   <?php
   }?>

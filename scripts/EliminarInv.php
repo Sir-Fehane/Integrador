@@ -19,11 +19,23 @@ if(isset($_POST['eliminar']))
     include "../class/database.php";
         $db = new Database();
         $db->conectarDB();
-    extract($_POST);
-    $cadena = "UPDATE INVENTARIO SET ESTADO = 'INACTIVO' WHERE ID_INS = $id";
+        try{
+          extract($_POST);
+    $cadena = "UPDATE INV_SUC SET ESTADO = 'INACTIVO' WHERE INVENTARIO = $idinv AND SUCURSAL = $idsuc;";
     $db->ejecutarsql($cadena);
     $db->desconectarDB();
     header("Location: Exito.php");
     exit;
-}
+        }
+        catch(PDOException $e) {
+          $error_message = "Error al ejecutar la acción.";
+          $error_code = $e->getCode();
+          
+          if ($error_code === "23000") {
+              $error_message = "No se puede eliminar este registro debido a restricciones de integridad referencial.";
+          }
+          
+          header("Location: Fallo.php?error_message=" . urlencode($error_message));
+      }
+  }
 ?>

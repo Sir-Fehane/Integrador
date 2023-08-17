@@ -56,10 +56,6 @@ else
         ?>
         </div>
         <div class="mb-3">
-        <label for="cant" class="form-label">Cantidad:</label>
-        <input type="number" name="cant" min="0" id="numero" class="form-control" required onkeypress="return validarNumero(event)">
-        </div>
-        <div class="mb-3">
         <label for="pres" class="form-label">Presentacion:</label>
         <?php
         $db = new Database();
@@ -86,7 +82,7 @@ else
         {
             echo "<option value='".$value->ID_SUC."'>".$value->NOMBRE."</option>";
         }
-        echo "<option value='0'>TODAS LAS SUCURSALES</option>";
+        echo "<option value=''>TODAS LAS SUCURSALES</option>";
         echo "</select>
         </div>";
         ?>
@@ -99,44 +95,34 @@ else
 <?php
 if(isset($_POST['submit']))
 {
-    try{
-        extract($_POST);
-            $cadena = "INSERT INTO INVENTARIO (NOMBRE, CATEGORIA, PRESENTACION, ESTADO) VALUES ('$nombre', '$categoria', '$pres', '$estado')";
-            $db->ejecutarsql($cadena);
-    if($sucur == 0)
+    try
     {
-        $cadena = "SELECT ID_SUC FROM SUCURSALES";
-        $reg = $db->seleccionar($cadena);
-        foreach ($reg as $value)
+        extract($_POST);
+        $cadena = "INSERT INTO INVENTARIO (NOMBRE, CATEGORIA, PRESENTACION, ESTADO) VALUES ('$nombre', '$categoria', '$pres', '$estado')";
+        $db->ejecutarsql($cadena);
+        if(empty($_POST['sucur']))
         {
-            $cadena = "INSERT INTO INV_SUC (SUCURSAL, INVENTARIO, CANTIDAD, FECHA) VALUES ('$value->ID_SUC', (SELECT ID_INS FROM INVENTARIO WHERE NOMBRE = '$nombre' ORDER BY ID_INS DESC LIMIT 1), '$cant', CURDATE())";
+            $suc = "SELECT ID_SUC FROM SUCURSALES";
+            $reg = $db->seleccionar($suc);
+            foreach ($reg as $value)
+            {
+                $cadena = "INSERT INTO INV_SUC (SUCURSAL, INVENTARIO, CANTIDAD, FECHA) VALUES ($value->ID_SUC, (SELECT ID_INS FROM INVENTARIO WHERE NOMBRE = '$nombre' ORDER BY ID_INS DESC LIMIT 1), 0, NOW())";
+                $db->ejecutarsql($cadena);
+            }
+        }
+        elseif(!empty($_POST['sucur']))
+        {
+            $cadena = "INSERT INTO INV_SUC (SUCURSAL, INVENTARIO, CANTIDAD, FECHA) VALUES ($sucur, (SELECT ID_INS FROM INVENTARIO WHERE NOMBRE = '$nombre' ORDER BY ID_INS DESC LIMIT 1), 0, NOW())";
             $db->ejecutarsql($cadena);
         }
-    }
-    else
-    {
-        $cadena = "INSERT INTO INV_SUC (SUCURSAL, INVENTARIO, CANTIDAD, FECHA) VALUES ('$sucur', (SELECT ID_INS FROM INVENTARIO WHERE NOMBRE = '$nombre' ORDER BY ID_INS DESC LIMIT 1), '$cant', CURDATE())";
-        $db->ejecutarsql($cadena);
-    }
-    $db->desconectarDB();
-    header("Location: Exito.php");
-    exit;
-    }catch(PDOException $e) 
+        $db->desconectarDB();
+        header("Location: Exito.php");
+        exit;
+    } catch(PDOException $e) 
     {
         header("Location: Fallo.php");
     }
 }
 ?>
-<script>
-    function validarNumero(event) {
-    const charCode = (event.which) ? event.which : event.keyCode;
-
-    if (charCode == 46 || (charCode >= 48 && charCode <= 57)) {
-        return true;
-    }
-
-    return false;
-  }
-    </script>
 </body>
 </html>

@@ -36,8 +36,11 @@ else
             <input type="text" name="nombre" class="form-control" required>
         </div>
         <div class="mb-3">
-            <label for="direc" class="form-label">Direccion:</label>
-            <input type="text" name="direc" class="form-control" required>
+            <label for="dire" class="form-label">Direccion:</label>
+            <div class="input-group">
+                <input type="text" name="calle" class="form-control" required placeholder="Calle y numero">
+                <input type="text" name="col" class="form-control" required placeholder="Colonia">
+            </div>
         </div>
         <div class="mb-3">
             <label for="tel" class="form-label">Telefono:</label>
@@ -90,12 +93,12 @@ if(isset($_POST['submit']))
     $hash = password_hash($contra, PASSWORD_DEFAULT);
     if($puesto == "ADMINISTRADOR")
     {
-        $cadena = "INSERT INTO USUARIOS (NOMBRE,DIRECCION,TELEFONO,CORREO,CONTRASENA,ROL,ESTADO) VALUES ('$nombre','$direc','$tel','$cor','$hash',1,'ACTIVADO');";
+        $cadena = "INSERT INTO USUARIOS (NOMBRE,DIRECCION,TELEFONO,CORREO,CONTRASENA,ROL,ESTADO) VALUES ('$nombre', CONCAT('$calle',' ','$col'),'$tel','$cor','$hash',1,'ACTIVADO');";
         $db->ejecutarsql($cadena);
     }
     else
     {
-        $cadena = "INSERT INTO USUARIOS (NOMBRE,DIRECCION,TELEFONO,CORREO,CONTRASENA,ROL,ESTADO) VALUES ('$nombre','$direc','$tel','$cor','$hash',3,'ACTIVADO');";
+        $cadena = "INSERT INTO USUARIOS (NOMBRE,DIRECCION,TELEFONO,CORREO,CONTRASENA,ROL,ESTADO) VALUES ('$nombre', CONCAT('$calle',' ','$col'),'$tel','$cor','$hash',3,'ACTIVADO');";
         $db->ejecutarsql($cadena);
         $cadena = "INSERT INTO EMPLEADO_SUCURSAL (EMPLEADO,PUESTO,SUCURSAL,ESTADO) VALUES ((SELECT ID_USUARIO FROM USUARIOS WHERE NOMBRE = '$nombre' AND ROL = 3
         ORDER BY ID_USUARIO DESC LIMIT 1),'$puesto',$sucur,'ACTIVO');";
@@ -103,7 +106,7 @@ if(isset($_POST['submit']))
     }
     
     $db->desconectarDB();
-    header("Location: Fallo.php");
+    header("Location: Exito.php");
     exit;
     } catch(PDOException $e) 
     {

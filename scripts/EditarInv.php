@@ -33,7 +33,7 @@ else
         <?php
         extract($_POST);
         ?>
-        <input type="hidden" name="id" value="<?php echo $id; ?>">
+        <input type="hidden" name="idinv" value="<?php echo $idinv; ?>">
         <div class="mb-3">
             <label for="nuevonom" class="form-label">Nombre del insumo:</label>
             <input type="text" name="nuevonom" class="form-control" value="<?php echo $nombre;?>" required>
@@ -57,7 +57,7 @@ else
         </div>
         <div class="mb-3">
         <label for="nuevocant" class="form-label">Cantidad:</label>
-        <input type="number" name="nuevocant" min="0" id="numero" class="form-control" value="<?php echo $existencia;?>" required>
+        <input type="number" name="nuevocant" class="form-control" disabled value="<?php echo $existencia;?>">
         </div>
         <div class="mb-3">
         <label for="nuevopres" class="form-label">Presentacion:</label>
@@ -70,6 +70,7 @@ else
             <option value="Vasos">Vasos</option>
             <option value="Paquete">Paquete</option>
             <option value="Caja">Caja</option>
+            <option value="Molde">Molde</option>
         </select>
         </div>
         <div class="mb-3">
@@ -88,20 +89,21 @@ else
         ?>
         </div>
         <div class="d-grid gap-2">
-            <button type="submit" name="submit" class="btn btn-primary">Guardar</button>
+            <button type="submit" name="editar" class="btn btn-primary">Guardar</button>
         </div>
     </form>
     <?php
-            if(isset($_POST['submit']))
+            if(isset($_POST['editar']))
             {
                 try{
-                    $cadena = "UPDATE INVENTARIO SET NOMBRE = '$nuevonom', CATEGORIA = $nuevocat, PRESENTACION = '$nuevopres' WHERE ID_INS = $id";
-                $db->ejecutarsql($cadena);
-                $cadena = "UPDATE INV_SUC SET SUCURSAL = $nuevosucur, CANTIDAD = $nuevocant WHERE INVENTARIO = $id";
-                $db->ejecutarsql($cadena);
-                $db->desconectarDB();
-                header("Location: Exito.php");
-                exit;
+                    extract($_POST);
+                    $cadena = "UPDATE INVENTARIO SET NOMBRE = '$nuevonom', CATEGORIA = $nuevocat, PRESENTACION = '$nuevopres' WHERE ID_INS = $idinv";
+                    $db->ejecutarsql($cadena);
+                    $cadena = "UPDATE INV_SUC SET SUCURSAL = $nuevosucur WHERE INVENTARIO = $idinv";
+                    $db->ejecutarsql($cadena);
+                    $db->desconectarDB();
+                    header("Location: Exito.php");
+                    exit;
                 }
                 catch(PDOException $e) 
                 {
@@ -116,6 +118,6 @@ else
     if(valor.value < 0){
     valor.value = 1;}
 }
-    </script>
+</script>
 </body>
 </html>

@@ -24,13 +24,10 @@ else
     <title>Nuevo</title>
 </head>
 <body>
-    <?php
-    $error = false;
-    ?>
 <div class="container w-75 p-5">
     <div class="d-flex">
         <a class="btn btn-primary justify-content-center" href="../views/admin.php">Regresar</a>
-        <h3 align="center" style="margin-left: 30%;">Añadir Insumo</h3>
+        <h3 align="center" style="margin-left: 30%;">Nueva Sucursal</h3>
     </div>
     <form action="" method="post">
         <input type="hidden" value="ACTIVO" name="estado">
@@ -40,7 +37,10 @@ else
         </div>
         <div class="mb-3">
             <label for="dire" class="form-label">Direccion:</label>
-            <input type="text" name="dire" class="form-control" required>
+            <div class="input-group">
+                <input type="text" name="calle" class="form-control" required placeholder="Calle y numero">
+                <input type="text" name="col" class="form-control" required placeholder="Colonia">
+            </div>
         </div>
         <div class="mb-3">
             <label for="tel" class="form-label">Telefono:</label>
@@ -54,12 +54,13 @@ else
 <?php
 if(isset($_POST['submit']))
 {
-    try{
-        include "../class/database.php";
+    include "../class/database.php";
     $db = new Database();
     $db->conectarDB();
+    try
+    {
     extract($_POST);
-            $cadena = "INSERT INTO SUCURSALES (NOMBRE, DIRECCION, TELEFONO, ESTADO) VALUES ('$nombre', '$dire', '$tel','ACTIVO')";
+            $cadena = "INSERT INTO SUCURSALES (NOMBRE, DIRECCION, TELEFONO, ESTADO) VALUES ('$nombre', CONCAT('$calle',' ','$col'), '$tel','ACTIVO')";
             $db->ejecutarsql($cadena);
             $db->desconectarDB();
     header("Location: Exito.php");

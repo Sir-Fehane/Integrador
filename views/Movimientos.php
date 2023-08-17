@@ -1,4 +1,6 @@
 <?php
+session_start();
+include '../class/database.php';
 if(!isset($_SESSION['rol']))
 {
   header('Location: ../index.php');
@@ -24,14 +26,29 @@ else
   <title>Movimientos</title>
 </head>
 <body>
+<div class="container mt-3">
+<div class="btn-group d-flex bg-light" role="group" style="overflow-x: auto; white-space: nowrap; width: 100%;">
+    <a class="btn btn-warning flex-fill" href="admin.php">Volver al inicio</a>
+    <a class="btn btn-primary flex-fill" href="Inventario.php">Inventario</a>
+    <a class="btn btn-primary flex-fill" href="Ordenes.php">Ordenes</a>
+    <a class="btn btn-primary flex-fill" href="Productos.php">Productos</a>
+    <a class="btn btn-primary flex-fill" href="Sucursales.php">Sucursales</a>
+    <a class="btn btn-primary flex-fill" href="Personal.php">Personal</a>
+    <a class="btn btn-primary flex-fill" href="Solicitudes.php">Solicitudes</a>
+    <a class="btn btn-primary flex-fill" href="Ingresos.php">Ingresos</a>
+    <a class="btn btn-primary flex-fill" href="ReporCierre.php">Cierres</a>
+    <a class="btn btn-primary flex-fill disabled" href="Movimientos.php" aria-disabled="true">Movimientos en inv</a>
+    <a class="btn btn-primary flex-fill" href="Merma.php">Merma</a>
+</div>
+</div>
 <?php
   $fechaActual = date("d/m/Y");
   $db = new Database();
   $db->conectarDB();
-    echo "<h6 align='center'>Reporte de <strong>movimientos de inventario</strong> de todas las sucursales ";
+    echo "<h4 align='center'>Reporte de <strong>movimientos de inventario</strong> de todas las sucursales ";
     echo
-    "</h6>"; ?>
-    <h6 align='center'>Selecciona los filtros segun tu necesidad</h6>
+    "</h4>"; ?>
+    <h4 align='center'>Selecciona los filtros segun tu necesidad</h4>
     <div class="container">
     <form class="" method="post">
         <div class="row">
@@ -80,7 +97,7 @@ else
   if (isset($_POST['MOVIMIENTOS']) && ((isset($_POST['suc']) && $_POST['suc'] != 0)))
   {?>
     <div class="container d-lg-none d-block">
-      <h6 align="center">Desliza la tabla para ver toda la informacion</h6>
+      <h4 align="center">Desliza la tabla para ver toda la informacion</h4>
     </div>
     <?php
     extract($_POST);
@@ -131,11 +148,12 @@ else
 </div>
 
   <?php
+  echo '<script>saveActiveTab("inventario");</script>';
   }
   else {
   ?>
   <div class="container">
-    <h6 align="center">Por favor, selecciona una sucursal primero.</h6>
+    <h4 align="center">Por favor, selecciona una sucursal primero.</h4>
   </div>
   <?php
   }?>

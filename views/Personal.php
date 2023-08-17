@@ -1,4 +1,6 @@
 <?php
+session_start();
+include '../class/database.php';
 if(!isset($_SESSION['rol']))
 {
   header('Location: ../index.php');
@@ -24,14 +26,29 @@ else
   <title>Personal</title>
 </head>
 <body>
+<div class="container mt-3">
+<div class="btn-group d-flex bg-light" role="group" style="overflow-x: auto; white-space: nowrap; width: 100%;">
+    <a class="btn btn-warning flex-fill" href="admin.php">Volver al inicio</a>
+    <a class="btn btn-primary flex-fill" href="Inventario.php">Inventario</a>
+    <a class="btn btn-primary flex-fill" href="Ordenes.php">Ordenes</a>
+    <a class="btn btn-primary flex-fill" href="Productos.php">Productos</a>
+    <a class="btn btn-primary flex-fill" href="Sucursales.php">Sucursales</a>
+    <a class="btn btn-primary flex-fill disabled" href="Personal.php" aria-disabled="true">Personal</a>
+    <a class="btn btn-primary flex-fill" href="Solicitudes.php">Solicitudes</a>
+    <a class="btn btn-primary flex-fill" href="Ingresos.php">Ingresos</a>
+    <a class="btn btn-primary flex-fill" href="ReporCierre.php">Cierres</a>
+    <a class="btn btn-primary flex-fill" href="Movimientos.php">Movimientos en inv</a>
+    <a class="btn btn-primary flex-fill" href="Merma.php">Merma</a>
+</div>
+</div>
 <?php
   $fechaActual = date("d/m/Y");
   $db = new Database();
   $db->conectarDB();
-    echo "<h6 align='center'>Reporte de <strong>personal</strong> de todas las sucursales ";
+    echo "<h4 align='center'>Reporte de <strong>personal</strong> de todas las sucursales ";
     echo
-    "</h6>"; ?>
-    <h6 align='center'>Selecciona los filtros segun tu necesidad</h6>
+    "</h4>"; ?>
+    <h4 align='center'>Selecciona los filtros segun tu necesidad</h4>
     <div class="container">
     <form class="" method="post">
         <div class="row">
@@ -110,10 +127,10 @@ else
     }
     $tabla = $db->seleccionar($cadena);
     ?>
-    <div class="container-fluid justify-content-center mr-3">
+    <div class="container justify-content-center">
     <div class="table-responsive">
         <?php
-        echo "<table class='table table-hover' id='DetalleInv'>";
+        echo "<table class='table table-hover' id='DetalleEmp'>";
         echo "<thead class='table-primary' align='center'>";
         echo "<tr>";
         echo "<th class='d-none'>ID</th>";
@@ -150,8 +167,11 @@ else
                     <input type="hidden" name="tel" value="<?php echo $registro->Telefono; ?>">
                     <button type="submit" class="btn btn-sm btn-primary mb-1">Editar</button>
                 </form>
-                <button type="button" class="btn btn-sm btn-danger mb-1" data-bs-toggle="modal" data-bs-target="#borraremp">Borrar</button>
-            </td>
+                <form action="../scripts/EliminarEmp.php" method="post">
+                  <input type="hidden" name="idemp" value="<?php echo $registro->IDEMP; ?>">
+                  <button type="submit" class="btn btn-sm btn-danger" name="baja" onclick="return confirm('¿Estás seguro que deseas eliminar al empleado?')">Borrar</button>
+                </form>
+              </td>
             <?php
             echo "</tr>";
         }
@@ -184,11 +204,12 @@ else
   </div>
 </div>
   <?php
+  echo '<script>saveActiveTab("personal");</script>';
   }
   else {
   ?>
   <div class="container">
-    <h6 align="center">Por favor, selecciona una sucursal primero.</h6>
+    <h4 align="center">Por favor, selecciona una sucursal primero.</h4>
   </div>
   <?php
   }?>
@@ -199,7 +220,7 @@ else
   <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
   <script>
     $(document).ready(function() {
-      $('#DetalleInv').DataTable();
+      $('#DetalleEmp').DataTable();
     });
   </script>
 

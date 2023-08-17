@@ -7,11 +7,11 @@
     <title>Nuevo</title>
 </head>
 <body>
-  <?php
-          include "../class/database.php";
-          $db = new Database();
-          $db->conectarDB();
-  ?>
+<?php
+    include "../class/database.php";
+    $db = new Database();
+    $db->conectarDB();
+?>
 <div class="container w-75 p-5">
     <div class="d-flex">
         <a class="btn btn-primary" href="../views/admin.php">Regresar</a>
@@ -39,15 +39,13 @@
         </div>
         <div class="mb-3">
             <label for="prec" class="form-label">Precio:</label>
-            <input type="number" name="prec" class="form-control" required onkeypress="return validarNumero(event)>
+            <input type="number" name="prec" class="form-control" required onkeypress="return validarNumero(event)">
         </div>
-        
         <div class="mb-3">
-    <label for="archivo" class="form-label">Imagen del producto:</label>
-    <input class="form-control" type="file" name="archivo" id="archivo">
-</div>
-            <button type="submit" name="submit" class="btn btn-primary">Agregar producto</button>
+            <label for="archivo" class="form-label">Imagen del producto:</label>
+            <input class="form-control" type="file" name="archivo" id="archivo">
         </div>
+            <button type="submit" name="submit" class="btn btn-primary">Agregar producto</button>
     </form>
 </div>
 <?php
@@ -96,17 +94,14 @@ if(isset($_POST['submit']))
     }
 }
 ?>
-<<<<<<< HEAD
 <script>
       function validarNumero(event) {
     const charCode = (event.which) ? event.which : event.keyCode;
-    if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57)) {
-        return false;
+    if (charCode == 46 || (charCode >= 48 && charCode <= 57)) {
+        return true;
     }
-    return true;
+    return false;
 }
-    </script>
-=======
->>>>>>> a1fc7d817ff273894346e518e325ad3a2b7f05c2
+</script>
 </body>
 </html>

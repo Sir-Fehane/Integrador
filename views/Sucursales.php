@@ -1,4 +1,6 @@
 <?php
+session_start();
+include '../class/database.php';
 if(!isset($_SESSION['rol']))
 {
   header('Location: ../index.php');
@@ -24,13 +26,28 @@ else
   <title>Sucursales</title>
 </head>
 <body>
+<div class="container mt-3">
+<div class="btn-group d-flex bg-light" role="group" style="overflow-x: auto; white-space: nowrap; width: 100%;">
+    <a class="btn btn-warning flex-fill" href="admin.php">Volver al inicio</a>
+    <a class="btn btn-primary flex-fill" href="Inventario.php">Inventario</a>
+    <a class="btn btn-primary flex-fill" href="Ordenes.php">Ordenes</a>
+    <a class="btn btn-primary flex-fill" href="Productos.php">Productos</a>
+    <a class="btn btn-primary flex-fill disabled" href="Sucursales.php" aria-disabled="true">Sucursales</a>
+    <a class="btn btn-primary flex-fill" href="Personal.php">Personal</a>
+    <a class="btn btn-primary flex-fill" href="Solicitudes.php">Solicitudes</a>
+    <a class="btn btn-primary flex-fill" href="Ingresos.php">Ingresos</a>
+    <a class="btn btn-primary flex-fill" href="ReporCierre.php">Cierres</a>
+    <a class="btn btn-primary flex-fill" href="Movimientos.php">Movimientos en inv</a>
+    <a class="btn btn-primary flex-fill" href="Merma.php">Merma</a>
+</div>
+</div>
 <?php
   $fechaActual = date("d/m/Y");
   $db = new Database();
   $db->conectarDB();
-    echo "<h6 align='center'>Listado de <strong>sucursales</strong>";
+    echo "<h4 align='center'>Listado de <strong>sucursales</strong>";
     echo
-    "</h6>"; ?>
+    "</h4>"; ?>
 <?php
 $db = new Database();
 $db->conectarDB();
@@ -40,7 +57,7 @@ $db->conectarDB();
   <a class="btn btn-primary mb-3" href="../scripts/NuevoSuc.php" role="button">Crear sucursal</a>
 </div>
 <div class="container d-lg-none d-block">
-  <h6 align="center">Desliza la tabla para ver toda la informacion</h6>
+  <h4 align="center">Desliza la tabla para ver toda la informacion</h4>
 </div>
 <?php
     $consulta = "SELECT ID_SUC, NOMBRE AS 'Nombre', DIRECCION AS 'Direccion', TELEFONO AS 'Telefono' 
@@ -75,8 +92,10 @@ $db->conectarDB();
         <input type="hidden" name="tel" value="<?php echo $registro->Telefono; ?>">
         <button type="submit" class="btn btn-sm btn-primary mb-1">Editar</button>
             </form>
-            <button type="button" class="btn btn-sm btn-danger mb-1" data-bs-toggle="modal"
-                    data-bs-target="#borrarsuc">Borrar</button>
+            <form action="../scripts/EliminarSuc.php" method="post">
+              <input type="hidden" name="suc" value="<?php echo $registro->ID_SUC; ?>">
+              <button type="submit" class="btn btn-sm btn-danger" name="eliminar" onclick="return confirm('¿Estás seguro que deseas eliminar la sucursal?')">Borrar</button>
+            </form>
         </td>
         <?php
         echo "</tr>";
@@ -87,28 +106,6 @@ $db->conectarDB();
     ?>
       </div>
     
-</div>
-<!-- ELIMINAR -->
-<div class="modal fade" id="borrarsuc" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="borrarper" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="staticBackdropLabel">Eliminar</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <p>¿Estas seguro de eliminar esta sucursal?</p> <br>
-        <p>Si lo haces<strong>, no se podra recuperar.</strong></p>
-      </div>
-      <div class="modal-footer">
-      <form action="../scripts/EliminarSuc.php" method="post">
-          <input type="hidden" name="suc" value="<?php echo $registro->ID_SUC; ?>">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-          <button type="submit" class="btn btn-danger" name="eliminar">Eliminar</button>
-        </form>
-      </div>
-    </div>
-  </div>
 </div>
 <script src="../js/bootstrap.min.js"></script>
 <script src="../js/bootstrap.bundle.min.js"></script>

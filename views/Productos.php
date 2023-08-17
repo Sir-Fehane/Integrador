@@ -1,4 +1,6 @@
 <?php
+session_start();
+include '../class/database.php';
 if(!isset($_SESSION['rol']))
 {
   header('Location: ../index.php');
@@ -24,13 +26,28 @@ else
   <title>Productos</title>
 </head>
 <body>
+<div class="container mt-3">
+<div class="btn-group d-flex bg-light" role="group" style="overflow-x: auto; white-space: nowrap; width: 100%;">
+    <a class="btn btn-warning flex-fill" href="admin.php">Volver al inicio</a>
+    <a class="btn btn-primary flex-fill" href="Inventario.php">Inventario</a>
+    <a class="btn btn-primary flex-fill" href="Ordenes.php">Ordenes</a>
+    <a class="btn btn-primary flex-fill disabled" href="Productos.php" aria-disabled="true">Productos</a>
+    <a class="btn btn-primary flex-fill" href="Sucursales.php">Sucursales</a>
+    <a class="btn btn-primary flex-fill" href="Personal.php">Personal</a>
+    <a class="btn btn-primary flex-fill" href="Solicitudes.php">Solicitudes</a>
+    <a class="btn btn-primary flex-fill" href="Ingresos.php">Ingresos</a>
+    <a class="btn btn-primary flex-fill" href="ReporCierre.php">Cierres</a>
+    <a class="btn btn-primary flex-fill" href="Movimientos.php">Movimientos en inv</a>
+    <a class="btn btn-primary flex-fill" href="Merma.php">Merma</a>
+</div>
+</div>
 <?php
   $fechaActual = date("d/m/Y");
   $db = new Database();
   $db->conectarDB();
-    echo "<h6 align='center'>Listado de <strong>productos</strong>";
+    echo "<h4 align='center'>Listado de <strong>productos</strong>";
     echo
-    "</h6>"; ?>
+    "</h4>"; ?>
 <?php
 $db = new Database();
 $db->conectarDB();
@@ -74,16 +91,18 @@ $db->conectarDB();
         ?>
         <td class="col-6 col-lg-3">
             <form action="../scripts/EditarProd.php" method="post">
-        <input type="hidden" name="COD" value="<?php echo $registro->CODIGO; ?>">
-        <input type="hidden" name="PROD" value="<?php echo $registro->Producto; ?>">
-        <input type="hidden" name="TAM" value="<?php echo $registro->Tamaño; ?>">
-        <input type="hidden" name="DES" value="<?php echo $registro->Descripcion; ?>">
-        <input type="hidden" name="PRE" value="<?php echo $registro->Precio; ?>">
-        <input type="hidden" name="IMG" value="<?php echo $registro->IMG; ?>">
-        <button type="submit" class="btn btn-sm btn-primary mb-1">Editar</button>
+              <input type="hidden" name="COD" value="<?php echo $registro->CODIGO; ?>">
+              <input type="hidden" name="PROD" value="<?php echo $registro->Producto; ?>">
+              <input type="hidden" name="TAM" value="<?php echo $registro->Tamaño; ?>">
+              <input type="hidden" name="DES" value="<?php echo $registro->Descripcion; ?>">
+              <input type="hidden" name="PRE" value="<?php echo $registro->Precio; ?>">
+              <input type="hidden" name="IMG" value="<?php echo $registro->IMG; ?>">
+              <button type="submit" class="btn btn-sm btn-primary mb-1" name="editarprod">Editar</button>
             </form>
-            <button type="button" class="btn btn-sm btn-danger mb-1" data-bs-toggle="modal"
-                    data-bs-target="#borrarprod">Borrar</button>
+            <form action="../scripts/eliminarproda.php" method="post">
+              <input type="hidden" name="COD" value="<?php echo $registro->CODIGO; ?>">
+              <button type="submit" class="btn btn-sm btn-danger" name="eliminar" onclick="return confirm('¿Estás seguro que deseas eliminar el producto? Esto se hará en todas las sucursales.')">Borrar</button>
+            </form>
         </td>
         <?php
         echo "</tr>";
@@ -95,28 +114,6 @@ $db->conectarDB();
       </div>
     
 </div>
-<!-- ELIMINAR -->
-<div class="modal fade" id="borrarprod" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="borrarper" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="staticBackdropLabel">Eliminar</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <p>¿Estas seguro de eliminar este producto?</p> <br>
-        <p>Si lo haces<strong>, no se podra recuperar.</strong></p>
-      </div>
-      <div class="modal-footer">
-      <form action="../scripts/eliminarproda.php" method="post">
-          <input type="hidden" name="COD" value="<?php echo $registro->CODIGO; ?>">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-          <button type="submit" class="btn btn-danger" name="eliminar">Eliminar</button>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
 <script src="../js/bootstrap.min.js"></script>
 <script src="../js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -125,6 +122,7 @@ $db->conectarDB();
   <script>
     $(document).ready(function() {
       $('#DetallePro').DataTable();
+      
     });
   </script>
 
