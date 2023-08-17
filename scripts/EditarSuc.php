@@ -26,7 +26,7 @@ else
 <body>
 <div class="container w-75 p-5">
     <div class="d-flex">
-        <a class="btn btn-primary justify-content-center" href="../views/admin.php">Regresar</a>
+        <a class="btn btn-primary justify-content-center" href="../views/Sucursales.php">Regresar</a>
         <h3 align="center" style="margin-left: 30%;">Editar Sucursal</h3>
     </div>
     <form action="" method="POST">
@@ -39,11 +39,11 @@ else
             <input type="text" name="nuevonom" class="form-control" value="<?php echo $nom;?>" required>
         </div>
         <div class="mb-3">
-            <label for="nuevonom" class="form-label">Direccion:</label>
+            <label for="nuevonom" class="form-label">Dirección:</label>
             <input type="text" name="nuevodir" class="form-control" value="<?php echo $dir;?>" required>
         </div>
         <div class="mb-3">
-        <label for="nuevotel" class="form-label">Telefono:</label>
+        <label for="nuevotel" class="form-label">Teléfono:</label>
             <input type="text" name="nuevotel" class="form-control" value="<?php echo $tel;?>" required>
         </div> 
         <div class="d-grid gap-2">

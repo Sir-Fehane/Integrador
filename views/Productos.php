@@ -30,7 +30,7 @@ else
 <div class="btn-group d-flex bg-light" role="group" style="overflow-x: auto; white-space: nowrap; width: 100%;">
     <a class="btn btn-warning flex-fill" href="admin.php">Volver al inicio</a>
     <a class="btn btn-primary flex-fill" href="Inventario.php">Inventario</a>
-    <a class="btn btn-primary flex-fill" href="Ordenes.php">Ordenes</a>
+    <a class="btn btn-primary flex-fill" href="Ordenes.php">Órdenes</a>
     <a class="btn btn-primary flex-fill disabled" href="Productos.php" aria-disabled="true">Productos</a>
     <a class="btn btn-primary flex-fill" href="Sucursales.php">Sucursales</a>
     <a class="btn btn-primary flex-fill" href="Personal.php">Personal</a>
@@ -45,7 +45,7 @@ else
   $fechaActual = date("d/m/Y");
   $db = new Database();
   $db->conectarDB();
-    echo "<h4 align='center'>Listado de <strong>productos</strong>";
+    echo "<h4 align='center'>Listado de <strong>productos</strong>.";
     echo
     "</h4>"; ?>
 <?php

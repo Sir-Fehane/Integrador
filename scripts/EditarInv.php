@@ -26,7 +26,7 @@ else
 <body>
 <div class="container w-75 p-5">
     <div class="d-flex">
-        <a class="btn btn-primary justify-content-center" href="../views/admin.php">Regresar</a>
+        <a class="btn btn-primary justify-content-center" href="../views/Inventario.php">Regresar</a>
         <h3 align="center" style="margin-left: 30%;">Editar Insumo</h3>
     </div>
     <form action="" method="POST">
@@ -39,7 +39,7 @@ else
             <input type="text" name="nuevonom" class="form-control" value="<?php echo $nombre;?>" required>
         </div>
         <div class="mb-3">
-        <label for="nuevocat" class="form-label">Categoria:</label>
+        <label for="nuevocat" class="form-label">Categoría:</label>
         <?php
         include "../class/database.php";
         $db = new Database();
@@ -60,7 +60,7 @@ else
         <input type="number" name="nuevocant" class="form-control" disabled value="<?php echo $existencia;?>">
         </div>
         <div class="mb-3">
-        <label for="nuevopres" class="form-label">Presentacion:</label>
+        <label for="nuevopres" class="form-label">Presentación:</label>
         <select name="nuevopres" class="form-select">
             <option value="Kg">Kg</option>
             <option value="Lata">Lata</option>

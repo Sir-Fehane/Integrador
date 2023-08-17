@@ -30,7 +30,7 @@ else
 <div class="btn-group d-flex bg-light" role="group" style="overflow-x: auto; white-space: nowrap; width: 100%;">
     <a class="btn btn-warning flex-fill" href="admin.php">Volver al inicio</a>
     <a class="btn btn-primary flex-fill disabled" href="Inventario.php" aria-disabled="true">Inventario</a>
-    <a class="btn btn-primary flex-fill" href="Ordenes.php">Ordenes</a>
+    <a class="btn btn-primary flex-fill" href="Ordenes.php">Órdenes</a>
     <a class="btn btn-primary flex-fill" href="Productos.php">Productos</a>
     <a class="btn btn-primary flex-fill" href="Sucursales.php">Sucursales</a>
     <a class="btn btn-primary flex-fill" href="Personal.php">Personal</a>
@@ -45,10 +45,10 @@ else
   $fechaActual = date("d/m/Y");
   $db = new Database();
   $db->conectarDB();
-    echo "<h4 align='center'>Reporte de <strong>inventario</strong> de todas las sucursales ";
+    echo "<h4 align='center'>Reporte de <strong>inventario</strong> de todas las sucursales. ";
     echo
     "</h4>"; ?>
-    <h4 align='center'>Selecciona los filtros segun tu necesidad</h4>
+    <h4 align='center'>Selecciona los filtros según tu necesidad.</h4>
     <div class="container">
     <form id="Inventario-form" method="post" action="">
             <div class="row">

@@ -26,7 +26,7 @@ else
 <body>
 <div class="container w-75 p-5">
     <div class="d-flex">
-        <a class="btn btn-primary" href="../views/admin.php">Regresar</a>
+        <a class="btn btn-primary" href="../views/Personal.php">Regresar</a>
         <h3 align="center" style="margin-left: 30%;">Añadir Empleado</h3>
     </div>
     <form action="" method="post">
@@ -36,14 +36,14 @@ else
             <input type="text" name="nombre" class="form-control" required>
         </div>
         <div class="mb-3">
-            <label for="dire" class="form-label">Direccion:</label>
+            <label for="dire" class="form-label">Dirección:</label>
             <div class="input-group">
-                <input type="text" name="calle" class="form-control" required placeholder="Calle y numero">
+                <input type="text" name="calle" class="form-control" required placeholder="Calle y número">
                 <input type="text" name="col" class="form-control" required placeholder="Colonia">
             </div>
         </div>
         <div class="mb-3">
-            <label for="tel" class="form-label">Telefono:</label>
+            <label for="tel" class="form-label">Teléfono:</label>
             <input type="text" name="tel" class="form-control" required>
         </div>
         <div class="mb-3">

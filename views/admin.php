@@ -60,7 +60,7 @@ else
 <div class="container-fluid">
 <div class="btn-group d-flex" role="group" style="overflow-x: auto; white-space: nowrap; width: 100%;">
     <a class="btn btn-primary flex-fill" href="Inventario.php">Inventario</a>
-    <a class="btn btn-primary flex-fill" href="Ordenes.php">Ordenes</a>
+    <a class="btn btn-primary flex-fill" href="Ordenes.php">Órdenes</a>
     <a class="btn btn-primary flex-fill" href="Productos.php">Productos</a>
     <a class="btn btn-primary flex-fill" href="Sucursales.php">Sucursales</a>
     <a class="btn btn-primary flex-fill" href="Personal.php">Personal</a>
@@ -73,7 +73,7 @@ else
   <div class="tab-content w-100" id="v-pills-tabContent">
     <div class="tab-pane fade show active" id="non" role="tabpanel" tabindex="0">
       <br><br>
-      <h3 align="center">Selecciona una pestaña en la seccion de arriba.</h3>
+      <h3 align="center">Selecciona una pestaña en la sección de arriba.</h3>
       <br>
       <div class="container">
         <div class="row">
@@ -88,7 +88,7 @@ else
                       <thead class="table-primary" align="center">
                         <tr>
                           <th>
-                            Numero de clientes registrados
+                            Número de clientes registrados
                           </th>
                         </tr>
                       </thead>

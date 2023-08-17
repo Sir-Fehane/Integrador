@@ -29,7 +29,7 @@ else
     ?>
 <div class="container w-75 p-5">
     <div class="d-flex">
-        <a class="btn btn-primary justify-content-center" href="../views/admin.php">Regresar</a>
+        <a class="btn btn-primary justify-content-center" href="../views/Inventario.php">Regresar</a>
         <h3 align="center" style="margin-left: 30%;">Añadir Insumo</h3>
     </div>
     <form action="" method="post">
@@ -39,7 +39,7 @@ else
             <input type="text" name="nombre" class="form-control" required>
         </div>
         <div class="mb-3">
-        <label for="categoria" class="form-label">Categoria:</label>
+        <label for="categoria" class="form-label">Categoría:</label>
         <?php
         include "../class/database.php";
         $db = new Database();
@@ -56,7 +56,7 @@ else
         ?>
         </div>
         <div class="mb-3">
-        <label for="pres" class="form-label">Presentacion:</label>
+        <label for="pres" class="form-label">Presentación:</label>
         <?php
         $db = new Database();
         $db->conectarDB();

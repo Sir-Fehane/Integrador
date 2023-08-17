@@ -14,7 +14,7 @@
 ?>
 <div class="container w-75 p-5">
     <div class="d-flex">
-        <a class="btn btn-primary" href="../views/admin.php">Regresar</a>
+        <a class="btn btn-primary" href="../views/Productos.php">Regresar</a>
         <h3 align="center" style="margin-left: 30%;">Añadir Productos</h3>
     </div>
     <form action="" method="post" enctype="multipart/form-data">
@@ -34,7 +34,7 @@
             </select>
         </div>
         <div class="mb-3">
-            <label for="desc" class="form-label">Descripcion:</label>
+            <label for="desc" class="form-label">Descripción:</label>
             <input type="text" name="desc" class="form-control" required>
         </div>
         <div class="mb-3">

@@ -123,7 +123,7 @@ $db->conectarDB();
     foreach($tabla as $registro){}
 ?>
     <div class="d-flex">
-        <a class="btn btn-primary" href="../views/admin.php">Regresar</a>
+        <a class="btn btn-primary" href="../views/Productos.php">Regresar</a>
         <h1 align="center" style="margin-left: 30%;">Editar Producto</h1>
     </div>
 
