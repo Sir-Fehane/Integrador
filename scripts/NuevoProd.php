@@ -45,7 +45,8 @@
             <label for="archivo" class="form-label">Imagen del producto:</label>
             <input class="form-control" type="file" name="archivo" id="archivo">
         </div>
-            <button type="submit" name="submit" class="btn btn-primary">Agregar producto</button>
+            <button type="submit" name="submit" class="btn btn-primary" id="bloqueo" onclick="cambiarContenido()"
+>Agregar producto</button>
     </form>
 </div>
 <?php
@@ -102,6 +103,17 @@ if(isset($_POST['submit']))
     }
     return false;
 }
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    var boton = document.getElementById("bloqueo");
+    var form = document.querySelector("form");
+
+    form.addEventListener("submit", function() {
+        boton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Cargando...';
+        boton.style.cursor = "not-allowed";
+    });
+});
 </script>
 </body>
 </html>

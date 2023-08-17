@@ -89,7 +89,7 @@ else
         ?>
         </div>
         <div class="d-grid gap-2">
-            <button type="submit" name="editar" class="btn btn-primary">Guardar</button>
+            <button type="submit" name="editar" class="btn btn-primary" id="bloqueo" onclick="cambiarContenido()">Guardar</button>
         </div>
     </form>
     <?php
@@ -118,6 +118,17 @@ else
     if(valor.value < 0){
     valor.value = 1;}
 }
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    var boton = document.getElementById("bloqueo");
+    var form = document.querySelector("form");
+
+    form.addEventListener("submit", function() {
+        boton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Cargando...';
+        boton.style.cursor = "not-allowed";
+    });
+});
 </script>
 </body>
 </html>

@@ -47,7 +47,7 @@ else
             <input type="text" name="tel" class="form-control" required>
         </div>
         <div class="d-grid gap-2">
-            <button type="submit" name="submit" class="btn btn-primary">Añadir sucursal</button>
+            <button type="submit" name="submit" class="btn btn-primary" id="bloqueo" onclick="cambiarContenido()">Añadir sucursal</button>
         </div>
     </form>
 </div>
@@ -72,5 +72,16 @@ if(isset($_POST['submit']))
     }
 }
 ?>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    var boton = document.getElementById("bloqueo");
+    var form = document.querySelector("form");
+
+    form.addEventListener("submit", function() {
+        boton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Cargando...';
+        boton.style.cursor = "not-allowed";
+    });
+});
+</script>
 </body>
 </html>
