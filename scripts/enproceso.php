@@ -19,7 +19,7 @@ $correo = $_SESSION['correo'];
   $db->conectarDB(); ?>
 <div class="container">
 
-<div class="align-center"><h3>Ordenes pendientes de aceptar en sucursal</h3></div>
+<div align="center"><h3>Ordenes que se estan realizando</h3></div>
 </div>
     <?php
     $valor = 3;
