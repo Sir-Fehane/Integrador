@@ -29,11 +29,12 @@ if ($ccorreo > 0) {
     echo "<script>alert('El correo ya está registrado.'); window.location.href = '../index.php';</script>";
     exit(); // Stop further execution
 }
-
+$direccion = "$calle, $colonia";
         $codigo_aleatorio = rand(100000, 999999);
         $hash = password_hash($password, PASSWORD_DEFAULT);
-    $cadena = "INSERT INTO USUARIOS(NOMBRE, DIRECCION, TELEFONO, CORREO, CONTRASENA, ROL, img_chidas,NICKNAME,CODIGOC,ESTADO)
-    VALUES ('$nombre','$direccion','$telefono','$correo','$hash', 2, 'https://toys-pizza.s3.amazonaws.com/imagenes/usuariotoys.jpg','','$codigo_aleatorio','INACTIVO')";
+        
+    $cadena = "INSERT INTO USUARIOS(NOMBRE, DIRECCION, TELEFONO, CORREO, CONTRASENA, ROL, img_chidas,NICKNAME,CODIGOC,ESTADO,cp)
+    VALUES ('$nombre','$direccion','$telefono','$correo','$hash', 2, 'https://toys-pizza.s3.amazonaws.com/imagenes/usuariotoys.jpg','','$codigo_aleatorio','INACTIVO','$cp')";
             $db->ejecutarSQL($cadena);
         // ... Código para recibir los datos del formulario y validarlos ...
 
