@@ -87,7 +87,7 @@ setInterval(tiempoReal, 1000);
               <a class="nav-link active" aria-current="page" href="puntoventa.php">Inicio</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="cocina.PHP">Cocina</a>
+              <a class="nav-link" href="cocina.php">Cocina</a>
             </li>
             <li>
               <a class="nav-link" href="pendientes.php">Pendientes</a>

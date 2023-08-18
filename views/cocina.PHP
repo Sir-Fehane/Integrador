@@ -67,7 +67,7 @@ foreach($resultadocons as $abc)
               <a class="nav-link active" aria-current="page" href="puntoventa.php">Inicio</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="cocina.PHP">Cocina</a>
+              <a class="nav-link" href="cocina.php">Cocina</a>
             </li>
             <li>
               <a class="nav-link" href="pendientes.php">Pendientes</a>
@@ -113,7 +113,7 @@ if (count($tabla) > 0) {
                   <h2>ORDEN $registro->NO_ORDEN</h2>
               </div>
               <div class='table-responsive'>
-                  <form action='../views/cocina.PHP' method='post'>
+                  <form action='../views/cocina.php' method='post'>
                       <input type='hidden' name='no_orden' value='$registro->NO_ORDEN'>
                       <button type='submit' class='btn btn-sm btn-success' name='editar_orden'>Terminar</button>
                       <button type='submit' class='btn btn-sm btn-danger' name='cancelar_orden'>Cancelar</button>
@@ -160,36 +160,25 @@ echo "</div></div>";
 
 if (isset($_POST['editar_orden'])) {
     $no_orden = $_POST['no_orden'];
-    $asd=$conexion->seleccionar("SELECT USUARIOS.CORREO FROM USUARIOS INNER JOIN ORDEN_VENTA ON ORDEN_VENTA.NO_ORDEN WHERE ORDEN_VENTA.NO_ORDEN=".$no_orden."");
-    foreach($asd as $cry)
-    {
-      $_SESSION['CORREO'] = $cry->CORREO;
-    }
     try {
-        $estado_nuevo = "ENTREGADO";
+        $estado_nuevo = "TERMINADO";
         $update_sql = "UPDATE ORDEN_VENTA SET ESTADO = :estado_nuevo WHERE NO_ORDEN = :no_orden";
 
         $stmt = $conexion->getDB()->prepare($update_sql);
         $stmt->bindParam(':estado_nuevo', $estado_nuevo);
         $stmt->bindParam(':no_orden', $no_orden);
         $stmt->execute();
-        include "../Mail/CORREOCOCINATERMINADO.php";
+
     } catch (PDOException $e) {
         echo "Error: " . $e->getMessage();
     }
-    echo "<script>window.location.href = 'cocina.PHP';</script>";
+    echo "<script>window.location.href = 'cocina.php';</script>";
 }
 
 if (isset($_POST['cancelar_orden'])) {
     $no_orden = $_POST['no_orden'];
 
     try {
-      $asd=$conexion->seleccionar("SELECT USUARIOS.CORREO FROM USUARIOS INNER JOIN ORDEN_VENTA ON ORDEN_VENTA.NO_ORDEN WHERE ORDEN_VENTA.NO_ORDEN=".$no_orden."");
-    foreach($asd as $cry)
-    {
-      $dfg= $cry->CORREO;
-      $_SESSION['CORREO'] = $dfg;
-    }
         $estado_nuevo = "CANCELADA";
         $update_sql = "UPDATE ORDEN_VENTA SET ESTADO = :estado_nuevo WHERE NO_ORDEN = :no_orden";
 
@@ -197,11 +186,10 @@ if (isset($_POST['cancelar_orden'])) {
         $stmt->bindParam(':estado_nuevo', $estado_nuevo);
         $stmt->bindParam(':no_orden', $no_orden);
         $stmt->execute();
-        include "";
     } catch (PDOException $e) {
         echo "Error: " . $e->getMessage();
     }
-    header("location: cocina.PHP");
+    header("location: cocina.php");
 }
 ?>
 </body>
