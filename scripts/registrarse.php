@@ -51,7 +51,7 @@ if ($ccorreo > 0) {
     $mail->Password   = 'igybzfaahhtsbrmt';                               //la contra de la verificacion de 2 pasos
     $mail->SMTPSecure = 'ssl';            //Enable implicit TLS encryption
     $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
-
+    $mail->CharSet = 'UTF-8';
     //Recipients
     $mail->setFrom('oscare.alvarado17@gmail.com', 'Don Toys');
     $mail->addAddress($correo);
