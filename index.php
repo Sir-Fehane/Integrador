@@ -52,7 +52,7 @@ else
     ?>
                 </ul>
                 <li class="nav-item">
-            <a href="carrito/viewCart.php" title="Ver carrito"><i class='bx bxs-cart'></i></a>
+            <a href="carrito/viewCart.php" title="Ver carrito"  id="carro"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAAAXNSR0IArs4c6QAAA/5JREFUWEedWE2IFEcYfV/PrhA96kHQgxhCdqpbBIWAJHjwIDkkxO3NHhZPejAK4j2QgJAcchMMEdaDGxAWyWZ6kmMCEQQDguLB2a5ZQSIeFMGbIBF1+pPq7p2p6q7qqd6+7Ex3/bzvfe+9rlnCli8CwK1mT2aYc/Vv6rPlIhAY3H7PfC37NNdiFXBVdK1B5Av4Id8aQ+Usny18sNTWmbK+0TIRpxfHfDP/T4SbaRLd9W5BYxW6DMzPuhargCwq5RWZRKdbqddjsItd0osScWq1Tca0tNEXN6yC9emb1TZ26RUMlajylpVXRnQ4YP6i/Pqv7IefKfHm7mvw0njvrQJ1tV0sprsxwlMAgRqTMR0Y9sX6BIsZDbqDJqB1anxsUnBjFqV9F3H6G8CLahgT/TLsifPTAblyyNzJDroCqAqtuyCPEvOtvDbGSxAuufQ6qV81lCyoyvvaAkz06m0w++ujtY9ebN5uZEgNEnGq2hQWE+qLOg1VVqHXXANdTL4rk/ATE5ArvQB0F+Q5Yr6iTzCs6Ao6n4AtQD+RSbTPypCt2sNf3tv+evaDFwxsd7LhfH+ZM6yyZvwk++G3xUhllOJv3g2XU0Wc/gwgF7SfV2xr2ts96nT2P1ybe+zNkBoYnRh8mAXBI7Neywa6bvyQ35FJeEQfqom6mSaxkP4DxjHTvO60LQ4ALhNw3hwGzsokXNbdbbTMrpECaDQ/iDMKek06anac/jQH+npmx7tdD64ffFUt0i0MncuLHIgHUiX37tYRUEOqGMKNNImWqrr0ZkhN7MbyOwL/0MyST1YxiPB52ov+qq5lBGPjRgTMnRju7FD2nIEZW2X+J2x+NkzCvQyqTTGOH7UIsNzozstVIq5RXSumyWVG9piKcQKaYDFNGcaDTxl020Z1nSH7e62aPXVRl3dcwajbUjlOzKcpCMLe4qlWvyOT6IjX2356lhXpIeL1JQatNo6vph0X2QPgZJpEq9Vz9Ca7Rct8XoQVXkMFiunjVhFAPJBJ1Gv6fenhslqpeoMtXZvOc9WhTg3ZnWKnT8TpMginMMJ/wUxwYf337t82TUVfD49no+wyAuwHY0Um4TfegPxqgxL1KRCujQEwHg774dxYB+Nf/QQxv74BQtladTjHaflHuOKKCY+W1euuJTbxW9mLttnOL2IhfQPG7CYrGdH3w574sdomvZjmN4Hl6dzi8EAwGt0HKE9sAFc3WzFuR0l32dozhZD5XdbpHNpYEwPXf04Mhqbn0ASdAoURfxUwP5V9Swu0QlSLmWgPd+jPjbXuYPzIopFWL1c3lT7qc/+ez9fVvGPdp7aFD33eeWauXs3C1hqqH6zdG7jE69q0pctcIdm+JhfQ93JBvTYjB6UlAAAAAElFTkSuQmCC"/> </a>
             </li>
               <li class="nav-item navtext">
                 <div class="container">
@@ -93,8 +93,8 @@ else
                     else
                     {
                     ?>
-                  <button type="button" class="btn btn-danger jus" data-bs-toggle="modal" data-bs-target="#login">Iniciar Sesion</button>
-                  <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#register">Registrate</button>
+                  <button type="button" class="btn btn-warning jus" data-bs-toggle="modal" data-bs-target="#login">Iniciar Sesion</button>
+                  
                   <?php
                     }
                   ?>
@@ -314,10 +314,15 @@ else
                     <input type="email" class="form-control" name="correo" required>
                     <label for="password" class="form-label">Contraseña</label>
                     <input type="password" class="form-control" name="password" required>
+                    <br>
+                    <span style="color: black;">¿No tienes una cuenta?</span>  <a data-bs-toggle="modal" data-bs-target="#register">Registrate</a>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-danger">Iniciar sesion</button>
                     </div>
                 </form>
+
+
+                
             </div>
         </div>
     </div>

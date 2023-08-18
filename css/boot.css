@@ -9,6 +9,9 @@
     list-style: none;
     text-decoration: none;
 }
+.carousel-inner h5, p{
+    text-shadow: -0.5px -0.5px 0 #000, 0.5px -0.5px 0 #000, -0.5px 0.5px 0 #000, 0.5px 0.5px 0 #000;
+}
 a{
     text-decoration: none;
 }
@@ -31,6 +34,9 @@ body{
     background-color:#F2F2F2 ;
     padding: 0;
     
+}
+#carro{
+    font-size: 150%;
 }
 /*Header*/
 .logo{
