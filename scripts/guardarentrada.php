@@ -51,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 $conexion->ejecutarSQL($actualizacionSolicitudes);
             }
 
-            header("Location: ExitoPV.php");
+            header("Location: Esoli.php");
         } else {
             echo "No se recibieron datos válidos.";
         }
