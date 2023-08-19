@@ -148,9 +148,8 @@ try {
     //Content
     $mail->isHTML(true);                                  //Poner diseño a esta cosa, pues es lo que se verá
     $mail->Subject = 'PEDIDO CONFIRMADO';
-    $mail->Body    =  'ticket de compra' ;
+    $mail->Body    =  'Pon esto shulo Isaac' ;
    //$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
-   $mail->addAttachment('mi_pdf.pdf', 'ticket.pdf');
     $mail->send();
 } catch (Exception $e) {
     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";

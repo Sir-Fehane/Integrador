@@ -24,33 +24,19 @@ a{
     background: var(--main-color);
     color:#f2f2f2;
 }
-body{
-    color:var(--text-color);
-    background-image: url(../img/fondocar.jpg);
-    background-repeat: repeat;
+.shipAddr{
+background-color: #ffff;
+width: 300px;
+text-align: center; 
+border-radius: 35px; 
+border: 2px solid #FECB00;
 }
-    .shipAddr{
-        background-color: #ffff;
-        width: 300px;
-        text-align: center; 
-        border-radius: 35px; 
-        border: 2px solid #FECB00;
-    }
-    .footBtn{width: 95%;float: left;}
-    .orderBtn {float: right;}
-    #img-toys{display: block;
-        margin-left: auto;
-        margin-right: auto;
-    }
-.formcarro{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
-.formcarro
-input
-{
-    width: 20%;
+
+
+#img-toys{
+display: block;
+margin-left: auto;
+margin-right: auto;
 }
 @media (max-width:576px)
 {.content
@@ -60,22 +46,22 @@ input
     #img-toys{width: 40%;}
     a{width: auto;}
     .shipAddr{margin-left: 2.5rem;}
-    .formcarro button
+    .buttonspe
 {
-    margin-left: 9.8rem;
+    margin-left: 2.5rem;
+    margin-top: 2rem;
 }
 }
 @media (min-width:576px)
 {
-    .shipAddr{margin-left: 28rem;}
-    .content{margin-top: 3rem;}
-    #img-toys{width: 20%;}
-    .formcarro button
+.content{margin-top: 3rem;}
+#img-toys{width: 20%;}
+.vistap
 {
-    margin-left: 9.8rem;
+    margin-left: 15rem;
 }
-}
-h4, h1
+.buttonspe
 {
-    font-weight: bold;
+    margin-left: 5rem;
+}
 }

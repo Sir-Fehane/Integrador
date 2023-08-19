@@ -36,11 +36,18 @@ $dbase->conectarDB();
                 <a class="nav-link active navtext" aria-current="page" href="../index.php">Inicio</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link navtext" href="../views/menu-pizza.php">Menu</a>
+                <a class="nav-link navtext" href="#">Menu</a>
               </li>
+              <?php
+    if (isset($_SESSION['rol']) && $_SESSION['rol'] == 3) {
+        echo '<li class="nav-item">
+                  <a class="nav-link navtext" href="../views/puntoventa.php">Punto de Venta</a>
+              </li>';
+    }
+    ?>
                 </ul>
                 <li class="nav-item">
-            <a href="../carrito/viewCart.php" title="Ver carrito"><i class='bx bxs-cart'></i></a>
+            <a href="carrito/viewCart.php" title="Ver carrito"  id="carro"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAAAXNSR0IArs4c6QAAA/5JREFUWEedWE2IFEcYfV/PrhA96kHQgxhCdqpbBIWAJHjwIDkkxO3NHhZPejAK4j2QgJAcchMMEdaDGxAWyWZ6kmMCEQQDguLB2a5ZQSIeFMGbIBF1+pPq7p2p6q7qqd6+7Ex3/bzvfe+9rlnCli8CwK1mT2aYc/Vv6rPlIhAY3H7PfC37NNdiFXBVdK1B5Av4Id8aQ+Usny18sNTWmbK+0TIRpxfHfDP/T4SbaRLd9W5BYxW6DMzPuhargCwq5RWZRKdbqddjsItd0osScWq1Tca0tNEXN6yC9emb1TZ26RUMlajylpVXRnQ4YP6i/Pqv7IefKfHm7mvw0njvrQJ1tV0sprsxwlMAgRqTMR0Y9sX6BIsZDbqDJqB1anxsUnBjFqV9F3H6G8CLahgT/TLsifPTAblyyNzJDroCqAqtuyCPEvOtvDbGSxAuufQ6qV81lCyoyvvaAkz06m0w++ujtY9ebN5uZEgNEnGq2hQWE+qLOg1VVqHXXANdTL4rk/ATE5ArvQB0F+Q5Yr6iTzCs6Ao6n4AtQD+RSbTPypCt2sNf3tv+evaDFwxsd7LhfH+ZM6yyZvwk++G3xUhllOJv3g2XU0Wc/gwgF7SfV2xr2ts96nT2P1ybe+zNkBoYnRh8mAXBI7Neywa6bvyQ35FJeEQfqom6mSaxkP4DxjHTvO60LQ4ALhNw3hwGzsokXNbdbbTMrpECaDQ/iDMKek06anac/jQH+npmx7tdD64ffFUt0i0MncuLHIgHUiX37tYRUEOqGMKNNImWqrr0ZkhN7MbyOwL/0MyST1YxiPB52ov+qq5lBGPjRgTMnRju7FD2nIEZW2X+J2x+NkzCvQyqTTGOH7UIsNzozstVIq5RXSumyWVG9piKcQKaYDFNGcaDTxl020Z1nSH7e62aPXVRl3dcwajbUjlOzKcpCMLe4qlWvyOT6IjX2356lhXpIeL1JQatNo6vph0X2QPgZJpEq9Vz9Ca7Rct8XoQVXkMFiunjVhFAPJBJ1Gv6fenhslqpeoMtXZvOc9WhTg3ZnWKnT8TpMginMMJ/wUxwYf337t82TUVfD49no+wyAuwHY0Um4TfegPxqgxL1KRCujQEwHg774dxYB+Nf/QQxv74BQtladTjHaflHuOKKCY+W1euuJTbxW9mLttnOL2IhfQPG7CYrGdH3w574sdomvZjmN4Hl6dzi8EAwGt0HKE9sAFc3WzFuR0l32dozhZD5XdbpHNpYEwPXf04Mhqbn0ASdAoURfxUwP5V9Swu0QlSLmWgPd+jPjbXuYPzIopFWL1c3lT7qc/+ez9fVvGPdp7aFD33eeWauXs3C1hqqH6zdG7jE69q0pctcIdm+JhfQ93JBvTYjB6UlAAAAAElFTkSuQmCC"/> </a>
             </li>
               <li class="nav-item navtext">
                 <div class="container">
@@ -48,13 +55,14 @@ $dbase->conectarDB();
                   <?php
                     if(isset($_SESSION["usuario"]))
                     {
-                      $usuario1 = $_SESSION['usuario'];
+                      $usuario1 = $_SESSION['correo'];
                       $consulta1 = "SELECT U.ID_USUARIO AS ID, U.NOMBRE AS 'NOMBRE', U.DIRECCION AS 'DIRECCION', U.TELEFONO AS 'TELEFONO', U.CORREO AS 'CORREO',
                       U.ESTADO, U.img_chidas FROM USUARIOS U
-                      WHERE NOMBRE = '$usuario1'";
+                      WHERE CORREO = '$usuario1'";
                       $tabla = $dbase->seleccionar($consulta1);
                       foreach ($tabla as $registro)
                       {
+                        $estado=$registro->ESTADO;
                         $imgchida = $registro->img_chidas;
                      echo "<img src='$imgchida' style='border-radius: 10px;' alt='img'width= '50px'
                      height=' 50px'>";
@@ -74,12 +82,12 @@ $dbase->conectarDB();
                         header("Location: ../scripts/verificar_codigo.php");
                         exit;
                     }
-                  }
+                    }
                     else
                     {
                     ?>
-                  <button type="button" class="btn btn-danger jus" data-bs-toggle="modal" data-bs-target="#login">Iniciar Sesion</button>
-                  <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#register">Registrate</button>
+                  <button type="button" class="btn btn-warning jus" data-bs-toggle="modal" data-bs-target="#login">Iniciar Sesion</button>
+                  
                   <?php
                     }
                   ?>
@@ -172,7 +180,7 @@ $dbase->conectarDB();
     </section>
 
     <!-- Modal login-->
-    <div class="modal fade" id="login" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="login" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -193,12 +201,12 @@ $dbase->conectarDB();
                       echo "<script>alert('Bienvenido: ".$_SESSION["usuario"].");</script>";
                       switch ($_SESSION["rol"])
                       {
-                          case 1: echo "<script>window.location.href = 'views/puntoventa.php';</script>";
+                          case 1: echo "<script>window.location.href = '../views/puntoventa.php';</script>";
                               break;
                           case 2:
                                 echo "<script>window.location.href = '../index.php';</script>";
                                 break;
-                          case 3: echo "<script>window.location.href = 'views/puntoventa.php';</script>";
+                          case 3: echo "<script>window.location.href = '../views/puntoventa.php';</script>";
                               break;
                           default:
                               break;
@@ -215,38 +223,50 @@ $dbase->conectarDB();
                     <input type="email" class="form-control" name="correo" required>
                     <label for="password" class="form-label">Contraseña</label>
                     <input type="password" class="form-control" name="password" required>
+                    <br>
+                    <span style="color: black;">¿No tienes una cuenta?</span>  <a data-bs-toggle="modal" data-bs-target="#register">Registrate</a>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-danger">Iniciar sesion</button>
+                    </div>
+                </form>
+
+
+                
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal register-->
+<div class="modal fade" id="register" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Registro</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="scripts/registrarse.php" method="POST" onsubmit="return validateForm()">
+                    <label for="Nombre" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" name="nombre" required>
+                    <label for="password" class="form-label">Contraseña (8 o más caracteres)</label>
+                    <input type="password" name="password" class="form-control" required minlength="8">
+                    <label for="calle" class="form-label">Direccion</label>
+                    <input type="text" class="form-control" required name="calle" placeholder="Calle y numero"><br>
+                    <input type="text" class="form-control" required name="colonia" placeholder="Colonia"><br>
+                    <input type="text" class="form-control" required name="cp" placeholder="Codigo postal"><br>
+                    <label for="celular" class="form-label">Telefono (10 dígitos)</label>
+                    <input type="tel" name="telefono" class="form-control" required inputmode="numeric" required pattern="[0-9]{10}" oninput="filterNonNumeric(event)">
+                    <label for="email" class="form-label">Correo</label>
+                    <input type="email" name="correo" placeholder="Obligatorio" required class="form-control">
+                    <span style="color: red;"><?php if(isset($correoError)) echo $correoError; ?></span>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-warning">Registrar</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
-  <!-- Modal register-->
-<div class="modal fade" id="register" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Registro</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-            <form action="../scripts/registrarse.php" method="POST">
-                <label for="Nombre" class="form-label">Nombre</label>
-                <input type="text" class="form-control" name="nombre" required>
-                <label for="password" class="form-label">Contraseña</label>
-                <input type="password" name="password" class="form-control" required>
-                <label for="direccion" class="form-label">Direccion</label>
-                <input type="text" class="form-control" required name="direccion">
-                <label for="celular" class="form-label">Telefono</label>
-                <input type="tel" name="telefono" class="form-control" required>
-                <label for="email" class="form-label">Correo</label>
-                <input type="email" name="correo" placeholder="Obligatorio" required class="form-control">
-                <div class="modal-footer">
-                  <button type="submit" class="btn btn-warning">Registrar</button>
-                </div>
-              </form>
 <!-- MODAL SUCURSALES -->
 <div class="modal fade" id="sucu" tabindex="-1" aria-labelledby="sucursales" aria-hidden="true">
     <div class="modal-dialog">
@@ -282,5 +302,6 @@ $dbase->conectarDB();
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="../src/validaciones.js"></script>
 </body>
 </html>

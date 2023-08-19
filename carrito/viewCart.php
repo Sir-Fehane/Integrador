@@ -1,14 +1,16 @@
 <?php
-// initializ shopping cart class
-include 'Cart.php';
+include "Cart.php";
 $cart = new Cart;
-include '../class/database.php';
+include "../class/database.php";
 $db=New Database();
 $db->conectarDB();
+if(isset($_SESSION['IDUSU']))
+{
 $Consulta=$db->seleccionar("SELECT USUARIOS.ESTADO FROM USUARIOS WHERE USUARIOS.ID_USUARIO=".$_SESSION['IDUSU']."");
 foreach($Consulta as $x)
 {
     $EstadoUsu=$x->ESTADO;
+}
 }
 ?>
 <!DOCTYPE html>
@@ -27,6 +29,7 @@ foreach($Consulta as $x)
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <style>
     input[type="number"]{width: 40%;}
+    body{color:var(--text-color);background-image: url(../img/fondocar.jpg);background-repeat: repeat;background-size: auto;}
     </style>
     <!--Script para impedir que se pongan numeros negativos-->
     <script>
