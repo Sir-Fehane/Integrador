@@ -173,6 +173,7 @@ else
         <?php endforeach; ?>
     <?php } ?>
 </div>
+<script src="../js/bootstrap.bundle.js"></script>
 <script>
     function validarNumero(event) 
     {
