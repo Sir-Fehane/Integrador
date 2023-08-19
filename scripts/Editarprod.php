@@ -177,7 +177,7 @@ $db->conectarDB();
 <div class="container">
     <div class="row g-5">
       <div class="col-md-5 col-lg-4 order-md-last text-center">
-        <h2>cambiar foto del producto</h2>
+        <h2>Cambiar imagen</h2>
       <?php
 $imgchida = $registro->img_prod;
 echo "<img src='$imgchida' alt='img' id = 'img' class='rounded-circle'>";
@@ -192,7 +192,7 @@ echo "<img src='$imgchida' alt='img' id = 'img' class='rounded-circle'>";
             </div>
             
             <div class="col-sm-3 col-lg-2 ">
-              <button type="submit" class="btn btn-secondary " value="Subir archivo">Cambiar Foto</button>
+              <button type="submit" class="btn btn-secondary " value="Subir archivo">Cambiar imagen</button>
             </div>
             </form>
 </div>
@@ -242,7 +242,7 @@ try {
 ?>
       </div>
       <div class="col-md-7 col-lg-8">
-        <h2 class="mb-3 text-center">informacion del producto</h2>
+        <h2 class="mb-3 text-center">Información del producto</h2>
         
           <div class="row g-3" style="padding: 10px;">
             <div class="col-sm-12">
@@ -266,30 +266,17 @@ try {
             <h3> <label for="firstName" class="form-label">Precio Unitario</label></h3>
              <h4> <label for="firstName" class="form-label d-block p-2  "><?php echo $registro->PRECIO;?> </label> </h4>
             </div>
-          
-        
-                    
               <form action="../scripts/editarproda.php" method="post">
-         <input type="hidden" name="id" value="<?php echo $registro->CODIGO; ?>">
+          <input type="hidden" name="id" value="<?php echo $registro->CODIGO; ?>">
           <input type="hidden" name="nombre" value="<?php echo $registro->NOMBRE; ?>">
-          <input type="hidden" name="tamaño" value="<?php echo $registro->TAMANO; ?>">
-          <input type="hidden" name="desc" value="<?php echo $registro->DESCRIPCION; ?>">
           <input type="hidden" name="precio" value="<?php echo $registro->PRECIO; ?>">
           <button class="w-100 btn btn-primary btn-lg" type="submit">Editar Producto</button>
         </form>
-      
-      
- 
-       
       </div>
     </div>
   </main>
-
-
 </div>
 </div>
 <script src="../js/bootstrap.bundle.min.js"></script>
-
-
-    <script src="../js//checkout.js"></script></body>
+<script src="../js//checkout.js"></script></body>
 </html>
