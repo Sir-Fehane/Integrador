@@ -60,7 +60,7 @@ $db->conectarDB();
   <h6 align="center">Desliza la tabla para ver toda la informacion</h6>
 </div>
 <?php
-    $consulta = "SELECT P.CODIGO, P.NOMBRE AS 'Producto', P.TAMANO AS 'Tamaño', P.DESCRIPCION AS 'Descripcion', 
+    $consulta = "SELECT P.CODIGO AS 'ID', P.NOMBRE AS 'Producto', P.TAMANO AS 'Tamaño', 
     P.PRECIO AS 'Precio', P.img_prod as 'IMG' FROM PRODUCTOS P
     WHERE P.ESTADO = 'ACTIVO'";
     $tabla = $db->seleccionar($consulta);
@@ -73,10 +73,10 @@ $db->conectarDB();
     echo "<tr>";
     echo "<th class='col-5 col-lg-3 sortable'>Producto</th>";
     echo "<th class='col-4 col-lg-3 sortable'>Tamaño</th>";
-    echo "<th class=' col-lg-3'>Descripcion</th>"; 
-    echo "<th class='col-1 col-lg-3 sortable'>Precio</th>";
-    echo "<th class=' col-lg-3'>IMG</th>";
-    echo "<th class='col-2 col-lg-3 sortable'>Editar</th>";
+    echo "<th class=' col-lg-3'>Ingredientes</th>"; 
+    echo "<th class='col-1 col-lg-1 sortable'>Precio</th>";
+    echo "<th class=' col-lg-1'>IMG</th>";
+    echo "<th class='col-2 col-lg-1 sortable'>Editar</th>";
     echo "</tr>";
     echo "</thead>";
     echo "<tbody align='center'>";
@@ -85,22 +85,38 @@ $db->conectarDB();
         echo "<tr>";
         echo "<td>$registro->Producto</td>";
         echo "<td>$registro->Tamaño</td>";
-        echo "<td>$registro->Descripcion</td>";
+        ?>
+        <td>
+          <select class="form-control w-50">
+            <?php
+            $db = new Database();
+            $db->conectarDB();
+            $consulta = "SELECT PI.PI_ID AS 'CODIGOINGR',I.NOMBRE AS 'INGREDIENTE' FROM INVENTARIO I
+            JOIN PROD_INV PI ON PI.INGREDIENTE = I.ID_INS
+            JOIN PRODUCTOS P ON P.CODIGO = PI.PRODUCTO
+            WHERE P.CODIGO = $registro->ID;";
+            $reg = $db->seleccionar($consulta);
+            foreach ($reg as $row)
+            {
+              echo "<option value='".$row->CODIGOINGR."' selected disabled>".$row->INGREDIENTE."</option>";
+            }
+            ?>
+          </select>
+        </td>
+        <?php
         echo "<td>$registro->Precio</td>";
         echo "<td><img src='$imgchida' style='border-radius: 10px;' alt='img' width='50px' height='50px'></td>";
         ?>
         <td class="col-6 col-lg-3">
-            <form action="../scripts/EditarProd.php" method="post">
-              <input type="hidden" name="COD" value="<?php echo $registro->CODIGO; ?>">
-              <input type="hidden" name="PROD" value="<?php echo $registro->Producto; ?>">
-              <input type="hidden" name="TAM" value="<?php echo $registro->Tamaño; ?>">
-              <input type="hidden" name="DES" value="<?php echo $registro->Descripcion; ?>">
-              <input type="hidden" name="PRE" value="<?php echo $registro->Precio; ?>">
+            <form action="../scripts/Editarprod.php" method="post">
+              <input type="hidden" name="id" value="<?php echo $registro->ID; ?>">
+              <input type="hidden" name="nombre" value="<?php echo $registro->Producto; ?>">
+              <input type="hidden" name="precio" value="<?php echo $registro->Precio; ?>">
               <input type="hidden" name="IMG" value="<?php echo $registro->IMG; ?>">
               <button type="submit" class="btn btn-sm btn-primary mb-1" name="editarprod">Editar</button>
             </form>
             <form action="../scripts/eliminarproda.php" method="post">
-              <input type="hidden" name="COD" value="<?php echo $registro->CODIGO; ?>">
+              <input type="hidden" name="COD" value="<?php echo $registro->ID; ?>">
               <button type="submit" class="btn btn-sm btn-danger" name="eliminar" onclick="return confirm('¿Estás seguro que deseas eliminar el producto? Esto se hará en todas las sucursales.')">Borrar</button>
             </form>
         </td>
