@@ -43,6 +43,9 @@ else
               <li class="nav-item">
                 <a class="nav-link navtext" href="views/menu-pizza.php">Menu</a>
               </li>
+              <li class="nav-item">
+              
+              </li>
               <?php
     if (isset($_SESSION['rol']) && $_SESSION['rol'] == 3) {
         echo '<li class="nav-item">
@@ -337,7 +340,7 @@ else
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="scripts/registrarse.php" method="POST" onsubmit="return validateForm()">
+                <form action="scripts/registrarse.php" method="POST">
                     <label for="Nombre" class="form-label">Nombre</label>
                     <input type="text" class="form-control" name="nombre" required>
                     <label for="password" class="form-label">Contraseña (8 o más caracteres)</label>
