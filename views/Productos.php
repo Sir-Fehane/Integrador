@@ -109,7 +109,7 @@ $db->conectarDB();
         ?>
         <td class="col-6 col-lg-3">
             <form action="../scripts/Editarprod.php" method="post">
-              <input type="hidden" name="id" value="<?php echo $registro->ID; ?>">
+              <input type="hidden" name="COD" value="<?php echo $registro->ID; ?>">
               <input type="hidden" name="nombre" value="<?php echo $registro->Producto; ?>">
               <input type="hidden" name="precio" value="<?php echo $registro->Precio; ?>">
               <input type="hidden" name="IMG" value="<?php echo $registro->IMG; ?>">
