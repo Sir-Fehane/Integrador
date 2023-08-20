@@ -33,6 +33,7 @@ foreach($resultadocons as $abc)
     <title>Toy's pizza</title>
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
 </head>
 <body>
     <nav class="navbar navbar-expand-lg fixed-top" id="barra">
@@ -83,10 +84,42 @@ foreach($resultadocons as $abc)
         </div>
     </nav>
     <div class="container">
-        <?php
-        
-        ?>
+    <div class="row" id="renglon">
+
+    <?php
+    $consulta = "SELECT P.NOMBRE as N, PS.PS_ID as ID, PS.SUCURSAL as SUC, P.img_prod as IMG 
+                FROM PROD_SUC PS 
+                INNER JOIN PRODUCTOS as P ON PS.PRODUCTO = P.CODIGO
+                WHERE PS.ESTADO = 'DISPONIBLE' AND PS.SUCURSAL = $_SESSION[IDSUCUR] GROUP BY N";
+
+    $reg = $conexion->seleccionar($consulta);        
+    foreach($reg as $value){ ?>
+        <div class="col-6 col-md-5 col-lg-4">
+            <div class="card justify-content-center" data-bs-toggle="modal" data-bs-target="#modal<?php echo $value->ID; ?>" data-modal-target="modal<?php echo $value->ID; ?>" id="item" data-titulo="<?php echo $value->N; ?>" data-tamaño="" style="height:225px">   
+                <?php $imagen = $value->IMG; ?>
+                <span class="titulo-item"><?php echo $value->N; ?></span>
+                <div class="d-lg-none d-block">
+                    <img src="<?php echo $imagen;?>" class="img-item" style="width: 125px; height:100px">
+                </div>
+                <div class="d-none d-lg-block">
+                    <img src="<?php echo $imagen;?>" class="img-item" style="width: 250px; height:150px">
+                </div>
+                <div class="btn-group" role="group" aria-label="Basic example">
+                <form action="procesar_botones.php" method="post">
+                    <button type="submit" class="btn btn-success" name="check_button" value="<?php echo $value->ID; ?>">
+                        <i class="bi bi-check"></i>
+                    </button>
+                    <button type="submit" class="btn btn-danger" name="x_button" value="<?php echo $value->ID; ?>">
+                        <i class="bi bi-x"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    <?php } ?>
+    </form>
     </div>
+</div>
+
     <script src="../js/bootstrap.bundle.js"></script>    
 </body>
 </html>
