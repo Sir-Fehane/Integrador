@@ -1,11 +1,10 @@
 <?php 
-session_start();
-$_SESSION['SUCURSALCHIDA']='';
+error_reporting(0);  // Desactivar la notificación de errores
+ini_set('display_errors', 0);  // No mostrar los errores en la página
 function getDistance($addressFrom, $addressTo, $unit = ''){
 
     // Google API key
-    $apiKey = 'AIzaSyCvYK11OxRL0uj95s71kCdtjlLwMxO84G4';
-    try{
+    $apiKey = 'AIzaSyDAGfdA1ONzoA_jONu3QMJGUVromGeICgw';
     // Change address format
     $formattedAddrFrom    = str_replace(' ', '+', $addressFrom);
     $formattedAddrTo     = str_replace(' ', '+', $addressTo);
@@ -25,14 +24,10 @@ function getDistance($addressFrom, $addressTo, $unit = ''){
     }
     
     // Get latitude and longitude from the geodata
-    if (isset($outputFrom->results[0]->geometry->location->lat) && isset($outputFrom->results[0]->geometry->location->lng)) {
     $latitudeFrom    = $outputFrom->results[0]->geometry->location->lat;
     $longitudeFrom    = $outputFrom->results[0]->geometry->location->lng;
-    }else {return "Error";}
-    if (isset($outputFrom->results[0]->geometry->location->lat) && isset($outputFrom->results[0]->geometry->location->lng)) {
     $latitudeTo        = $outputTo->results[0]->geometry->location->lat;
     $longitudeTo    = $outputTo->results[0]->geometry->location->lng;
-    }else {return "Error";}
     
     // Calculate distance between latitude and longitude
     $theta    = $longitudeFrom - $longitudeTo;
@@ -44,35 +39,28 @@ function getDistance($addressFrom, $addressTo, $unit = ''){
     // Convert unit and return distance
     $unit = strtoupper($unit);
     if($unit == "K"){
-        return round($miles * 1.609344, 2);
+        return round($miles * 1.609344, 2).' km';
     }elseif($unit == "M"){
-        return round($miles * 1609.344, 2);
+        return round($miles * 1609.344, 2).' meters';
     }else{
-        return round($miles, 2);
+        return round($miles, 2).' miles';
     }
-  }
-  catch(Exception $e)
-  {
-    return "Ocurrió un error al procesar la solicitud: " . $e->getMessage();
-  }
 }
-
-include "../class/database.php";
 $db=New Database();
 $db->conectarDB();
 //Sucursales
 $Bebebonita=$db->seleccionar("SELECT * FROM SUCURSALES WHERE ESTADO='ACTIVO'");
-$direccion=$db->seleccionar("SELECT USUARIOS.DIRECCION FROM USUARIOS WHERE ID_USUARIO=".$_SESSION['IDUSU']."");
+$direccion=$db->seleccionar("SELECT USUARIOS.DIRECCION, USUARIOS.cp FROM USUARIOS WHERE ID_USUARIO=".$_SESSION['IDUSU']."");
 foreach($direccion as $di)
 {
     $dom=$di->DIRECCION;
     $cp=$di->cp;
 }
-$dirusu=$dom+$cp;
-$addressFrom = "".$dirusu." Torreón, Coah.";
+$dirusu=$dom.", ".$cp;
+$addressFrom =$dirusu;
 $KMT=0;
 foreach ($Bebebonita as $X)
-{
+{   
     $addressTo=$X->DIRECCION;
     $distance = getDistance($addressFrom, $addressTo, "K");
     if($KMT === 0 || $distance < $KMT)
@@ -81,6 +69,4 @@ foreach ($Bebebonita as $X)
         $_SESSION['SUCURSALCHIDA']=$X->NOMBRE;
     }
 }
-echo"Sucursal: ".$_SESSION['SUCURSALCHIDA']." <br>";
-echo"Km: ".$KMT."";
 ?>

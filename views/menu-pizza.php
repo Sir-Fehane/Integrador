@@ -1,9 +1,10 @@
 <?php
 // include database configuration file
 session_start();
-include'../class/database.php';
+include '../class/database.php';
 $dbase= new Database();
 $dbase->conectarDB();
+if(!isset($_SESSION['SUCURSALCHIDA']) && isset($_SESSION['IDUSU'])){include "../scripts/direccion.php";}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,6 +39,18 @@ $dbase->conectarDB();
               <li class="nav-item">
                 <a class="nav-link navtext" href="#">Menu</a>
               </li>
+              <li class="nav-item dropdown">
+              <a class='nav-link dropdown-toggle text-white' href='#' role='button' data-bs-toggle='dropdown' aria-expanded='false'><?php if(isset($_SESSION['SUCURSALCHIDA'])){echo $_SESSION['SUCURSALCHIDA'];} else{echo"Selecciona sucursal";} ?></a>
+                <ul class="dropdown-menu">
+                <?php 
+                //Sucursales en Navbar
+                $Sucs=$dbase->seleccionar("SELECT * FROM SUCURSALES WHERE ESTADO = 'ACTIVO'");
+                foreach($Sucs as $x)
+                {
+                  echo "<form action='../scripts/jala.php' method='POST'><input type='hidden' name='nombre' id='nombre' value='$x->NOMBRE'><button type='submit' class='btn btn-warning'>Sucursal: '".$x->NOMBRE."'</button></form>";
+                }
+                ?>
+              </ul>
               <?php
     if (isset($_SESSION['rol']) && $_SESSION['rol'] == 3) {
         echo '<li class="nav-item">
@@ -108,7 +121,16 @@ $dbase->conectarDB();
     <?php 
         $TAMAÑOS= $dbase->seleccionar("SELECT PRODUCTOS.TAMANO FROM PRODUCTOS WHERE PRODUCTOS.ESTADO='ACTIVO' GROUP BY PRODUCTOS.TAMANO");
         foreach($TAMAÑOS as $tm){ 
-          $consu="SELECT * FROM PRODUCTOS WHERE TAMANO='".$tm->TAMANO."' AND PRODUCTOS.ESTADO='ACTIVO' ORDER BY PRODUCTOS.TAMANO DESC";   
+          if (isset($_SESSION['SUCURSALCHIDA'])){
+          $consu="SELECT PRODUCTOS.CODIGO ,PRODUCTOS.NOMBRE, PRODUCTOS.PRECIO, PRODUCTOS.DESCRIPCION, PRODUCTOS.img_prod FROM PRODUCTOS 
+          INNER JOIN PROD_SUC ON PROD_SUC.PRODUCTO = PRODUCTOS.CODIGO
+          INNER JOIN SUCURSALES ON SUCURSALES.ID_SUC=PROD_SUC.SUCURSAL
+          WHERE PRODUCTOS.ESTADO='ACTIVO' AND PROD_SUC.ESTADO='DISPONIBLE' AND SUCURSALES.NOMBRE='".$_SESSION['SUCURSALCHIDA']."' AND PRODUCTOS.TAMANO ='".$tm->TAMANO."'order BY PRODUCTOS.TAMANO DESC";
+          }
+          else
+          {
+            $consu="SELECT * FROM PRODUCTOS WHERE TAMANO='".$tm->TAMANO."' AND PRODUCTOS.ESTADO='ACTIVO' ORDER BY PRODUCTOS.TAMANO DESC";
+          }   
         $PIZZAS=$dbase->seleccionar($consu);
          ?>
       <div class="container">
@@ -123,7 +145,7 @@ $dbase->conectarDB();
             <div class='face back'>
             <h3><?php echo $row->NOMBRE; ?></h3>
             <p><?php echo $row->DESCRIPCION; ?></p>
-            <p><?php echo $row->TAMANO;?></p>
+            <p><?php echo $tm->TAMANO;?></p>
             <div class='linka d-flex mb-lg-3'>
             <div class="row">
                         <div class="col-md-6">

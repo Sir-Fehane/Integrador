@@ -1,4 +1,5 @@
 <?php 
+include "class/database.php";
 session_start();
 if(!isset($_SESSION['rol']))
 {
@@ -11,6 +12,7 @@ else
     exit;
   }
  }
+ if(!isset($_SESSION['SUCURSALCHIDA']) && isset($_SESSION['IDUSU'])){include "scripts/direccion.php";}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -43,9 +45,10 @@ else
               <li class="nav-item">
                 <a class="nav-link navtext" href="views/menu-pizza.php">Menu</a>
               </li>
-              <li class="nav-item">
-              
-              </li>
+              <?php 
+                //Sucursales en Navbar
+                $conec=new Database();
+                $conec->conectarDB();?>
               <?php
     if (isset($_SESSION['rol']) && $_SESSION['rol'] == 3) {
         echo '<li class="nav-item">
@@ -61,7 +64,7 @@ else
                 <div class="container">
                   <div class="d-flex justify-content">
                   <?php
-                  include 'class/database.php';
+                  
                   $db = new Database();
                   $db->conectarDB();
                     if(isset($_SESSION["usuario"]))
