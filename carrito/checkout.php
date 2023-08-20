@@ -7,7 +7,7 @@ $db= new Database();
 $db->conectarDB();
 $cart = new Cart;
 $horainicio="00:00";
-$horacierre="00:00";
+$horacierre="23:00";
 $horaactual=date("H:i");
 
 // redirect to home if cart is empty
@@ -24,23 +24,9 @@ $custRow = $db->selecsinall("SELECT * FROM USUARIOS WHERE ID_USUARIO = ".$_SESSI
 ?>
 
 <?php
-    if ($_SERVER["REQUEST_METHOD"] === "POST")
-    {
-        
-        if (!isset($_POST["sucursal"])) 
-        {
-            $_SESSION['IDSUCURSAL']=0;
-            $_SESSION['NombSuc']="Selecciona sucursal!";
-        }
-        else
-        {
-            $sucursal = $_POST["sucursal"];
-            $_SESSION['IDSUCURSAL']=$sucursal;
-            $putrow=$db->selecsinall("SELECT NOMBRE FROM SUCURSALES WHERE ID_SUC=".$sucursal."");
-            $_SESSION['NombSuc']=$putrow['NOMBRE'];
-        }
-    }
-    ?>
+$putrow=$db->selecsinall("SELECT ID_SUC FROM SUCURSALES WHERE NOMBRE='".$_SESSION['SUCURSALCHIDA']."'");
+$_SESSION['IDSUCURSAL']=$putrow['ID_SUC'];   
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -57,7 +43,7 @@ $custRow = $db->selecsinall("SELECT * FROM USUARIOS WHERE ID_USUARIO = ".$_SESSI
 </head>
 <body>
 <?php
-    if ($horaactual >= $horainicio && $horaactual <= $horacierre)
+    if ($horaactual >= $horainicio)
     {
     ?>
 
@@ -110,13 +96,13 @@ $custRow = $db->selecsinall("SELECT * FROM USUARIOS WHERE ID_USUARIO = ".$_SESSI
         <p><h4>Telefono:</h4> <br><?php echo $custRow['TELEFONO']; ?></p>
         <hr>
         <p><h4>Sucursal: </h4><br>
-        <?php if (!isset($_SESSION['NombSuc']))
+        <?php if (!isset($_SESSION['SUCURSALCHIDA']))
         {
             echo"<p>Porfavor seleccione una sucursal</p>";
         }
         else
         {
-            echo $_SESSION['NombSuc'];
+            echo $_SESSION['SUCURSALCHIDA'];
         } 
         ?>
         </p>
@@ -125,7 +111,7 @@ $custRow = $db->selecsinall("SELECT * FROM USUARIOS WHERE ID_USUARIO = ".$_SESSI
     <div class=" buttonspe col-lg-4">
         <a href="../views/menu-pizza.php" class="btn btn-warning"><i class='bx bx-chevron-left'></i>¡Continuar comprando!</a>
         <?php 
-        if (!isset($_SESSION['NombSuc']))
+        if (!isset($_SESSION['SUCURSALCHIDA']))
         {
             
         }
@@ -137,24 +123,6 @@ $custRow = $db->selecsinall("SELECT * FROM USUARIOS WHERE ID_USUARIO = ".$_SESSI
     </div>
     </div>
     </div>
-    <form class="formcarro col-lg-4" action="" method="post" id="sucursal">
-          <?php
-            $cadena = "SELECT ID_SUC,NOMBRE FROM SUCURSALES";
-            $reg = $db->seleccionar($cadena);
-            echo "<div class='me-2'>
-            <h4>Selecciona sucursal</h4>
-            <select name='sucursal' class='form-select'>";
-            
-            foreach ($reg as $value)
-            {
-              echo "<option value='".$value->ID_SUC."'>".$value->NOMBRE."</option>";
-            }
-            echo "</select>
-            </div>";
-           
-            ?><br>
-          <button type="submit" class="btn btn-warning">Elegir</button>
-        </form>
 <?php
     } 
     else 
