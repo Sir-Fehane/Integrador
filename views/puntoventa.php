@@ -38,6 +38,9 @@ foreach($resultadocons as $abc)
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Toy's Pízza</title>
     <link rel="stylesheet" href="../css/style.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500&display=swap" rel="stylesheet">
     <link
       rel="stylesheet"
       href="../css/bootstrap.min.css"
@@ -46,6 +49,7 @@ foreach($resultadocons as $abc)
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     <script type="text/javascript">
+      
 
 		function tiempoReal()
 		{
