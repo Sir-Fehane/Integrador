@@ -145,7 +145,7 @@ if (['.','e'].includes(tecla))
         <img src="../img/pizza.png" style="width:30%;" class="col-lg-12 col-12"/>
         <h1>Parece que te has perdido un poco...</h1>
         <h3>Primero tienes que</h3>
-        <a href="../index.php" id="login" class="btn btn-danger col-lg-4 col-4 ">¡Registrarte y/o Iniciar sesión!</a>
+        <a href="../index.php" data-bs-toggle="modal" data-bs-target="#login" class="btn btn-danger col-lg-4 col-4 ">¡Registrarte y/o Iniciar sesión!</a>
         <br><br><br>
         <h4>¡Para así continuar con la experiencia Toys!</h4>
         </row>

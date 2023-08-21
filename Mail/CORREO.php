@@ -16,7 +16,22 @@ require 'PHPMailer.php';
 require 'SMTP.php';
 //Create an instance; passing `true` enables exceptions
 $mail = new PHPMailer(true);
-
+// HTML email starts here
+   
+   $message  = "<!DOCTYPE html>
+   <html>
+   <body style='background-color:#f2f2f2;'>
+   <div style='width: 100%; height: 10%; background-color: #BB0E10;' >
+   <h1 style='color: #FECB00'>Toys Pizza</h1></div>
+   <div>
+           <h1 style='color: #2A52D5' align='center'>Pedido confirmado</h1><br>
+           <h3 style='color: #2A52D5' align='center'>¡Gracias por ordenar!</h3>
+           <P style='color: #2A52D5' align='center'>Lo mantendremos al pendiente con su orden mediante el correo, también, puede ver sus<br>pedidos en la pestaña ver pedidos.
+           </P>
+         </div>
+   </body>
+   </html>
+";   
 try {
     //Server settings
    
@@ -41,7 +56,7 @@ try {
     //Content
     $mail->isHTML(true);                                  //Poner diseño a esta cosa, pues es lo que se verá
     $mail->Subject = 'PEDIDO CONFIRMADO';
-    $mail->Body    =  'Pon esto shulo Isaac' ;
+    $mail->Body    =  $message ;
    //$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
     $mail->send();
 } catch (Exception $e) {

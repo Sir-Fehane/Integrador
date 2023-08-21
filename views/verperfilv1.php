@@ -216,7 +216,7 @@ echo "<img src='$imgchida' alt='img' id = 'img' class='rounded-circle'>";
  <div class="row g-3 text-center">
 <form action="../views/verperfilv1.php" method="post" enctype="multipart/form-data">
 <div class="col-sm-9 col-lg-10">
-              <input class="form-control" type="file" name="archivo" id="archivo">
+              <input class="form-control" type="file" accept="image/*" name="archivo" id="archivo">
             </div>
             
             <div class="col-sm-3 col-lg-2 ">

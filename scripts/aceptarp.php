@@ -53,20 +53,46 @@ try {
     if($estado == 'EN PROCESO')
     {                  
     $mail->Subject = 'PEDIDO RECIBIDO';//Poner diseño a esta cosa, pues es lo que se verá
-    $mail->Body    =  'Su pedido ha sido recibido, favor de estar al pendiente de más actualizaciones.' ;
+    $messageR  = "<!DOCTYPE html>
+    <html>
+    <body style='background-color:#f2f2f2;'>
+    <div style='width: 100%; height: 10%; background-color: #BB0E10;' >
+    <h1 style='color: #FECB00'>Toys Pizza</h1></div>
+    <div>
+            <h1 style='color: #2A52D5' align='center'>Pedido recibido</h1><br>
+            <h3 style='color: #2A52D5' align='center'>¡En hora buena!</h3>
+            <P style='color: #2A52D5' align='center'>Su pedido ya ha pasado nuestra cocina, en unos momentos ya estará lista.
+            </P>
+          </div>
+    </body>
+    </html>
+ "; 
+    $mail->Body    =  $messageR ;
    //$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
     $mail->send();
-    echo "<h1> PEDIDO RECIBIDO </h1>";
     }
     else
     {
+        $messageC  = "<!DOCTYPE html>
+        <html>
+        <body style='background-color:#f2f2f2;'>
+        <div style='width: 100%; height: 10%; background-color: #BB0E10;' >
+        <h1 style='color: #FECB00'>Toys Pizza</h1></div>
+        <div>
+                <h1 style='color: #2A52D5' align='center'>Pedido cancelado</h1><br>
+                <h3 style='color: #2A52D5' align='center'>Lo sentimos...</h3>
+                <P style='color: #2A52D5' align='center'>Su orden ha sido cancelada, favor de comunicarse para saber que sucedió...
+                </P>
+              </div>
+        </body>
+        </html>
+     "; 
         $mail->Subject = 'PEDIDO CANCELADO';//Poner diseño a esta cosa, pues es lo que se verá
-        $mail->Body    =  'Su pedido ha sido cancelado, favor de comunicarse para saber que ocurrió.' ;
+        $mail->Body    = $messageC ;
        //$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
         $mail->send();
-        echo "<h1> PEDIDO CANCELADO </h1>";
     }
-    header('refresh:5 ; ../views/pendientes.php');
+    header('refresh:0 ; ../views/pendientes.php');
 } catch (Exception $e) {
     echo "Sucedió un error inesperado. Error: {$mail->ErrorInfo}";
 }
