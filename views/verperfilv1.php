@@ -118,7 +118,7 @@ $db = new Database();
 $db->conectarDB();
   $usuario1 = $_SESSION['correo'];
   $consulta1 = "SELECT U.ID_USUARIO AS ID, U.NOMBRE AS 'NOMBRE', U.DIRECCION AS 'DIRECCION', U.TELEFONO AS 'TELEFONO', U.CORREO AS 'CORREO',
-  U.img_chidas FROM USUARIOS U
+  U.img_chidas, U.cp as 'codigop' FROM USUARIOS U
   WHERE CORREO = '$usuario1';";
   $tabla = $db->seleccionar($consulta1);
     foreach($tabla as $registro){}
@@ -285,9 +285,6 @@ try {
              <h3> <label for="firstName" class="form-label">Nombre</label></h3>
              <h4> <label for="firstName" class="form-label"><?php echo $registro->NOMBRE;?> </label> </h4>
             </div>
-
-
-
             <div class="col-12">
             <h3> <label for="firstName" class="form-label">Direccion</label></h3>
              <h4> <label for="firstName" class="form-label d-block p-2  "><?php echo $registro->DIRECCION;?> </label> </h4>
@@ -297,6 +294,10 @@ try {
             <h3> <label for="firstName" class="form-label">Telefono</label></h3>
              <h4> <label for="firstName" class="form-label d-block p-2  "><?php echo $registro->TELEFONO;?> </label> </h4>
             </div>
+            <div class="col-12">
+            <h3> <label for="firstName" class="form-label">Codigo postal</label></h3>
+             <h4> <label for="firstName" class="form-label d-block p-2  "><?php echo $registro->codigop;?> </label> </h4>
+            </div>
         
         
                     
@@ -305,6 +306,7 @@ try {
           <input type="hidden" name="nombre" value="<?php echo $registro->NOMBRE; ?>">
           <input type="hidden" name="direccion" value="<?php echo $registro->DIRECCION; ?>">
           <input type="hidden" name="telefono" value="<?php echo $registro->TELEFONO; ?>">
+          <input type="hidden" name="cp" value="<?php echo $registro->codigop; ?>">
           <button class="w-100 btn btn-primary btn-lg" type="submit">Editar Perfil</button>
         </form>
       

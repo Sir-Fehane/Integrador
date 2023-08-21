@@ -41,7 +41,11 @@ if(!isset($_SESSION['rol']))
         </div>
         <div class="mb-3">
         <label for="nuevotel" class="form-label" >Telefono (10 caracteres):</label>
-        <input type="text" name="telefono" class="form-control" oninput="filterNonNumeric(event)" required pattern="[0-9]{10}" required inputmode="numeric"value="<?php echo $telefono;?>">
+        <input type="text" name="nuevotel" class="form-control" oninput="filterNonNumeric(event)" required pattern="[0-9]{10}" required inputmode="numeric"value="<?php echo $telefono;?>">
+        </div>
+        <div class="mb-3">
+        <label for="nuevotel" class="form-label" >Codigo postal (5 caracteres):</label>
+        <input type="text" name="nuevocp" class="form-control" oninput="filterNonNumeric(event)" required pattern="[0-9]{5}" required inputmode="numeric"value="<?php echo $cp;?>">
         </div>
 
 
@@ -52,7 +56,7 @@ if(!isset($_SESSION['rol']))
     <?php
             if(isset($_POST['submit']))
             {
-                $cadena = "UPDATE USUARIOS SET NOMBRE = '$nuevonom', DIRECCION = '$nuevodir', TELEFONO = '$nuevotel' WHERE ID_USUARIO = $id";
+                $cadena = "UPDATE USUARIOS SET NOMBRE = '$nuevonom', DIRECCION = '$nuevodir', TELEFONO = '$nuevotel', cp='$nuevocp' WHERE ID_USUARIO = $id";
                 $db->ejecutarsql($cadena);
                 $db->desconectarDB();
                 header("Location: ../views/verperfilv1.php");
