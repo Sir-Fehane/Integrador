@@ -127,7 +127,7 @@ else
                                     <td colspan="6"><?php echo $detalle->N; ?> (<?php echo $detalle->P; ?>)</td>
                                     <td colspan="6">
                                         <input type="number" name="cantidades[<?php echo $value->S; ?>][<?php echo $detalle->N; ?>]" 
-                                            class="form-control" 
+                                            class="form-control"
                                             data-nombre="<?php echo $detalle->N; ?>"
                                             onkeypress="return validarNumero(event)" 
                                             placeholder="Ingresa la cantidad que llegó del insumo:" 

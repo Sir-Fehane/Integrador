@@ -14,7 +14,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
             include "../class/database.php";
             $db = new Database();
             $db->conectarDB();
-
             $id_usu = $_SESSION["IDUSU"];
 
             $consulta_sucursal = "SELECT SUCURSAL FROM EMPLEADO_SUCURSAL WHERE EMPLEADO = '$id_usu'";
@@ -25,14 +24,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
                 $sucursal_id = $resultado_sucursal[0]->SUCURSAL;
 
                 //Insertar en SOLICITUDES
-                $consulta = "INSERT INTO SOLICITUDES (SUCURSAL, ESTADO, FECHA) VALUES ($sucursal_id, 'SOLICITADO', NOW())";
+                $consulta = "INSERT INTO SOLICITUDES (SUCURSAL, ESTADO, FECHA) VALUES ($sucursal_id, 'SOLICITADO', DATE_FORMAT(NOW(), '%Y-%m-%d %H:%i'))";
                 $db->ejecutarSQL($consulta);
-
+            
                 for ($i = 0; $i < count($insumos); $i++) 
                 {
                     $cantidad = $cantidades[$indice];
                     {
-                    $consulta_solicitud = "SELECT ID_SOLICITUD FROM SOLICITUDES WHERE SUCURSAL = $sucursal_id AND FECHA = NOW()";
+                    $consulta_solicitud = "SELECT ID_SOLICITUD FROM SOLICITUDES WHERE SUCURSAL = $sucursal_id AND DATE_FORMAT(FECHA, '%Y-%m-%d %H:%i') = DATE_FORMAT(NOW(), '%Y-%m-%d %H:%i')";
+
                     $resultado_solicitud = $db->seleccionar($consulta_solicitud);
 
                     if($resultado_solicitud && count($resultado_solicitud) > 0)
