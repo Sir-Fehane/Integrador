@@ -220,7 +220,7 @@ echo "<img src='$imgchida' alt='img' id = 'img' class='rounded-circle'>";
             </div>
             
             <div class="col-sm-3 col-lg-2 ">
-              <button type="submit" class="btn btn-secondary " value="Subir archivo">Cambiar Foto</button>
+            <button type="submit" class="btn btn-secondary " value="Subir archivo" id="btnCambiarFoto" disabled>Cambiar imagen</button>
             </div>
             </form>
 </div>
@@ -233,7 +233,6 @@ echo "<img src='$imgchida' alt='img' id = 'img' class='rounded-circle'>";
         btnCambiarFoto.disabled = !archivoInput.value; // Habilitar si se seleccionó un archivo, deshabilitar si no
     });
 </script>
-
    <?php
 require '../vendor/autoload.php'; // Carga el autoload del AWS SDK para PHP
 

@@ -25,6 +25,7 @@ $mail = new PHPMailer(true);
    <h1 style='color: #FECB00'>Toys Pizza</h1></div>
    <div>
            <h1 style='color: #2A52D5' align='center'>Pedido confirmado</h1><br>
+           <h2 style='color: #2A52D5' align='center'>Su orden es # $orden</h2>
            <h3 style='color: #2A52D5' align='center'>¡Gracias por ordenar!</h3>
            <P style='color: #2A52D5' align='center'>Lo mantendremos al pendiente con su orden mediante el correo, también, puede ver sus<br>pedidos en la pestaña ver pedidos.
            </P>
