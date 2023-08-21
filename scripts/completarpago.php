@@ -61,7 +61,7 @@ if (isset($_POST['pagar'])) {
     }
     unset($_SESSION['carrito']);
 }
-
+include "../Mail/CORREOPV.php";
 header("Location: ../views/puntoventa.php");
 exit();
 ?>
