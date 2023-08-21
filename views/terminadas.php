@@ -15,7 +15,7 @@ $idemp=$_SESSION["IDUSU"];
     <script src="../src/app.js"></script>
     <link rel="stylesheet" href="../css/style.css">
     <title>Terminadas</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500&display=swap" rel="stylesheet">
 </head>
@@ -85,7 +85,7 @@ $idemp=$_SESSION["IDUSU"];
         }
         if($CountNotifs==0)
         {
-            echo"<h1> No hay pedidos terminados... </h1>";
+            echo"<h1 align='center'> No hay pedidos terminados... </h1>";
         }
         else
         {
@@ -136,7 +136,7 @@ $idemp=$_SESSION["IDUSU"];
         echo"
         <div class= 'col-lg-6 offset-lg-4 d-inline-flex col-6 offset-3'>
         <row class='col-lg-6'>
-        <form action='../scripts/poto.php' method='post' class='col-6 col-lg-6'>
+        <form action='../scripts/entregap.php' method='post' class='col-6 col-lg-6'>
         <input type='hidden' name='correo' id='correo' value='".$CORREO."'>
         <input type='hidden' name='noorder' id='noorder' value='".$ORDEN."'>
         <input type='hidden' name='OV' id='OV' value='ENTREGADA'>
@@ -144,7 +144,7 @@ $idemp=$_SESSION["IDUSU"];
         </form>
         </row>
         <row class='col-lg-6'>
-        <form action='../scripts/pato.php' method='post' class='col-6 col-lg-6'>
+        <form action='../scripts/entregap.php' method='post' class='col-6 col-lg-6'>
         <input type='hidden' name='correo' id='correo' value='".$CORREO."'>
         <input type='hidden' name='noorder' id='noorder' value='".$ORDEN."'>
         <input type='hidden' name='OV' id='OV' value='CANCELADA'>
