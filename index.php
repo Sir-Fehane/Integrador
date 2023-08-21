@@ -216,7 +216,7 @@ else
             <h4>ENLACES</h4>
             <ul class="bx-ul">
                 <li><a href="#nav"><i class='bx bxs-home'></i>INICIO</a></li>
-                <li><a href="#views/menu-pizza.php"><i class='bx bxs-food-menu'></i>MENU</a></li>
+                <li><a href="views/menu-pizza.php"><i class='bx bxs-food-menu'></i>MENU</a></li>
                 <li><a href="#servicios"><i class='bx bxs-check-square'></i>SERVICIO</a></li>
                 <li><a href="https://www.facebook.com/pizzastoystorreon/"><i class='bx bxl-facebook-square'></i>FACEBOOK</a></li>
             </ul>
