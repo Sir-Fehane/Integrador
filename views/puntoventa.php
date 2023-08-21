@@ -134,13 +134,13 @@ setInterval(tiempoReal, 1000);
     <div class="container">
         <div class="row" id="renglon">
         <?php
-        $consulta ="SELECT PRODUCTOS.NOMBRE as N, PRODUCTOS.CODIGO as ID, PRODUCTOS.PRECIO as PR, PRODUCTOS.img_prod as IMG FROM PRODUCTOS WHERE PRODUCTOS.ESTADO = 'ACTIVO' GROUP BY PRODUCTOS.NOMBRE";
+        $consulta ="SELECT PRODUCTOS.NOMBRE as N, PRODUCTOS.TAMANO as T, PRODUCTOS.CODIGO as ID, PRODUCTOS.PRECIO as PR, PRODUCTOS.img_prod as IMG FROM PRODUCTOS INNER JOIN PROD_SUC ON PROD_SUC.PRODUCTO = PRODUCTOS.CODIGO INNER JOIN SUCURSALES ON SUCURSALES.ID_SUC = PROD_SUC.SUCURSAL WHERE PROD_SUC.ESTADO = 'DISPONIBLE' AND SUCURSALES.ID_SUC = ".$_SESSION['IDSUCUR']."";
         $reg = $conexion->seleccionar($consulta);        
         foreach($reg as $value){ ?>
           <div class="col-6 col-md-5 col-lg-4">
           <button class="btn justify-content-center" data-bs-toggle="modal" data-bs-target="#modal<?php echo $value->ID; ?>" data-modal-target="modal<?php echo $value->ID; ?>" id="item" data-titulo="<?php echo $value->N; ?>" data-tamaño="" style="height:225px">   
           <?php $imagen = $value->IMG; ?>
-                  <span class="titulo-item"><?php echo $value->N; ?></span>
+                  <span class="titulo-item"><?php echo $value->N, $value->T; ?></span>
                   <div class="d-lg-none d-block">
                       <img src="<?php echo $imagen;?>" class="img-item" style="width: 125px; height:100px">
                   </div>
@@ -164,7 +164,7 @@ setInterval(tiempoReal, 1000);
                     </div>
                     <div class="modal-body">
               <?php
-                  $size = "SELECT TAMANO as T, PRECIO as PR, CODIGO as ID FROM PRODUCTOS WHERE PRODUCTOS.NOMBRE = '$value->N'";
+                  $size = "SELECT TAMANO as T, PRECIO as PR, CODIGO as ID FROM PRODUCTOS WHERE PRODUCTOS.CODIGO = $value->ID";
                   $sizes = $conexion->seleccionar($size);
                   echo "<label for='tamaño'>Tamaño</label>";
                   echo "<select name='tamaño' class='form-select tamaño' data-precio='0'>";
@@ -187,7 +187,7 @@ setInterval(tiempoReal, 1000);
                         <input type="hidden" name="titulo" value="<?php echo $value->N; ?>">
                         <input type="hidden" name="precio" value="0">
                         <input type="hidden" name="ID" value="<?php echo $value->ID; ?>">
-                        <input type="hidden" name="tamaño" value="">
+                        <input type="hidden" name="tamaño" value="<?php echo $value->ID; ?>">
                         <button type="submit" class="btn btn-primary" onclick="actualizarCampos(<?php echo $value->ID; ?>)" id="agregar_<?php echo $value->ID; ?>">Agregar</button>
             </div>
           </div>
