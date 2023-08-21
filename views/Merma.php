@@ -94,6 +94,7 @@ else
     </div>
     <?php
           extract($_POST);
+          $valor = 0;
           $cadena = "SELECT S.NOMBRE AS 'Sucursal', BM.FECHA AS 'Fecha', BM.TAMANO AS 'Tamaño', 
       BM.CANTIDAD AS 'Cantidad'
       FROM BitacoraMerma BM
@@ -124,11 +125,12 @@ else
     <div class="container justify-content-center">
     <div class="table-responsive">
         <?php
-        echo "<table class='table table-hover' id='DetalleCie'>";
+        echo "<table class='table table-hover' id='DetalleMer'>";
         echo "<thead class='table-primary' align='center'>";
         echo "<tr>";
         if (isset($_POST['suc']) && ($_POST['suc'] == 999 || $_POST['suc'] == 0)) {
             echo "<th class='sortable'>Sucursal</th>";
+            $valor =1;
         }
         echo "<th class='col-2 col-lg-3 sortable'>Fecha</th>";
         echo "<th class='col-2 col-lg-3 sortable'>Tamaño</th>";
@@ -210,8 +212,10 @@ else
   <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
   <script>
     $(document).ready(function() {
-      $('#DetalleMer').DataTable();
+    $('#DetalleMer').DataTable({
+        "order": [[<?php echo $valor; ?>, 'desc']]
     });
+});
   </script>
 </body>
 </html>

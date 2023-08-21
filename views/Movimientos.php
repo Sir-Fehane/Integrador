@@ -101,6 +101,7 @@ else
     </div>
     <?php
     extract($_POST);
+    $valor = 0;
     $cadena = "SELECT S.NOMBRE AS 'Sucursal', DATE(ES.FECHA_HORA) AS 'Fecha', ES.INSUMO AS 'Insumo', 
     ES.CANTIDAD AS 'Cantidad', ES.TIPO AS 'Tipo'
     FROM BitacoraEntSal ES
@@ -122,6 +123,7 @@ else
         echo "<tr>";
         if (isset($_POST['suc']) && ($_POST['suc'] == 999 || $_POST['suc'] == 0)) {
             echo "<th class='sortable'>Sucursal</th>";
+            $valor = 1;
         }
         echo "<th class='col-2 col-lg-3 sortable'>Fecha</th>";
         echo "<th class='col-1 col-lg-1 sortable'>Insumo</th>";
@@ -165,8 +167,10 @@ else
   <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
   <script>
     $(document).ready(function() {
-      $('#DetalleMov').DataTable();
+    $('#DetalleMov').DataTable({
+        "order": [[<?php echo $valor; ?>, 'desc']]
     });
+});
   </script>
 </body>
 </html>
