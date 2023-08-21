@@ -1,5 +1,4 @@
 <?php 
-include "class/database.php";
 session_start();
 if(!isset($_SESSION['rol']))
 {
@@ -12,7 +11,6 @@ else
     exit;
   }
  }
- if(!isset($_SESSION['SUCURSALCHIDA']) && isset($_SESSION['IDUSU'])){include "scripts/direccion.php";}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -45,10 +43,6 @@ else
               <li class="nav-item">
                 <a class="nav-link navtext" href="views/menu-pizza.php">Menu</a>
               </li>
-              <?php 
-                //Sucursales en Navbar
-                $conec=new Database();
-                $conec->conectarDB();?>
               <?php
     if (isset($_SESSION['rol']) && $_SESSION['rol'] == 3) {
         echo '<li class="nav-item">
@@ -64,7 +58,7 @@ else
                 <div class="container">
                   <div class="d-flex justify-content">
                   <?php
-                  
+                  include 'class/database.php';
                   $db = new Database();
                   $db->conectarDB();
                     if(isset($_SESSION["usuario"]))
@@ -124,8 +118,6 @@ else
     </div>
   </div>
 </section>
-
-
     <!---->
     <section class="abt" id="abt">
         <div class="abt-img">
@@ -144,58 +136,30 @@ else
         <span>Prueba nuestras Pizzas</span>
         <h2>Tenemos una gran variedad de sabores y tamaños para toda ocasión.</h2>
     </div>
-    <div id="carousel" class="carousel slide" data-bs-ride="true" data-bs-interval="3500">
-  <div class="carousel-indicators">
-    <button type="button" data-bs-target="#carousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-    <button type="button" data-bs-target="#carousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-    <button type="button" data-bs-target="#carousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
-    <button type="button" data-bs-target="#carousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
-    <button type="button" data-bs-target="#carousel" data-bs-slide-to="4" aria-label="Slide 5"></button>
-    <button type="button" data-bs-target="#carousel" data-bs-slide-to="5" aria-label="Slide 6"></button>
-  </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div id="carousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3500">
   <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="img/pepe.jpg" class="d-block w-100" alt="Pizza Pepperoni">
-      <div class="carousel-caption d-none d-md-block">
-        <h5>Pizza Pepperoni</h5>
-        <p>La clasica pizza de pepperoni, con queso y salsa de pizza.</p>
+    <?php
+    $db = new Database();
+    $db->conectarDB();
+    $imagenes = "SELECT DISTINCT NOMBRE, DESCRIPCION, img_prod AS 'IMG' FROM BDTOYS.PRODUCTOS WHERE ESTADO = 'ACTIVO';";
+    $reg = $db->seleccionar($imagenes);
+    $first = true;
+    foreach ($reg as $val) {
+      $imagen = $val->IMG;
+      ?>
+      <div class="carousel-item <?php if ($first) { echo 'active'; $first = false; } ?>">
+        <img src="<?php echo $imagen; ?>" class="d-block w-100" alt="<?php echo $val->NOMBRE; ?>">
+        <div class="carousel-caption">
+          <h5><?php echo $val->NOMBRE; ?></h5>
+          <p><?php echo $val->DESCRIPCION; ?></p>
+        </div>
       </div>
-    </div>
-    <div class="carousel-item">
-      <img src="img/mexi.jpg" class="d-block w-100" alt="Pizza Mexicana">
-      <div class="carousel-caption d-none d-md-block">
-        <h5>Pizza mexicana</h5>
-        <p>Pizza de carne molida, chile, tomate, cebolla, tocino.</p>
-      </div>
-    </div>
-    <div class="carousel-item">
-      <img src="img/cfrias.jpg" class="d-block w-100" alt="Pizza Carnes Frias">
-      <div class="carousel-caption d-none d-md-block">
-        <h5>Pizza de carnes frias</h5>
-        <p>Pizza con opcion a elegir 2 ingredientes entre jamon, chorizo, pepperoni.</p>
-      </div>
-    </div>
-    <div class="carousel-item">
-      <img src="img/hawa.jpg" class="d-block w-100" alt="Pizza Hawaiana">
-      <div class="carousel-caption d-none d-md-block">
-        <h5>Pizza hawaiana</h5>
-        <p>Pizza de jamon, queso y piña.</p>
-      </div>
-    </div>
-    <div class="carousel-item">
-      <img src="img/espe.jpg" class="d-block w-100" alt="Pizza Especial">
-      <div class="carousel-caption d-none d-md-block">
-        <h5>Pizza especial</h5>
-        <p>Pizza de jamon, chorizo, pepperoni y champiñones.</p>
-      </div>
-    </div>
-    <div class="carousel-item">
-      <img src="img/mollete.jpg" class="d-block w-100" alt="Pizza Mollete">
-      <div class="carousel-caption d-none d-md-block">
-        <h5>Pizza mollete</h5>
-        <p>Pizza base de frijoles, con queso, chorizo y tocino.</p>
-      </div>
-    </div>
+    <?php
+    }
+    ?>
   </div>
   <button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -205,7 +169,11 @@ else
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Next</span>
   </button>
-</div>    
+</div>
+        </div>
+      </div>
+    </div>
+
     </section>
     <!--Servicios-->
     <section class="servicios" id="servicios">
@@ -248,7 +216,7 @@ else
             <h4>ENLACES</h4>
             <ul class="bx-ul">
                 <li><a href="#nav"><i class='bx bxs-home'></i>INICIO</a></li>
-                <li><a href="views/menu-pizza.php"><i class='bx bxs-food-menu'></i>MENU</a></li>
+                <li><a href="#views/menu-pizza.php"><i class='bx bxs-food-menu'></i>MENU</a></li>
                 <li><a href="#servicios"><i class='bx bxs-check-square'></i>SERVICIO</a></li>
                 <li><a href="https://www.facebook.com/pizzastoystorreon/"><i class='bx bxl-facebook-square'></i>FACEBOOK</a></li>
             </ul>
@@ -343,7 +311,7 @@ else
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="scripts/registrarse.php" method="POST">
+                <form action="scripts/registrarse.php" method="POST" onsubmit="return validateForm()">
                     <label for="Nombre" class="form-label">Nombre</label>
                     <input type="text" class="form-control" name="nombre" required>
                     <label for="password" class="form-label">Contraseña (8 o más caracteres)</label>
@@ -380,7 +348,13 @@ else
         </div>
     </div>
 </div>
-
+<script>
+  var carousel = document.querySelector('#carousel');
+  var carouselInstance = new bootstrap.Carousel(carousel, {
+    interval: 3500,
+    wrap: true // Enable continuous loop
+  });
+</script>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         const buttons = document.querySelectorAll(".btn-sucursal");
