@@ -9,7 +9,7 @@
     list-style: none;
     text-decoration: none;
 }
-.carousel-inner h5, p{
+.carousel-inner h5{
     text-shadow: -0.5px -0.5px 0 #000, 0.5px -0.5px 0 #000, -0.5px 0.5px 0 #000, 0.5px 0.5px 0 #000;
 }
 a{
