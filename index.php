@@ -28,7 +28,7 @@ else
 </head>
 <body>
   
-<nav class="navbar navbar-expand-lg he" id="nav">
+  <nav class="navbar navbar-expand-lg he" id="nav">
     <div class="container-fluid">
         <a class="navbar-brand logo" href="#">
             <img src="img/pizza.png" alt="Logo" width="60" height="48" class="d-inline-block align-text-top">
