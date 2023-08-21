@@ -1,4 +1,5 @@
 <?php
+//CAMBIOS A GIT
 session_start(); 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") 
@@ -14,21 +15,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
             $db = new Database();
             $db->conectarDB();
 
-            $nombre_usuario = $_SESSION["usuario"];
-            $consulta_usuario = "SELECT ID_USUARIO FROM USUARIOS WHERE NOMBRE = '$nombre_usuario'";
-            $resultado_usuario = $db->seleccionar($consulta_usuario);
+            $id_usu = $_SESSION["IDUSU"];
 
-            if ($resultado_usuario && count($resultado_usuario) > 0) 
-            {
-                $id_usuario = $resultado_usuario[0]->ID_USUARIO;
-
-            $consulta_sucursal = "SELECT SUCURSAL FROM EMPLEADO_SUCURSAL WHERE EMPLEADO = '$id_usuario'";
+            $consulta_sucursal = "SELECT SUCURSAL FROM EMPLEADO_SUCURSAL WHERE EMPLEADO = '$id_usu'";
             $resultado_sucursal = $db->seleccionar($consulta_sucursal);
 
             if ($resultado_sucursal && count($resultado_sucursal) > 0) 
             {
                 $sucursal_id = $resultado_sucursal[0]->SUCURSAL;
-
 
                 //Insertar en SOLICITUDES
                 $consulta = "INSERT INTO SOLICITUDES (SUCURSAL, ESTADO, FECHA) VALUES ($sucursal_id, 'SOLICITADO', NOW())";
@@ -62,15 +56,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
                     }
                     }
                 }
-            }
-                $db->desconectarDB();
                 header("Location: ExitoPV.php");
-            exit();
+                exit();
+            }
+            echo "no se encontró sucursal";
+                $db->desconectarDB();
             }
         } else 
         {
             echo "Los arreglos 'insumo' y 'cantidad' no tienen la misma cantidad de elementos.";
         }
     }
-}
 ?>
