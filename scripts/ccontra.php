@@ -30,8 +30,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <?php
-                echo "<script>alert('Las contraseñas no coinciden');</script>";
-                header("Refresh:1 ../views/olvidecontra.php");
+echo "<script>
+alert('Las contraseñas no coinciden, vuelve a ingresar tu correo');
+setTimeout(function() {
+    window.location.href = '../views/olvidecontra.php';
+}, 500); // 500 milisegundos = 0.5 segundos
+</script>";
             }
         exit;
     } else {

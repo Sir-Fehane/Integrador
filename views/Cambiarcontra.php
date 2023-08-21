@@ -78,8 +78,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["codigo_ingresado"]))
 
 }else{
 // Los códigos no coinciden, muestra un mensaje de error
-echo "<script>alert('Código no válido, vuelve a realizar el proceso');</script>";
-header("Refresh:1 ../index.php");
+echo "<script>
+        alert('Código no válido, vuelve a ingresar tu correo');
+        setTimeout(function() {
+            window.location.href = '../views/olvidecontra.php';
+        }, 500); // 500 milisegundos = 0.5 segundos
+      </script>";
 }        
 }
 ?>

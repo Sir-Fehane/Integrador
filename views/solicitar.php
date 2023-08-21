@@ -128,7 +128,7 @@ else
 
                 </table>
                 <div class="d-grid gap-2">
-                    <button class="btn btn-primary" type="submit">Solicitar</button>
+                    <button class="btn btn-primary" type="submit" id="bloqueo" onclick="cambiarContenido()">Solicitar</button>
                 </div>
         </form>
         </div>
@@ -231,6 +231,17 @@ else
 
     fila.remove();
 }
+document.addEventListener("DOMContentLoaded", function() 
+        {
+    var boton = document.getElementById("bloqueo");
+    var form = document.querySelector("form");
+
+    form.addEventListener("submit", function() 
+    {
+        boton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Cargando...';
+        boton.disabled = true;
+    });
+});
 </script>
 </body>
 </html>

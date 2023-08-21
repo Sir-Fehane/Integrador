@@ -109,7 +109,7 @@ session_start();
                     <label for="#">Enviaremos un código de verificación para que puedas recuperar tu contraseña</label>
                     <br><br>
                     <input type="email" id="correo" name="correo" class="form-control custom-input" required><br>
-                    <button type="submit" class="btn btn-primary">Enviar</button>
+                    <button type="submit" class="btn btn-primary"id="bloqueo" onclick="cambiarContenido()">Enviar</button>
                 </form>
 
                 <!-- Modal para ingresar código de verificación -->
@@ -153,6 +153,17 @@ session_start();
             }
             ?>
         });
+        document.addEventListener("DOMContentLoaded", function() 
+        {
+    var boton = document.getElementById("bloqueo");
+    var form = document.querySelector("form");
+
+    form.addEventListener("submit", function() 
+    {
+        boton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Cargando...';
+        boton.disabled = true;
+    });
+});
     </script>
 </body>
 </html>
