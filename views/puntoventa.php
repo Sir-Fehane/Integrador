@@ -140,7 +140,7 @@ setInterval(tiempoReal, 1000);
           <div class="col-6 col-md-5 col-lg-4">
           <button class="btn justify-content-center" data-bs-toggle="modal" data-bs-target="#modal<?php echo $value->ID; ?>" data-modal-target="modal<?php echo $value->ID; ?>" id="item" data-titulo="<?php echo $value->N; ?>" data-tamaño="" style="height:225px">   
           <?php $imagen = $value->IMG; ?>
-                  <span class="titulo-item"><?php echo $value->N, $value->T; ?></span>
+                  <span class="titulo-item"><?php echo $value->N." ". $value->T; ?></span>
                   <div class="d-lg-none d-block">
                       <img src="<?php echo $imagen;?>" class="img-item" style="width: 125px; height:100px">
                   </div>
