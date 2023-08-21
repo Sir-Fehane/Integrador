@@ -30,9 +30,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
                              JOIN INVENTARIO ON INV_SUC.INVENTARIO = INVENTARIO.ID_INS
                              SET INV_SUC.CANTIDAD = $cantidad, INV_SUC.FECHA = '$fecha'
                              WHERE INVENTARIO.NOMBRE = '$nombre_insumo' AND INV_SUC.SUCURSAL = $sucursal_id";
-
                 $conexion->ejecutarSQL($consulta);
             }
+            $consulta="CALL RegistrarIngresosDiarios($sucursal_id);";
+                $conexion->ejecutarSQL($consulta);
             header("Location: ExitoPV.php");
             exit();
         } else {

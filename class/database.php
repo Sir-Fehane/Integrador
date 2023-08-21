@@ -118,6 +118,7 @@ class Database{
                 $_SESSION["usuario"] = $nombre;
                 $_SESSION["rol"] = $rol;
                 $_SESSION["IDUSU"]= $id_usuar;
+                unset($_SESSION['SUCURSALCHIDA']);
                 //echo "<div class = 'alert alert-success'>";
                 //echo "<h2 align = 'center'>Bienvenido ".$_SESSION["usuario"]."</h2> </div>";
                 //echo "</div>";

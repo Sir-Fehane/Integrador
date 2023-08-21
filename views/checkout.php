@@ -110,12 +110,12 @@
                       </td>
                   </tr>
                   <tr>
-                      <td colspan="3" class="table-light"></td>
+                      <td colspan="3" class="table-light"> <a href="../views/puntoventa.php" class="btn btn-lg btn-warning d-grid gap-1">Regresar</a> </td>
                       <td colspan="2" class="text-center">
                       <div class="d-grid gap-1">
                         <form action="../scripts/completarpago.php" method="post">
                         <input type="hidden" name="totalfinal" value="<?php echo $totalGeneral; ?>">
-                          <button type="submit" class="btn btn-lg btn-success" name="pagar">Pagar</button>
+                          <button type="submit" class="btn btn-lg btn-success" id="bloqueo" name="pagar" onclick="cambiarContenido()">Pagar</button>
                           </form>
                       </div>
                       </td>
@@ -130,6 +130,38 @@
         echo "El carrito está vacío.";
     } ?>
     </div>
+    <script>
+document.addEventListener("DOMContentLoaded", function() {
+    var boton = document.getElementById("bloqueo");
+    var form = document.querySelector("form");
+
+    form.addEventListener("submit", function() {
+        boton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Presione regresar...';
+
+    });
+});
+</script>
+
+<script>
+function cambiarContenido() {
+    var boton = document.getElementById("bloqueo");
+    var form = document.querySelector("form");
+
+    // Deshabilitar el botón después de hacer clic
+  
+    
+
+    // Cambiar el contenido del botón para mostrar una animación o mensaje
+    boton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Procesando...';
+
+    // Ocultar el botón después de un breve retraso (opcional)
+    setTimeout(function() {
+        boton.style.display = "none";
+    }, 1000);
+
+    // Aquí puedes realizar otras acciones si es necesario
+}
+</script>
     <script src="../js/bootstrap.bundle.js"></script>
   </body>
 </html>
