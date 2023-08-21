@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +7,6 @@
   <link rel="stylesheet" href="../css/boot.css">
   <link rel="stylesheet" href="../css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
- 
   <title>Inventario</title>
 </head>
 <body>
@@ -17,9 +15,8 @@ $correo = $_SESSION['correo'];
   $fechaActual = date("d/m/Y");
   $db = new Database();
   $db->conectarDB(); ?>
-<div class="container">
-
-<div align="center"><h3>Ordenes que se estan realizando</h3></div>
+<div class="container"><br>
+<div align="center"><h3>Órdenes que se están realizando</h3></div>
 </div>
     <?php
     $valor = 3;
@@ -39,8 +36,7 @@ $correo = $_SESSION['correo'];
         <table class='table table-hover' id='enproceso'>
             <thead class='table-danger' align='center'>
                 <tr>
-                <th class='col-2 col-lg-1 sortable'>Numero</th>
-                
+                <th class='col-2 col-lg-1 sortable'>Orden</th>
                     <th class='col-2 col-lg-2 sortable'>Total</th>
                     <th class='col-2 col-lg-3 sortable'>Fecha</th>
                     <th class='col-2 col-lg-2 sortable'>Estado</th>
@@ -71,10 +67,6 @@ $correo = $_SESSION['correo'];
         </table>
     </div>
 </div>
-
-
- 
-
 
 <script src="../js/bootstrap.min.js"></script>
 <script src="../js/bootstrap.bundle.min.js"></script>

@@ -1,7 +1,5 @@
 <?php
 session_start();
-
- 
  include "../class/database.php";
 ?>
 <!DOCTYPE html>
@@ -13,7 +11,6 @@ session_start();
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" href="../css/boot.css">
 <style>
-
 </style>
 <title>Mis pedidos</title>
 </head>

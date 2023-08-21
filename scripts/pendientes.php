@@ -4,11 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="../js/bootstrap.bundle.js"></script>
-  <link rel="stylesheet" href="../css/boot.css">
   <link rel="stylesheet" href="../css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
- 
+  <link rel="stylesheet" href="../css/boot.css">
   <title>Inventario</title>
 </head>
 <body>
@@ -17,10 +15,9 @@ $correo = $_SESSION['correo'];
   $fechaActual = date("d/m/Y");
   $db = new Database();
   $db->conectarDB(); ?>
-<div class="container">
-
-<div align="center"><h3>Ordenes pendientes de aceptar en sucursal </h3></div>
-<div align="center"><h3>Una vez aceptada la orden en sucursal no se podrá cancelar</h3></div>
+<div class="container"><br>
+<div align="center"><h3>Órdenes pendientes de aceptar en sucursal. </h3></div>
+<div align="center"><h3>Una vez aceptada la orden, no se podrá cancelar.</h3></div>
 </div>
     <?php
     $valor = 3;
@@ -48,53 +45,82 @@ $correo = $_SESSION['correo'];
                     <th class="col-1 col-lg-2 sortable">Cancelar</th>
                 </tr>
             </thead>
-            <tbody align='center'>
-                <?php
-                foreach ($tabla as $registro) {
-                    echo "<tr>";
-                    echo "<td>$registro->NO_ORDEN</td>";
-                    echo "<td>$registro->Total</td>";
-                    echo "<td>$registro->Fecha</td>";
-                    echo "<td>$registro->Estado</td>";
-                    ?>
-                    <td>
-                      <form method="post" action="../scripts/DetalleOrdenesp.php">
-                        <input type="hidden" name="num" value="<?php echo $registro->NO_ORDEN; ?>">
-                        <button type="submit" class="btn btn-sm btn-primary">Ver detalle</button>
-                      </form>
+            <!-- Tu encabezado y contenido anterior -->
+
+<tbody align='center'>
+    <?php foreach ($tabla as $registro) { ?>
+        <tr>
+            <td><?php echo $registro->NO_ORDEN; ?></td>
+            <td><?php echo $registro->Total; ?></td>
+            <td><?php echo $registro->Fecha; ?></td>
+            <td><?php echo $registro->Estado; ?></td>
+            <td>
+                <form method="post" action="../scripts/DetalleOrdenesp.php">
+                    <input type="hidden" name="num" value="<?php echo $registro->NO_ORDEN; ?>">
+                    <button type="submit" class="btn btn-sm btn-primary">Ver detalle</button>
+                </form>
+            </td>
+            <td>
+                        <button type="button" class="btn btn-danger cancel-button" data-order="<?php echo $registro->NO_ORDEN; ?>">Cancelar orden</button>
                     </td>
-                      <td>
-                      <form action="../scripts/cancelar.php" method="post">
-          <input type="hidden" name="id" value="<?php echo $registro->NO_ORDEN; ?>">
-          <button type="submit" class="btn btn-danger" name="eliminar">Cancelar orden</button>
-        </form>
-                    </td>
-                    <?php
-                    echo "</tr>";
-                }
-                ?>
+                </tr>
+<!-- Modal para confirmación -->
+<div class="modal fade" id="confirmModal<?php echo $registro->NO_ORDEN; ?>" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmModalLabel">Confirmar Cancelación</h5>
+                <button type="button" class="close d-none" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ¿Estás seguro de cancelar la orden?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-confirm-no" data-order="<?php echo $registro->NO_ORDEN; ?>">No</button>
+                <form action="../scripts/cancelar.php" method="post">
+                    <input type="hidden" name="id" value="<?php echo $registro->NO_ORDEN; ?>">
+                    <button type="submit" class="btn btn-danger btn-confirm-yes" name="eliminar">Sí</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+            <?php } ?>
             </tbody>
+
         </table>
     </div>
 </div>
-
-
-
- 
-
-
-<script src="../js/bootstrap.min.js"></script>
-<script src="../js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="../js/bootstrap.bundle.js"></script>
 <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-  <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
-  <script>
+<script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+<script>
     $(document).ready(function() {
-    $('#DetalleOrd').DataTable({
-        "order": [[<?php echo $valor; ?>, 'desc']]
-    });
-});
+        $('#DetalleOrd').DataTable({
+            "order": [[<?php echo $valor; ?>, 'desc']]
+        });
 
-  </script>
+        // Agregamos un listener para los botones de cancelar
+        $('.cancel-button').on('click', function() {
+            var orderNumber = $(this).data('order');
+            $('#confirmModal' + orderNumber).modal('show');
+        });
+
+        // Agregamos un listener para el botón "Sí" dentro del modal
+        $('.modal').on('click', '.btn-confirm-yes', function() {
+            var orderNumber = $(this).data('order');
+            $('#confirmModal' + orderNumber).modal('hide');
+        });
+
+        // Agregamos un listener para el botón "No" dentro del modal
+        $('.modal').on('click', '.btn-confirm-no', function() {
+            var orderNumber = $(this).data('order');
+            $('#confirmModal' + orderNumber).modal('hide');
+        });
+    });
+</script>
 </body>
 </html>

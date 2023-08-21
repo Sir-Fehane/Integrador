@@ -17,8 +17,7 @@ $correo = $_SESSION['correo'];
   $fechaActual = date("d/m/Y");
   $db = new Database();
   $db->conectarDB(); ?>
-<div class="container">
-
+<div class="container"><br>
 <div align="center"><h3>Historial de tus pedidos</h3></div>
 </div>
     <?php
@@ -40,7 +39,6 @@ $correo = $_SESSION['correo'];
             <thead class='table-danger' align='center'>
                 <tr>
                 <th class='col-2 col-lg-1 sortable'>Orden</th>
-                 
                     <th class='col-2 col-lg-2 sortable'>Total</th>
                     <th class='col-2 col-lg-3 sortable'>Fecha</th>
                     <th class='col-2 col-lg-2 sortable'>Estado</th>
@@ -71,10 +69,6 @@ $correo = $_SESSION['correo'];
         </table>
     </div>
 </div>
-
-
- 
-
 
 <script src="../js/bootstrap.min.js"></script>
 <script src="../js/bootstrap.bundle.min.js"></script>
