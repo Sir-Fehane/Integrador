@@ -289,15 +289,13 @@ else
                     <input type="email" class="form-control" name="correo" required>
                     <label for="password" class="form-label">Contraseña</label>
                     <input type="password" class="form-control" name="password" required>
+                    <a href="views/olvidecontra.php" class="btn btn-link">Olvidé mi contraseña</a>
                     <br>
                     <span style="color: black;">¿No tienes una cuenta?</span>  <a data-bs-toggle="modal" data-bs-target="#register">Registrate</a>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-danger">Iniciar sesion</button>
                     </div>
                 </form>
-
-
-                
             </div>
         </div>
     </div>
