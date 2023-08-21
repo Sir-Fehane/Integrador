@@ -154,7 +154,7 @@ else
         <img src="<?php echo $imagen; ?>" class="d-block w-100" alt="<?php echo $val->NOMBRE; ?>">
         <div class="carousel-caption">
           <h5><?php echo $val->NOMBRE; ?></h5>
-          <p><?php echo $val->DESCRIPCION; ?></p>
+          <p style="text-shadow: -0.5px -0.5px 0 #000, 0.5px -0.5px 0 #000, -0.5px 0.5px 0 #000, 0.5px 0.5px 0 #000;"><?php echo $val->DESCRIPCION; ?></p>
         </div>
       </div>
     <?php
