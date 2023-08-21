@@ -71,6 +71,18 @@ class Database{
             echo $e->getMessage();
         }
     }
+    function selecsinall2($consulta, $params = array()) {
+        try {
+            $consulta_preparada = $this->PDOAws->prepare($consulta);
+            $consulta_preparada->execute($params);
+            
+            $fila = $consulta_preparada->fetch(PDO::FETCH_ASSOC);
+            return $fila;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+    
 
     function ejecutarSQL($consulta)
     {

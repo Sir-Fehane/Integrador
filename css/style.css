@@ -1,3 +1,6 @@
+*{
+    font-family: 'Oswald', sans-serif;
+}
 body{
     margin: 0;
     padding: 0;
@@ -7,10 +10,19 @@ body{
     background-color: #BB0E10;
     position:sticky;
 }
+#barra a{
+    color: #f2f2f2;
+}
 .offcanvas {
     max-width: 1500px; /* Cambia el porcentaje según tus necesidades */
   }
-  
+  .card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
 #cuerpo{
     display: flex;
 }
@@ -51,7 +63,7 @@ body{
     font-size: 15px;
 }
 #logo{
-    color: #FECB00;
+    color: #FECB00 !important;
     text-shadow: -0.5px -0.5px 0 #000, 0.5px -0.5px 0 #000, -0.5px 0.5px 0 #000, 0.5px 0.5px 0 #000;
 }
 #btn-carrito
