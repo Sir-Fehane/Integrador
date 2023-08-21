@@ -81,6 +81,67 @@ else
             <?php
                     $db = new Database();
                     $db->conectarDB();
+                    $consulta = "WITH ProductosVendidosPorSucursal AS (
+                      SELECT
+                          S.NOMBRE AS 'Sucursal',
+                          P.NOMBRE AS 'Producto',
+                          SUM(DO.CANTIDAD) AS 'Vendidas',
+                          ROW_NUMBER() OVER(PARTITION BY S.ID_SUC ORDER BY SUM(DO.CANTIDAD) DESC) AS RowNum
+                      FROM
+                          SUCURSALES S
+                      INNER JOIN
+                          ORDEN_VENTA OV ON S.ID_SUC = OV.SUCURSAL AND OV.ESTADO = 'ENTREGADA'
+                      INNER JOIN
+                          DETALLE_ORDEN DO ON OV.NO_ORDEN = DO.NO_ORDEN
+                      INNER JOIN
+                          PRODUCTOS P ON DO.PRODUCTO = P.CODIGO
+                      WHERE
+                          OV.HORA_FECHA >= DATE_SUB(CURDATE(), INTERVAL 7 DAY) AND OV.HORA_FECHA < CURDATE() -- Filtrar una semana
+                      GROUP BY
+                          S.ID_SUC,
+                          P.NOMBRE
+                  )
+                  SELECT
+                      PV.Sucursal,
+                      PV.Producto,
+                      PV.Vendidas
+                  FROM ProductosVendidosPorSucursal PV
+                  WHERE
+                      PV.RowNum = 1;";
+                    $reg = $db->seleccionar($consulta);
+                    ?>
+                    <table class="table table-hover">
+                      <thead class="table-primary" align="center">
+                        <tr>
+                          <th colspan="3">
+                          Pizza más vendida en la última semana
+                          </th>
+                        </tr>
+                        <tr>
+                          <th>Sucursal</th>
+                          <th>Producto</th>
+                          <th>Vendidas</th>
+                        </tr>
+                      </thead>
+                      <tbody align='center'>
+                        <?php
+                        foreach ($reg as $row) 
+                        {
+                          echo "<tr>";
+                          echo"<td>$row->Sucursal</td>";
+                          echo"<td>$row->Producto</td>";
+                          echo"<td>$row->Vendidas</td>";
+                          echo "</tr>";
+                        }
+                        $db->desconectarDB();
+                        ?>
+                      </tbody>
+                    </table>
+          </div>
+          <div class="col-12 col-lg-5 offset-1">
+            <?php
+                    $db = new Database();
+                    $db->conectarDB();
                     $consulta = "SELECT COUNT(*) AS 'CONTADOR' FROM USUARIOS WHERE ROL = '2' AND ESTADO = 'ACTIVADO'";
                     $reg = $db->seleccionar($consulta);
                     ?>
