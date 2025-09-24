@@ -4,7 +4,7 @@ session_start();
 include '../class/database.php';
 $dbase= new Database();
 $dbase->conectarDB();
-if(!isset($_SESSION['SUCURSALCHIDA']) && isset($_SESSION['IDUSU'])){include "../scripts/direccion.php";}
+//if(!isset($_SESSION['SUCURSALCHIDA']) && isset($_SESSION['IDUSU'])){include "../scripts/direccion.php";}
 ?>
 <!DOCTYPE html>
 <html lang="en">

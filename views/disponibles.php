@@ -3,7 +3,7 @@ session_start();
 include '../class/database.php';
 $conexion = new Database();
 $conexion->conectarDB();
-if (!isset($_SESSION['rol'])) {
+/* if (!isset($_SESSION['rol'])) {
   header('Location: ../index.php');
 } else {
   if ($_SESSION["rol"] == 2) {
@@ -13,13 +13,13 @@ if (!isset($_SESSION['rol'])) {
     header("Location: admin.php");
     exit;
   }
-}
+} */
 
-$cons = "SELECT SUCURSALES.ID_SUC FROM SUCURSALES INNER JOIN EMPLEADO_SUCURSAL ON EMPLEADO_SUCURSAL.SUCURSAL=SUCURSALES.ID_SUC INNER JOIN USUARIOS ON USUARIOS.ID_USUARIO=EMPLEADO_SUCURSAL.EMPLEADO WHERE USUARIOS.ID_USUARIO=" . $_SESSION["IDUSU"] . "";
-$resultadocons = $conexion->seleccionar($cons);
-foreach ($resultadocons as $abc) {
-  $_SESSION['IDSUCUR'] = $abc->ID_SUC;
-} ?>
+//$cons = "SELECT SUCURSALES.ID_SUC FROM SUCURSALES INNER JOIN EMPLEADO_SUCURSAL ON EMPLEADO_SUCURSAL.SUCURSAL=SUCURSALES.ID_SUC INNER JOIN USUARIOS ON USUARIOS.ID_USUARIO=EMPLEADO_SUCURSAL.EMPLEADO WHERE USUARIOS.ID_USUARIO=" . $_SESSION["IDUSU"] . "";
+//$resultadocons = $conexion->seleccionar($cons);
+//foreach ($resultadocons as $abc) {
+  //$_SESSION['IDSUCUR'] = $abc->ID_SUC;
+//} ?>
 <!DOCTYPE html>
 <html lang="en">
 

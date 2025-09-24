@@ -1,5 +1,5 @@
 <?php
-session_start();
+/* session_start();
 if(!isset($_SESSION['rol']))
 {
   header('Location: ../index.php');
@@ -13,7 +13,7 @@ else
     header("Location: puntoventa.php");
     exit;
   }
- }
+ } */
  include "../class/database.php";
 ?>
 <!DOCTYPE html>

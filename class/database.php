@@ -1,9 +1,9 @@
 <?php 
 class Database{
     private $PDOAws;
-    private $user = "admin";
-    private $password = "buenasnoches123,-";
-    private $server = "mysql:host=toys-pizzadb.crljnq1eyagb.us-east-1.rds.amazonaws.com; dbname=BDTOYS";
+    private $user = "root";
+    private $password = "";
+    private $server = "mysql:host=localhost; dbname=bdtoys; charset=utf8";
     function conectarDB()
     {
         try

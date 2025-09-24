@@ -3,17 +3,18 @@ include '../class/database.php';
 $conexion = new database();
 $conexion->conectarDB();
 session_start();
+/*
 if(!isset($_SESSION['rol']))
 {
  header('location: ../index.php');
 }
 else
 {
-  if ($_SESSION["rol"] == 1) { 
+  if ($_SESSION["rol"] == 1) {
     header("Location: admin.php");
     exit;
-  } elseif ($_SESSION["rol"] == 3) { 
-    if (basename($_SERVER['PHP_SELF']) === 'puntoventa.php') {    
+  } elseif ($_SESSION["rol"] == 3) {
+    if (basename($_SERVER['PHP_SELF']) === 'puntoventa.php') {
     } else {
         header("Location: puntoventa.php");
         exit;
@@ -23,12 +24,13 @@ else
     exit;
   }
 }
-$cons="SELECT SUCURSALES.ID_SUC FROM SUCURSALES INNER JOIN EMPLEADO_SUCURSAL ON EMPLEADO_SUCURSAL.SUCURSAL=SUCURSALES.ID_SUC INNER JOIN USUARIOS ON USUARIOS.ID_USUARIO=EMPLEADO_SUCURSAL.EMPLEADO WHERE USUARIOS.ID_USUARIO=".$_SESSION["IDUSU"]."";
-$resultadocons=$conexion->seleccionar($cons);
-foreach($resultadocons as $abc)
-{
-  $_SESSION['IDSUCUR']=$abc->ID_SUC;
-}
+*/
+//$cons="SELECT SUCURSALES.ID_SUC FROM SUCURSALES INNER JOIN EMPLEADO_SUCURSAL ON EMPLEADO_SUCURSAL.SUCURSAL=SUCURSALES.ID_SUC INNER JOIN USUARIOS ON USUARIOS.ID_USUARIO=EMPLEADO_SUCURSAL.EMPLEADO WHERE USUARIOS.ID_USUARIO=".$_SESSION["IDUSU"]."";
+//$resultadocons=$conexion->seleccionar($cons);
+//foreach($resultadocons as $abc)
+//{
+  //$_SESSION['IDSUCUR']=$abc->ID_SUC;
+//}
 ?>
 <!DOCTYPE html>
 <html lang="en">
